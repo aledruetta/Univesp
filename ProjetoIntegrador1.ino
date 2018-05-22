@@ -32,9 +32,11 @@
 
 // Outras constantes globais e instanciação de objetos
 
+#define DEBUG false      // true (Monitor), false (Plotter)
+
 #define USOM_MAX_DISTANCE   200
 #define USOM_ITERATIONS     10
-#define USOM_PING_INTERVAL  100
+#define USOM_PING_INTERVAL  50    // mínimo 50 milisegundos
 
 NewPing sonar(USOM_TRIGGER_PIN, USOM_ECHO_PIN, USOM_MAX_DISTANCE);
 unsigned int reads_cm[USOM_ITERATIONS];
@@ -49,20 +51,30 @@ void setup() {
 }
 
 void loop() {
+  unsigned int distance_cm;
+  
   for (uint8_t i=0; i<USOM_ITERATIONS; i++) {
     reads_cm[i] = sonar.ping_cm();
     delay(USOM_PING_INTERVAL);
   }
 
-  unsigned int distance_cm = median(reads_cm);
-  
-  //Serial.print("--> ");
+  distance_cm = median(reads_cm);
   Serial.println(distance_cm);
 }
 
+
+/**
+ * Para se obterem leituras mais estáveis, a função
+ * ordena os registros, filtra as leituras com valores
+ * maiores do que 0 e retorna a mediana desses valores.
+ * 
+ * A quantindade de leituras por ciclo é definida pela
+ * constante USOM_ITERATIONS.
+ */
 unsigned int median(unsigned int reads_cm[]) {
   unsigned int tmp;
-  uint8_t index;
+  uint8_t last_zero;
+  uint8_t median_index;
     
   for (uint8_t i=1; i<USOM_ITERATIONS; i++) {
     for (uint8_t j=0; j<USOM_ITERATIONS-i; j++) {
@@ -76,12 +88,25 @@ unsigned int median(unsigned int reads_cm[]) {
   
   for (uint8_t k=0; k<USOM_ITERATIONS; k++) {
     if (reads_cm[k] == 0) {
-      index = k;
+      last_zero = k;
     }
-    //Serial.print(reads_cm[k]);
-    //Serial.print(' ');
+
+    if (DEBUG) {
+      Serial.print(reads_cm[k]);
+      Serial.print(' ');
+    }
+  }
+
+  median_index = (USOM_ITERATIONS + last_zero) / 2;
+
+  if (DEBUG) {
+    Serial.println();
+    Serial.print(last_zero);
+    Serial.print(", ");
+    Serial.print(median_index);
+    Serial.print(" : ");
   }
   
-  return reads_cm[(uint8_t) index + (USOM_ITERATIONS - index) / 2];
+  return reads_cm[median_index];
 }
 
