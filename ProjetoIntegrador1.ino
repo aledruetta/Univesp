@@ -21,8 +21,8 @@
 // Librarias
 
 #include <NewPing.h>
-//#include <OneWire.h>
-//#include <DallasTemperature.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
 
 // Pinagem E/S
 
@@ -39,7 +39,6 @@
 #define USOM_PING_INTERVAL  50    // mínimo 50 milisegundos
 
 NewPing sonar(USOM_TRIGGER_PIN, USOM_ECHO_PIN, USOM_MAX_DISTANCE);
-unsigned int reads_cm[USOM_ITERATIONS];
 unsigned int median(unsigned int reads_cm[]);
 
 void setup() {
@@ -51,6 +50,7 @@ void setup() {
 }
 
 void loop() {
+  unsigned int reads_cm[USOM_ITERATIONS];
   unsigned int distance_cm;
   
   for (uint8_t i=0; i<USOM_ITERATIONS; i++) {
