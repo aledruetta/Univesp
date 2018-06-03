@@ -28,7 +28,7 @@
 
 #define USOM_TRIGGER_PIN  8
 #define USOM_ECHO_PIN     9
-#define TEMP_SIGNAL      10
+#define TEMP_SIGNAL_PIN   10
 
 // Outras constantes globais e instanciação de objetos
 
@@ -41,17 +41,31 @@
 NewPing sonar(USOM_TRIGGER_PIN, USOM_ECHO_PIN, USOM_MAX_DISTANCE);
 unsigned int median(unsigned int reads_cm[]);
 
+#define SENSOR_RESOLUTION   9     // bits para o valor da temperatura
+#define SENSOR_INDEX        0     // 0 para apenas um sensor
+
+OneWire oneWire(TEMP_SIGNAL_PIN);
+DallasTemperature sensors(&oneWire);
+DeviceAddress sensorDeviceAddress;
+
 void setup() {
   Serial.begin(115200);
   
   while (!Serial) {
     delay(50);
   }
+
+  sensors.begin();
+  sensors.getAddress(sensorDeviceAddress, 0);
+  sensors.setResolution(sensorDeviceAddress, SENSOR_RESOLUTION);
 }
 
 void loop() {
+  float temperatureInCelsius;
   unsigned int reads_cm[USOM_ITERATIONS];
   unsigned int distance_cm;
+
+  sensors.requestTemperatures();  // a leitura pode demorar até 750ms
   
   for (uint8_t i=0; i<USOM_ITERATIONS; i++) {
     reads_cm[i] = sonar.ping_cm();
@@ -59,7 +73,11 @@ void loop() {
   }
 
   distance_cm = median(reads_cm);
-  Serial.println(distance_cm);
+  Serial.print(distance_cm);
+  Serial.print(" ");
+
+  temperatureInCelsius = sensors.getTempCByIndex(SENSOR_INDEX);
+  Serial.println(temperatureInCelsius, 4);
 }
 
 
