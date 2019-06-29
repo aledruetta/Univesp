@@ -1,5 +1,7 @@
 /*
  * file: aula3_lista_linear_sequencial.c
+ *
+ * LISTA LINEAR SEQUENCIAL (versão inicial)
  */
 
 #include "aula3_lista_linear_sequencial.h"

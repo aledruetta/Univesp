@@ -1,7 +1,8 @@
 /*
- * file: aula3_lista_linear_sequencial.h
+ * file: aula3_lista_linear_sequencial_optimizada.h
  *
- * LISTA LINEAR SEQUENCIAL (versão inicial)
+ * LISTA LINEAR SEQUENCIAL (optimizada)
+ * - Busca por Sentinela;
  */
 
 #include <stdio.h>
@@ -20,7 +21,7 @@ typedef struct
 
 typedef struct
 {
-    REGISTRO A[MAX];
+    REGISTRO A[MAX+1];
     int nroElem;
 } LISTA;
 
@@ -29,6 +30,7 @@ void inicializarLista(LISTA * lista);
 int tamanho(LISTA lista);
 void exibirLista(LISTA lista);
 int buscaSequencial(LISTA lista, CHAVE chave);
+int buscaSentinela(LISTA * lista, CHAVE chave);
 bool inserirElemLista(LISTA * lista, REGISTRO reg, int pos);
 bool excluirElemLista(LISTA * lista, CHAVE chave);
 void reinicializarLista(LISTA * lista);
@@ -54,7 +56,7 @@ int tamanho(LISTA lista)
 
 void exibirLista(LISTA lista)
 {
-    printf("Lista: [ ");
+    printf("\nLista: [ ");
     for (int i=0; i<lista.nroElem; i++)
         printf("%i ", lista.A[i].chave);
     printf("] tamanho: %i\n", tamanho(lista));
@@ -63,11 +65,21 @@ void exibirLista(LISTA lista)
 
 int buscaSequencial(LISTA lista, CHAVE chave)
 {
-    for (int i=0; i<lista.nroElem; i++)
+    for (int pos=0; pos<lista.nroElem; pos++)
     {
-        if (lista.A[i].chave == chave) return i;
+        if (lista.A[pos].chave == chave) return pos;
     }
     return -1;
+}
+
+
+int buscaSentinela(LISTA * lista, CHAVE chave)
+{
+    lista->A[lista->nroElem].chave = chave;
+    int pos = 0;
+    while (lista->A[pos].chave != chave) pos++;
+    if (pos == lista->nroElem) return -1;
+    return pos;
 }
 
 
