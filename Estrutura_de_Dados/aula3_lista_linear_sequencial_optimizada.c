@@ -39,15 +39,14 @@ int main()
     }
     exibirLista(lista);
 
-    int resto = MAX - lista.nroElem;
-
-    for (int i=0; i<resto; i++)
-    {
-        REGISTRO registro;
-        registro.chave = 0;
-        inserirElemLista(&lista, registro, lista.nroElem);
-    }
-    exibirLista(lista);
+    //int resto = MAX - lista.nroElem;
+    //for (int i=0; i<resto; i++)
+    //{
+    //    REGISTRO registro;
+    //    registro.chave = 0;
+    //    inserirElemLista(&lista, registro, lista.nroElem);
+    //}
+    //exibirLista(lista);
 
     int ch, pos;
     CHAVE outras_chaves[] = {5, 8, 2, 10, 11, 37, 65};
@@ -82,6 +81,10 @@ int main()
                "\"%i\" foi eliminada da lista!\n", ch);
     exibirLista(lista);
 
+    printf("\nOrdenar lista (insert sort):\n");
+    ordenarLista(&lista);
+
+    printf("\nReinicializar lista:\n");
     reinicializarLista(&lista);
     exibirLista(lista);
 

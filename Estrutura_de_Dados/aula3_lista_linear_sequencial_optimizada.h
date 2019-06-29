@@ -33,6 +33,7 @@ int buscaSequencial(LISTA lista, CHAVE chave);
 int buscaSentinela(LISTA * lista, CHAVE chave);
 bool inserirElemLista(LISTA * lista, REGISTRO reg, int pos);
 bool excluirElemLista(LISTA * lista, CHAVE chave);
+void ordenarLista(LISTA * lista);
 void reinicializarLista(LISTA * lista);
 
 
@@ -66,9 +67,7 @@ void exibirLista(LISTA lista)
 int buscaSequencial(LISTA lista, CHAVE chave)
 {
     for (int pos=0; pos<lista.nroElem; pos++)
-    {
         if (lista.A[pos].chave == chave) return pos;
-    }
     return -1;
 }
 
@@ -115,7 +114,7 @@ bool excluirElemLista(LISTA * lista, CHAVE chave)
 
     if (pos < 0)
     {
-        printf("O elemento não existe!\n");
+        printf("O elemento com chave [%i] não existe!\n", chave);
         return false;
     }
 
@@ -125,5 +124,23 @@ bool excluirElemLista(LISTA * lista, CHAVE chave)
     lista->nroElem--;
 
     return true;
+}
+
+// Algoritmo: insertion sort
+void ordenarLista(LISTA * lista)
+{
+    if (lista->nroElem <= 1) return;
+    for (int i=1; i<lista->nroElem; i++)
+    {
+        REGISTRO tmp = lista->A[i];
+        int j = 1;
+        while ((tmp.chave < lista->A[i-j].chave) && (i-j >= 0))
+        {
+            lista->A[i-j+1] = lista->A[i-j];
+            j++;
+        }
+        lista->A[i-j+1] = tmp;
+        exibirLista( * lista);
+    }
 }
 
