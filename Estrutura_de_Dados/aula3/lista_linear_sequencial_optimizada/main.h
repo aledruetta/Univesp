@@ -1,5 +1,5 @@
 /*
- * file: aula3_lista_linear_sequencial_optimizada.h
+ * file: main.h
  *
  * LISTA LINEAR SEQUENCIAL (optimizada)
  * - Busca por Sentinela;
@@ -9,83 +9,83 @@
 #include <stdbool.h>
 
 #define MAX 50
-typedef int CHAVE;
+typedef int KEY;
 
 
 typedef struct
 {
-    CHAVE chave;
+    KEY key;
     // outros campos
-} REGISTRO;
+} REGISTER;
 
 
 typedef struct
 {
-    REGISTRO A[MAX+1];
-    int nroElem;
-} LISTA;
+    REGISTER A[MAX+1];
+    int len;
+} LIST;
 
 
-void inicializarLista(LISTA * lista);
-int tamanho(LISTA lista);
-void exibirLista(LISTA lista);
-int buscaSequencial(LISTA lista, CHAVE chave);
-int buscaSentinela(LISTA * lista, CHAVE chave);
-bool inserirElemLista(LISTA * lista, REGISTRO reg, int pos);
-bool excluirElemLista(LISTA * lista, CHAVE chave);
-void ordenarLista(LISTA * lista);
-void reinicializarLista(LISTA * lista);
+void initialize(LIST * list);
+int len(LIST list);
+void show(LIST list);
+int searchSeq(LIST list, KEY key);
+int searchSent(LIST * list, KEY key);
+bool append(LIST * list, REGISTER reg, int pos);
+bool delete(LIST * list, KEY key);
+void insertionSort(LIST * list);
+void reinitialize(LIST * list);
 
 
-void inicializarLista(LISTA * lista)
+void initialize(LIST * list)
 {
-    lista->nroElem = 0;
+    list->len = 0;
 }
 
 
-void reinicializarLista(LISTA * lista)
+void reinitialize(LIST * list)
 {
-    lista->nroElem = 0;
+    list->len = 0;
 }
 
 
-int tamanho(LISTA lista)
+int len(LIST list)
 {
-    return lista.nroElem;
+    return list.len;
 }
 
 
-void exibirLista(LISTA lista)
+void show(LIST list)
 {
-    printf("\nLista: [ ");
-    for (int i=0; i<lista.nroElem; i++)
-        printf("%i ", lista.A[i].chave);
-    printf("] tamanho: %i\n", tamanho(lista));
+    printf("\nList: [ ");
+    for (int i=0; i<list.len; i++)
+        printf("%i ", list.A[i].key);
+    printf("] len: %i\n", len(list));
 }
 
 
-int buscaSequencial(LISTA lista, CHAVE chave)
+int searchSeq(LIST list, KEY key)
 {
-    for (int pos=0; pos<lista.nroElem; pos++)
-        if (lista.A[pos].chave == chave) return pos;
+    for (int pos=0; pos<list.len; pos++)
+        if (list.A[pos].key == key) return pos;
     return -1;
 }
 
 
-int buscaSentinela(LISTA * lista, CHAVE chave)
+int searchSent(LIST * list, KEY key)
 {
-    lista->A[lista->nroElem].chave = chave;
+    list->A[list->len].key = key;
     int pos = 0;
-    while (lista->A[pos].chave != chave) pos++;
-    if (pos == lista->nroElem) return -1;
+    while (list->A[pos].key != key) pos++;
+    if (pos == list->len) return -1;
     return pos;
 }
 
 
-bool inserirElemLista(LISTA * lista, REGISTRO reg, int pos)
+bool append(LIST * list, REGISTER reg, int pos)
 {
-    bool pos_invalida = (pos < 0) && (pos > lista->nroElem);
-    bool cheia = (lista->nroElem == MAX);
+    bool pos_invalida = (pos < 0) && (pos > list->len);
+    bool cheia = (list->len == MAX);
 
     if (cheia)
     {
@@ -98,49 +98,49 @@ bool inserirElemLista(LISTA * lista, REGISTRO reg, int pos)
         return false;
     }
 
-    for (int i=lista->nroElem; i>pos; i--)
-        lista->A[i] = lista->A[i-1];
+    for (int i=list->len; i>pos; i--)
+        list->A[i] = list->A[i-1];
 
-    lista->A[pos] = reg;
-    lista->nroElem++;
+    list->A[pos] = reg;
+    list->len++;
 
     return true;
 }
 
-bool excluirElemLista(LISTA * lista, CHAVE chave)
+bool delete(LIST * list, KEY key)
 {
     int pos, i;
-    pos = buscaSequencial(* lista, chave);
+    pos = searchSeq(* list, key);
 
     if (pos < 0)
     {
-        printf("O elemento com chave [%i] não existe!\n", chave);
+        printf("O elemento com chave [%i] não existe!\n", key);
         return false;
     }
 
-    for (i=pos; i<lista->nroElem-1; i++)
-        lista->A[i] = lista->A[i+1];
+    for (i=pos; i<list->len-1; i++)
+        list->A[i] = list->A[i+1];
 
-    lista->nroElem--;
+    list->len--;
 
     return true;
 }
 
 // Algoritmo: insertion sort
-void ordenarLista(LISTA * lista)
+void insertionSort(LIST * list)
 {
-    if (lista->nroElem <= 1) return;
-    for (int i=1; i<lista->nroElem; i++)
+    if (list->len <= 1) return;
+    for (int i=1; i<list->len; i++)
     {
-        REGISTRO tmp = lista->A[i];
+        REGISTER tmp = list->A[i];
         int j = 1;
-        while ((tmp.chave < lista->A[i-j].chave) && (i-j >= 0))
+        while ((tmp.key < list->A[i-j].key) && (i-j >= 0))
         {
-            lista->A[i-j+1] = lista->A[i-j];
+            list->A[i-j+1] = list->A[i-j];
             j++;
         }
-        lista->A[i-j+1] = tmp;
-        exibirLista( * lista);
+        list->A[i-j+1] = tmp;
+        show( * list);
     }
 }
 
