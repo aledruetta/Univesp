@@ -29,8 +29,8 @@ typedef struct
 void initialize(LIST * list);
 int len(LIST list);
 void show(LIST list);
-int searchSeq(LIST list, KEY key);
-int searchSent(LIST * list, KEY key);
+int sequencialSearch(LIST list, KEY key);
+int sentinelSearch(LIST * list, KEY key);
 bool append(LIST * list, REGISTER reg, int pos);
 bool delete(LIST * list, KEY key);
 void sort(LIST * list);
@@ -65,7 +65,7 @@ void show(LIST list)
 }
 
 
-int searchSeq(LIST list, KEY key)
+int sequencialSearch(LIST list, KEY key)
 {
     for (int pos=0; pos<list.len; pos++)
         if (list.A[pos].key == key) return pos;
@@ -73,7 +73,7 @@ int searchSeq(LIST list, KEY key)
 }
 
 
-int searchSent(LIST * list, KEY key)
+int sentinelSearch(LIST * list, KEY key)
 {
     list->A[list->len].key = key;
     int pos = 0;
@@ -111,7 +111,7 @@ bool append(LIST * list, REGISTER reg, int pos)
 bool delete(LIST * list, KEY key)
 {
     int pos, i;
-    pos = searchSeq(* list, key);
+    pos = sequencialSearch(* list, key);
 
     if (pos < 0)
     {

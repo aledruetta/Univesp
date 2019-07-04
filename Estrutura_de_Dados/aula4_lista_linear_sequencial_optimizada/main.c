@@ -22,7 +22,7 @@ int main()
     printf("Eliminar chave? ");
     int chave, pos;
     scanf("%i", &chave);
-    pos = searchSent(&lista, chave);
+    pos = sentinelSearch(&lista, chave);
     if (pos == -1) printf("Chave inválida!\n");
     else
     {
