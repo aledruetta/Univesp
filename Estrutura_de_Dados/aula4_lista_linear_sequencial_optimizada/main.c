@@ -32,6 +32,10 @@ int main()
     }
     printf("\nLista ordenada:\n");
     insertionSort(&lista);
+    printf("\nInsertar um registro:\n");
+    REGISTER registro;
+    registro.key = 18;
+    if (insert(&lista, registro)) show(lista);
 
     return 0;
 }

@@ -34,6 +34,7 @@ int searchSent(LIST * list, KEY key);
 bool append(LIST * list, REGISTER reg, int pos);
 bool delete(LIST * list, KEY key);
 void insertionSort(LIST * list);
+bool insert(LIST * list, REGISTER reg);
 void reinitialize(LIST * list);
 
 
@@ -85,9 +86,9 @@ int searchSent(LIST * list, KEY key)
 bool append(LIST * list, REGISTER reg, int pos)
 {
     bool pos_invalida = (pos < 0) && (pos > list->len);
-    bool cheia = (list->len == MAX);
+    bool is_full = (list->len == MAX);
 
-    if (cheia)
+    if (is_full)
     {
         printf("A lista está cheia!\n");
         return false;
@@ -142,5 +143,27 @@ void insertionSort(LIST * list)
         list->A[i-j+1] = tmp;
         show( * list);
     }
+}
+
+bool insert(LIST * list, REGISTER reg)
+{
+    bool is_full = (list->len == MAX);
+
+    if (is_full)
+    {
+        printf("A lista está cheia!\n");
+        return false;
+    }
+
+    int pos = list->len - 1;
+    while (pos >= 0 && list->A[pos].key > reg.key)
+    {
+        list->A[pos+1] = list->A[pos];
+        pos--;
+    }
+    list->A[pos+1] = reg;
+    list->len++;
+
+    return true;
 }
 
