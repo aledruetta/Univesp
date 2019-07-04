@@ -33,7 +33,7 @@ int searchSeq(LIST list, KEY key);
 int searchSent(LIST * list, KEY key);
 bool append(LIST * list, REGISTER reg, int pos);
 bool delete(LIST * list, KEY key);
-void insertionSort(LIST * list);
+void sort(LIST * list);
 bool insert(LIST * list, REGISTER reg);
 void reinitialize(LIST * list);
 
@@ -127,8 +127,8 @@ bool delete(LIST * list, KEY key)
     return true;
 }
 
+void sort(LIST * list)
 // Algoritmo: insertion sort
-void insertionSort(LIST * list)
 {
     if (list->len <= 1) return;
     for (int i=1; i<list->len; i++)
