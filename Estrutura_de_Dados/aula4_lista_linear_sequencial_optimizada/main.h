@@ -128,7 +128,7 @@ bool append(LIST * list, REGISTER reg, int pos)
 bool delete(LIST * list, KEY key)
 {
     int pos, i;
-    pos = sequencialSearch(* list, key);
+    pos = binarySearch(* list, key);
 
     if (pos < 0)
     {
