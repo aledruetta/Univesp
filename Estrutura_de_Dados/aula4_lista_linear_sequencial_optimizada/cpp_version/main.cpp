@@ -25,19 +25,30 @@ int main()
     LinearSeqList list;
     list.show();
     srand(time(nullptr));
+
     for (int i=0; i<10; i++)
     {
         Register reg(rand() % 100);
         if (!list.append(reg)) cout << "Não há mais espaço na lista!" << endl;
     }
     list.show();
-    cout << "Adicionar? ";
+
     int key;
+    int pos;
+
+    cout << "Adicionar? ";
     cin >> key;
     list.append(key);
     list.show();
+
+    cout << "Adicionar? ";
+    cin >> key;
+    cout << "Posição? ";
+    cin >> pos;
+    list.append(key, pos);
+    list.show();
+
     cout << "Deletar? ";
-    int pos;
     cin >> pos;
     list.del(pos);
     list.show();

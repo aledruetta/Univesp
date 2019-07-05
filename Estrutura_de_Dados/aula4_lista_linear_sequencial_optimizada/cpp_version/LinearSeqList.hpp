@@ -30,12 +30,16 @@ class LinearSeqList
 
         LinearSeqList();
         bool append(Register reg);
+        bool append(Register reg, int pos);
         int find(int key);
         bool del(int key);
         void show();
 };
 
 LinearSeqList::LinearSeqList()
+/*
+ * Construtor da Lista.
+ */
 {
     len = 0;
 }
@@ -56,17 +60,26 @@ void LinearSeqList::show()
 
 bool LinearSeqList::append(Register reg)
 /*
- * Método append da classe LinearSeqList.
  * Adiciona um registro no final da lista se a lista não estiver cheia.
  */
 {
-    if (len < MAX)
-    {
-        regs[len] = reg;
-        len++;
-        return true;
-    }
-    return false;
+    if (len >= MAX) return false;
+    regs[len] = reg;
+    len++;
+    return true;
+}
+
+bool LinearSeqList::append(Register reg, int pos)
+/*
+ * Insere um registro em uma posição determinada se a lista não
+ * estiver cheia e a posição for válida.
+ */
+{
+    if (len >= MAX || pos < 0 || pos > len-1) return false;
+    for (int i=len; i>pos; i--) regs[i] = regs[i-1];
+    regs[pos] = reg;
+    len++;
+    return true;
 }
 
 int LinearSeqList::find(int key)
@@ -82,6 +95,9 @@ int LinearSeqList::find(int key)
 }
 
 bool LinearSeqList::del(int key)
+/*
+ * Deleta um elemento da lista procurado pela chave.
+ */
 {
     int pos = find(key);
     if (pos < 0) return false;
