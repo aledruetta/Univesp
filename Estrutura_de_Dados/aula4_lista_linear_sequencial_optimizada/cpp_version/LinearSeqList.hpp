@@ -29,7 +29,6 @@ class LinearSeqList
     public:
 
         LinearSeqList();
-        int getLen();
         bool append(Register reg);
         int find(int key);
         bool del(int key);
@@ -41,18 +40,12 @@ LinearSeqList::LinearSeqList()
     len = 0;
 }
 
-int LinearSeqList::getLen()
-{
-    return len;
-}
-
 void LinearSeqList::show()
 /*
  * Imprime uma representação da Lista no formato:
  * List: [ 2 7 23 ] Length: 3
  */
 {
-    int len = getLen();
     cout << "List: [ ";
     for (int i=0; i<len; i++)
     {
