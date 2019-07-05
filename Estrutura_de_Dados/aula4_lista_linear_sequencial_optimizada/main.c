@@ -36,6 +36,11 @@ int main()
     REGISTER registro;
     registro.key = 18;
     if (insert(&lista, registro)) show(lista);
+    printf("\nProcurar chave? ");
+    scanf("%i", &chave);
+    pos = binarySearch(lista, chave);
+    if (pos == -1) printf("Chave inválida!\n");
+    else printf("A chave \"%i\" está na posição [%i].\n", chave, pos);
 
     return 0;
 }

@@ -31,6 +31,7 @@ int len(LIST list);
 void show(LIST list);
 int sequencialSearch(LIST list, KEY key);
 int sentinelSearch(LIST * list, KEY key);
+int binarySearch(LIST list, KEY key);
 bool append(LIST * list, REGISTER reg, int pos);
 bool delete(LIST * list, KEY key);
 void sort(LIST * list);
@@ -80,6 +81,22 @@ int sentinelSearch(LIST * list, KEY key)
     while (list->A[pos].key != key) pos++;
     if (pos == list->len) return -1;
     return pos;
+}
+
+int binarySearch(LIST list, KEY key)
+{
+    int lef, mid, rig;
+    lef = 0;
+    rig = list.len - 1;
+
+    while (lef <= rig)
+    {
+        mid = (lef + rig) / 2;
+        if (list.A[mid].key == key) return mid;
+        if (list.A[mid].key < key) lef = mid + 1;
+        else rig = mid - 1;
+    }
+    return -1;
 }
 
 
