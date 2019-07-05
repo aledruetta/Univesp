@@ -24,14 +24,16 @@ class LinearSeqList
  */
 {
         int len;
-        Register regs[MAX];
+        Register regs[MAX+1];
 
     public:
 
         LinearSeqList();
         int getLen();
-        void show();
         bool append(Register reg);
+        int find(int key);
+        bool del(int key);
+        void show();
 };
 
 LinearSeqList::LinearSeqList()
@@ -45,6 +47,10 @@ int LinearSeqList::getLen()
 }
 
 void LinearSeqList::show()
+/*
+ * Imprime uma representação da Lista no formato:
+ * List: [ 2 7 23 ] Length: 3
+ */
 {
     int len = getLen();
     cout << "List: [ ";
@@ -68,5 +74,26 @@ bool LinearSeqList::append(Register reg)
         return true;
     }
     return false;
+}
+
+int LinearSeqList::find(int key)
+/*
+ * Procura uma chave usando o algoritmo de busca por sentinela.
+ */
+{
+    int pos = 0;
+    regs[len] = Register(key);
+    while (regs[pos].getKey() != key) pos++;
+    if (pos == len) return -1;
+    return pos;
+}
+
+bool LinearSeqList::del(int key)
+{
+    int pos = find(key);
+    if (pos < 0) return false;
+    for (int i=pos; i<len-1; i++) regs[i] = regs[i+1];
+    len--;
+    return true;
 }
 
