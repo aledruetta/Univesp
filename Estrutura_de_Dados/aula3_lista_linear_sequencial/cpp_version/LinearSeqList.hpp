@@ -30,7 +30,7 @@ class LinearSeqList
 
         LinearSeqList();
         bool append(Register reg);
-        bool append(Register reg, int pos);
+        bool insert(Register reg, int pos);
         int find(int key);
         bool del(int key);
         void show();
@@ -69,7 +69,7 @@ bool LinearSeqList::append(Register reg)
     return true;
 }
 
-bool LinearSeqList::append(Register reg, int pos)
+bool LinearSeqList::insert(Register reg, int pos)
 /*
  * Insere um registro em uma posição determinada se a lista não
  * estiver cheia e a posição for válida.

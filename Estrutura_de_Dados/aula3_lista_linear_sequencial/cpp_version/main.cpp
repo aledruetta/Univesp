@@ -45,7 +45,7 @@ int main()
     cin >> key;
     cout << "Posição? ";
     cin >> pos;
-    list.append(key, pos);
+    list.insert(key, pos);
     list.show();
 
     cout << "Deletar? ";
