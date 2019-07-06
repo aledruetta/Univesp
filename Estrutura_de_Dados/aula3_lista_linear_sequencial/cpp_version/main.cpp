@@ -13,8 +13,12 @@
 #include <iostream>
 #include <cstdlib>                  // rand, srand
 #include <ctime>                    // time
+#include <limits>
 #include "Register.hpp"
 #include "LinearSeqList.hpp"
+
+void printMenu();
+void flushCin();
 
 
 int main()
@@ -23,7 +27,6 @@ int main()
  */
 {
     LinearSeqList list;
-    list.show();
     srand(time(nullptr));
 
     for (int i=0; i<10; i++)
@@ -35,24 +38,87 @@ int main()
 
     int key;
     int pos;
+    char op = '6';
 
-    cout << "Adicionar? ";
-    cin >> key;
-    list.append(key);
-    list.show();
+    do {
 
-    cout << "Adicionar? ";
-    cin >> key;
-    cout << "Posição? ";
-    cin >> pos;
-    list.insert(key, pos);
-    list.show();
+        switch (op)
+        {
+            case '1':
+            {
+                cout << "Chave? ";
+                cin >> key;
+                flushCin();
+                Register reg(key);
+                list.append(reg);
+                list.show();
+                break;
+            }
+            case '2':
+            {
+                cout << "Chave? ";
+                cin >> key;
+                flushCin();
+                Register reg(key);
+                cout << "Posição? ";
+                cin >> pos;
+                flushCin();
+                list.insert(reg, pos);
+                list.show();
+                break;
+            }
+            case '3':
+            {
+                cout << "Chave? ";
+                cin >> key;
+                cout << "Posição: " << list.find(key) << endl;
+                list.show();
+                break;
+            }
+            case '4':
+            {
+                cout << "Chave? ";
+                cin >> key;
+                flushCin();
+                list.del(key);
+                list.show();
+                break;
+            }
+            case '5':
+                list.show();
+                break;
+            case '6':
+                printMenu();
+                break;
+            default:
+                cout << "Opção inválida!" << endl;
+        }
 
-    cout << "Deletar? ";
-    cin >> pos;
-    list.del(pos);
-    list.show();
+        cout << "\nOpção: ";
+        cin.get(op);
+        flushCin();
+
+    } while (op != '7');
 
     return 0;
+}
+
+void printMenu()
+{
+        cout << "\nMenu:"        << endl
+             << "=====\n"        << endl
+             << "1. Adicionar"   << endl
+             << "2. Inserir"     << endl
+             << "3. Procurar"    << endl
+             << "4. Deletar"     << endl
+             << "5. Mostrar"     << endl
+             << "6. Menu"        << endl
+             << "7. Sair"        << endl;
+}
+
+void flushCin()
+{
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(),'\n');
 }
 
