@@ -42,7 +42,7 @@ int main()
 
     do {
 
-        switch (op)
+        switch (tolower(op))
         {
             case 'a':
             // Adicionar
@@ -95,6 +95,7 @@ int main()
             case 'o':
             // Ordenar por Insertion Sort
                 list.sortIns();
+                list.show();
                 break;
             case 'm':
             // Menu
@@ -105,7 +106,7 @@ int main()
         }
 
         cout << "\nOpção: ";
-        cin.get(op);
+        cin >> op;
         flushCin();
 
     } while (op != 's');
@@ -117,14 +118,14 @@ void printMenu()
 {
         cout << "\nMenu:"        << endl
              << "=====\n"        << endl
-             << "a. Adicionar"   << endl
-             << "i. Inserir"     << endl
-             << "p. Procurar"    << endl
-             << "d. Deletar"     << endl
-             << "v. Visualizar"  << endl
-             << "o. Ordenar"     << endl
-             << "m. Menu"        << endl
-             << "s. Sair"        << endl;
+             << "A. Adicionar"   << endl
+             << "D. Deletar"     << endl
+             << "I. Inserir"     << endl
+             << "M. Menu"        << endl
+             << "S. Sair"        << endl
+             << "O. Ordenar"     << endl
+             << "P. Procurar"    << endl
+             << "V. Visualizar"  << endl;
 }
 
 void flushCin()
