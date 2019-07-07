@@ -38,7 +38,8 @@ int main()
 
     int key;
     int pos;
-    char op = 'm';
+    char op = 'm';          // Menu como opção padrão
+    char ops;
 
     do {
 
@@ -93,8 +94,15 @@ int main()
                 list.show();
                 break;
             case 'o':
-            // Ordenar por Insertion Sort
-                list.sortIns();
+            // Ordenar
+                cout << "I - Insertion Sort" << endl
+                     << "B - Bubble Sort" << endl
+                     << "Metodo (I/B)? ";
+                cin >> ops;
+                flushCin();
+                ops = tolower(ops);
+                if (ops == 'i') list.sortIns();
+                else list.sortBub();
                 list.show();
                 break;
             case 'm':
