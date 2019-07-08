@@ -74,7 +74,7 @@ int main()
             {
                 cout << "Chave? ";
                 cin >> key;
-                pos = list.find(key);
+                pos = list.findSent(key);
                 if (pos == -1) cout << "Chave inválida!" << endl;
                 else cout << "Posição: " << pos << endl;
                 list.show();
