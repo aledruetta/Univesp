@@ -16,7 +16,7 @@
 #include <iostream>
 #include <cstdlib>                  // rand, srand
 #include <ctime>                    // time
-#include "Register.hpp"
+#include "register.h"
 
 using namespace std;
 const int MAX = 50;                 // Quantidade máxima de registros

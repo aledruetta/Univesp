@@ -12,8 +12,8 @@
 
 #include <iostream>
 #include <limits>
-#include "Register.hpp"
-#include "LinearSeqList.hpp"
+#include "register.h"
+#include "linearSeqList.h"
 
 void printMenu();
 void flushCin();
