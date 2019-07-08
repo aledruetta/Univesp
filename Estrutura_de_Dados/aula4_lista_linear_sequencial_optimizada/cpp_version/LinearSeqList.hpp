@@ -62,7 +62,7 @@ void LinearSeqList::show()
 
 void LinearSeqList::sortIns()
 /*
- * Ordena a lista usando o algoritmo insertion sort.
+ * Ordena a lista usando o algoritmo INSERTION SORT.
  */
 {
     for (int i=1; i<len; i++)
@@ -80,9 +80,19 @@ void LinearSeqList::sortIns()
 
 void LinearSeqList::sortBub()
 /*
- * Ordena a lista usando o algoritmo bubble sort.
+ * Ordena a lista usando o algoritmo BUBBLE SORT.
  */
 {
+    for (int i=len-1; i>0; i--)
+        for (int j=0; j<i; j++)
+        {
+            if (regs[j].getKey() > regs[j+1].getKey())
+            {
+                Register tmp = regs[j];
+                regs[j] = regs[j+1];
+                regs[j+1] = tmp;
+            }
+        }
 }
 
 bool LinearSeqList::append(Register reg)
