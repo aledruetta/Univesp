@@ -10,6 +10,8 @@
  * Data:       05/07/2019
  */
 
+#ifndef UNIVESP_REGISTER_H
+#define UNIVESP_REGISTER_H
 
 class Register
 /*
@@ -48,3 +50,4 @@ int Register::getKey()
     return key;
 }
 
+#endif

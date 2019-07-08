@@ -10,9 +10,13 @@
  * Data:       06/07/2019
  */
 
+#ifndef UNIVESP_LINEARSEQLIST_H
+#define UNIVESP_LINEARSEQLIST_H
 
+#include <iostream>
 #include <cstdlib>                  // rand, srand
 #include <ctime>                    // time
+#include "Register.hpp"
 
 using namespace std;
 const int MAX = 50;                 // Quantidade máxima de registros
@@ -165,3 +169,4 @@ bool LinearSeqList::del(int key)
     return true;
 }
 
+#endif
