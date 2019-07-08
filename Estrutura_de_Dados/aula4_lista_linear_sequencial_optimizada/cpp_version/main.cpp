@@ -11,8 +11,6 @@
  */
 
 #include <iostream>
-#include <cstdlib>                  // rand, srand
-#include <ctime>                    // time
 #include <limits>
 #include "Register.hpp"
 #include "LinearSeqList.hpp"
@@ -27,24 +25,25 @@ int main()
  */
 {
     LinearSeqList list;
-    srand(time(nullptr));
-
-    for (int i=0; i<10; i++)
-    {
-        Register reg(rand() % 100);
-        if (!list.append(reg)) cout << "Não há mais espaço na lista!" << endl;
-    }
     list.show();
 
     int key;
     int pos;
     char op = 'm';          // Menu como opção padrão
     char ops;
+    int num;
 
     do {
 
         switch (tolower(op))
         {
+            case 'g':
+                cout << "Tamanho? ";
+                cin >> num;
+                flushCin();
+                list.generate(num);
+                list.show();
+                break;
             case 'a':
             // Adicionar
             {
@@ -128,6 +127,7 @@ void printMenu()
              << "=====\n"        << endl
              << "A. Adicionar"   << endl
              << "D. Deletar"     << endl
+             << "G. Gerar"       << endl
              << "I. Inserir"     << endl
              << "M. Menu"        << endl
              << "S. Sair"        << endl

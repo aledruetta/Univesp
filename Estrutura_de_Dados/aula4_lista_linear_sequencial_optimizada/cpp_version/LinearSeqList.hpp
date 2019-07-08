@@ -11,6 +11,9 @@
  */
 
 
+#include <cstdlib>                  // rand, srand
+#include <ctime>                    // time
+
 using namespace std;
 const int MAX = 50;                 // Quantidade máxima de registros
 
@@ -29,6 +32,7 @@ class LinearSeqList
     public:
 
         LinearSeqList();
+        bool generate(int num);
         void sortIns();                 // Insertion sort
         void sortBub();                 // Bubble sort
         bool append(Register reg);
@@ -44,6 +48,26 @@ LinearSeqList::LinearSeqList()
  */
 {
     len = 0;
+}
+
+bool LinearSeqList::generate(int num)
+{
+    if (num > MAX)
+    {
+        cout << "Tamanho máximo 50 elementos!" << endl;
+        return false;
+    }
+
+    srand(time(nullptr));
+    len = 0;                    // inicializar lista
+
+    for (int i=0; i<num; i++)
+    {
+        Register reg(rand() % 100);
+        if (!append(reg)) cout << "Não há mais espaço na lista!" << endl;
+    }
+
+    return true;
 }
 
 void LinearSeqList::show()
