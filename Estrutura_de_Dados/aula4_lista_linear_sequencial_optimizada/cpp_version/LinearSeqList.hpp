@@ -109,14 +109,12 @@ void LinearSeqList::sortBub()
 {
     for (int i=len-1; i>0; i--)
         for (int j=0; j<i; j++)
-        {
             if (regs[j].getKey() > regs[j+1].getKey())
             {
                 Register tmp = regs[j];
                 regs[j] = regs[j+1];
                 regs[j+1] = tmp;
             }
-        }
 }
 
 bool LinearSeqList::append(Register reg)
