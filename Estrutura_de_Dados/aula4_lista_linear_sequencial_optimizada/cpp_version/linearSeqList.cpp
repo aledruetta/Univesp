@@ -140,7 +140,7 @@ int LinearSeqList::findBin(int key)
         if (regs[mid].getKey() > key) end = mid - 1;
         else ini = mid + 1;
     }
-    return len - 1;
+    return -1;
 }
 
 bool LinearSeqList::del(int key)
