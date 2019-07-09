@@ -14,7 +14,7 @@
 
 LinearSeqList::LinearSeqList()
 /*
- * Construtor da Lista.
+ * CONSTRUTOR da Lista.
  */
 {
     len = 0;
@@ -22,6 +22,9 @@ LinearSeqList::LinearSeqList()
 
 bool LinearSeqList::generate(int num)
 {
+/*
+ * GERA uma lista randômica de comprimento "num".
+ */
     if (num > MAX)
     {
         cout << "Tamanho máximo 50 elementos!" << endl;
@@ -42,7 +45,7 @@ bool LinearSeqList::generate(int num)
 
 void LinearSeqList::show()
 /*
- * Imprime uma representação da Lista no formato:
+ * IMPRIME uma representação da Lista no formato:
  * List: [ 2 7 23 ] Length: 3
  */
 {
@@ -56,7 +59,7 @@ void LinearSeqList::show()
 
 void LinearSeqList::sortIns()
 /*
- * Ordena a lista usando o algoritmo INSERTION SORT.
+ * ORDENA a lista usando o algoritmo INSERTION SORT.
  */
 {
     for (int i=1; i<len; i++)
@@ -74,7 +77,7 @@ void LinearSeqList::sortIns()
 
 void LinearSeqList::sortBub()
 /*
- * Ordena a lista usando o algoritmo BUBBLE SORT.
+ * ORDENA a lista usando o algoritmo BUBBLE SORT.
  */
 {
     for (int i=len-1; i>0; i--)
@@ -89,7 +92,7 @@ void LinearSeqList::sortBub()
 
 bool LinearSeqList::append(Register reg)
 /*
- * Adiciona um registro no final da lista se a lista não estiver cheia.
+ * ADICIONA um registro no FINAL da lista se a lista não estiver cheia.
  */
 {
     if (len >= MAX) return false;
@@ -100,7 +103,7 @@ bool LinearSeqList::append(Register reg)
 
 bool LinearSeqList::insert(Register reg, int pos)
 /*
- * Insere um registro em uma posição determinada se a lista não
+ * INSERE um registro em uma posição determinada se a lista não
  * estiver cheia e a posição for válida.
  */
 {
@@ -113,7 +116,7 @@ bool LinearSeqList::insert(Register reg, int pos)
 
 int LinearSeqList::findSent(int key)
 /*
- * Procura uma chave usando o algoritmo de BUSCA POR SENTINELA.
+ * PROCURA uma chave usando o algoritmo de BUSCA POR SENTINELA.
  */
 {
     int pos = 0;
@@ -125,7 +128,7 @@ int LinearSeqList::findSent(int key)
 
 int LinearSeqList::findBin(int key)
 /*
- * Procura uma chave usando o algoritmo de BUSCA BINÁRIA.
+ * PROCURA uma chave usando o algoritmo de BUSCA BINÁRIA.
  */
 {
     int mid;
@@ -145,7 +148,7 @@ int LinearSeqList::findBin(int key)
 
 bool LinearSeqList::del(int key)
 /*
- * Deleta um elemento da lista procurado pela chave.
+ * DELETA um elemento da lista procurado pela chave.
  */
 {
     int pos = findSent(key);
