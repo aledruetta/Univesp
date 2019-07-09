@@ -128,8 +128,19 @@ int LinearSeqList::findBin(int key)
  * Procura uma chave usando o algoritmo de BUSCA BINÁRIA.
  */
 {
-    int pos = 0;
-    return pos;
+    int mid;
+    int ini = 0;
+    int end = len - 1;
+    sortBub();
+
+    while (ini <= end)
+    {
+        mid = (ini + end) / 2;
+        if (regs[mid].getKey() == key) return mid;
+        if (regs[mid].getKey() > key) end = mid - 1;
+        else ini = mid + 1;
+    }
+    return len - 1;
 }
 
 bool LinearSeqList::del(int key)
