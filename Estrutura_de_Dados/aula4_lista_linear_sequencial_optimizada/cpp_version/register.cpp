@@ -18,7 +18,7 @@ Register::Register()
  * Instancia o objeto e atribui o valor 0 à chave.
  */
 {
-    this->key = 0;
+    key = 0;
 }
 
 Register::Register(int key)
