@@ -17,9 +17,9 @@ int main()
     REGISTER reg;
     reg.key = 5;
     LIST list;
-    initList(&list);
-    addList(&list, reg);
-    showList(list);
+    initList (&list);
+    addList (&list, reg);
+    showList (list);
     return 0;
 }
 

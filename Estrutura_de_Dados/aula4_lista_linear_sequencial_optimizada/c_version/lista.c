@@ -13,7 +13,7 @@
 #include "lista.h"
 
 
-void initList(LIST * list)
+void initList (LIST * list)
 /*
  * Inicializa uma lista com zero elementos.
  */
@@ -22,7 +22,7 @@ void initList(LIST * list)
 }
 
 
-int lenList(LIST list)
+int lenList (LIST list)
 /*
  * Retorna o número de elementos da lista.
  */
@@ -31,7 +31,7 @@ int lenList(LIST list)
 }
 
 
-void showList(LIST list)
+void showList (LIST list)
 /*
  * Imprime uma representação da lista no formato:
  * List: [ 4 12 8 ] Length: 3
@@ -44,7 +44,7 @@ void showList(LIST list)
 }
 
 
-int findSeqList(LIST list, KEY key)
+int findSeqList (LIST list, KEY key)
 /*
  * Procura por uma chave de forma sequencial.
  */
@@ -55,7 +55,7 @@ int findSeqList(LIST list, KEY key)
 }
 
 
-int findSentList(LIST * list, KEY key)
+int findSentList (LIST * list, KEY key)
 /*
  * Procura por uma chave usando a busca por sentinela.
  */
@@ -67,7 +67,7 @@ int findSentList(LIST * list, KEY key)
     return pos;
 }
 
-int findBinList(LIST list, KEY key)
+int findBinList (LIST list, KEY key)
 /*
  * Procura por uma chave usando busca binária.
  */
@@ -87,27 +87,31 @@ int findBinList(LIST list, KEY key)
 }
 
 
-bool insPosList(LIST * list, REGISTER reg, int pos)
+bool insPosList (LIST * list, REGISTER reg, int pos)
 {
 }
 
-bool insOrdList(LIST * list, REGISTER reg)
+bool insOrdList (LIST * list, REGISTER reg)
 {
 }
 
-bool delList(LIST * list, KEY key)
+bool delList (LIST * list, KEY key)
 {
 }
 
-void sortInsList(LIST * list)
+void sortInsList (LIST * list)
 {
 }
 
-void sortBubList(LIST * list)
+void sortBubList (LIST * list)
 {
 }
 
-bool addList(LIST * list, REGISTER reg)
+bool addList (LIST * list, REGISTER reg)
+/*
+ * Adiciona um elemento na última posição sempre que
+ * a lista não estiver cheia.
+ */
 {
     if (list->len >= MAX) return false;
     list->regs[list->len] = reg;

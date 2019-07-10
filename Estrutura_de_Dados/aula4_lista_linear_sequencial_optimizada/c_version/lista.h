@@ -34,18 +34,18 @@ typedef struct
 } LIST;
 
 
-void initList(LIST * list);
-void showList(LIST list);
-int lenList(LIST list);
-int findSeqList(LIST list, KEY key);
-int findSentList(LIST * list, KEY key);
-int findBinList(LIST list, KEY key);
-bool addList(LIST * list, REGISTER reg);
-bool delList(LIST * list, KEY key);
-void sortInsList(LIST * list);
-void sortBinList(LIST * list);
-bool insPosList(LIST * list, REGISTER reg, int pos);
-bool insOrdList(LIST * list, REGISTER reg);
+void initList (LIST * list);
+void showList (LIST list);
+int lenList (LIST list);
+int findSeqList (LIST list, KEY key);
+int findSentList (LIST * list, KEY key);
+int findBinList (LIST list, KEY key);
+bool addList (LIST * list, REGISTER reg);
+bool delList (LIST * list, KEY key);
+void sortInsList (LIST * list);
+void sortBinList (LIST * list);
+bool insPosList (LIST * list, REGISTER reg, int pos);
+bool insOrdList (LIST * list, REGISTER reg);
 
 #endif
 
