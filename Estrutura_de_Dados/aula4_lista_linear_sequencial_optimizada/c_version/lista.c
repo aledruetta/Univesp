@@ -5,8 +5,6 @@
  * - Busca por Sentinela;
  */
 
-#include <stdio.h>
-#include <stdbool.h>
 #include "lista.h"
 
 
