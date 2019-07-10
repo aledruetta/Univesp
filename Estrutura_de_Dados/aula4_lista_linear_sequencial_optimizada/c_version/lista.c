@@ -1,8 +1,13 @@
 /*
- * file: lista.c
+ * UNIVESP - ENG. DA COMPUTAÇÃO
  *
- * LISTA LINEAR SEQUENCIAL (optimizada)
- * - Busca por Sentinela;
+ * LISTA LINEAR SEQUENCIAL OPTIMIZADA (versão C)
+ *
+ * Arquivo:     lista.c
+ * Disciplina:  ESTRUTURA DE DADOS
+ * Bimestre:    9°
+ * Autor:       Alejandro Druetta
+ * Data:        10/07/2019
  */
 
 #include "lista.h"

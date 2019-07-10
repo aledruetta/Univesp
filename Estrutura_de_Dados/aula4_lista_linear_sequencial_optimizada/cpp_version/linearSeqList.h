@@ -5,7 +5,7 @@
  *
  * Arquivo:    linearSeqList.h
  * Disciplina: ESTRUTURA DE DADOS
- * Bimestre:   8vo
+ * Bimestre:    9°
  * Autor:      Alejandro Druetta
  * Data:       06/07/2019
  */

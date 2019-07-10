@@ -1,7 +1,13 @@
 /*
- * file: main.c
+ * UNIVESP - ENG. DA COMPUTAÇÃO
  *
- * LISTA LINEAR SEQUENCIAL (optimizada)
+ * LISTA LINEAR SEQUENCIAL OPTIMIZADA (versão C)
+ *
+ * Arquivo:     main.c
+ * Disciplina:  ESTRUTURA DE DADOS
+ * Bimestre:    9°
+ * Autor:       Alejandro Druetta
+ * Data:        10/07/2019
  */
 
 #include "lista.h"
