@@ -4,7 +4,7 @@
  * LISTA LINEAR SEQUENCIAL (optimizada)
  */
 
-#include "main.h"
+#include "lista.h"
 
 int main()
 {
