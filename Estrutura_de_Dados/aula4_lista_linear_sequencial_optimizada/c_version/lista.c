@@ -15,7 +15,7 @@
 
 void initList (LIST * list)
 /*
- * Inicializa uma lista com zero elementos.
+ * INICIALIZA uma lista com zero elementos.
  */
 {
     list->len = 0;
@@ -33,20 +33,21 @@ int lenList (LIST list)
 
 void showList (LIST list)
 /*
- * Imprime uma representação da lista no formato:
+ * IMPRIME uma representação da lista no formato:
  * List: [ 4 12 8 ] Length: 3
  */
 {
     printf("\nList: [ ");
     for (int i=0; i<list.len; i++)
         printf("%i ", list.regs[i].key);
-    printf("] Length: %i\n", lenList(list));
+    printf("] Length: %i\n", list.len);
 }
 
 
 int findSeqList (LIST list, KEY key)
 /*
- * Procura por uma chave de forma sequencial.
+ * PROCURA por uma chave de forma sequencial. A lista
+ * NÃO precisa estar ordenada.
  */
 {
     for (int pos=0; pos<list.len; pos++)
@@ -57,19 +58,22 @@ int findSeqList (LIST list, KEY key)
 
 int findSentList (LIST * list, KEY key)
 /*
- * Procura por uma chave usando a busca por sentinela.
+ * PROCURA por uma chave usando a busca por sentinela. A lista
+ * NÃO precisa estar ordenada.
  */
 {
-    list->regs[list->len].key = key;
+    int len = list->len;
+    list->regs[len].key = key;
     int pos = 0;
     while (list->regs[pos].key != key) pos++;
-    if (pos == list->len) return -1;
+    if (pos == len) return -1;
     return pos;
 }
 
 int findBinList (LIST list, KEY key)
 /*
- * Procura por uma chave usando busca binária.
+ * PROCURA por uma chave usando busca binária. A lista
+ * SIM precisa estar ordenada.
  */
 {
     int mid;
@@ -89,8 +93,8 @@ int findBinList (LIST list, KEY key)
 
 bool insPosList (LIST * list, REGISTER reg, int pos)
 /*
- * Inserta um elemento na posição dada, sempre que a lista
- * não estiver cheia. A lista não precisa estar ordenada.
+ * INSERTA um elemento na posição dada, sempre que a lista
+ * não estiver cheia. A lista NÃO precisa estar ordenada.
  */
 {
     int len = list->len;
@@ -114,23 +118,32 @@ bool delList (LIST * list, KEY key)
 
 
 void sortInsList (LIST * list)
+/*
+ * ORDENA os elementos da lista em função das suas chaves
+ * usando o algoritmo INSERTION SORT.
+ */
 {
 }
 
 
 void sortBubList (LIST * list)
+/*
+ * ORDENA os elementos da lista em função das suas chaves
+ * usando o algoritmo BUBBLE SORT.
+ */
 {
 }
 
 
 bool addList (LIST * list, REGISTER reg)
 /*
- * Adiciona um elemento na última posição sempre que
+ * ADICIONA um elemento na última posição sempre que
  * a lista não estiver cheia.
  */
 {
-    if (list->len >= MAX) return false;
-    list->regs[list->len] = reg;
+    int len = list->len;
+    if (len >= MAX) return false;
+    list->regs[len] = reg;
     list->len++;
     return true;
 }
