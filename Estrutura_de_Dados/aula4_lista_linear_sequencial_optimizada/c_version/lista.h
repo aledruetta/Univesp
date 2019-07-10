@@ -29,22 +29,23 @@ typedef struct
 
 typedef struct
 {
-    REGISTER A[MAX+1];
+    REGISTER regs[MAX+1];
     int len;
 } LIST;
 
 
-void initialize(LIST * list);
-int len(LIST list);
-void show(LIST list);
-int sequencialSearch(LIST list, KEY key);
-int sentinelSearch(LIST * list, KEY key);
-int binarySearch(LIST list, KEY key);
-bool append(LIST * list, REGISTER reg, int pos);
-bool delete(LIST * list, KEY key);
-void sort(LIST * list);
-bool insert(LIST * list, REGISTER reg);
-void reinitialize(LIST * list);
+void initList(LIST * list);
+void showList(LIST list);
+int lenList(LIST list);
+int findSeqList(LIST list, KEY key);
+int findSentList(LIST * list, KEY key);
+int findBinList(LIST list, KEY key);
+bool addList(LIST * list, REGISTER reg);
+bool delList(LIST * list, KEY key);
+void sortInsList(LIST * list);
+void sortBinList(LIST * list);
+bool insPosList(LIST * list, REGISTER reg, int pos);
+bool insOrdList(LIST * list, REGISTER reg);
 
 #endif
 

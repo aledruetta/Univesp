@@ -13,148 +13,105 @@
 #include "lista.h"
 
 
-void initialize(LIST * list)
+void initList(LIST * list)
+/*
+ * Inicializa uma lista com zero elementos.
+ */
 {
     list->len = 0;
 }
 
 
-void reinitialize(LIST * list)
-{
-    list->len = 0;
-}
-
-
-int len(LIST list)
+int lenList(LIST list)
+/*
+ * Retorna o número de elementos da lista.
+ */
 {
     return list.len;
 }
 
 
-void show(LIST list)
+void showList(LIST list)
+/*
+ * Imprime uma representação da lista no formato:
+ * List: [ 4 12 8 ] Length: 3
+ */
 {
     printf("\nList: [ ");
     for (int i=0; i<list.len; i++)
-        printf("%i ", list.A[i].key);
-    printf("] len: %i\n", len(list));
+        printf("%i ", list.regs[i].key);
+    printf("] Length: %i\n", lenList(list));
 }
 
 
-int sequencialSearch(LIST list, KEY key)
+int findSeqList(LIST list, KEY key)
+/*
+ * Procura por uma chave de forma sequencial.
+ */
 {
     for (int pos=0; pos<list.len; pos++)
-        if (list.A[pos].key == key) return pos;
+        if (list.regs[pos].key == key) return pos;
     return -1;
 }
 
 
-int sentinelSearch(LIST * list, KEY key)
+int findSentList(LIST * list, KEY key)
+/*
+ * Procura por uma chave usando a busca por sentinela.
+ */
 {
-    list->A[list->len].key = key;
+    list->regs[list->len].key = key;
     int pos = 0;
-    while (list->A[pos].key != key) pos++;
+    while (list->regs[pos].key != key) pos++;
     if (pos == list->len) return -1;
     return pos;
 }
 
-int binarySearch(LIST list, KEY key)
+int findBinList(LIST list, KEY key)
+/*
+ * Procura por uma chave usando busca binária.
+ */
 {
-    int lef, mid, rig;
-    lef = 0;
-    rig = list.len - 1;
+    int mid;
+    int ini = 0;
+    int end = list.len - 1;
 
-    while (lef <= rig)
+    while (ini <= end)
     {
-        mid = (lef + rig) / 2;
-        if (list.A[mid].key == key) return mid;
-        if (list.A[mid].key < key) lef = mid + 1;
-        else rig = mid - 1;
+        mid = (ini + end) / 2;
+        if (list.regs[mid].key == key) return mid;
+        if (list.regs[mid].key < key) ini = mid + 1;
+        else ini = mid - 1;
     }
     return -1;
 }
 
 
-bool append(LIST * list, REGISTER reg, int pos)
+bool insPosList(LIST * list, REGISTER reg, int pos)
 {
-    bool pos_invalida = (pos < 0) && (pos > list->len);
-    bool is_full = (list->len == MAX);
+}
 
-    if (is_full)
-    {
-        printf("A lista está cheia!\n");
-        return false;
-    }
-    if (pos_invalida)
-    {
-        printf("A posição não é válida!\n");
-        return false;
-    }
+bool insOrdList(LIST * list, REGISTER reg)
+{
+}
 
-    for (int i=list->len; i>pos; i--)
-        list->A[i] = list->A[i-1];
+bool delList(LIST * list, KEY key)
+{
+}
 
-    list->A[pos] = reg;
+void sortInsList(LIST * list)
+{
+}
+
+void sortBubList(LIST * list)
+{
+}
+
+bool addList(LIST * list, REGISTER reg)
+{
+    if (list->len >= MAX) return false;
+    list->regs[list->len] = reg;
     list->len++;
-
-    return true;
-}
-
-bool delete(LIST * list, KEY key)
-{
-    int pos, i;
-    pos = binarySearch(* list, key);
-
-    if (pos < 0)
-    {
-        printf("O elemento com chave [%i] não existe!\n", key);
-        return false;
-    }
-
-    for (i=pos; i<list->len-1; i++)
-        list->A[i] = list->A[i+1];
-
-    list->len--;
-
-    return true;
-}
-
-void sort(LIST * list)
-// Algoritmo: insertion sort
-{
-    if (list->len <= 1) return;
-    for (int i=1; i<list->len; i++)
-    {
-        REGISTER tmp = list->A[i];
-        int j = 1;
-        while ((tmp.key < list->A[i-j].key) && (i-j >= 0))
-        {
-            list->A[i-j+1] = list->A[i-j];
-            j++;
-        }
-        list->A[i-j+1] = tmp;
-        show( * list);
-    }
-}
-
-bool insert(LIST * list, REGISTER reg)
-{
-    bool is_full = (list->len == MAX);
-
-    if (is_full)
-    {
-        printf("A lista está cheia!\n");
-        return false;
-    }
-
-    int pos = list->len - 1;
-    while (pos >= 0 && list->A[pos].key > reg.key)
-    {
-        list->A[pos+1] = list->A[pos];
-        pos--;
-    }
-    list->A[pos+1] = reg;
-    list->len++;
-
     return true;
 }
 
