@@ -88,24 +88,40 @@ int findBinList (LIST list, KEY key)
 
 
 bool insPosList (LIST * list, REGISTER reg, int pos)
+/*
+ * Inserta um elemento na posição dada, sempre que a lista
+ * não estiver cheia. A lista não precisa estar ordenada.
+ */
 {
+    int len = list->len;
+    if (len >= MAX || pos < 0 || pos >= len) return false;
+    for (int i=len-1; i>=pos; i--)
+        list->regs[i+1] = list->regs[i];
+    list->regs[pos] = reg;
+    list->len++;
+    return true;
 }
+
 
 bool insOrdList (LIST * list, REGISTER reg)
 {
 }
 
+
 bool delList (LIST * list, KEY key)
 {
 }
+
 
 void sortInsList (LIST * list)
 {
 }
 
+
 void sortBubList (LIST * list)
 {
 }
+
 
 bool addList (LIST * list, REGISTER reg)
 /*
