@@ -43,7 +43,7 @@ int findBinList (LIST list, KEY key);                   // Busca Binária
 bool addList (LIST * list, REGISTER reg);               // Adicionar
 bool delList (LIST * list, KEY key);                    // Deletar
 void sortInsList (LIST * list);                         // Insertion Sort
-void sortBinList (LIST * list);                         // Binary Sort
+void sortBubList (LIST * list);                         // Bubble Sort
 bool insPosList (LIST * list, REGISTER reg, int pos);   // Inserir Posicional
 bool insOrdList (LIST * list, REGISTER reg);            // Inserir Ordenada
 

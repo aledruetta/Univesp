@@ -113,6 +113,9 @@ bool insOrdList (LIST * list, REGISTER reg)
 
 
 bool delList (LIST * list, KEY key)
+/*
+ * DELETA um elemento pela sua chave.
+ */
 {
 }
 
@@ -132,6 +135,18 @@ void sortBubList (LIST * list)
  * usando o algoritmo BUBBLE SORT.
  */
 {
+    int len = list->len;
+
+    for (int i=1; i<len; i++)
+        for (int j=0; j<len-i; j++)
+        {
+            if (list->regs[j].key > list->regs[j+1].key)
+            {
+                REGISTER tmp = list->regs[j];
+                list->regs[j] = list->regs[j+1];
+                list->regs[j+1] = tmp;
+            }
+        }
 }
 
 

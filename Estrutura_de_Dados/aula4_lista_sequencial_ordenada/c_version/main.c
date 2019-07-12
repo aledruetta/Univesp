@@ -28,6 +28,8 @@ int main()
     reg.key = 99;
     insPosList(&list, reg, 5);
     showList(list);
+    sortBubList(&list);
+    showList(list);
 
     return 0;
 }
