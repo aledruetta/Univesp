@@ -126,6 +126,19 @@ void sortInsList (LIST * list)
  * usando o algoritmo INSERTION SORT.
  */
 {
+    int i = 1;
+    while (i < list->len)
+    {
+        REGISTER tmp = list->regs[i];
+        int j = i - 1;
+        while (j >=0 && tmp.key < list->regs[j].key)
+        {
+            list->regs[j+1] = list->regs[j];
+            j--;
+        }
+        list->regs[j+1] = tmp;
+        i++;
+    }
 }
 
 
