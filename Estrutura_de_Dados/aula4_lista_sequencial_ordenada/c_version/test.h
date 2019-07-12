@@ -3,20 +3,20 @@
  *
  * LISTA LINEAR SEQUENCIAL ORDENADA (versão C)
  *
- * Arquivo:     main.c
+ * Arquivo:     test.h
  * Disciplina:  ESTRUTURA DE DADOS
  * Bimestre:    9°
  * Autor:       Alejandro Druetta
- * Data:        10/07/2019
+ * Data:        12/07/2019
  */
 
+
+#ifndef TEST_LIST_H
+#define TEST_LIST_H
+
 #include "lista.h"
-#include "test.h"
 
-int main()
-{
-    testList();
+void testList();
 
-    return 0;
-}
+#endif
 
