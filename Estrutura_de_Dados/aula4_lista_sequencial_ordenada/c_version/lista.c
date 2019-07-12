@@ -22,6 +22,21 @@ void initList (LIST * list)
 }
 
 
+void genList (LIST * list, int len)
+/*
+ * GERA uma lista de tamanho len.
+ */
+{
+    srand(time(NULL));
+    for (int i=0; i<len; i++)
+    {
+        REGISTER reg;
+        reg.key = rand() % 100;
+        addList(list, reg);
+    }
+}
+
+
 int lenList (LIST list)
 /*
  * Retorna o número de elementos da lista.

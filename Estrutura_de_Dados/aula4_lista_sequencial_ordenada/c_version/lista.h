@@ -14,6 +14,8 @@
 #define UNIVESP_LISTA_H
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <stdbool.h>
 
 #define MAX 50
@@ -35,6 +37,7 @@ typedef struct
 
 
 void initList (LIST * list);                            // Inicializar
+void genList(LIST * list, int len);                      // Generar
 void showList (LIST list);                              // Mostrar
 int lenList (LIST list);                                // Cumprimento
 int findSeqList (LIST list, KEY key);                   // Busca Sequencial

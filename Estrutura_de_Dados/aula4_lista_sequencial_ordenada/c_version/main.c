@@ -14,15 +14,9 @@
 
 int main()
 {
-    int keys[] = {4, 9, 0, 3, 7, 12, 4, 28, 19, 8};
     LIST list;
     initList(&list);
-    for (int i=0; i<10; i++)
-    {
-        REGISTER reg;
-        reg.key = keys[i];
-        addList(&list, reg);
-    }
+    genList(&list, 10);
     showList(list);
     REGISTER reg;
     reg.key = 99;
