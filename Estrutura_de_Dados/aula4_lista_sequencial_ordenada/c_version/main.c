@@ -61,10 +61,10 @@ int main()
     sortBubList(&list);
     showList(list);
 
-    printf("\nTeste 10: INSERINDO elemento de chave 15 numa lista ordenada...");
-    reg.key = 15;
-    insOrdList(&list, reg);
-    showList(list);
+    //printf("\nTeste 10: INSERINDO elemento de chave 15 numa lista ordenada...");
+    //reg.key = 15;
+    //insOrdList(&list, reg);
+    //showList(list);
 
     return 0;
 }

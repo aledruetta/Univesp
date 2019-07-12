@@ -107,7 +107,7 @@ int findBinList (LIST list, KEY key)
 
 bool insPosList (LIST * list, REGISTER reg, int pos)
 /*
- * INSERTA um elemento na posição dada, sempre que a lista
+ * INSERE um elemento na posição dada, sempre que a lista
  * não estiver cheia. A lista NÃO precisa estar ordenada.
  */
 {
@@ -121,9 +121,12 @@ bool insPosList (LIST * list, REGISTER reg, int pos)
 }
 
 
-bool insOrdList (LIST * list, REGISTER reg)
-{
-}
+//bool insOrdList (LIST * list, REGISTER reg)
+/*
+ * INSERE um elemento numa lista ordenada.
+ */
+//{
+//}
 
 
 bool delList (LIST * list, KEY key)
