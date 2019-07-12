@@ -24,15 +24,14 @@ void initList (LIST * list)
 
 void genList (LIST * list, int len)
 /*
- * GERA uma lista de tamanho len.
+ * GERA uma lista randômica de tamanho len.
  */
 {
-    srand(time(NULL));
     for (int i=0; i<len; i++)
     {
         REGISTER reg;
         reg.key = rand() % 100;
-        addList(list, reg);
+        addList (list, reg);
     }
 }
 
@@ -52,10 +51,10 @@ void showList (LIST list)
  * List: [ 4 12 8 ] Length: 3
  */
 {
-    printf("\nList: [ ");
+    printf ("\nList: [ ");
     for (int i=0; i<list.len; i++)
-        printf("%i ", list.regs[i].key);
-    printf("] Length: %i\n", list.len);
+        printf ("%i ", list.regs[i].key);
+    printf ("] Length: %i\n", list.len);
 }
 
 
@@ -132,6 +131,12 @@ bool delList (LIST * list, KEY key)
  * DELETA um elemento pela sua chave.
  */
 {
+    int pos = findBinList (*list, key);
+    if(pos == -1) return false;
+    for (int i=pos; i<list->len-1; i++)
+        list->regs[i] = list->regs[i+1];
+    list->len--;
+    return true;
 }
 
 
