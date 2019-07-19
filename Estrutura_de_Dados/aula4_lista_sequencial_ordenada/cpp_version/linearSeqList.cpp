@@ -20,6 +20,7 @@ LinearSeqList::LinearSeqList(int maxSize)
     _maxSize = maxSize;
     _regs = new Register[maxSize+1];
     _len = 0;
+    _is_ordered = false;
 }
 
 bool LinearSeqList::generate(int num)
@@ -75,6 +76,7 @@ void LinearSeqList::sortIns()
         }
         _regs[j+1] = tmp;
     }
+    _is_ordered = true;
 }
 
 void LinearSeqList::sortBub()
@@ -90,6 +92,7 @@ void LinearSeqList::sortBub()
                 _regs[j] = _regs[j+1];
                 _regs[j+1] = tmp;
             }
+    _is_ordered = true;
 }
 
 bool LinearSeqList::append(Register reg)
@@ -100,6 +103,7 @@ bool LinearSeqList::append(Register reg)
     if (_len >= _maxSize) return false;
     _regs[_len] = reg;
     _len++;
+    _is_ordered = false;
     return true;
 }
 
@@ -113,10 +117,11 @@ bool LinearSeqList::insert(Register reg, int pos)
     for (int i=_len; i>pos; i--) _regs[i] = _regs[i-1];
     _regs[pos] = reg;
     _len++;
+    _is_ordered = false;
     return true;
 }
 
-int LinearSeqList::findSent(int key)
+int LinearSeqList::_findSent(int key)
 /*
  * PROCURA uma chave usando o algoritmo de BUSCA POR SENTINELA.
  */
@@ -128,7 +133,7 @@ int LinearSeqList::findSent(int key)
     return pos;
 }
 
-int LinearSeqList::findBin(int key)
+int LinearSeqList::_findBin(int key)
 /*
  * PROCURA uma chave usando o algoritmo de BUSCA BINÁRIA.
  */
@@ -136,7 +141,6 @@ int LinearSeqList::findBin(int key)
     int mid;
     int ini = 0;
     int end = _len - 1;
-    sortBub();
 
     while (ini <= end)
     {
@@ -148,12 +152,22 @@ int LinearSeqList::findBin(int key)
     return -1;
 }
 
+int LinearSeqList::find(int key)
+/*
+ * Chama os métodos de busca binária ou por sentinela segundo
+ * se a lista estiver ordenada ou não.
+ */
+{
+    if (_is_ordered) return _findBin(key);
+    else return _findSent(key);
+}
+
 bool LinearSeqList::del(int key)
 /*
  * DELETA um elemento da lista procurado pela chave.
  */
 {
-    int pos = findSent(key);
+    int pos = find(key);
     if (pos < 0) return false;
     for (int i=pos; i<_len-1; i++) _regs[i] = _regs[i+1];
     _len--;

@@ -5,7 +5,7 @@
  *
  * Arquivo:    linearSeqList.h
  * Disciplina: ESTRUTURA DE DADOS
- * Bimestre:    9°
+ * Bimestre:   9°
  * Autor:      Alejandro Druetta
  * Data:       06/07/2019
  */
@@ -36,14 +36,16 @@ class LinearSeqList
         void sortBub();                 // Bubble sort
         bool append(Register reg);
         bool insert(Register reg, int pos);
-        int findSent(int key);          // Busca por sentinela
-        int findBin(int key);           // Busca binária
+        int find(int key);
         bool del(int key);
         void show();
     private:
         int _maxSize;
         int _len;
         Register* _regs;
+        bool _is_ordered;
+        int _findSent(int key);         // Busca por sentinela
+        int _findBin(int key);          // Busca binária
 };
 
 #endif

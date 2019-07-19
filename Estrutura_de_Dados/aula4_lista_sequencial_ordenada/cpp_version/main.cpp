@@ -75,14 +75,7 @@ int main()
                 cout << "Chave? ";
                 cin >> key;
                 flushCin();
-                cout << "S - Por Sentinela" << endl
-                     << "B - Busca Binária" << endl
-                     << "Método (S/B)? ";
-                cin >> ops;
-                flushCin();
-                ops = tolower(ops);
-                if (ops == 's') pos = list.findSent(key);
-                else pos = list.findBin(key);
+                pos = list.find(key);
                 if (pos == -1) cout << "Chave inválida!" << endl;
                 else cout << "Posição: " << pos << endl;
                 list.show();
