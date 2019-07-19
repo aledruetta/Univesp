@@ -20,7 +20,7 @@ LinearSeqList::LinearSeqList(int maxSize)
     _maxSize = maxSize;
     _regs = new Register[maxSize+1];
     _len = 0;
-    _is_ordered = false;
+    _is_sorted = false;
 }
 
 bool LinearSeqList::generate(int num)
@@ -60,7 +60,7 @@ void LinearSeqList::show()
     cout << "] Length: " << _len << endl;
 }
 
-void LinearSeqList::sortIns()
+void LinearSeqList::_sortIns()
 /*
  * ORDENA a lista usando o algoritmo INSERTION SORT.
  */
@@ -76,10 +76,10 @@ void LinearSeqList::sortIns()
         }
         _regs[j+1] = tmp;
     }
-    _is_ordered = true;
+    _is_sorted = true;
 }
 
-void LinearSeqList::sortBub()
+void LinearSeqList::_sortBub()
 /*
  * ORDENA a lista usando o algoritmo BUBBLE SORT.
  */
@@ -92,7 +92,12 @@ void LinearSeqList::sortBub()
                 _regs[j] = _regs[j+1];
                 _regs[j+1] = tmp;
             }
-    _is_ordered = true;
+    _is_sorted = true;
+}
+
+void LinearSeqList::sort()
+{
+    _sortBub();
 }
 
 bool LinearSeqList::append(Register reg)
@@ -103,7 +108,7 @@ bool LinearSeqList::append(Register reg)
     if (_len >= _maxSize) return false;
     _regs[_len] = reg;
     _len++;
-    _is_ordered = false;
+    _is_sorted = false;
     return true;
 }
 
@@ -117,7 +122,7 @@ bool LinearSeqList::insert(Register reg, int pos)
     for (int i=_len; i>pos; i--) _regs[i] = _regs[i-1];
     _regs[pos] = reg;
     _len++;
-    _is_ordered = false;
+    _is_sorted = false;
     return true;
 }
 
@@ -158,7 +163,7 @@ int LinearSeqList::find(int key)
  * se a lista estiver ordenada ou não.
  */
 {
-    if (_is_ordered) return _findBin(key);
+    if (_is_sorted) return _findBin(key);
     else return _findSent(key);
 }
 

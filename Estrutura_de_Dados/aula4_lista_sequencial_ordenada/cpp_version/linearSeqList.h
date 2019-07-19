@@ -32,10 +32,9 @@ class LinearSeqList
     public:
         LinearSeqList(int maxSize);
         bool generate(int num);
-        void sortIns();                 // Insertion sort
-        void sortBub();                 // Bubble sort
         bool append(Register reg);
         bool insert(Register reg, int pos);
+        void sort();
         int find(int key);
         bool del(int key);
         void show();
@@ -43,9 +42,11 @@ class LinearSeqList
         int _maxSize;
         int _len;
         Register* _regs;
-        bool _is_ordered;
+        bool _is_sorted;
         int _findSent(int key);         // Busca por sentinela
         int _findBin(int key);          // Busca binária
+        void _sortIns();                // Insertion sort
+        void _sortBub();                // Bubble sort
 };
 
 #endif

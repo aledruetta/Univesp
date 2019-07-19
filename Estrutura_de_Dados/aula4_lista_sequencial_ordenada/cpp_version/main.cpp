@@ -97,14 +97,7 @@ int main()
                 break;
             case 'o':
             // Ordenar
-                cout << "I - Insertion Sort" << endl
-                     << "B - Bubble Sort" << endl
-                     << "Método (I/B)? ";
-                cin >> ops;
-                flushCin();
-                ops = tolower(ops);
-                if (ops == 'i') list.sortIns();
-                else list.sortBub();
+                list.sort();
                 list.show();
                 break;
             case 'm':
