@@ -10,9 +10,16 @@
  * Data:       08/07/2019
  */
 
+
+#include <iostream>
+#include <cstdlib>                  // rand, srand
+#include <ctime>                    // time
+#include "register.h"
 #include "linearSeqList.h"
 
-LinearSeqList::LinearSeqList(int maxSize):
+using namespace std;
+
+LinearSeqList::LinearSeqList (int maxSize):
     _maxSize {maxSize},
     _regs {new Register[maxSize+1]},
     _len {0},
@@ -27,7 +34,12 @@ LinearSeqList::LinearSeqList(int maxSize):
     //_is_sorted = false;
 }
 
-bool LinearSeqList::generate(int num)
+Register& LinearSeqList::operator[] (int i)
+{
+    return _regs[i];
+}
+
+bool LinearSeqList::generate (int num)
 {
 /*
  * GERA uma lista randômica de comprimento "num".
@@ -38,19 +50,19 @@ bool LinearSeqList::generate(int num)
         return false;
     }
 
-    srand(time(nullptr));
+    srand (time(nullptr));
     _len = 0;                    // inicializar lista
 
     for (int i=0; i<num; i++)
     {
-        Register reg(rand() % 100);
-        if (!append(reg)) cout << "Não há mais espaço na lista!" << endl;
+        Register reg (rand() % 100);
+        if (!append (reg)) cout << "Não há mais espaço na lista!" << endl;
     }
 
     return true;
 }
 
-void LinearSeqList::show()
+void LinearSeqList::show ()
 /*
  * IMPRIME uma representação da Lista no formato:
  * List: [ 2 7 23 ] Length: 3
@@ -64,7 +76,7 @@ void LinearSeqList::show()
     cout << "] Length: " << _len << endl;
 }
 
-void LinearSeqList::_sortIns()
+void LinearSeqList::_sortIns ()
 /*
  * ORDENA a lista usando o algoritmo INSERTION SORT.
  */
@@ -83,7 +95,7 @@ void LinearSeqList::_sortIns()
     _is_sorted = true;
 }
 
-void LinearSeqList::_sortBub()
+void LinearSeqList::_sortBub ()
 /*
  * ORDENA a lista usando o algoritmo BUBBLE SORT.
  */
@@ -99,12 +111,12 @@ void LinearSeqList::_sortBub()
     _is_sorted = true;
 }
 
-void LinearSeqList::sort()
+void LinearSeqList::sort ()
 {
     _sortBub();
 }
 
-bool LinearSeqList::append(Register reg)
+bool LinearSeqList::append (Register reg)
 /*
  * ADICIONA um registro no FINAL da lista se a lista não estiver cheia.
  */
@@ -116,7 +128,7 @@ bool LinearSeqList::append(Register reg)
     return true;
 }
 
-bool LinearSeqList::insert(Register reg, int pos)
+bool LinearSeqList::insert (Register reg, int pos)
 /*
  * INSERE um registro em uma posição determinada se a lista não
  * estiver cheia e a posição for válida.
@@ -130,19 +142,19 @@ bool LinearSeqList::insert(Register reg, int pos)
     return true;
 }
 
-int LinearSeqList::_findSent(int key)
+int LinearSeqList::_findSent (int key)
 /*
  * PROCURA uma chave usando o algoritmo de BUSCA POR SENTINELA.
  */
 {
     int pos = 0;
-    _regs[_len] = Register(key);
+    _regs[_len] = Register (key);
     while (_regs[pos].getKey() != key) pos++;
     if (pos == _len) return -1;
     return pos;
 }
 
-int LinearSeqList::_findBin(int key)
+int LinearSeqList::_findBin (int key)
 /*
  * PROCURA uma chave usando o algoritmo de BUSCA BINÁRIA.
  */
@@ -167,8 +179,8 @@ int LinearSeqList::find(int key)
  * se a lista estiver ordenada ou não.
  */
 {
-    if (_is_sorted) return _findBin(key);
-    else return _findSent(key);
+    if (_is_sorted) return _findBin (key);
+    else return _findSent (key);
 }
 
 bool LinearSeqList::del(int key)
@@ -176,7 +188,7 @@ bool LinearSeqList::del(int key)
  * DELETA um elemento da lista procurado pela chave.
  */
 {
-    int pos = find(key);
+    int pos = find (key);
     if (pos < 0) return false;
     for (int i=pos; i<_len-1; i++) _regs[i] = _regs[i+1];
     _len--;

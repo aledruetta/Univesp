@@ -13,13 +13,6 @@
 #ifndef UNIVESP_LINEARSEQLIST_H
 #define UNIVESP_LINEARSEQLIST_H
 
-#include <iostream>
-#include <cstdlib>                  // rand, srand
-#include <ctime>                    // time
-#include "register.h"
-
-using namespace std;
-
 
 class LinearSeqList
 /*
@@ -30,23 +23,24 @@ class LinearSeqList
  */
 {
     public:
-        LinearSeqList(int maxSize);
-        bool generate(int num);
-        bool append(Register reg);
-        bool insert(Register reg, int pos);
-        void sort();
-        int find(int key);
-        bool del(int key);
-        void show();
+        LinearSeqList (int maxSize);
+        bool generate (int num);
+        Register& operator[] (int i);
+        bool append (Register reg);
+        bool insert (Register reg, int pos);
+        void sort ();
+        int find (int key);
+        bool del (int key);
+        void show ();
     private:
         int _maxSize;
         int _len;
         Register* _regs;
         bool _is_sorted;
-        int _findSent(int key);         // Busca por sentinela
-        int _findBin(int key);          // Busca binária
-        void _sortIns();                // Insertion sort
-        void _sortBub();                // Bubble sort
+        int _findSent (int key);         // Busca por sentinela
+        int _findBin (int key);          // Busca binária
+        void _sortIns ();                // Insertion sort
+        void _sortBub ();                // Bubble sort
 };
 
 #endif
