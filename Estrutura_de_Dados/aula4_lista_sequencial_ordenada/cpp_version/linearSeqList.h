@@ -19,7 +19,6 @@
 #include "register.h"
 
 using namespace std;
-const int MAX = 50;                 // Quantidade máxima de registros
 
 
 class LinearSeqList
@@ -30,12 +29,8 @@ class LinearSeqList
  * de elementos do tipo Register.
  */
 {
-        int len;
-        Register regs[MAX+1];
-
     public:
-
-        LinearSeqList();
+        LinearSeqList(int maxSize);
         bool generate(int num);
         void sortIns();                 // Insertion sort
         void sortBub();                 // Bubble sort
@@ -45,6 +40,10 @@ class LinearSeqList
         int findBin(int key);           // Busca binária
         bool del(int key);
         void show();
+    private:
+        int _maxSize;
+        int _len;
+        Register* _regs;
 };
 
 #endif

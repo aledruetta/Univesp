@@ -12,12 +12,14 @@
 
 #include "linearSeqList.h"
 
-LinearSeqList::LinearSeqList()
+LinearSeqList::LinearSeqList(int maxSize)
 /*
  * CONSTRUTOR da Lista.
  */
 {
-    len = 0;
+    _maxSize = maxSize;
+    _regs = new Register[maxSize+1];
+    _len = 0;
 }
 
 bool LinearSeqList::generate(int num)
@@ -25,14 +27,14 @@ bool LinearSeqList::generate(int num)
 /*
  * GERA uma lista randômica de comprimento "num".
  */
-    if (num > MAX)
+    if (num > _maxSize)
     {
         cout << "Tamanho máximo 50 elementos!" << endl;
         return false;
     }
 
     srand(time(nullptr));
-    len = 0;                    // inicializar lista
+    _len = 0;                    // inicializar lista
 
     for (int i=0; i<num; i++)
     {
@@ -50,11 +52,11 @@ void LinearSeqList::show()
  */
 {
     cout << "List: [ ";
-    for (int i=0; i<len; i++)
+    for (int i=0; i<_len; i++)
     {
-        cout << regs[i].getKey() << " ";
+        cout << _regs[i].getKey() << " ";
     }
-    cout << "] Length: " << len << endl;
+    cout << "] Length: " << _len << endl;
 }
 
 void LinearSeqList::sortIns()
@@ -62,16 +64,16 @@ void LinearSeqList::sortIns()
  * ORDENA a lista usando o algoritmo INSERTION SORT.
  */
 {
-    for (int i=1; i<len; i++)
+    for (int i=1; i<_len; i++)
     {
-        Register tmp = regs[i];
+        Register tmp = _regs[i];
         int j = i - 1;
-        while (regs[j].getKey() > tmp.getKey() && j >= 0)
+        while (_regs[j].getKey() > tmp.getKey() && j >= 0)
         {
-            regs[j+1] = regs[j];
+            _regs[j+1] = _regs[j];
             j--;
         }
-        regs[j+1] = tmp;
+        _regs[j+1] = tmp;
     }
 }
 
@@ -80,13 +82,13 @@ void LinearSeqList::sortBub()
  * ORDENA a lista usando o algoritmo BUBBLE SORT.
  */
 {
-    for (int i=len-1; i>0; i--)
+    for (int i=_len-1; i>0; i--)
         for (int j=0; j<i; j++)
-            if (regs[j].getKey() > regs[j+1].getKey())
+            if (_regs[j].getKey() > _regs[j+1].getKey())
             {
-                Register tmp = regs[j];
-                regs[j] = regs[j+1];
-                regs[j+1] = tmp;
+                Register tmp = _regs[j];
+                _regs[j] = _regs[j+1];
+                _regs[j+1] = tmp;
             }
 }
 
@@ -95,9 +97,9 @@ bool LinearSeqList::append(Register reg)
  * ADICIONA um registro no FINAL da lista se a lista não estiver cheia.
  */
 {
-    if (len >= MAX) return false;
-    regs[len] = reg;
-    len++;
+    if (_len >= _maxSize) return false;
+    _regs[_len] = reg;
+    _len++;
     return true;
 }
 
@@ -107,10 +109,10 @@ bool LinearSeqList::insert(Register reg, int pos)
  * estiver cheia e a posição for válida.
  */
 {
-    if (len >= MAX || pos < 0 || pos > len-1) return false;
-    for (int i=len; i>pos; i--) regs[i] = regs[i-1];
-    regs[pos] = reg;
-    len++;
+    if (_len >= _maxSize || pos < 0 || pos > _len-1) return false;
+    for (int i=_len; i>pos; i--) _regs[i] = _regs[i-1];
+    _regs[pos] = reg;
+    _len++;
     return true;
 }
 
@@ -120,9 +122,9 @@ int LinearSeqList::findSent(int key)
  */
 {
     int pos = 0;
-    regs[len] = Register(key);
-    while (regs[pos].getKey() != key) pos++;
-    if (pos == len) return -1;
+    _regs[_len] = Register(key);
+    while (_regs[pos].getKey() != key) pos++;
+    if (pos == _len) return -1;
     return pos;
 }
 
@@ -133,14 +135,14 @@ int LinearSeqList::findBin(int key)
 {
     int mid;
     int ini = 0;
-    int end = len - 1;
+    int end = _len - 1;
     sortBub();
 
     while (ini <= end)
     {
         mid = (ini + end) / 2;
-        if (regs[mid].getKey() == key) return mid;
-        if (regs[mid].getKey() > key) end = mid - 1;
+        if (_regs[mid].getKey() == key) return mid;
+        if (_regs[mid].getKey() > key) end = mid - 1;
         else ini = mid + 1;
     }
     return -1;
@@ -153,8 +155,8 @@ bool LinearSeqList::del(int key)
 {
     int pos = findSent(key);
     if (pos < 0) return false;
-    for (int i=pos; i<len-1; i++) regs[i] = regs[i+1];
-    len--;
+    for (int i=pos; i<_len-1; i++) _regs[i] = _regs[i+1];
+    _len--;
     return true;
 }
 

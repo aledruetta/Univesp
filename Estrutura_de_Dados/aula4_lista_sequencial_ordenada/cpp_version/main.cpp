@@ -24,7 +24,7 @@ int main()
  * Função: main.
  */
 {
-    LinearSeqList list;
+    LinearSeqList list(50);
     list.show();
 
     int key;
