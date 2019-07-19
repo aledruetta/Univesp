@@ -5,22 +5,26 @@
  *
  * Arquivo:    linearSeqList.cpp
  * Disciplina: ESTRUTURA DE DADOS
- * Bimestre:    9°
+ * Bimestre:   9°
  * Autor:      Alejandro Druetta
  * Data:       08/07/2019
  */
 
 #include "linearSeqList.h"
 
-LinearSeqList::LinearSeqList(int maxSize)
+LinearSeqList::LinearSeqList(int maxSize):
+    _maxSize {maxSize},
+    _regs {new Register[maxSize+1]},
+    _len {0},
+    _is_sorted {false}
 /*
  * CONSTRUTOR da Lista.
  */
 {
-    _maxSize = maxSize;
-    _regs = new Register[maxSize+1];
-    _len = 0;
-    _is_sorted = false;
+    //_maxSize = maxSize;
+    //_regs = new Register[maxSize+1];
+    //_len = 0;
+    //_is_sorted = false;
 }
 
 bool LinearSeqList::generate(int num)
