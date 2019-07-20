@@ -1,17 +1,17 @@
 CFLAGS = -O
 CC = g++
 
-LinearSeqList: main.o linearSeqList.o register.o
-	$(CC) $(CFLAGS) -o a.out main.o linearSeqList.o register.o
+LinearSeqList: main.o LinearSeqList.o Register.o
+	$(CC) $(CFLAGS) -o a.out main.o LinearSeqList.o Register.o
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) -c main.cpp
 
-linearSeqList.o: linearSeqList.cpp
-	$(CC) $(CFLAGS) -c linearSeqList.cpp
+LinearSeqList.o: LinearSeqList.cpp
+	$(CC) $(CFLAGS) -c LinearSeqList.cpp
 
-register.o: register.cpp
-	$(CC) $(CFLAGS) -c register.cpp
+Register.o: Register.cpp
+	$(CC) $(CFLAGS) -c Register.cpp
 
 clean:
 	rm -f core *.o

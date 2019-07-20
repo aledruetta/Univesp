@@ -3,14 +3,14 @@
  *
  * LISTA LINEAR SEQUENCIAL OPTIMIZADA (versão C++)
  *
- * Arquivo:    register.cpp
+ * Arquivo:    Register.cpp
  * Disciplina: ESTRUTURA DE DADOS
  * Bimestre:    9°
  * Autor:      Alejandro Druetta
  * Data:       08/07/2019
  */
 
-#include "register.h"
+#include "Register.h"
 
 Register::Register()
 /*

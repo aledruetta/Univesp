@@ -3,7 +3,7 @@
  *
  * LISTA LINEAR SEQUENCIAL OPTIMIZADA (versão C++)
  *
- * Arquivo:    linearSeqList.h
+ * Arquivo:    LinearSeqList.h
  * Disciplina: ESTRUTURA DE DADOS
  * Bimestre:   9°
  * Autor:      Alejandro Druetta

@@ -12,8 +12,10 @@
 
 #include <iostream>
 #include <limits>
-#include "register.h"
-#include "linearSeqList.h"
+#include "Register.h"
+#include "LinearSeqList.h"
+
+using namespace std;
 
 void printMenu();
 void flushCin();
