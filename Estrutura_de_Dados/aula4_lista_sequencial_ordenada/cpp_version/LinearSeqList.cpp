@@ -20,13 +20,13 @@
 using namespace std;
 
 LinearSeqList::LinearSeqList (int maxSize):
+/*
+ * CONSTRUTOR da Lista.
+ */
     _maxSize {maxSize},
     _regs {new Register[maxSize+1]},
     _len {0},
     _is_sorted {false}
-/*
- * CONSTRUTOR da Lista.
- */
 {
     //_maxSize = maxSize;
     //_regs = new Register[maxSize+1];
