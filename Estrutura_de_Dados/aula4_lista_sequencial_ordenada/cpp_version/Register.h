@@ -23,7 +23,7 @@ class Register
     public:
 
         Register();
-        Register(int key);
+        Register(int);
         int getKey();
 };
 

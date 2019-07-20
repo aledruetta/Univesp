@@ -23,22 +23,22 @@ class LinearSeqList
  */
 {
     public:
-        LinearSeqList (int maxSize);
-        bool generate (int num);
-        Register& operator[] (int i);
-        bool append (Register reg);
-        bool insert (Register reg, int pos);
+        LinearSeqList (int);
+        bool generate (int);
+        Register& operator[] (int);
+        bool append (Register);
+        bool insert (Register, int);
         void sort ();
-        int find (int key);
-        bool del (int key);
+        int find (int);
+        bool del (int);
         void show ();
     private:
         int _maxSize;
         int _len;
         Register* _regs;
         bool _is_sorted;
-        int _findSent (int key);         // Busca por sentinela
-        int _findBin (int key);          // Busca binária
+        int _findSent (int);         // Busca por sentinela
+        int _findBin (int);          // Busca binária
         void _sortIns ();                // Insertion sort
         void _sortBub ();                // Bubble sort
 };
