@@ -23,11 +23,11 @@ using namespace std;
 
 int main ()
 {
-    Complex z (4, 6.9);
+    mylibs::Complex z (4, 6.9);
     cout << z << endl;
     cout << "Parte real:       " << z.real() << endl;
     cout << "Parte imaginária: " << z.imag() << "j" << endl;
-    Complex w (3, 3);
+    mylibs::Complex w (3, 3);
     cout << z << endl;
     cout << "Módulo: " << z.module() << endl;
     cout << "Fase:   " << z.fase() << "°" << endl;

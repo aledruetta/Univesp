@@ -21,25 +21,28 @@
 
 using namespace std;
 
-class Complex
+namespace mylibs
 {
-    public:
-        Complex (double, double);
-        double real ();
-        double imag ();
-        double module ();
-        double fase ();
-        void real (double);
-        void imag (double);
-        friend ostream& operator<< (ostream&, Complex&);
-    private:
-        double _real;
-        double _imag;
-        double _module;
-        double _fase;
-        double _rad (double);
-        double _deg (double);
-};
+    class Complex
+    {
+        public:
+            Complex (double, double);
+            double real ();
+            double imag ();
+            double module ();
+            double fase ();
+            void real (double);
+            void imag (double);
+            friend ostream& operator<< (ostream&, Complex&);
+        private:
+            double _real;
+            double _imag;
+            double _module;
+            double _fase;
+            double _rad (double);
+            double _deg (double);
+    };
+}
 
 #endif
 
