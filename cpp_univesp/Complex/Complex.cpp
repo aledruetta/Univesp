@@ -17,6 +17,7 @@
  */
 
 #include <iostream>
+#include <cmath>
 #include "Complex.h"
 
 using namespace std;
@@ -37,14 +38,34 @@ double Complex::imag ()
     return _imag;
 }
 
-void Complex::real(double r)
+void Complex::real (double r)
 {
     _real = r;
 }
 
-void Complex::imag(double j)
+void Complex::imag (double j)
 {
     _imag = j;
+}
+
+double Complex::module ()
+{
+    return sqrt(pow(_real, 2) + pow(_imag, 2));
+}
+
+double Complex::fase ()
+{
+    return _deg(atan(_imag / _real));
+}
+
+double Complex::_rad (double deg)
+{
+    return deg * M_PI / 180;
+}
+
+double Complex::_deg (double rad)
+{
+    return rad * 180 / M_PI;
 }
 
 ostream& operator<< (ostream& os, Complex& z)

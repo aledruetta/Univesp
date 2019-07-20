@@ -27,12 +27,18 @@ class Complex
         Complex (double r, double j);
         double real ();
         double imag ();
+        double module ();
+        double fase ();
         void real (double r);
         void imag (double j);
         friend ostream& operator<< (ostream& os, Complex& z);
     private:
         double _real;
         double _imag;
+        double _module;
+        double _fase;
+        double _rad (double deg);
+        double _deg (double rad);
 };
 
 #endif
