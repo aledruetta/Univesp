@@ -37,10 +37,6 @@ namespace mylibs
         private:
             double _real;
             double _imag;
-            double _module;
-            double _fase;
-            double _rad (double);
-            double _deg (double);
     };
 }
 

@@ -26,11 +26,11 @@ int main ()
     mylibs::Complex z (4, 6.9);
     cout << z << endl;
     cout << "Parte real:       " << z.real() << endl;
-    cout << "Parte imaginária: " << z.imag() << "j" << endl;
+    cout << "Parte imaginária: " << z.imag() << "j\n" << endl;
     mylibs::Complex w (3, 3);
-    cout << z << endl;
-    cout << "Módulo: " << z.module() << endl;
-    cout << "Fase:   " << z.fase() << "°" << endl;
+    cout << w << endl;
+    cout << "Módulo: " << w.module() << endl;
+    cout << "Fase:   " << w.fase() << "°" << endl;
 
     return 0;
 }
