@@ -27,8 +27,7 @@ int main ()
     cout << z << endl;
     cout << "Parte real:       " << z.real() << endl;
     cout << "Parte imaginária: " << z.imag() << "j" << endl;
-    z.real(3);
-    z.imag(3);
+    Complex w (3, 3);
     cout << z << endl;
     cout << "Módulo: " << z.module() << endl;
     cout << "Fase:   " << z.fase() << "°" << endl;

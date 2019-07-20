@@ -24,21 +24,21 @@ using namespace std;
 class Complex
 {
     public:
-        Complex (double r, double j);
+        Complex (double, double);
         double real ();
         double imag ();
         double module ();
         double fase ();
-        void real (double r);
-        void imag (double j);
-        friend ostream& operator<< (ostream& os, Complex& z);
+        void real (double);
+        void imag (double);
+        friend ostream& operator<< (ostream&, Complex&);
     private:
         double _real;
         double _imag;
         double _module;
         double _fase;
-        double _rad (double deg);
-        double _deg (double rad);
+        double _rad (double);
+        double _deg (double);
 };
 
 #endif
