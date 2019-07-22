@@ -18,13 +18,12 @@ class Register
  * Classe: Register
  */
 {
-        int key;
-
     public:
-
-        Register();
-        Register(int);
-        int getKey();
+        Register ();
+        Register (int);
+        int getKey ();
+    private:
+        int key;
 };
 
 #endif

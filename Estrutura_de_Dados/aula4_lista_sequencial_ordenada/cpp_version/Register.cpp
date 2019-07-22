@@ -5,14 +5,14 @@
  *
  * Arquivo:    Register.cpp
  * Disciplina: ESTRUTURA DE DADOS
- * Bimestre:    9°
+ * Bimestre:   9°
  * Autor:      Alejandro Druetta
  * Data:       08/07/2019
  */
 
 #include "Register.h"
 
-Register::Register()
+Register::Register ()
 /*
  * Construtor padrão da classe Register.
  * Instancia o objeto e atribui o valor 0 à chave.
@@ -21,7 +21,7 @@ Register::Register()
     key = 0;
 }
 
-Register::Register(int key)
+Register::Register (int key)
 /*
  * Construtor parametrizado da classe Register.
  * Instancia o objeto e atribui o valor do parámetro à chave.
@@ -30,7 +30,7 @@ Register::Register(int key)
     this->key = key;
 }
 
-int Register::getKey()
+int Register::getKey ()
 {
     return key;
 }
