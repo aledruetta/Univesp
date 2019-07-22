@@ -18,6 +18,8 @@ class MyClass
 MyClass operator+ (MyClass a, MyClass b) {MyClass r; r.set(a.get() + b.get()); return r;}
 MyClass operator- (MyClass a, MyClass b) {MyClass r; r.set(a.get() - b.get()); return r;}
 
+bool operator== (MyClass a, MyClass b) {return a.get() == b.get();}
+
 int main ()
 {
     MyClass a, b, c;
@@ -41,6 +43,8 @@ int main ()
 
     c = a - b;
     cout << "c = a - b: " << c.get() << endl;
+
+    cout << ((a == b) ? "true" : "false") << endl;
 
     return 0;
 }
