@@ -1,3 +1,21 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  tabela_ascii.cpp
+ *
+ *    Description:  Caracteres ASCII imprimíveis
+ *
+ *        Version:  1.0
+ *        Created:  17/07/2019
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  Alejandro Druetta
+ *   OrganicargaSecation:  Eng. da Computação - Univesp
+ *
+ * =====================================================================================
+ */
+
 #include <iostream>
 using namespace std;
 
