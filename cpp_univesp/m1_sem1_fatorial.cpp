@@ -22,7 +22,8 @@ using namespace std;
 
 int main ()
 {
-    unsigned num, numd, fac;
+    unsigned num, numd;
+    unsigned long long fac;
     cout << "\nNúmero: ", cin >> num;
     numd = num;
 
