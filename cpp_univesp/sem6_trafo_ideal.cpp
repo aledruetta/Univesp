@@ -11,7 +11,7 @@
  *       Compiler:  gcc
  *
  *         Author:  Alejandro Druetta
- *   OrganicargaSecation:  Eng. da Computação - Univesp
+ *   Organization:  Eng. da Computação - Univesp
  *
  * =====================================================================================
  */
