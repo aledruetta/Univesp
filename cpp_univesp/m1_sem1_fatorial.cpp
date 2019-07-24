@@ -23,8 +23,9 @@ using namespace std;
 int main ()
 {
     unsigned num, numd;
-    unsigned long long fac;
-    cout << "\nNúmero: ", cin >> num;
+    long double fac;
+    cout << "\nIngrese um inteiro possitivo menor ou igual do que 25." << endl;
+    cout << "Número: ", cin >> num;
     numd = num;
 
     /* *
@@ -49,6 +50,8 @@ int main ()
     while (numd > 0);
     cout << setw(24) << "Fatorial loop DO/WHILE: " << fac << "\n"
          << endl;
+
+    cout << to_string(fac) << endl;
 
     return 0;
 }
