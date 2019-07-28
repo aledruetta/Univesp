@@ -22,8 +22,8 @@ using namespace std;
 int main ()
 {
     bool flag = true;
-    string ops;
-    char opc;
+    string op_str;
+    char op_char;
 
     while (flag)
     {
@@ -36,25 +36,25 @@ int main ()
              << "    Sair  S\n"
              << endl;
 
-        cout << "    Opção? ", getline(cin, ops);
-        opc = tolower(ops[0]);
+        cout << "    Opção? ", getline(cin, op_str);
+        op_char = tolower(op_str[0]);
 
-        switch (opc)
+        switch (op_char)
         {
             case '1':
-                cout << "    Você digitou a opção " << opc << endl;
+                cout << "    Você digitou a opção " << op_char << endl;
                 break;
             case '2':
-                cout << "    Você digitou a opção " << opc << endl;
+                cout << "    Você digitou a opção " << op_char << endl;
                 break;
             case '3':
-                cout << "    Você digitou a opção " << opc << endl;
+                cout << "    Você digitou a opção " << op_char << endl;
                 break;
             case '4':
-                cout << "    Você digitou a opção " << opc << endl;
+                cout << "    Você digitou a opção " << op_char << endl;
                 break;
             case '5':
-                cout << "    Você digitou a opção " << opc << endl;
+                cout << "    Você digitou a opção " << op_char << endl;
                 break;
             case 's':
                 cout << "    Saíndo..." << endl;
