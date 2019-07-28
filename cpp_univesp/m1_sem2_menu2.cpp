@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *       Filename:  m1_sem2_menu1.cpp
+ *       Filename:  m1_sem2_menu2.cpp
  *
  *    Description:  Modelo de menu usando Switch/Case
  *
@@ -22,7 +22,8 @@ using namespace std;
 int main ()
 {
     bool flag = true;
-    char op;
+    string ops;
+    char opc;
 
     while (flag)
     {
@@ -35,25 +36,25 @@ int main ()
              << "    Sair  S\n"
              << endl;
 
-        cout << "    Opção? ", cin >> op;
-        op = tolower(op);
+        cout << "    Opção? ", getline(cin, ops);
+        opc = tolower(ops[0]);
 
-        switch (op)
+        switch (opc)
         {
             case '1':
-                cout << "    Você digitou a opção " << op << endl;
+                cout << "    Você digitou a opção " << opc << endl;
                 break;
             case '2':
-                cout << "    Você digitou a opção " << op << endl;
+                cout << "    Você digitou a opção " << opc << endl;
                 break;
             case '3':
-                cout << "    Você digitou a opção " << op << endl;
+                cout << "    Você digitou a opção " << opc << endl;
                 break;
             case '4':
-                cout << "    Você digitou a opção " << op << endl;
+                cout << "    Você digitou a opção " << opc << endl;
                 break;
             case '5':
-                cout << "    Você digitou a opção " << op << endl;
+                cout << "    Você digitou a opção " << opc << endl;
                 break;
             case 's':
                 cout << "    Saíndo..." << endl;
