@@ -2,10 +2,10 @@
 
 using namespace std;
 
-int main()
+int main ()
 {
     char op;
-    float a, b, res=0;
+    double a, b, res=0;
     int aint, bint;
 
     cout << "\n Use operador ';' para sair." << endl;
