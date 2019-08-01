@@ -35,7 +35,7 @@ int main ()
              << "    Sair  S\n"
              << endl;
 
-        cout << "    Opção? ", cin >> op;
+        cout << "    Opção? ", op = getchar();
         op = tolower(op);
 
         switch (op)
