@@ -22,6 +22,7 @@ int main()
     printf ("%d\n", list.start);
     printf ("%d\n", list.empty);
     printf ("%d\n", list_len(list));
+    list_show (list);
 
     return 0;
 }

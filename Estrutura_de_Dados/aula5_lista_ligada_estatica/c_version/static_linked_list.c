@@ -30,6 +30,9 @@ void list_initialize (LIST *list)
 }
 
 int list_len (LIST list)
+/*
+ * Retorna o tamanho da lista.
+ */
 {
     int len = 0;
     int next = list.start;
@@ -38,5 +41,20 @@ int list_len (LIST list)
         len++;
     }
     return len;
+}
+
+void list_show (LIST list)
+/*
+ * Imprime na saída padrão uma representação da lista no formato:
+ * List [ 2, 8, 1, ... ] Lenght: 7
+ */
+{
+    int next = list.start;
+    printf("List [ ");
+    while (next != INVALID) {
+        printf("%d ", list.arr[next].reg.key);
+        next = list.arr[next].next;
+    }
+    printf("] Length: %d\n", list_len(list));
 }
 
