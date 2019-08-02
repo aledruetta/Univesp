@@ -44,10 +44,10 @@ typedef struct
                         // um novo elemento.
 } LIST;
 
-void list_initialize (LIST *list);      // Inicializar lista.
-int list_len (LIST list);               // Tamanho da lista.
-void list_show (LIST list);             // Visualizar a lista.
-int list_search (LIST list, KEY key);   // Procura um elemento da lista.
+void initialize_list (LIST *list);      // Inicializar lista.
+int len_list (LIST list);               // Tamanho da lista.
+void show_list (LIST list);             // Visualizar a lista.
+int search_list (LIST list, KEY key);   // Procura um elemento da lista.
 
-#endif
+#endif /* STATIC_LINKED_LIST_H */
 

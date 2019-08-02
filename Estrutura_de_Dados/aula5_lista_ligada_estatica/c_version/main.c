@@ -18,12 +18,12 @@
 int main()
 {
     LIST list;
-    list_initialize (&list);
+    initialize_list (&list);
     printf ("%d\n", list.start);
     printf ("%d\n", list.empty);
-    printf ("%d\n", list_len(list));
-    list_show (list);
-    int pos = list_search (list, 5);
+    printf ("%d\n", len_list (list));
+    show_list (list);
+    int pos = search_list (list, 5);
     printf ("%d\n", pos);
 
     return 0;

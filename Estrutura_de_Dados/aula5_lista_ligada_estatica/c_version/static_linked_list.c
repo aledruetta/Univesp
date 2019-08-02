@@ -12,7 +12,7 @@
 
 #include "static_linked_list.h"
 
-void list_initialize (LIST *list)
+void initialize_list (LIST *list)
 /*
  * Inicializa uma lista nova sem elementos.
  * Recebe um ponteiro a um struct LIST.
@@ -29,7 +29,7 @@ void list_initialize (LIST *list)
     list->arr[MAX-1].next = INVALID;
 }
 
-int list_len (LIST list)
+int len_list (LIST list)
 /*
  * Retorna o tamanho da lista.
  */
@@ -43,22 +43,22 @@ int list_len (LIST list)
     return len;
 }
 
-void list_show (LIST list)
+void show_list (LIST list)
 /*
  * Imprime na saída padrão uma representação da lista no formato:
  * List [ 1, 2, 8, ... ] Lenght: 7
  */
 {
     int next = list.start;
-    printf("List [ ");
+    printf ("List [ ");
     while (next != INVALID) {
-        printf("%d ", list.arr[next].reg.key);
+        printf ("%d ", list.arr[next].reg.key);
         next = list.arr[next].next;
     }
-    printf("] Length: %d\n", list_len(list));
+    printf ("] Length: %d\n", len_list (list));
 }
 
-int list_search (LIST list, KEY key)
+int search_list (LIST list, KEY key)
 /*
  * Procura por um elemento da lista.
  * Recebe uma lista e uma chave.
