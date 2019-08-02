@@ -25,8 +25,18 @@ void initialize_list (LIST *list)
     list->empty = 0;
 
     for (int i=0; i<MAX-1; i++)
-        list->arr[i].next = i + 1;
-    list->arr[MAX-1].next = INVALID;
+        list->arr[i].nxt = i + 1;
+    list->arr[MAX-1].nxt = INVALID;
+}
+
+ELEMENT make_element (KEY key, int nxt)
+{
+    REGISTER reg;
+    ELEMENT this;
+    reg.key = key;
+    this.reg = reg;
+    this.nxt = nxt;
+    return this;
 }
 
 int len_list (LIST list)
@@ -35,9 +45,9 @@ int len_list (LIST list)
  */
 {
     int len = 0;
-    int next = list.start;
-    while (next != INVALID) {
-        next = list.arr[next].next;
+    int nxt = list.start;
+    while (nxt != INVALID) {
+        nxt = list.arr[nxt].nxt;
         len++;
     }
     return len;
@@ -49,11 +59,11 @@ void show_list (LIST list)
  * List [ 1, 2, 8, ... ] Lenght: 7
  */
 {
-    int next = list.start;
+    int nxt = list.start;
     printf ("List [ ");
-    while (next != INVALID) {
-        printf ("%d ", list.arr[next].reg.key);
-        next = list.arr[next].next;
+    while (nxt != INVALID) {
+        printf ("%d ", list.arr[nxt].reg.key);
+        nxt = list.arr[nxt].nxt;
     }
     printf ("] Length: %d\n", len_list (list));
 }
@@ -65,10 +75,10 @@ int search_list (LIST list, KEY key)
  * A lista precisa estar ordenada.
  */
 {
-    int next = list.start;
-    while (next != INVALID && list.arr[next].reg.key < key)
-        next = list.arr[next].next;
-    if (next != INVALID && list.arr[next].reg.key == key) return next;
+    int nxt = list.start;
+    while (nxt != INVALID && list.arr[nxt].reg.key < key)
+        nxt = list.arr[nxt].nxt;
+    if (nxt != INVALID && list.arr[nxt].reg.key == key) return nxt;
     return INVALID;
 }
 

@@ -32,7 +32,7 @@ typedef struct
 typedef struct
 {
     REGISTER reg;
-    int next;           // Próximo elemento na lista.
+    int nxt;           // Próximo elemento na lista.
 } ELEMENT;
 
 // Lista
@@ -44,10 +44,11 @@ typedef struct
                         // um novo elemento.
 } LIST;
 
-void initialize_list (LIST *list);      // Inicializar lista.
-int len_list (LIST list);               // Tamanho da lista.
-void show_list (LIST list);             // Visualizar a lista.
-int search_list (LIST list, KEY key);   // Procura um elemento da lista.
+void initialize_list (LIST *list);          // Inicializar lista.
+ELEMENT make_element (KEY key, int nxt);   // Criar elemento.
+int len_list (LIST list);                   // Tamanho da lista.
+void show_list (LIST list);                 // Visualizar a lista.
+int search_list (LIST list, KEY key);       // Procura um elemento da lista.
 
 #endif /* STATIC_LINKED_LIST_H */
 
