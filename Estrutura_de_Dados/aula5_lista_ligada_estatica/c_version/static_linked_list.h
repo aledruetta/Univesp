@@ -45,7 +45,8 @@ typedef struct
 } LIST;
 
 void initialize_list (LIST *list);          // Inicializar lista.
-ELEMENT make_element (KEY key, int nxt);   // Criar elemento.
+REGISTER Register (KEY key);                // Criar registro.
+ELEMENT Element (KEY key, int nxt);         // Criar elemento.
 int len_list (LIST list);                   // Tamanho da lista.
 void show_list (LIST list);                 // Visualizar a lista.
 int search_list (LIST list, KEY key);       // Procura um elemento da lista.

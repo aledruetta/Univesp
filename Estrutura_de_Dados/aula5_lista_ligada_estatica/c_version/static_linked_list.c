@@ -29,11 +29,17 @@ void initialize_list (LIST *list)
     list->arr[MAX-1].nxt = INVALID;
 }
 
-ELEMENT make_element (KEY key, int nxt)
+REGISTER Register (KEY key)
 {
-    REGISTER reg;
+    REGISTER this;
+    this.key = key;
+    return this;
+}
+
+ELEMENT Element (KEY key, int nxt)
+{
+    REGISTER reg = Register (key);
     ELEMENT this;
-    reg.key = key;
     this.reg = reg;
     this.nxt = nxt;
     return this;
