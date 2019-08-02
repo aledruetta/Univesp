@@ -46,7 +46,7 @@ int list_len (LIST list)
 void list_show (LIST list)
 /*
  * Imprime na saída padrão uma representação da lista no formato:
- * List [ 2, 8, 1, ... ] Lenght: 7
+ * List [ 1, 2, 8, ... ] Lenght: 7
  */
 {
     int next = list.start;
@@ -56,5 +56,19 @@ void list_show (LIST list)
         next = list.arr[next].next;
     }
     printf("] Length: %d\n", list_len(list));
+}
+
+int list_search (LIST list, KEY key)
+/*
+ * Procura por um elemento da lista.
+ * Recebe uma lista e uma chave.
+ * A lista precisa estar ordenada.
+ */
+{
+    int next = list.start;
+    while (next != INVALID && list.arr[next].reg.key < key)
+        next = list.arr[next].next;
+    if (next != INVALID && list.arr[next].reg.key == key) return next;
+    return INVALID;
 }
 

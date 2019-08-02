@@ -47,6 +47,7 @@ typedef struct
 void list_initialize (LIST *list);      // Inicializar lista.
 int list_len (LIST list);               // Tamanho da lista.
 void list_show (LIST list);             // Visualizar a lista.
+int list_search (LIST list, KEY key);   // Procura um elemento da lista.
 
 #endif
 
