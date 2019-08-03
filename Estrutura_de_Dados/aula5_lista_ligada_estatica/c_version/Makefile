@@ -8,6 +8,9 @@ OBJ = main.o static_linked_list.o
 test.out: $(OBJ)
 	$(CC) -o $@ $^
 
+dbg.out: $(OBJ)
+	$(CC) -g -o $@ $^
+
 clean:
 	rm -rf *.o core
 

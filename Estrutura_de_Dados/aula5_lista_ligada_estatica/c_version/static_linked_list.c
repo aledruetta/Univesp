@@ -12,7 +12,23 @@
 
 #include "static_linked_list.h"
 
-void initialize_list (LIST *list)
+REGISTER Register (KEY key)
+{
+    REGISTER this;
+    this.key = key;
+    return this;
+}
+
+ELEMENT Element (KEY key)
+{
+    REGISTER reg = Register (key);
+    ELEMENT this;
+    this.reg = reg;
+    this.next = INVALID;
+    return this;
+}
+
+void initializeList (LIST *list)
 /*
  * Inicializa uma lista nova sem elementos.
  * Recebe um ponteiro a um struct LIST.
@@ -22,69 +38,95 @@ void initialize_list (LIST *list)
     list->start = INVALID;
     // O elemento de índice 0 é o primeiro disponível para adicionar
     // um novo elemento.
-    list->empty = 0;
+    list->vacancy = 0;
 
     for (int i=0; i<MAX-1; i++)
-        list->arr[i].nxt = i + 1;
-    list->arr[MAX-1].nxt = INVALID;
+        list->arr[i].next = i + 1;
+    list->arr[MAX-1].next = INVALID;
 }
 
-REGISTER Register (KEY key)
+bool addToList (LIST *list, ELEMENT elem)
 {
-    REGISTER this;
-    this.key = key;
-    return this;
+    int vacancy = list->vacancy;
+    if (vacancy != INVALID)
+        list->vacancy = list->arr[vacancy].next;
+    else return false;  // A lista está cheia.
+
+    int start = list->start,
+        next = start,
+        previous = INVALID;
+    KEY key = elem.reg.key;
+
+    /* Se a lista está vacia nunca entra no loop.
+     * Sai do loop se:
+     *  - chegar no último elemento da lista;
+     *  - ou achar um elemento maior ou igual ao
+     *    que será inserido.
+     */
+    while (next != INVALID && list->arr[next].reg.key < key) {
+        previous = next;
+        next = list->arr[next].next;
+    }
+
+    if (next != INVALID && list->arr[next].reg.key == key)  // O elemento já existe.
+        return false;
+
+    if (start != INVALID) {                 // A lista não estava vacia.
+        if (next != INVALID)                // O elemento não é o último.
+            elem.next = next;
+        if (key > list->arr[start].reg.key) // O elemento não é o primeiro.
+            list->arr[previous].next = vacancy;
+        else                                // O elemento SIM é o primeiro.
+            list->start = vacancy;
+    }
+    else                                    // A lista SIM estava vacia.
+        list->start = vacancy;
+
+    list->arr[vacancy] = elem;
+
+    return true;
 }
 
-ELEMENT Element (KEY key, int nxt)
-{
-    REGISTER reg = Register (key);
-    ELEMENT this;
-    this.reg = reg;
-    this.nxt = nxt;
-    return this;
-}
-
-int len_list (LIST list)
+int lenList (LIST list)
 /*
  * Retorna o tamanho da lista.
  */
 {
     int len = 0;
-    int nxt = list.start;
-    while (nxt != INVALID) {
-        nxt = list.arr[nxt].nxt;
+    int next = list.start;
+    while (next != INVALID) {
+        next = list.arr[next].next;
         len++;
     }
     return len;
 }
 
-void show_list (LIST list)
+void showList (LIST list)
 /*
  * Imprime na saída padrão uma representação da lista no formato:
  * List [ 1, 2, 8, ... ] Lenght: 7
  */
 {
-    int nxt = list.start;
+    int next = list.start;
     printf ("List [ ");
-    while (nxt != INVALID) {
-        printf ("%d ", list.arr[nxt].reg.key);
-        nxt = list.arr[nxt].nxt;
+    while (next != INVALID) {
+        printf ("%d ", list.arr[next].reg.key);
+        next = list.arr[next].next;
     }
-    printf ("] Length: %d\n", len_list (list));
+    printf ("] Length: %d\n", lenList (list));
 }
 
-int search_list (LIST list, KEY key)
+int searchList (LIST list, KEY key)
 /*
  * Procura por um elemento da lista.
  * Recebe uma lista e uma chave.
  * A lista precisa estar ordenada.
  */
 {
-    int nxt = list.start;
-    while (nxt != INVALID && list.arr[nxt].reg.key < key)
-        nxt = list.arr[nxt].nxt;
-    if (nxt != INVALID && list.arr[nxt].reg.key == key) return nxt;
+    int next = list.start;
+    while (next != INVALID && list.arr[next].reg.key < key)
+        next = list.arr[next].next;
+    if (next != INVALID && list.arr[next].reg.key == key) return next;
     return INVALID;
 }
 

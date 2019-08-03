@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define MAX 50
 #define INVALID -1
@@ -32,7 +33,7 @@ typedef struct
 typedef struct
 {
     REGISTER reg;
-    int nxt;           // Próximo elemento na lista.
+    int next;           // Próximo elemento na lista.
 } ELEMENT;
 
 // Lista
@@ -40,16 +41,17 @@ typedef struct
 {
     ELEMENT arr[MAX];
     int start;          // Primeiro elemento da lista.
-    int empty;          // Próximo elemento disponível para adicionar
+    int vacancy;        // Próximo elemento disponível para adicionar
                         // um novo elemento.
 } LIST;
 
-void initialize_list (LIST *list);          // Inicializar lista.
-REGISTER Register (KEY key);                // Criar registro.
-ELEMENT Element (KEY key, int nxt);         // Criar elemento.
-int len_list (LIST list);                   // Tamanho da lista.
-void show_list (LIST list);                 // Visualizar a lista.
-int search_list (LIST list, KEY key);       // Procura um elemento da lista.
+REGISTER Register (KEY key);                 // Criar registro.
+ELEMENT Element (KEY key);                   // Criar elemento.
+void initializeList (LIST *list);            // Inicializar lista.
+bool addToList (LIST *list, ELEMENT elem);   // Adicionar elemento.
+int lenList (LIST list);                     // Tamanho da lista.
+void showList (LIST list);                   // Visualizar a lista.
+int searchList (LIST list, KEY key);         // Procura um elemento da lista.
 
 #endif /* STATIC_LINKED_LIST_H */
 
