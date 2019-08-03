@@ -67,19 +67,23 @@ bool addToList (LIST *list, ELEMENT elem)
         previous = next;
         next = list->arr[next].next;
     }
-
-    if (next != INVALID && list->arr[next].reg.key == key)  // O elemento já existe.
+    // O elemento já existe.
+    if (next != INVALID && list->arr[next].reg.key == key)
         return false;
-
-    if (start != INVALID) {                 // A lista não estava vacia.
-        if (next != INVALID)                // O elemento não é o último.
+    // A lista não estava vacia.
+    if (start != INVALID) {
+        // O elemento não é o último.
+        if (next != INVALID)
             elem.next = next;
-        if (key > list->arr[start].reg.key) // O elemento não é o primeiro.
+        // O elemento não é o primeiro.
+        if (key > list->arr[start].reg.key)
             list->arr[previous].next = vacancy;
-        else                                // O elemento SIM é o primeiro.
+        // O elemento SIM é o primeiro.
+        else
             list->start = vacancy;
     }
-    else                                    // A lista SIM estava vacia.
+    // A lista SIM estava vacia.
+    else
         list->start = vacancy;
 
     list->arr[vacancy] = elem;
