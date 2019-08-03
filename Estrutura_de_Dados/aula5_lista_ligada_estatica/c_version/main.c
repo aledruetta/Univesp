@@ -35,7 +35,7 @@ int main()
     int r;
     for (int i=0; i<10; i++) {
         r = rand () % 100 - 50;
-        printf ("Element of key: %d\n", r);
+        printf ("%d element of key: %d\n", i+1, r);
         addToList (&list, Element (r));
     }
     showList (list);
