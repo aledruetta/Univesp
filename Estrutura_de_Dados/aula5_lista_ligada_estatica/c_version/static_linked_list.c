@@ -152,13 +152,18 @@ bool delFromList (LIST *list, KEY key)
         i = list->arr[i].next;
     }
 
+    // Se o elemento não existir ele não pode ser excluído.
     if (i == INVALID || list->arr[i].reg.key != key) return false;
 
+    // Se o elemento tiver um outro precedendo ele, o anterior
+    // tem que apontar pro próximo.
     if (previous != INVALID)
         list->arr[previous].next = list->arr[i].next;
-    else
-        list->start = list->arr[i].next;
+    // Se não tiver, o início da lista será o próximo.
+    else list->start = list->arr[i].next;
 
+    // O elemento deletado aponta pro atualmente primeiro disponível e
+    // torna-se o primeiro disponível.
     list->arr[i].next = list->available;
     list->available = i;
 
