@@ -16,6 +16,8 @@
 
 #include "static_linked_list.h"
 
+void printAvailablePositions (LIST list);
+
 int main()
 {
     LIST list;
@@ -50,6 +52,8 @@ int main()
     printf ("Index of element of key 1: %d\n", searchList (list, 1));
     printf ("Index of element of key 5: %d\n", searchList (list, 5));
     printf ("Index of element of key 10: %d\n", searchList (list, 10));
+
+    printAvailablePositions (list);
     printf("\n");
 
     printf ("Deleting element of key 1...");
@@ -60,8 +64,20 @@ int main()
     (delFromList (&list, 10)) ? printf (" OK!\n") : printf (" Down!\n");
     showList (list);
 
+    printAvailablePositions (list);
     printf("\n");
 
     return 0;
+}
+
+void printAvailablePositions (LIST list) {
+    printf("\n");
+    printf ("Posições disponíveis: \n");
+    int av = list.available;
+    do {
+        printf ("%d ", av);
+        av = list.arr[av].next;
+    } while (av != INVALID);
+    printf("\n");
 }
 

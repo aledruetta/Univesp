@@ -138,7 +138,10 @@ int searchList (LIST list, KEY key)
 
 bool delFromList (LIST *list, KEY key)
 /*
- *
+ * Deleta um elemento da lista e atualiza a lista de disponíveis.
+ * Recebe um ponteiro para LISTA e a chave do elemento.
+ * Retorna true se o elemento foi achado e deletado ou false se o elemento
+ * não existe.
  */
 {
     int i = list->start,
@@ -155,6 +158,9 @@ bool delFromList (LIST *list, KEY key)
         list->arr[previous].next = list->arr[i].next;
     else
         list->start = list->arr[i].next;
+
+    list->arr[i].next = list->available;
+    list->available = i;
 
     return true;
 }
