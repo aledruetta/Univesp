@@ -24,9 +24,9 @@ int main()
     printf ("Start: %d\n", list.start);
     printf ("vacancy: %d\n", list.vacancy);
     showList (list);
-    ELEMENT elem = Element (5);
+    NODE node = Node (5);
     printf("Adding element of key 5...\n");
-    addToList (&list, elem);
+    addToList (&list, node);
     showList (list);
     printf ("Index of element of key 5: %d\n", searchList (list, 5));
 
@@ -36,7 +36,7 @@ int main()
     for (int i=0; i<10; i++) {
         r = rand () % 100 - 50;
         printf ("%2d element of key: %3d\n", i+1, r);
-        addToList (&list, Element (r));
+        addToList (&list, Node (r));
     }
     showList (list);
 

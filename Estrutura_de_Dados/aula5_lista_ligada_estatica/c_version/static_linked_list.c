@@ -19,10 +19,10 @@ REGISTER Register (KEY key)
     return this;
 }
 
-ELEMENT Element (KEY key)
+NODE Node (KEY key)
 {
     REGISTER reg = Register (key);
-    ELEMENT this;
+    NODE this;
     this.reg = reg;
     this.next = INVALID;
     return this;
@@ -45,16 +45,21 @@ void initializeList (LIST *list)
     list->arr[MAX-1].next = INVALID;
 }
 
-bool addToList (LIST *list, ELEMENT elem)
+bool addToList (LIST *list, NODE node)
+/*
+ * Insere um elemento em uma lista ordenada.
+ * Não admite elementos repetidos.
+ */
 {
-    int vacancy = list->vacancy;
-    if (vacancy == INVALID) return false;   // A lista está cheia.
+    unsigned vacancy = list->vacancy;
+    // A lista está cheia.
+    if (vacancy == INVALID) return false;
     list->vacancy = list->arr[vacancy].next;
 
-    int start = list->start,
-        next = start,
-        previous = INVALID;
-    KEY key = elem.reg.key;
+    unsigned start = list->start,
+        previous = INVALID,
+        i = start;
+    KEY key = node.reg.key;
 
     /* Se a lista está vacia nunca entra no loop.
      * Sai do loop se:
@@ -62,18 +67,22 @@ bool addToList (LIST *list, ELEMENT elem)
      *  - ou achar um elemento maior ou igual ao
      *    que será inserido.
      */
-    while (next != INVALID && list->arr[next].reg.key < key) {
-        previous = next;
-        next = list->arr[next].next;
+    while (i != INVALID && list->arr[i].reg.key < key) {
+        previous = i;
+        i = list->arr[i].next;
     }
     // O elemento já existe.
-    if (next != INVALID && list->arr[next].reg.key == key)
+    if (i != INVALID && list->arr[i].reg.key == key)
         return false;
+
+    // Insere o elemento
+    list->arr[vacancy] = node;
+
     // A lista não estava vacia.
     if (start != INVALID) {
         // O elemento não é o último.
-        if (next != INVALID)
-            elem.next = next;
+        if (i != INVALID)
+            list->arr[vacancy].next = i;
         // O elemento não é o primeiro.
         if (key > list->arr[start].reg.key)
             list->arr[previous].next = vacancy;
@@ -84,8 +93,6 @@ bool addToList (LIST *list, ELEMENT elem)
     // A lista SIM estava vacia.
     else
         list->start = vacancy;
-
-    list->arr[vacancy] = elem;
 
     return true;
 }

@@ -34,21 +34,21 @@ typedef struct
 {
     REGISTER reg;
     int next;           // Próximo elemento na lista.
-} ELEMENT;
+} NODE;
 
 // Lista
 typedef struct
 {
-    ELEMENT arr[MAX];
+    NODE arr[MAX];
     int start;          // Primeiro elemento da lista.
     int vacancy;        // Próximo elemento disponível para adicionar
                         // um novo elemento.
 } LIST;
 
 REGISTER Register (KEY key);                 // Criar registro.
-ELEMENT Element (KEY key);                   // Criar elemento.
+NODE Node (KEY key);                         // Criar elemento.
 void initializeList (LIST *list);            // Inicializar lista.
-bool addToList (LIST *list, ELEMENT elem);   // Adicionar elemento.
+bool addToList (LIST *list, NODE node);      // Adicionar elemento.
 int lenList (LIST list);                     // Tamanho da lista.
 void showList (LIST list);                   // Visualizar a lista.
 int searchList (LIST list, KEY key);         // Procura um elemento da lista.
