@@ -41,17 +41,17 @@ typedef struct
 {
     NODE arr[MAX];
     int start;          // Primeiro elemento da lista.
-    int vacancy;        // Próximo elemento disponível para adicionar
+    int available;      // Próximo elemento disponível para adicionar
                         // um novo elemento.
 } LIST;
 
-REGISTER Register (KEY key);                 // Criar registro.
-NODE Node (KEY key);                         // Criar elemento.
-void initializeList (LIST *list);            // Inicializar lista.
-bool addToList (LIST *list, NODE node);      // Adicionar elemento.
-int lenList (LIST list);                     // Tamanho da lista.
-void showList (LIST list);                   // Visualizar a lista.
-int searchList (LIST list, KEY key);         // Procura um elemento da lista.
+NODE Node (KEY key);                        // Criar elemento.
+void initializeList (LIST *list);           // Inicializar lista.
+bool addToList (LIST *list, NODE node);     // Adicionar elemento.
+int lenList (LIST list);                    // Tamanho da lista.
+void showList (LIST list);                  // Visualizar a lista.
+int searchList (LIST list, KEY key);        // Procura um elemento da lista.
+bool delFromList (LIST *list, KEY key);     // Deleta um elemento.
 
 #endif /* STATIC_LINKED_LIST_H */
 

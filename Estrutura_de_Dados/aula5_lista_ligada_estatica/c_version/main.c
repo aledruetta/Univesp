@@ -21,16 +21,15 @@ int main()
     LIST list;
     initializeList (&list);
 
-    printf ("Start: %d\n", list.start);
-    printf ("vacancy: %d\n", list.vacancy);
+    printf ("\nStart: %d\n", list.start);
+    printf ("available: %d\n", list.available);
     showList (list);
     NODE node = Node (5);
-    printf("Adding element of key 5...\n");
+    printf("\nAdding element of key 5...\n");
     addToList (&list, node);
     showList (list);
-    printf ("Index of element of key 5: %d\n", searchList (list, 5));
 
-    printf("Adding more elements...\n");
+    printf("\nAdding more elements...\n");
     srand (time (NULL));
     int r;
     for (int i=0; i<10; i++) {
@@ -40,6 +39,28 @@ int main()
     }
     showList (list);
 
+    printf("\nYielding a new sequencial list...\n");
+    addToList (&list, node);
+    initializeList (&list);
+    for (int i=0; i<10; i++) {
+        addToList (&list, Node (i + 1));
+    }
+    showList (list);
+    printf("\n");
+    printf ("Index of element of key 1: %d\n", searchList (list, 1));
+    printf ("Index of element of key 5: %d\n", searchList (list, 5));
+    printf ("Index of element of key 10: %d\n", searchList (list, 10));
+    printf("\n");
+
+    printf ("Deleting element of key 1...");
+    (delFromList (&list, 1)) ? printf (" OK!\n") : printf (" Down!\n");
+    printf ("Deleting element of key 5...");
+    (delFromList (&list, 5)) ? printf (" OK!\n") : printf (" Down!\n");
+    printf ("Deleting element of key 10...");
+    (delFromList (&list, 10)) ? printf (" OK!\n") : printf (" Down!\n");
+    showList (list);
+
+    printf("\n");
 
     return 0;
 }

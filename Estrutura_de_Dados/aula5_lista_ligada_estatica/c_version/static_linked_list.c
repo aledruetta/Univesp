@@ -38,7 +38,7 @@ void initializeList (LIST *list)
     list->start = INVALID;
     // O elemento de índice 0 é o primeiro disponível para adicionar
     // um novo elemento.
-    list->vacancy = 0;
+    list->available = 0;
 
     for (int i=0; i<MAX-1; i++)
         list->arr[i].next = i + 1;
@@ -51,14 +51,13 @@ bool addToList (LIST *list, NODE node)
  * Não admite elementos repetidos.
  */
 {
-    unsigned vacancy = list->vacancy;
+    unsigned available = list->available;
     // A lista está cheia.
-    if (vacancy == INVALID) return false;
-    list->vacancy = list->arr[vacancy].next;
+    if (available == INVALID) return false;
+    list->available = list->arr[available].next;
 
-    unsigned start = list->start,
-        previous = INVALID,
-        i = start;
+    unsigned next = list->start,
+        previous = INVALID;
     KEY key = node.reg.key;
 
     /* Se a lista está vacia nunca entra no loop.
@@ -67,32 +66,28 @@ bool addToList (LIST *list, NODE node)
      *  - ou achar um elemento maior ou igual ao
      *    que será inserido.
      */
-    while (i != INVALID && list->arr[i].reg.key < key) {
-        previous = i;
-        i = list->arr[i].next;
+    while (next != INVALID && list->arr[next].reg.key < key) {
+        previous = next;
+        next = list->arr[next].next;
     }
+
     // O elemento já existe.
-    if (i != INVALID && list->arr[i].reg.key == key)
+    if (next != INVALID && list->arr[next].reg.key == key)
         return false;
 
     // Insere o elemento
-    list->arr[vacancy] = node;
+    list->arr[available] = node;
 
-    // A lista não estava vacia.
-    if (start != INVALID) {
-        // O elemento não é o último.
-        if (i != INVALID)
-            list->arr[vacancy].next = i;
-        // O elemento não é o primeiro.
-        if (key > list->arr[start].reg.key)
-            list->arr[previous].next = vacancy;
-        // O elemento SIM é o primeiro.
-        else
-            list->start = vacancy;
+    // Não há elemento prévio.
+    if (previous == INVALID) {
+        list->arr[available].next = next;
+        list->start = available;
     }
-    // A lista SIM estava vacia.
-    else
-        list->start = vacancy;
+    // Há um elemento prévio.
+    else {
+        list->arr[previous].next = available;
+        list->arr[available].next = next;
+    }
 
     return true;
 }
@@ -130,13 +125,37 @@ int searchList (LIST list, KEY key)
 /*
  * Procura por um elemento da lista.
  * Recebe uma lista e uma chave.
+ * Retorna o índice do elemento.
  * A lista precisa estar ordenada.
  */
 {
-    int next = list.start;
-    while (next != INVALID && list.arr[next].reg.key < key)
-        next = list.arr[next].next;
-    if (next != INVALID && list.arr[next].reg.key == key) return next;
-    return INVALID;
+    int i = list.start;
+    while (i != INVALID && list.arr[i].reg.key < key)
+        i = list.arr[i].next;
+    if (i == INVALID || list.arr[i].reg.key != key) return INVALID;
+    return i;
+}
+
+bool delFromList (LIST *list, KEY key)
+/*
+ *
+ */
+{
+    int i = list->start,
+        previous = INVALID;
+
+    while (i != INVALID && list->arr[i].reg.key < key) {
+        previous = i;
+        i = list->arr[i].next;
+    }
+
+    if (i == INVALID || list->arr[i].reg.key != key) return false;
+
+    if (previous != INVALID)
+        list->arr[previous].next = list->arr[i].next;
+    else
+        list->start = list->arr[i].next;
+
+    return true;
 }
 
