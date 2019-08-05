@@ -48,9 +48,8 @@ void initializeList (LIST *list)
 bool addToList (LIST *list, ELEMENT elem)
 {
     int vacancy = list->vacancy;
-    if (vacancy != INVALID)
-        list->vacancy = list->arr[vacancy].next;
-    else return false;  // A lista está cheia.
+    if (vacancy == INVALID) return false;   // A lista está cheia.
+    list->vacancy = list->arr[vacancy].next;
 
     int start = list->start,
         next = start,
