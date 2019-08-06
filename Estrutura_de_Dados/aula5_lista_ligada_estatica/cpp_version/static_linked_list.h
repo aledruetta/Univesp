@@ -20,7 +20,10 @@
 #define STATIC_LINKED_LIST_H
 
 #include <string>
+
 #define INVALID -1
+#define MAX 50
+
 using namespace std;
 
 typedef int KEY;
@@ -38,12 +41,29 @@ template <typename T>
 class Node
 {
     public:
+        Node () {
+            next_node = INVALID;
+        }
         Node (T rec) {
             record = rec;
             next_node = INVALID;
         }
         T record;
         int next_node;
+};
+
+
+template <typename T>
+class List
+{
+    public:
+        List () {
+            start = -1;
+            available = 0;
+        }
+        Node <T> nodes[MAX];
+        int start;
+        int available;
 };
 
 

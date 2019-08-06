@@ -31,6 +31,15 @@ int main ()
          << "Posição do próximo usuário: " << node.next_node
          << endl;
 
+    List<User> list;
+    list.nodes[list.start] = node;
+
+    cout << "Início: " << list.start << "\n"
+         << "Posição disponível: " << list.available << "\n"
+         << "Chave: " << list.nodes[list.start].record.key << "\n"
+         << "Nome:  " << list.nodes[list.start].record.name
+         << endl;
+
     return 0;
 }
 
