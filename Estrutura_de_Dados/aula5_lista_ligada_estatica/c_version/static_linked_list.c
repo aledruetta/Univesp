@@ -51,12 +51,12 @@ bool addToList (LIST *list, NODE node)
  * Não admite elementos repetidos.
  */
 {
-    unsigned available = list->available;
+    int available = list->available;
     // A lista está cheia.
     if (available == INVALID) return false;
     list->available = list->arr[available].next;
 
-    unsigned next = list->start,
+    int next = list->start,
         previous = INVALID;
     KEY key = node.reg.key;
 

@@ -1,4 +1,5 @@
-CC=gcc
+CC = gcc
+SRC = main.c static_linked_list.c
 DEPS = static_linked_list.h
 OBJ = main.o static_linked_list.o
 
@@ -8,9 +9,12 @@ OBJ = main.o static_linked_list.o
 test.out: $(OBJ)
 	$(CC) -o $@ $^
 
-dbg.out: $(OBJ)
+dbg.out: $(SRC)
 	$(CC) -g -o $@ $^
 
+debug:
+	gdb dbg.out
+
 clean:
-	rm -rf *.o core
+	rm -rf *.o *.out core
 
