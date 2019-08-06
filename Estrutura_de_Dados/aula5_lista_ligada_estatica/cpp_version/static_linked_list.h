@@ -19,5 +19,33 @@
 #ifndef STATIC_LINKED_LIST_H
 #define STATIC_LINKED_LIST_H
 
+#include <string>
+#define INVALID -1
+using namespace std;
+
+typedef int KEY;
+
+struct User
+{
+    KEY key;
+    string name;
+    // otros campos
+};
+
+User userConstructor (KEY key, string name);
+
+template <typename T>
+class Node
+{
+    public:
+        Node (T rec) {
+            record = rec;
+            next_node = INVALID;
+        }
+        T record;
+        int next_node;
+};
+
+
 #endif /* STATIC_LINKED_LIST_H */
 

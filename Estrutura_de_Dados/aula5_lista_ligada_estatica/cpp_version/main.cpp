@@ -17,10 +17,19 @@
  */
 
 #include <iostream>
+#include "static_linked_list.h"
+
 using namespace std;
 
 int main ()
 {
+    User user = userConstructor (209, "Alejandro");
+    Node <User> node (user);
+
+    cout << "Name: " << node.record.name << "\n"
+         << "Id:   " << node.record.key  << "\n"
+         << "Posição do próximo usuário: " << node.next_node
+         << endl;
 
     return 0;
 }

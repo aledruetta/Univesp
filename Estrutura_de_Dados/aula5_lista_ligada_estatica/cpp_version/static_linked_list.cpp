@@ -18,3 +18,13 @@
 
 #include "static_linked_list.h"
 
+
+User userConstructor (KEY key, string name)
+{
+    User user;
+    user.key = key;
+    user.name = name;
+
+    return user;
+}
+
