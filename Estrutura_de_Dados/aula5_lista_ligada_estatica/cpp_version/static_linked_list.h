@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  main.cpp
+ *       Filename:  static_linked_list.h
  *
  *    Description:  Lista Ligada (Implementação Estática)
  *
  *        Version:  1.0
- *        Created:  06/08/2019 08:05:51
+ *        Created:  06/08/2019 08:06:20
  *       Revision:  none
  *       Compiler:  g++
  *
@@ -16,12 +16,8 @@
  * =====================================================================================
  */
 
-#include <iostream>
-using namespace std;
+#ifndef STATIC_LINKED_LIST_H
+#define STATIC_LINKED_LIST_H
 
-int main ()
-{
-
-    return 0;
-}
+#endif /* STATIC_LINKED_LIST_H */
 
