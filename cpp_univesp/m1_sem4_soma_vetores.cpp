@@ -52,16 +52,16 @@ int main ()
     // imprime A formatado
     cout << "\tA = { ";
     for (size_t i=0; i<sz; i++) {
-        cout << A[i];
-        cout << ((i < sz - 1) ? ", " : " ");
+        cout << A[i]
+             << ((i < sz - 1) ? ", " : " ");
     }
     cout << "}" << endl;
 
     // imprime B formatado
     cout << "\tB = { ";
     for (size_t i=0; i<sz; i++) {
-        cout << B[i];
-        cout << ((i < sz - 1) ? ", " : " ");
+        cout << B[i]
+             << ((i < sz - 1) ? ", " : " ");
     }
     cout << "}" << endl;
 
@@ -73,8 +73,8 @@ int main ()
     // imprime R formatado
     cout << "\n\tA + B = { ";
     for (size_t i=0; i<sz; i++) {
-        cout << R[i];
-        cout << ((i < sz - 1) ? ", " : " ");
+        cout << R[i]
+             << ((i < sz - 1) ? ", " : " ");
     }
     cout << "}\n" << endl;
 
