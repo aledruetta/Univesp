@@ -20,15 +20,15 @@
 #include <iomanip>
 #define MAX 255
 typedef unsigned SIZE;
-typedef double MATRIZ;
+typedef double MATRIZ_T;
 using namespace std;
 
 int main ()
 {
     SIZE filas = 0;
     SIZE colunas = 0;
-    MATRIZ matriz_A [MAX][MAX];
-    MATRIZ matriz_B [MAX][MAX];
+    MATRIZ_T matriz_A [MAX][MAX];
+    MATRIZ_T matriz_B [MAX][MAX];
 
     cout << "\n\t *** Soma de Matrizes ***\n" << endl
          << " Filas?   ", cin >> filas;
@@ -52,7 +52,7 @@ int main ()
     for (SIZE i=0; i<filas; i++) {
         cout << "\t[";
         for (SIZE j=0; j<colunas; j++) {
-            MATRIZ result = matriz_A [i][j] + matriz_B [i][j];
+            MATRIZ_T result = matriz_A [i][j] + matriz_B [i][j];
             cout << setw (3) << result;
         }
         cout << " ]" << endl;
