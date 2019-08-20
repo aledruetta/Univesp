@@ -12,14 +12,18 @@ void carregar_lista (LLSeq*, const Chave*, unsigned num);
 int main ()
 {
     unsigned ntest = 1;
+
+    // inicializar
     printf ("\n*** Testes ***\n");
     printf ("\nTeste %u: inicializar uma lista vacia\n", ntest++);
     LLSeq lista;
     inicializar_llseq (&lista);
 
+    // mostrar
     printf ("\nTeste %u: mostrar lista\n", ntest++);
     mostrar_llseq (&lista);
 
+    // Adicionar
     printf ("\nTeste %u: adicionar 5 elementos à lista\n", ntest++);
     printf ("Tamanho máximo: %d elementos\n", MAX);
     unsigned num = 5;
@@ -32,6 +36,7 @@ int main ()
     carregar_lista (&lista, mais_chaves, 8);
     mostrar_llseq (&lista);
 
+    // inserir
     printf ("\nTeste %u: inserir elemento na lista cheia\n", ntest++);
     Registro registro = {2};
     bool inserido = inserir_llseq (&lista, &registro, 2);
@@ -39,8 +44,8 @@ int main ()
         printf ("Erro: Lista cheia ou ídice inválido!\n");
     mostrar_llseq (&lista);
 
-    // procurar elemento na lista
-    // remover elemento da lista
+    // procurar
+    // remover
 
     return 0;
 }
