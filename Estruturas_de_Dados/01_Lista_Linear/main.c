@@ -10,22 +10,22 @@ int main ()
 {
     // inicializar lista
     ListaLinear lista;
-    inicializar_listaLinear (&lista);
-    printf ("Tamanho lista: %d\n", lista.tamanho);
+    inicializar_llin (&lista);
+    printf ("Tamanho máximo: %d elementos\n", MAX);
 
     // adicionar elementos à lista
-    Chave chaves[MAX] = {5, 3, 0, 9, 8};
-    for (unsigned i=0; i<MAX; i++) {
+    Chave chaves[MAX+1] = {5, 3, 0, 9, 8};
+    for (unsigned i=0; i<MAX+1; i++) {
         Registro registro = {chaves[i]};
-        bool adicionado = adicionar_listaLinear (&lista, &registro);
-        if (adicionado)
-            printf ("Chave elemento %u: %d\n", i, lista.regs[i].chave);
-        else
-            printf ("Erro: Lista cheia!");
+        printf ("Adicionando: %d\n", registro.chave);
+        bool adicionado = adicionar_llin (&lista, &registro);
+        if (!adicionado)
+            printf ("Erro: Lista cheia!\n");
     }
-    printf ("Tamanho lista: %d\n", lista.tamanho);
 
     // mostrar lista
+    mostrar_llin (&lista);
+
     // procurar elemento na lista
     // remover elemento da lista
 

@@ -8,7 +8,7 @@
 
 #include <stdbool.h>
 
-#define MAX 10
+#define MAX 5
 
 typedef int Chave;
 
@@ -23,7 +23,8 @@ typedef struct
     unsigned tamanho;
 } ListaLinear;
 
-void inicializar_listaLinear (ListaLinear*);
-bool adicionar_listaLinear (ListaLinear*, const Registro*);
+void inicializar_llin (ListaLinear*);
+bool adicionar_llin (ListaLinear*, const Registro*);
+void mostrar_llin (const ListaLinear*);
 
 #endif /* LISTA_LINEAR_H */
