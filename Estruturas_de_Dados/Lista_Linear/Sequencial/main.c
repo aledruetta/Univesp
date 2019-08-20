@@ -37,7 +37,7 @@ int main ()
     mostrar_llseq (&lista);
 
     // inserir
-    printf ("\nTeste %u: inserir elemento na lista cheia\n", ntest++);
+    printf ("\nTeste %u: inserir elemento numa lista cheia\n", ntest++);
     Registro registro = {2};
     bool inserido = inserir_llseq (&lista, &registro, 2);
     if (!inserido)
@@ -45,6 +45,17 @@ int main ()
     mostrar_llseq (&lista);
 
     // procurar
+    printf ("\nTeste %u: procurar elementos na lista\n", ntest++);
+    int chave = chaves[3];
+    int indice = procurar_llseq (&lista, chave);
+    printf ("O elemento com chave %d está na posição %d\n", chave, indice);
+    chave = 104;
+    indice = procurar_llseq (&lista, chave);
+    if (indice >= 0)
+        printf ("O elemento com chave %d está na posição %d\n", chave, indice);
+    else
+        printf ("Erro: O elemento com chave %d não existe!\n", chave);
+
     // remover
 
     return 0;

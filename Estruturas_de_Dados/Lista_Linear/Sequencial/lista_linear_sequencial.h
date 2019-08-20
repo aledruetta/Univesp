@@ -26,6 +26,8 @@ typedef struct
 void inicializar_llseq (LLSeq*);
 bool adicionar_llseq (LLSeq*, const Registro*);
 void mostrar_llseq (const LLSeq*);
-bool inserir_llseq (LLSeq*, const Registro*, unsigned);
+bool inserir_llseq (LLSeq*, const Registro*, const unsigned);
+int procurar_llseq (const LLSeq*, const Chave);
+bool deletar_llseq (LLSeq*, const Chave);
 
 #endif /* LISTA_LINEAR_SEQUENCIAL_H */

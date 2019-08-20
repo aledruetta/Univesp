@@ -28,7 +28,7 @@ void mostrar_llseq (const LLSeq* lista)
     printf ("] Tamanho: %u\n", lista->tamanho);
 }
 
-bool inserir_llseq (LLSeq *lista, const Registro *registro, unsigned index)
+bool inserir_llseq (LLSeq *lista, const Registro *registro, const unsigned index)
 {
     if (lista->tamanho >= MAX || index >= lista->tamanho) return false;
 
@@ -40,3 +40,18 @@ bool inserir_llseq (LLSeq *lista, const Registro *registro, unsigned index)
 
     return true;
 }
+
+int procurar_llseq (const LLSeq* lista, const Chave chave)
+{
+    unsigned i = 0;
+    while (i < lista->tamanho) {
+        if (chave == lista->regs[i].chave)
+            return i;
+        i++;
+    }
+    return -1;
+}
+
+//bool deletar_llseq (LLSeq* lista, const Chave chave)
+//{
+//}
