@@ -1,5 +1,5 @@
 /*
- * File: 01_Lista_Linear/main.c
+ * File: Lista_Linear/Sequencial/main.c
  * @author: Alejandro Druetta
  */
 
@@ -26,6 +26,7 @@ int main ()
     // mostrar lista
     mostrar_llin (&lista);
 
+    // inserir elemento na lista
     // procurar elemento na lista
     // remover elemento da lista
 

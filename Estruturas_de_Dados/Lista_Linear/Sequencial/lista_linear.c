@@ -1,5 +1,5 @@
 /*
- * File: 01_Lista_Linear/lista_linear.c
+ * File: Lista_Linear/Sequencial/lista_linear.c
  * @author: Alejandro Druetta
  */
 
