@@ -8,7 +8,7 @@
 
 #include <stdbool.h>
 
-#define MAX 5
+#define MAX 10
 
 typedef int Chave;
 
