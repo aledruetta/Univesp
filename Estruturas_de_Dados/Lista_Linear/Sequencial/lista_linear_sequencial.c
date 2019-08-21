@@ -22,7 +22,7 @@ bool adicionar_llseq (LLSeq *lista, const Registro *registro)
 
 void mostrar_llseq (const LLSeq* lista)
 {
-    printf ("Lista [ ");
+    printf (" Lista [ ");
     for (unsigned i=0; i<lista->tamanho; i++)
         printf ("%d ", lista->regs[i].chave);
     printf ("] Tamanho: %u\n", lista->tamanho);
@@ -52,6 +52,13 @@ int procurar_llseq (const LLSeq* lista, const Chave chave)
     return -1;
 }
 
-//bool deletar_llseq (LLSeq* lista, const Chave chave)
-//{
-//}
+bool deletar_llseq (LLSeq* lista, const Chave chave)
+{
+    int pos = procurar_llseq (lista, chave);
+    if (pos == -1) return false;
+    for (unsigned i=pos; i<lista->tamanho-1; i++)
+        lista->regs[i] = lista->regs[i+1];
+    lista->tamanho--;
+
+    return true;
+}
