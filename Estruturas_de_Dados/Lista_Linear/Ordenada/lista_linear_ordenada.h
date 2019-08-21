@@ -1,10 +1,10 @@
 /*
- * File: Lista_Linear/Sequencial/lista.h
+ * File: Lista_Linear/Ordenada/lista_sequencial_ordenada.h
  * @author: Alejandro Druetta
  */
 
-#ifndef LISTA_LINEAR_SEQUENCIAL_H
-#define LISTA_LINEAR_SEQUENCIAL_H
+#ifndef LISTA_LINEAR_ORDENADA_H
+#define LISTA_LINEAR_ORDENADA_H
 
 #include <stdbool.h>
 
@@ -22,13 +22,13 @@ typedef struct
 {
     Registro regs[MAX];
     unsigned tamanho;
-} LLSeq;
+} LLOrd;
 
-void inicializar_llseq (LLSeq*);
-bool adicionar_llseq (LLSeq*, const Registro*);
-bool inserir_llseq (LLSeq*, const Registro*, const unsigned);
-int procurar_llseq (const LLSeq*, const Chave);
-bool deletar_llseq (LLSeq*, const Chave);
-void mostrar_llseq (const LLSeq*);
+void inicializar_llord (LLOrd*);
+bool adicionar_llord (LLOrd*, const Registro*);
+bool inserir_llord (LLOrd*, const Registro*, const unsigned);
+int procurar_llord (const LLOrd*, const Chave);
+bool deletar_llord (LLOrd*, const Chave);
+void mostrar_llord (const LLOrd*);
 
-#endif /* LISTA_LINEAR_SEQUENCIAL_H */
+#endif /* LISTA_LINEAR_ORDENADA_H */

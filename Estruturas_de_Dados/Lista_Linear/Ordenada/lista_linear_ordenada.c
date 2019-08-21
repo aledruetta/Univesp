@@ -1,17 +1,17 @@
 /*
- * File: Lista_Linear/Sequencial/lista_linear.c
+ * File: Lista_Linear/Ordenada/lista_linear_ordenada.c
  * @author: Alejandro Druetta
  */
 
 #include <stdio.h>
-#include "lista_linear_sequencial.h"
+#include "lista_linear_ordenada.h"
 
-void inicializar_llseq (LLSeq *lista)
+void inicializar_llord (LLOrd *lista)
 {
     lista->tamanho = 0;
 }
 
-bool adicionar_llseq (LLSeq *lista, const Registro *registro)
+bool adicionar_llord (LLOrd *lista, const Registro *registro)
 {
     if (lista->tamanho >= MAX) return false;
     lista->regs[lista->tamanho] = *registro;
@@ -20,7 +20,7 @@ bool adicionar_llseq (LLSeq *lista, const Registro *registro)
     return true;
 }
 
-void mostrar_llseq (const LLSeq* lista)
+void mostrar_llord (const LLOrd* lista)
 {
     printf (" Lista [ ");
     for (unsigned i=0; i<lista->tamanho; i++)
@@ -28,7 +28,7 @@ void mostrar_llseq (const LLSeq* lista)
     printf ("] Tamanho: %u\n", lista->tamanho);
 }
 
-bool inserir_llseq (LLSeq *lista, const Registro *registro, const unsigned index)
+bool inserir_llord (LLOrd *lista, const Registro *registro, const unsigned index)
 {
     if (lista->tamanho >= MAX || index >= lista->tamanho) return false;
 
@@ -41,7 +41,7 @@ bool inserir_llseq (LLSeq *lista, const Registro *registro, const unsigned index
     return true;
 }
 
-int procurar_llseq (const LLSeq* lista, const Chave chave)
+int procurar_llord (const LLOrd* lista, const Chave chave)
 {
     unsigned i = 0;
     while (i < lista->tamanho) {
@@ -52,9 +52,9 @@ int procurar_llseq (const LLSeq* lista, const Chave chave)
     return -1;
 }
 
-bool deletar_llseq (LLSeq* lista, const Chave chave)
+bool deletar_llord (LLOrd* lista, const Chave chave)
 {
-    int pos = procurar_llseq (lista, chave);
+    int pos = procurar_llord (lista, chave);
     if (pos == -1) return false;
     for (unsigned i=pos; i<lista->tamanho-1; i++)
         lista->regs[i] = lista->regs[i+1];
