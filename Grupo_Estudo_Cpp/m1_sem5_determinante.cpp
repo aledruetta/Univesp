@@ -43,13 +43,6 @@ int main ()
         deter += M[0][i] * (M[1][i+1] * M[2][i+2] - M[1][i+2] * M[2][i+1]);
     }
 
-    //cout << endl;
-    //for (unsigned i=0; i<SIZE; i++) {
-    //    for (unsigned j=0; j<SIZE; j++)
-    //        cout << M[i][j] << " ";
-    //    cout << endl;
-    //}
-
     cout << "\nDeterminante = " << deter << "\n" << endl;
 
     return 0;
