@@ -48,7 +48,6 @@ double produto_escalar (const Ponto &a, const Ponto &b)
     return (a.x * b.x) + (a.y * b.y);
 }
 
-
 // Imprime uma representação do ponto
 void imprime (const Ponto &p)
 {
