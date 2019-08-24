@@ -36,10 +36,13 @@ double distancia (const Ponto &a, const Ponto &b)
 }
 
 // Soma dois pontos
-void soma (const Ponto &a, const Ponto &b, Ponto &c)
+Ponto& soma (const Ponto &a, const Ponto &b)
 {
-    c.x = a.x + b.x;
-    c.y = a.y + b.y;
+    Ponto* c = new Ponto;
+    c->x = a.x + b.x;
+    c->y = a.y + b.y;
+
+    return *c;
 }
 
 // Produto escalar
@@ -72,8 +75,7 @@ int main ()
          << "\n"
          << endl;
 
-    Ponto c;
-    soma (a, b, c);
+    Ponto c = soma (a, b);
     cout << " A + B = ";
     imprime (c);
     cout << endl;
