@@ -40,7 +40,7 @@ int main ()
     // inserir
     Registro registro = {2};
     printf ("\n Teste %u: inserir elemento chave %d numa lista cheia.\n", ntest++, registro.chave);
-    bool inserido = inserir_llseq (&lista, &registro, 2);
+    bool inserido = inserir_llseq (&lista, registro, 2);
     if (!inserido)
         printf (" Erro: Lista cheia ou índice inválido!\n");
     mostrar_llseq (&lista);
@@ -86,7 +86,7 @@ void carregar_lista (LLSeq* lista, const Chave* chaves, unsigned num)
     for (unsigned i=0; i<num; i++) {
         Registro registro = {chaves[i]};
         printf (" Adicionando chave %d ", chaves[i]);
-        bool adicionado = adicionar_llseq (lista, &registro);
+        bool adicionado = adicionar_llseq (lista, registro);
         if (!adicionado)
             printf (" Erro: Lista cheia!\n");
         else

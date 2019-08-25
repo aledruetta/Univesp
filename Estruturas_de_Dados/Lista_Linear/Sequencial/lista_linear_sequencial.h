@@ -25,8 +25,8 @@ typedef struct
 } LLSeq;
 
 void inicializar_llseq (LLSeq*);
-bool adicionar_llseq (LLSeq*, const Registro*);
-bool inserir_llseq (LLSeq*, const Registro*, const unsigned);
+bool adicionar_llseq (LLSeq*, const Registro);
+bool inserir_llseq (LLSeq*, const Registro, const unsigned);
 int procurar_llseq (const LLSeq*, const Chave);
 bool deletar_llseq (LLSeq*, const Chave);
 void ordenar_llseq (LLSeq*, char);
