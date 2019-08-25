@@ -64,7 +64,7 @@ void ordenar_llseq (LLSeq* lista, char algoritmo)
         insertion_sort (lista);
     }
     else if (algoritmo == BUBBLE_SORT) {
-        //bubble_sort (lista);
+        bubble_sort (lista);
     }
 }
 
@@ -81,7 +81,7 @@ bool deletar_llseq (LLSeq* lista, const Chave chave)
 
 void insertion_sort (LLSeq* lista)
 {
-    if (lista->tamanho > 1) {
+    if (lista->tamanho > 1)
         for (unsigned i=1; i<lista->tamanho; i++) {
             int j = i - 1;
             Registro tmp = lista->regs[i];
@@ -91,10 +91,17 @@ void insertion_sort (LLSeq* lista)
             }
             lista->regs[j+1] = tmp;
         }
-    }
 }
 
 void bubble_sort (LLSeq* lista)
 {
-
+    if (lista->tamanho > 1)
+        for (unsigned i=1; i<lista->tamanho; i++)
+            for (unsigned j=0; j<lista->tamanho-i; j++)
+                if (lista->regs[j].chave > lista->regs[j+1].chave) {
+                    Registro tmp = lista->regs[j];
+                    lista->regs[j] = lista->regs[j+1];
+                    lista->regs[j+1] = tmp;
+                }
 }
+

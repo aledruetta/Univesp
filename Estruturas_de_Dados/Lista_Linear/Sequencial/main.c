@@ -74,8 +74,11 @@ int main ()
         printf (" Erro: O elemento com chave %d não existe!\n", chave);
     mostrar_llseq (&lista);
 
-    printf ("\n Teste %u: Ordenar lista usando insertion sort.\n", ntest++);
-    ordenar_llseq (&lista, 'i');
+    printf ("\n Teste %u: Ordenar lista.\n", ntest++);
+    char algoritmo;
+    printf (" Insertion [i] ou Bubble [b] sort? ");
+    scanf ("%c", &algoritmo);
+    ordenar_llseq (&lista, algoritmo);
     mostrar_llseq (&lista);
 
     return 0;
