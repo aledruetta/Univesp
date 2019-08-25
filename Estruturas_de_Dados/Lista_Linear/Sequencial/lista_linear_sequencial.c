@@ -6,6 +6,12 @@
 #include <stdio.h>
 #include "lista_linear_sequencial.h"
 
+#define BUBBLE_SORT 'b'
+#define INSERTION_SORT 'i'
+
+void insertion_sort (LLSeq*);
+//void bubble_sort (LLSeq*);
+
 void inicializar_llseq (LLSeq *lista)
 {
     lista->tamanho = 0;
@@ -52,6 +58,16 @@ int procurar_llseq (const LLSeq* lista, const Chave chave)
     return -1;
 }
 
+void ordenar_llseq (LLSeq* lista, char algoritmo)
+{
+    if (algoritmo == INSERTION_SORT) {
+        insertion_sort (lista);
+    }
+    else if (algoritmo == BUBBLE_SORT) {
+        //bubble_sort (lista);
+    }
+}
+
 bool deletar_llseq (LLSeq* lista, const Chave chave)
 {
     int pos = procurar_llseq (lista, chave);
@@ -62,3 +78,20 @@ bool deletar_llseq (LLSeq* lista, const Chave chave)
 
     return true;
 }
+
+void insertion_sort (LLSeq* lista)
+{
+    if (lista->tamanho > 1) {
+        for (unsigned i=1; i<lista->tamanho; i++) {
+            int j = i - 1;
+            Registro tmp = lista->regs[i];
+            while (j >= 0 && tmp.chave < lista->regs[j].chave) {
+                lista->regs[j+1] = lista->regs[j];
+                j--;
+            }
+            lista->regs[j+1] = tmp;
+        }
+    }
+}
+
+//void bubble_sort (LLSeq*);

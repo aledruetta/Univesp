@@ -72,7 +72,10 @@ int main ()
     deletado = deletar_llseq (&lista, 0);
     if (!deletado)
         printf (" Erro: O elemento com chave %d não existe!\n", chave);
+    mostrar_llseq (&lista);
 
+    printf ("\n Teste %u: Ordenar lista usando insertion sort.\n", ntest++);
+    ordenar_llseq (&lista, 'i');
     mostrar_llseq (&lista);
 
     return 0;
