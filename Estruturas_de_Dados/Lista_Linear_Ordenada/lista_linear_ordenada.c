@@ -1,5 +1,5 @@
 /*
- * File: Lista_Linear/Ordenada/lista_linear_ordenada.c
+ * File: Lista_Linear_Ordenada/lista_linear_ordenada.c
  * @author: Alejandro Druetta
  */
 

@@ -1,5 +1,5 @@
 /*
- * File: Lista_Linear/Ordenada/main.c
+ * File: Lista_Linear_Ordenada/main.c
  * @author: Alejandro Druetta
  */
 

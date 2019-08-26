@@ -1,5 +1,5 @@
 /*
- * File: Lista_Linear/Ordenada/lista_sequencial_ordenada.h
+ * File: Lista_Linear_Ordenada/lista_sequencial_ordenada.h
  * @author: Alejandro Druetta
  */
 
