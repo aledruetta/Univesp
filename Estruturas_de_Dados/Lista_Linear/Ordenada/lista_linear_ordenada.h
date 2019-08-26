@@ -24,10 +24,10 @@ typedef struct
     unsigned tamanho;
 } LOrd;
 
-void inicializar_lord (LOrd*);
-bool adicionar_lord (LOrd*, const Registro);
-int procurar_lord (const LOrd*, const Chave);
-bool deletar_lord (LOrd*, const Chave);
-void mostrar_lord (const LOrd*);
+void inicializar_lOrd (LOrd*);
+bool adicionar_lOrd (LOrd*, const Registro);
+int procurar_lOrd (const LOrd*, const Chave);
+bool deletar_lOrd (LOrd*, const Chave);
+void mostrar_lOrd (const LOrd*);
 
 #endif /* LISTA_LINEAR_ORDENADA_H */

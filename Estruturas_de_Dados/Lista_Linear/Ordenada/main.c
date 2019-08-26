@@ -21,26 +21,26 @@ int main ()
     // inicializar
     printf ("\n Teste %u: inicializar uma lista vacia.\n", ntest++);
     LOrd lista;
-    inicializar_lord (&lista);
+    inicializar_lOrd (&lista);
 
     // mostrar
     printf ("\n Teste %u: mostrar lista.\n", ntest++);
-    mostrar_lord (&lista);
+    mostrar_lOrd (&lista);
 
     // Adicionar
     printf ("\n Teste %u: adicionar 5 elementos à lista.\n", ntest++);
     printf (" Tamanho máximo: %d elementos.\n", MAX);
     gerar_lista (&lista, 5);
-    mostrar_lord (&lista);
+    mostrar_lOrd (&lista);
 
     printf ("\n Teste %u: adicionar mais 8 elementos à lista para estorar o limite.\n", ntest++);
     gerar_lista (&lista, 8);
-    mostrar_lord (&lista);
+    mostrar_lOrd (&lista);
 
     // procurar existente
     Chave chave = lista.regs[3].chave;
     printf ("\n Teste %u: procurar chave %d na lista.\n", ntest++, chave);
-    int indice = procurar_lord (&lista, chave);
+    int indice = procurar_lOrd (&lista, chave);
     if (indice >= 0)
         printf (" O elemento com chave %d está na posição %d.\n", chave, indice);
     else
@@ -49,7 +49,7 @@ int main ()
     // procurar aleatório
     chave = rand () % 100 - 50;
     printf ("\n Teste %u: procurar chave %d na lista.\n", ntest++, chave);
-    indice = procurar_lord (&lista, chave);
+    indice = procurar_lOrd (&lista, chave);
     if (indice >= 0)
         printf (" O elemento com chave %d está na posição %d.\n", chave, indice);
     else
@@ -58,18 +58,18 @@ int main ()
     // remover existente
     chave = lista.regs[6].chave;
     printf ("\n Teste %u: deletar chave %d da lista.\n", ntest++, chave);
-    bool deletado = deletar_lord (&lista, chave);
+    bool deletado = deletar_lOrd (&lista, chave);
     if (!deletado)
         printf (" Erro: O elemento com chave %d não existe!\n", chave);
 
     // remover aleatório
     chave = rand () % 100 - 50;
     printf ("\n Teste %u: deletar primeira ocorrência elemento chave %d da lista.\n", ntest++, chave);
-    deletado = deletar_lord (&lista, chave);
+    deletado = deletar_lOrd (&lista, chave);
     if (!deletado)
         printf (" Erro: O elemento com chave %d não existe!\n", chave);
 
-    mostrar_lord (&lista);
+    mostrar_lOrd (&lista);
 
     return 0;
 }
@@ -80,7 +80,7 @@ void gerar_lista (LOrd* lista, unsigned tamanho)
         Chave chave = rand () % 100 - 50;
         Registro registro = {chave};
         printf (" Adicionando chave %d ", chave);
-        bool adicionado = adicionar_lord (lista, registro);
+        bool adicionado = adicionar_lOrd (lista, registro);
         if (!adicionado)
             printf (" Erro: lista cheia ou item repetido!\n");
         else
