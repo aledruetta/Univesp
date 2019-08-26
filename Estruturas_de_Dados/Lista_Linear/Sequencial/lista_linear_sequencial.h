@@ -22,14 +22,14 @@ typedef struct
 {
     Registro regs[MAX];
     unsigned tamanho;
-} LLSeq;
+} LSeq;
 
-void inicializar_llseq (LLSeq*);
-bool adicionar_llseq (LLSeq*, const Registro);
-bool inserir_llseq (LLSeq*, const Registro, const unsigned);
-int procurar_llseq (const LLSeq*, const Chave);
-bool deletar_llseq (LLSeq*, const Chave);
-void ordenar_llseq (LLSeq*, char);
-void mostrar_llseq (const LLSeq*);
+void inicializar_lseq (LSeq*);
+bool adicionar_lseq (LSeq*, const Registro);
+bool inserir_lseq (LSeq*, const Registro, const unsigned);
+int procurar_lseq (const LSeq*, const Chave);
+bool deletar_lseq (LSeq*, const Chave);
+void ordenar_lseq (LSeq*, char);
+void mostrar_lseq (const LSeq*);
 
 #endif /* LISTA_LINEAR_SEQUENCIAL_H */

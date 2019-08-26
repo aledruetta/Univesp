@@ -9,15 +9,15 @@
 #define BUBBLE_SORT 'b'
 #define INSERTION_SORT 'i'
 
-void insertion_sort (LLSeq*);
-void bubble_sort (LLSeq*);
+void insertion_sort (LSeq*);
+void bubble_sort (LSeq*);
 
-void inicializar_llseq (LLSeq *lista)
+void inicializar_lseq (LSeq *lista)
 {
     lista->tamanho = 0;
 }
 
-bool adicionar_llseq (LLSeq *lista, const Registro registro)
+bool adicionar_lseq (LSeq *lista, const Registro registro)
 {
     if (lista->tamanho >= MAX) return false;
     lista->regs[lista->tamanho] = registro;
@@ -26,7 +26,7 @@ bool adicionar_llseq (LLSeq *lista, const Registro registro)
     return true;
 }
 
-void mostrar_llseq (const LLSeq* lista)
+void mostrar_lseq (const LSeq* lista)
 {
     printf (" Lista [ ");
     for (unsigned i=0; i<lista->tamanho; i++)
@@ -34,7 +34,7 @@ void mostrar_llseq (const LLSeq* lista)
     printf ("] Tamanho: %u\n", lista->tamanho);
 }
 
-bool inserir_llseq (LLSeq *lista, const Registro registro, const unsigned index)
+bool inserir_lseq (LSeq *lista, const Registro registro, const unsigned index)
 {
     if (lista->tamanho >= MAX || index >= lista->tamanho) return false;
 
@@ -47,7 +47,7 @@ bool inserir_llseq (LLSeq *lista, const Registro registro, const unsigned index)
     return true;
 }
 
-int procurar_llseq (const LLSeq* lista, const Chave chave)
+int procurar_lseq (const LSeq* lista, const Chave chave)
 {
     unsigned i = 0;
     while (i < lista->tamanho) {
@@ -58,7 +58,7 @@ int procurar_llseq (const LLSeq* lista, const Chave chave)
     return -1;
 }
 
-void ordenar_llseq (LLSeq* lista, char algoritmo)
+void ordenar_lseq (LSeq* lista, char algoritmo)
 {
     if (algoritmo == INSERTION_SORT) {
         insertion_sort (lista);
@@ -68,9 +68,9 @@ void ordenar_llseq (LLSeq* lista, char algoritmo)
     }
 }
 
-bool deletar_llseq (LLSeq* lista, const Chave chave)
+bool deletar_lseq (LSeq* lista, const Chave chave)
 {
-    int pos = procurar_llseq (lista, chave);
+    int pos = procurar_lseq (lista, chave);
     if (pos == -1) return false;
     for (unsigned i=pos; i<lista->tamanho-1; i++)
         lista->regs[i] = lista->regs[i+1];
@@ -79,7 +79,7 @@ bool deletar_llseq (LLSeq* lista, const Chave chave)
     return true;
 }
 
-void insertion_sort (LLSeq* lista)
+void insertion_sort (LSeq* lista)
 {
     if (lista->tamanho > 1)
         for (unsigned i=1; i<lista->tamanho; i++) {
@@ -93,7 +93,7 @@ void insertion_sort (LLSeq* lista)
         }
 }
 
-void bubble_sort (LLSeq* lista)
+void bubble_sort (LSeq* lista)
 {
     if (lista->tamanho > 1)
         for (unsigned i=1; i<lista->tamanho; i++)
