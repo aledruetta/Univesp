@@ -28,19 +28,6 @@ void mostrar_llord (const LLOrd* lista)
     printf ("] Tamanho: %u\n", lista->tamanho);
 }
 
-bool inserir_llord (LLOrd *lista, const Registro registro, const unsigned index)
-{
-    if (lista->tamanho >= MAX || index >= lista->tamanho) return false;
-
-    unsigned i;
-    for (i=lista->tamanho; i>index; i--)
-        lista->regs[i] = lista->regs[i-1];
-    lista->regs[i] = registro;
-    lista->tamanho++;
-
-    return true;
-}
-
 int procurar_llord (const LLOrd* lista, const Chave chave)
 {
     unsigned i = 0;

@@ -28,21 +28,13 @@ int main ()
     printf ("\n Teste %u: adicionar 5 elementos à lista.\n", ntest++);
     printf (" Tamanho máximo: %d elementos.\n", MAX);
     unsigned num = 5;
-    Chave chaves[] = {5, 3, 0, 9, 8};
+    Chave chaves[] = {5, 3, -7, 9, 8};
     carregar_lista (&lista, chaves, num);
     mostrar_llord (&lista);
 
     printf ("\n Teste %u: adicionar mais 8 elementos à lista para estorar o limite.\n", ntest++);
     Chave mais_chaves[8] = {};
     carregar_lista (&lista, mais_chaves, 8);
-    mostrar_llord (&lista);
-
-    // inserir
-    Registro registro = {2};
-    printf ("\n Teste %u: inserir elemento chave %d numa lista cheia.\n", ntest++, registro.chave);
-    bool inserido = inserir_llord (&lista, registro, 2);
-    if (!inserido)
-        printf (" Erro: Lista cheia ou índice inválido!\n");
     mostrar_llord (&lista);
 
     // procurar

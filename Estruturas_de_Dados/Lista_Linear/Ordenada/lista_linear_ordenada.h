@@ -26,7 +26,6 @@ typedef struct
 
 void inicializar_llord (LLOrd*);
 bool adicionar_llord (LLOrd*, const Registro);
-bool inserir_llord (LLOrd*, const Registro, const unsigned);
 int procurar_llord (const LLOrd*, const Chave);
 bool deletar_llord (LLOrd*, const Chave);
 void mostrar_llord (const LLOrd*);
