@@ -17,9 +17,9 @@
  */
 
 #include <iostream>
-#include <cstdlib>
-#include <cmath>
-#include <ctime>
+#include <cmath>   // log, log2 e log10
+#include <cstdlib> // rand, srand
+#include <ctime>   // time
 using namespace std;
 
 double logaritmo (double, double);
@@ -28,6 +28,8 @@ int main ()
 {
     srand (time (NULL));
     cout << endl;
+    // Gera 5 números aleatórios e
+    // imprime o resultado
     for (int i=0; i<5; i++) {
         double n = double(rand () % 30);
         double b = double(rand () % 30);
@@ -41,12 +43,21 @@ int main ()
 
 double logaritmo (double num, double base)
 {
+    // Aplica as restrições dos logaritmos
+    // base e logaritmando positivos
+    // base diferente de 1
     if (num <= 0 || base <= 0 || base == 1 ) return -1;
+    // Logaritmo de 1 em qualquer base = 0
     if (num == 1) return 0;
+    // base igual logaritmando = 1
     if (num == base) return 1;
+    // base 10
     if (base == 10) return log10 (num);
+    // base 2
     if (base == 2) return log2 (num);
 
+    // Aplica mudança de base para qualquer
+    // outro caso
     return log (num) / log (base);
 }
 
