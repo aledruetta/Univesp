@@ -46,7 +46,6 @@ double logaritmo (double num, double base)
     if (num == base) return 1;
     if (base == 10) return log10 (num);
     if (base == 2) return log2 (num);
-    if (base >= 2.7182 && base <= 2.7183) return log (num);
 
     return log (num) / log (base);
 }
