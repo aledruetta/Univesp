@@ -40,11 +40,14 @@ void mostrar_lord (const LOrd* lista)
 
 int procurar_lord (const LOrd* lista, const Chave chave)
 {
-    unsigned i = 0;
-    while (i < lista->tamanho) {
-        if (chave == lista->regs[i].chave)
-            return i;
-        i++;
+    unsigned tamanho = lista->tamanho;
+    if (tamanho > 0) {
+        unsigned i = 0;
+        while (i < tamanho) {
+            if (chave == lista->regs[i].chave)
+                return i;
+            i++;
+        }
     }
     return -1;
 }
@@ -56,7 +59,6 @@ bool deletar_lord (LOrd* lista, const Chave chave)
     for (unsigned i=pos; i<lista->tamanho-1; i++)
         lista->regs[i] = lista->regs[i+1];
     lista->tamanho--;
-
     return true;
 }
 
