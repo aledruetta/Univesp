@@ -30,9 +30,10 @@ int main ()
     cout << endl;
     // Gera 5 números aleatórios e
     // imprime o resultado
+    double n, b;
     for (int i=0; i<5; i++) {
-        double n = double(rand () % 30);
-        double b = double(rand () % 30);
+        n = double(rand () % 30);
+        b = double(rand () % 30);
         cout << " Log" << b << " ( " << n << " ) = "
              << logaritmo (n, b) << endl;
     }
