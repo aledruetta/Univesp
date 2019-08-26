@@ -24,12 +24,12 @@ typedef struct
     unsigned tamanho;
 } LSeq;
 
-void inicializar_lseq (LSeq*);
-bool adicionar_lseq (LSeq*, const Registro);
-bool inserir_lseq (LSeq*, const Registro, const unsigned);
-int procurar_lseq (const LSeq*, const Chave);
-bool deletar_lseq (LSeq*, const Chave);
-void ordenar_lseq (LSeq*, char);
-void mostrar_lseq (const LSeq*);
+void inicializar_lSeq (LSeq*);
+bool adicionar_lSeq (LSeq*, const Registro);
+bool inserir_lSeq (LSeq*, const Registro, const unsigned);
+int procurar_lSeq (const LSeq*, const Chave);
+bool deletar_lSeq (LSeq*, const Chave);
+void ordenar_lSeq (LSeq*, char);
+void mostrar_lSeq (const LSeq*);
 
 #endif /* LISTA_LINEAR_SEQUENCIAL_H */

@@ -18,11 +18,11 @@ int main ()
     // inicializar
     printf ("\n Teste %u: inicializar uma lista vacia.\n", ntest++);
     LSeq lista;
-    inicializar_lseq (&lista);
+    inicializar_lSeq (&lista);
 
     // mostrar
     printf ("\n Teste %u: mostrar lista.\n", ntest++);
-    mostrar_lseq (&lista);
+    mostrar_lSeq (&lista);
 
     // Adicionar
     printf ("\n Teste %u: adicionar 5 elementos à lista.\n", ntest++);
@@ -30,25 +30,25 @@ int main ()
     unsigned num = 5;
     Chave chaves[] = {5, 3, 0, 9, 8};
     carregar_lista (&lista, chaves, num);
-    mostrar_lseq (&lista);
+    mostrar_lSeq (&lista);
 
     printf ("\n Teste %u: adicionar mais 8 elementos à lista para estorar o limite.\n", ntest++);
     Chave mais_chaves[8] = {};
     carregar_lista (&lista, mais_chaves, 8);
-    mostrar_lseq (&lista);
+    mostrar_lSeq (&lista);
 
     // inserir
     Registro registro = {2};
     printf ("\n Teste %u: inserir elemento chave %d numa lista cheia.\n", ntest++, registro.chave);
-    bool inserido = inserir_lseq (&lista, registro, 2);
+    bool inserido = inserir_lSeq (&lista, registro, 2);
     if (!inserido)
         printf (" Erro: Lista cheia ou índice inválido!\n");
-    mostrar_lseq (&lista);
+    mostrar_lSeq (&lista);
 
     // procurar
     int chave = chaves[3];
     printf ("\n Teste %u: procurar chave %d na lista.\n", ntest++, chave);
-    int indice = procurar_lseq (&lista, chave);
+    int indice = procurar_lSeq (&lista, chave);
     if (indice >= 0)
         printf (" O elemento com chave %d está na posição %d.\n", chave, indice);
     else
@@ -56,7 +56,7 @@ int main ()
 
     chave = 104;
     printf ("\n Teste %u: procurar chave %d na lista.\n", ntest++, chave);
-    indice = procurar_lseq (&lista, chave);
+    indice = procurar_lSeq (&lista, chave);
     if (indice >= 0)
         printf (" O elemento com chave %d está na posição %d.\n", chave, indice);
     else
@@ -64,22 +64,22 @@ int main ()
 
     // remover
     printf ("\n Teste %u: deletar chave 104 da lista.\n", ntest++);
-    bool deletado = deletar_lseq (&lista, chave);
+    bool deletado = deletar_lSeq (&lista, chave);
     if (!deletado)
         printf (" Erro: O elemento com chave %d não existe!\n", chave);
 
     printf ("\n Teste %u: deletar primeira ocorrência elemento chave 0 da lista.\n", ntest++);
-    deletado = deletar_lseq (&lista, 0);
+    deletado = deletar_lSeq (&lista, 0);
     if (!deletado)
         printf (" Erro: O elemento com chave %d não existe!\n", chave);
-    mostrar_lseq (&lista);
+    mostrar_lSeq (&lista);
 
     printf ("\n Teste %u: Ordenar lista.\n", ntest++);
     char algoritmo;
     printf (" Insertion [i] ou Bubble [b] sort? ");
     scanf ("%c", &algoritmo);
-    ordenar_lseq (&lista, algoritmo);
-    mostrar_lseq (&lista);
+    ordenar_lSeq (&lista, algoritmo);
+    mostrar_lSeq (&lista);
 
     return 0;
 }
@@ -89,7 +89,7 @@ void carregar_lista (LSeq* lista, const Chave* chaves, unsigned num)
     for (unsigned i=0; i<num; i++) {
         Registro registro = {chaves[i]};
         printf (" Adicionando chave %d ", chaves[i]);
-        bool adicionado = adicionar_lseq (lista, registro);
+        bool adicionado = adicionar_lSeq (lista, registro);
         if (!adicionado)
             printf (" Erro: Lista cheia!\n");
         else
