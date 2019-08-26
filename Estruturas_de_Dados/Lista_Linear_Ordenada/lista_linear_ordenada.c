@@ -38,15 +38,20 @@ void mostrar_lOrd (const LOrd* lista)
     printf ("] Tamanho: %u\n", lista->tamanho);
 }
 
+// Binary Search
 int procurar_lOrd (const LOrd* lista, const Chave chave)
 {
-    unsigned tamanho = lista->tamanho;
-    if (tamanho > 0) {
-        unsigned i = 0;
-        while (i < tamanho) {
-            if (chave == lista->regs[i].chave)
-                return i;
-            i++;
+    int fim = lista->tamanho;
+    if (fim > 0) {
+        int inicio = 0;
+        int metade = 0;
+        while ((fim - inicio) >= 0) {
+            metade = inicio + (fim - inicio) / 2;
+            if (lista->regs[metade].chave == chave) return metade;
+            else if (lista->regs[metade].chave < chave)
+                inicio = metade + 1;
+            else
+                fim = metade - 1;
         }
     }
     return -1;

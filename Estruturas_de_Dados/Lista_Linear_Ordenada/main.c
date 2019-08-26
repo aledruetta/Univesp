@@ -38,7 +38,7 @@ int main ()
     mostrar_lOrd (&lista);
 
     // procurar existente
-    Chave chave = lista.regs[3].chave;
+    Chave chave = lista.regs[9].chave;
     printf ("\n Teste %u: procurar chave %d na lista.\n", ntest++, chave);
     int indice = procurar_lOrd (&lista, chave);
     if (indice >= 0)
@@ -64,7 +64,7 @@ int main ()
 
     // remover aleatório
     chave = rand () % 100 - 50;
-    printf ("\n Teste %u: deletar primeira ocorrência elemento chave %d da lista.\n", ntest++, chave);
+    printf ("\n Teste %u: deletar elemento chave %d da lista.\n", ntest++, chave);
     deletado = deletar_lOrd (&lista, chave);
     if (!deletado)
         printf (" Erro: O elemento com chave %d não existe!\n", chave);
