@@ -22,12 +22,12 @@ typedef struct
 {
     Registro regs[MAX];
     unsigned tamanho;
-} LLOrd;
+} LOrd;
 
-void inicializar_llord (LLOrd*);
-bool adicionar_llord (LLOrd*, const Registro);
-int procurar_llord (const LLOrd*, const Chave);
-bool deletar_llord (LLOrd*, const Chave);
-void mostrar_llord (const LLOrd*);
+void inicializar_lord (LOrd*);
+bool adicionar_lord (LOrd*, const Registro);
+int procurar_lord (const LOrd*, const Chave);
+bool deletar_lord (LOrd*, const Chave);
+void mostrar_lord (const LOrd*);
 
 #endif /* LISTA_LINEAR_ORDENADA_H */
