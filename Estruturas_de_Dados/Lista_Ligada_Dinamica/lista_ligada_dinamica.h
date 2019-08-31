@@ -28,6 +28,9 @@ typedef struct
 void inicializar_lDim (LDim*);
 unsigned tamanho_lDim (const LDim*);
 void mostrar_lDim (const LDim*);
+Registro* buscaSeq_lDim (const LDim*, Chave);
+Registro* buscaOrd_lDim (const LDim*, Chave);
+bool inserir_lDim (LDim*, Registro);
 
 #endif /* LISTA_LIGADA_DINAMICA_H */
 
