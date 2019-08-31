@@ -8,6 +8,8 @@
 #include <stdbool.h>
 #include "lista_ligada_dinamica.h"
 
+void procuraPreProx (Chave, Celula**, Celula**);
+
 void inicializar_lDim (LDim *lista)
 {
     lista->ini = NULL;
@@ -56,15 +58,12 @@ Registro* buscaOrd_lDim (const LDim *lista, Chave chave)
     return NULL;
 }
 
-bool inserir_lDim (LDim* lista, Registro reg)
+bool inserir_lDim (LDim *lista, Registro reg)
 {
     Celula *prev = NULL;
     Celula *prox = lista->ini;
 
-    while (prox != NULL && prox->reg.chave < reg.chave) {
-        prev = prox;
-        prox = prox->prox;
-    }
+    procuraPreProx (reg.chave, &prev, &prox);
 
     if (prox != NULL && prox->reg.chave == reg.chave) return false;
 
@@ -76,5 +75,30 @@ bool inserir_lDim (LDim* lista, Registro reg)
     else prev->prox = nova;
 
     return true;
+}
+
+bool deletar_lDim (LDim *lista, Chave chave)
+{
+    Celula *prev = NULL;
+    Celula *prox = lista->ini;
+
+    procuraPreProx (chave, &prev, &prox);
+
+    if (prox == NULL || prox->reg.chave > chave) return false;
+    if (prev != NULL)
+        prev->prox = prox->prox;
+    else
+        lista->ini = prox->prox;
+
+    free (prox);
+
+    return true;
+}
+
+void procuraPreProx (Chave chave, Celula **prev, Celula **prox) {
+    while (*prox != NULL && (*prox)->reg.chave < chave) {
+        *prev = *prox;
+        *prox = (*prox)->prox;
+    }
 }
 

@@ -31,6 +31,7 @@ void mostrar_lDim (const LDim*);
 Registro* buscaSeq_lDim (const LDim*, Chave);
 Registro* buscaOrd_lDim (const LDim*, Chave);
 bool inserir_lDim (LDim*, Registro);
+bool deletar_lDim (LDim*, Chave);
 
 #endif /* LISTA_LIGADA_DINAMICA_H */
 
