@@ -14,11 +14,14 @@ void povoar_lDim (LDim*, unsigned);
 int main ()
 {
     srand (time (NULL));
+
     LDim lista;
     inicializar_lDim (&lista);
     mostrar_lDim (&lista);
+
     povoar_lDim (&lista, 10);
     mostrar_lDim (&lista);
+
     Registro reg = {99};
     inserir_lDim (&lista, reg);
     reg.chave = 0;
@@ -26,9 +29,13 @@ int main ()
     reg.chave = -99;
     inserir_lDim (&lista, reg);
     mostrar_lDim (&lista);
+
     deletar_lDim (&lista, -99);
     deletar_lDim (&lista, 0);
     deletar_lDim (&lista, 99);
+    mostrar_lDim (&lista);
+
+    reinicializar_lDim (&lista);
     mostrar_lDim (&lista);
 
     return 0;

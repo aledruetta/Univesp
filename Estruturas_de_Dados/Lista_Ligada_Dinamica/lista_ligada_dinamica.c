@@ -15,6 +15,20 @@ void inicializar_lDim (LDim *lista)
     lista->ini = NULL;
 }
 
+void reinicializar_lDim (LDim *lista)
+{
+    Celula *cel = lista->ini;
+    Celula *pre = lista->ini;
+
+    while (cel != NULL) {
+        pre = cel;
+        cel = cel->prox;
+        free (pre);
+    }
+
+    lista->ini = NULL;
+}
+
 unsigned tamanho_lDim (const LDim *lista)
 {
     Celula *cel = lista->ini;
