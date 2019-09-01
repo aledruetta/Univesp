@@ -40,11 +40,11 @@ int main ()
     if (preg)
         printf ("Chave: %d\n", preg->chave);
 
-    preg = buscaSeq_lCir (&lista, chaves[2]);
+    preg = buscaOrd_lCir (&lista, chaves[2]);
     if (preg)
         printf ("Chave: %d\n", preg->chave);
 
-    preg = buscaSeq_lCir (&lista, chaves[3]);
+    preg = buscaOrd_lCir (&lista, chaves[3]);
     if (preg)
         printf ("Chave: %d\n", preg->chave);
     else
