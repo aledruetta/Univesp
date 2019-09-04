@@ -14,8 +14,9 @@ void inicializar_pilhaDim ( PilhaDim *pilha )
 
 void reinicializar_pilhaDim ( PilhaDim *pilha )
 {
+    Celula *topo = NULL;
     while (pilha->topo != NULL) {
-        Celula *topo = pilha->topo;
+        topo = pilha->topo;
         pilha->topo = topo->prox;
         free (topo);
     }
