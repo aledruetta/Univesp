@@ -1,5 +1,8 @@
 #include <iostream>
+#include <sstream>
+#include <string>
 #include "eletronica.hpp"
+
 using namespace std;
 
 Resistor::Resistor ( unsigned resistencia )
@@ -12,17 +15,42 @@ unsigned Resistor::getResistencia () const
     return resistencia_;
 }
 
+string Resistor::getEngSimbol () const
+{
+    char engSim[] = "RkMGTP";
+    unsigned cont = 0;
+    double resto = (double) getResistencia ();
+    while (resto > 1e3) {
+        resto /= 1e3;
+        cont++;
+    }
+
+    stringstream ss;
+    ss << resto << engSim[cont];
+
+    return ss.str();
+}
+
+ostream& operator<< ( ostream& os, const Resistor res)
+{
+    os << res.getEngSimbol () << " "
+       << res.getCodigoCores ();
+
+    return os;
+}
+
 double Resistor::getCondutancia () const
 {
     return 1 / (double) resistencia_;
 }
 
-void Resistor::getCodigoCores () const
+string Resistor::getCodigoCores () const
 {
-    if (resistencia_ <= 0) return;
+    if (resistencia_ <= 0) return "";
 
     enum Color { preto, marrom, vermelho, laranja, amarelo, verde, azul,
                  roxo, cinza, branco };
+
     unsigned digito[12];
     unsigned resto = resistencia_;
     unsigned i = 0;
@@ -40,20 +68,24 @@ void Resistor::getCodigoCores () const
         codigo[2] = i - 2;          // multiplicador
     }
 
-    cout << "[ ";
+    stringstream ss;
+
+    ss << "[ ";
     for (auto cod : codigo) {
         switch (cod) {
-            case preto:    cout << "preto "    ; break;
-            case marrom:   cout << "marrom "   ; break;
-            case vermelho: cout << "vermelho " ; break;
-            case laranja:  cout << "laranja "  ; break;
-            case amarelo:  cout << "amarelo "  ; break;
-            case verde:    cout << "verde "    ; break;
-            case azul:     cout << "azul "     ; break;
-            case roxo:     cout << "roxo "     ; break;
-            case cinza:    cout << "cinza "    ; break;
-            case branco:   cout << "branco "   ; break;
+            case preto:    ss << "preto "    ; break;
+            case marrom:   ss << "marrom "   ; break;
+            case vermelho: ss << "vermelho " ; break;
+            case laranja:  ss << "laranja "  ; break;
+            case amarelo:  ss << "amarelo "  ; break;
+            case verde:    ss << "verde "    ; break;
+            case azul:     ss << "azul "     ; break;
+            case roxo:     ss << "roxo "     ; break;
+            case cinza:    ss << "cinza "    ; break;
+            case branco:   ss << "branco "   ; break;
         }
     }
-    cout << "]" << endl;
+    ss << "]" << endl;
+
+    return ss.str();
 }
