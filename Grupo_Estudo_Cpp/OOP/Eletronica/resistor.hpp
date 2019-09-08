@@ -1,5 +1,13 @@
-#ifndef ELETRONICA_HPP
-#define ELETRONICA_HPP
+/*
+ * File: resistor.hpp
+ * @author: Alejandro Druetta
+ * Organization: Univesp - Eng. Computação
+ *
+ * Description: Uma classe para modelar resistores.
+ */
+
+#ifndef RESISTOR_HPP
+#define RESISTOR_HPP
 
 using namespace std;
 
@@ -16,4 +24,4 @@ class Resistor
         unsigned resistencia_;
 };
 
-#endif /* ELETRONICA_HPP */
+#endif /* RESISTOR_HPP */

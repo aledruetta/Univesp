@@ -1,7 +1,15 @@
+/*
+ * File: resistor.cpp
+ * @author: Alejandro Druetta
+ * Organization: Univesp - Eng. Computação
+ *
+ * Description: Uma classe para modelar resistores.
+ */
+
 #include <iostream>
 #include <sstream>
 #include <string>
-#include "eletronica.hpp"
+#include "resistor.hpp"
 
 using namespace std;
 

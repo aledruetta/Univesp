@@ -1,5 +1,13 @@
+/*
+ * File: main.cpp
+ * @author: Alejandro Druetta
+ * Organization: Univesp - Eng. Computação
+ *
+ * Description: Testar classes de modelagem eletrônica.
+ */
+
 #include <iostream>
-#include "eletronica.hpp"
+#include "resistor.hpp"
 using namespace std;
 
 int main ()
