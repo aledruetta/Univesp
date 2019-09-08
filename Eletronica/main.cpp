@@ -4,6 +4,10 @@
  * Organization: Univesp - Eng. Computação
  *
  * Description: Testar classes de modelagem eletrônica.
+ *
+ * Build:
+ *          $ make
+ *          $ ./eletronica.out
  */
 
 #include <iostream>
