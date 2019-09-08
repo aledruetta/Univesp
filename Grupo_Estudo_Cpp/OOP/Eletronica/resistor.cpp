@@ -90,6 +90,18 @@ string Resistor::getCodigoCores () const
     return ss.str();
 }
 
+Resistor& Resistor::conectSerie ( Resistor r ) const
+{
+    return *(new Resistor ( resistencia_ + r ));
+}
+
+Resistor& Resistor::conectParalelo ( Resistor r ) const
+{
+    unsigned req = ( resistencia_ * r.getResistencia() )
+                 / ( getResistencia() + r.getResistencia() );
+    return *(new Resistor ( req ));
+}
+
 ostream& operator<< ( ostream& os, const Resistor res)
 {
     os << res.getEngSimbol () << " "
@@ -97,3 +109,10 @@ ostream& operator<< ( ostream& os, const Resistor res)
 
     return os;
 }
+
+Resistor& operator+ ( const Resistor &r1, const Resistor &r2 )
+{
+    unsigned req = r1.getResistencia() + r2.getResistencia();
+    return *( new Resistor( req ) );
+}
+
