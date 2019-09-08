@@ -18,13 +18,14 @@ int main ()
 
     Resistor r1 (res);
 
+    cout << "\n Representação: "
+         << r1
+         << endl;
     cout << " Valor de R: "
          << r1.getResistencia() << endl;
     cout << " Valor de G: "
          << r1.getCondutancia() << endl;
-    cout << " Representação: "
-         << r1
-         << endl;
+    cout << endl;
 
     return 0;
 }

@@ -39,14 +39,6 @@ string Resistor::getEngSimbol () const
     return ss.str();
 }
 
-ostream& operator<< ( ostream& os, const Resistor res)
-{
-    os << res.getEngSimbol () << " "
-       << res.getCodigoCores ();
-
-    return os;
-}
-
 double Resistor::getCondutancia () const
 {
     return 1 / (double) resistencia_;
@@ -93,7 +85,15 @@ string Resistor::getCodigoCores () const
             case branco:   ss << "branco "   ; break;
         }
     }
-    ss << "]" << endl;
+    ss << "]";
 
     return ss.str();
+}
+
+ostream& operator<< ( ostream& os, const Resistor res)
+{
+    os << res.getEngSimbol () << " "
+       << res.getCodigoCores ();
+
+    return os;
 }
