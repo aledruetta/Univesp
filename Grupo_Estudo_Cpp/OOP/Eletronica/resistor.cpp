@@ -98,7 +98,7 @@ Resistor& Resistor::conectSerie ( Resistor r ) const
 Resistor& Resistor::conectParalelo ( Resistor r ) const
 {
     unsigned req = ( resistencia_ * r.getResistencia() )
-                 / ( getResistencia() + r.getResistencia() );
+                 / ( resistencia_ + r.getResistencia() );
     return *(new Resistor ( req ));
 }
 
