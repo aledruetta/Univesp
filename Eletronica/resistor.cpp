@@ -13,12 +13,12 @@
 
 using namespace std;
 
-Resistor::Resistor ( unsigned resistencia ) : ElementoPassivo ( resistencia )
+Resistor::Resistor ( double resistencia ) : ElementoPassivo ( resistencia )
 {
     resistencia_ = resistencia;
 }
 
-unsigned Resistor::getResistencia () const
+double Resistor::getResistencia () const
 {
     return resistencia_;
 }
@@ -27,7 +27,7 @@ string Resistor::getEngSimbol () const
 {
     char engSim[] = "RkMGTP";
     unsigned cont = 0;
-    double resto = (double) getResistencia ();
+    double resto = getResistencia ();
     while (resto > 1e3) {
         resto /= 1e3;
         cont++;
@@ -41,7 +41,7 @@ string Resistor::getEngSimbol () const
 
 double Resistor::getCondutancia () const
 {
-    return 1 / (double) resistencia_;
+    return 1.0 / resistencia_;
 }
 
 string Resistor::getCodigoCores () const
@@ -97,7 +97,7 @@ Resistor& Resistor::conectSerie ( Resistor r ) const
 
 Resistor& Resistor::conectParalelo ( Resistor r ) const
 {
-    unsigned req = ( resistencia_ * r.getResistencia() )
+    double req = ( resistencia_ * r.getResistencia() )
                  / ( resistencia_ + r.getResistencia() );
     return *(new Resistor ( req ));
 }
@@ -112,7 +112,7 @@ ostream& operator<< ( ostream& os, const Resistor res)
 
 Resistor& operator+ ( const Resistor &r1, const Resistor &r2 )
 {
-    unsigned req = r1.getResistencia() + r2.getResistencia();
+    double req = r1.getResistencia() + r2.getResistencia();
     return *( new Resistor( req ) );
 }
 

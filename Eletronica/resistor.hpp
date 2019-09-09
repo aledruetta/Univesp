@@ -16,8 +16,8 @@ using namespace std;
 class Resistor : public ElementoPassivo
 {
     public:
-        Resistor ( unsigned resistencia );
-        unsigned getResistencia () const;
+        Resistor ( double resistencia );
+        double getResistencia () const;
         double getCondutancia () const;
         string getEngSimbol () const;
         string getCodigoCores () const;

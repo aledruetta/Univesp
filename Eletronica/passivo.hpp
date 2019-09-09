@@ -13,7 +13,9 @@ class ElementoPassivo
 {
     public:
         ElementoPassivo ( double impedancia );
-        double getImpedancia () const;
+        double getZ () const;
+        double getI ( double v ) const;
+        double getV ( double i ) const;
     private:
         double impedancia_;
 };

@@ -13,8 +13,18 @@ ElementoPassivo::ElementoPassivo ( double impedancia )
     impedancia_ = impedancia;
 }
 
-double ElementoPassivo::getImpedancia () const
+double ElementoPassivo::getZ () const
 {
     return impedancia_;
+}
+
+double ElementoPassivo::getV ( double i ) const
+{
+    return impedancia_ * i;
+}
+
+double ElementoPassivo::getI ( double v ) const
+{
+    return  v / impedancia_;
 }
 

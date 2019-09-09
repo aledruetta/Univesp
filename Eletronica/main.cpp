@@ -16,7 +16,10 @@ using namespace std;
 
 int main ()
 {
-    unsigned res = 0;
+    double res = 0,
+           ten = 0,
+           cor = 0;
+
     cout << "\n ********** Resistores ********** " << endl;
     cout << "\n Introduzir valor de R1 em Ohms? "; cin >> res;
 
@@ -28,9 +31,15 @@ int main ()
     cout << " Valor de R: "
          << r1.getResistencia() << endl;
     cout << " Valor de Z: "
-         << r1.getImpedancia() << endl;
+         << r1.getZ() << endl;
     cout << " Valor de G: "
          << r1.getCondutancia() << endl;
+
+    cout << "\n Tensão em volts? "; cin >> ten;
+    cout << " O valor da corrente será: " << r1.getI ( ten ) << endl;
+
+    cout << "\n Corrente em ampéres? "; cin >> cor;
+    cout << " O valor da tensão será: " << r1.getV ( cor ) << endl;
 
     cout << "\n Introduzir valor de R2 em Ohms? "; cin >> res;
     Resistor r2 ( res );
