@@ -46,10 +46,10 @@ void mostrar_filaEst ( const FilaEst *fila )
     printf ("] Tamanho: %u\n", tamanho_filaEst (fila));
 }
 
-bool excluir_filaEst ( FilaEst *fila, Registro **registro )
+bool excluir_filaEst ( FilaEst *fila, Registro *registro )
 {
     if ( fila->tamanho <= 0 ) return false;
-    *registro = &fila->reg[fila->inicio];
+    *registro = fila->reg[fila->inicio];
     fila->inicio = ( fila->inicio + 1 ) % MAX;
     fila->tamanho--;
 

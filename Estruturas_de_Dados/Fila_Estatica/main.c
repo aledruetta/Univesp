@@ -33,11 +33,11 @@ int main ()
 
     // Deletar
     printf ("\n Teste %u: Deletar registros pela esquerda.\n", ntest++);
-    Registro *registro = NULL;
+    Registro registro;
     for (unsigned i=0; i<quant-4; i++) {
         bool res = excluir_filaEst (&fila, &registro);
         if ( res )
-            printf (" Deletando registro chave: %d\n", registro->chave);
+            printf (" Deletando registro chave: %d\n", registro.chave);
         else
             printf (" Erro: A lista está vacia!\n");
     }
