@@ -27,6 +27,8 @@ int main ()
          << endl;
     cout << " Valor de R: "
          << r1.getResistencia() << endl;
+    cout << " Valor de Z: "
+         << r1.getImpedancia() << endl;
     cout << " Valor de G: "
          << r1.getCondutancia() << endl;
 

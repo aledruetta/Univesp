@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS = -g -Wall
 DEPS = resistor.hpp
-OBJ = main.o resistor.o
+OBJ = main.o passivo.o resistor.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c $< $(CFLAGS)

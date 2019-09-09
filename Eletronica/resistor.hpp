@@ -9,9 +9,11 @@
 #ifndef RESISTOR_HPP
 #define RESISTOR_HPP
 
+#include "passivo.hpp"
+
 using namespace std;
 
-class Resistor
+class Resistor : public ElementoPassivo
 {
     public:
         Resistor ( unsigned resistencia );
@@ -23,8 +25,10 @@ class Resistor
         Resistor& conectParalelo ( Resistor r ) const;
         friend ostream& operator<< ( ostream& os, const Resistor res);
         friend Resistor& operator+ ( const Resistor &res1, const Resistor &res2 );
+
     private:
         unsigned resistencia_;
 };
 
 #endif /* RESISTOR_HPP */
+

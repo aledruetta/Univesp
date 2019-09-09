@@ -13,7 +13,7 @@
 
 using namespace std;
 
-Resistor::Resistor ( unsigned resistencia )
+Resistor::Resistor ( unsigned resistencia ) : ElementoPassivo ( resistencia )
 {
     resistencia_ = resistencia;
 }
