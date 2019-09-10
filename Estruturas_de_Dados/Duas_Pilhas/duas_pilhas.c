@@ -11,23 +11,23 @@ bool inserir ( DPilhas*, const Registro, unsigned );
 bool excluir ( DPilhas*, Registro*, unsigned );
 void mostrar ( const DPilhas*, unsigned );
 
-void inicializar_dPilhas ( DPilhas *pilhas )
+void inicializar ( DPilhas *pilhas )
 {
     pilhas->topo1 = -1;
     pilhas->topo2 = MAX;
 }
 
-void reinicializar_dPilhas ( DPilhas *pilhas )
+void reinicializar ( DPilhas *pilhas )
 {
-    inicializar_dPilhas ( pilhas );
+    inicializar ( pilhas );
 }
 
 void mostrar ( const DPilhas *pilhas, unsigned pilha )
 {
-    printf (" Pilha%d [ ", pilha);
+    printf (" Pilha%s [ ", ( pilha == 1 ) ? " Esquerda" : " Direita ");
     unsigned pos = ( pilha == 1 ) ? 0 : MAX - 1;
-    unsigned tamanho =  ( pilha == 1 ) ? tamanho1_dPilhas ( pilhas )
-                                       : tamanho2_dPilhas ( pilhas );
+    unsigned tamanho =  ( pilha == 1 ) ? tamanho_esquerda ( pilhas )
+                                       : tamanho_direita ( pilhas );
     unsigned cont = tamanho;
     while ( cont > 0 ) {
         printf ("%d ", pilhas->reg[pos].chave);
@@ -56,42 +56,42 @@ bool excluir ( DPilhas *pilhas, Registro *registro, unsigned pilha )
     return true;
 }
 
-bool inserir1_dPilhas ( DPilhas *pilhas, const Registro registro )
+bool inserir_esquerda ( DPilhas *pilhas, const Registro registro )
 {
     return inserir ( pilhas, registro, 1);
 }
 
-bool inserir2_dPilhas ( DPilhas *pilhas, const Registro registro )
+bool inserir_direita ( DPilhas *pilhas, const Registro registro )
 {
     return inserir ( pilhas, registro, 2);
 }
 
-unsigned tamanho1_dPilhas ( const DPilhas *pilhas )
+unsigned tamanho_esquerda ( const DPilhas *pilhas )
 {
     return pilhas->topo1 + 1;
 }
 
-unsigned tamanho2_dPilhas ( const DPilhas *pilhas )
+unsigned tamanho_direita ( const DPilhas *pilhas )
 {
     return MAX - pilhas->topo2;
 }
 
-void mostrar1_dPilhas ( const DPilhas *pilhas )
+void mostrar_esquerda ( const DPilhas *pilhas )
 {
     mostrar ( pilhas, 1 );
 }
 
-void mostrar2_dPilhas ( const DPilhas *pilhas )
+void mostrar_direita ( const DPilhas *pilhas )
 {
     mostrar ( pilhas, 2 );
 }
 
-bool excluir1_dPilhas ( DPilhas *pilhas, Registro *registro )
+bool excluir_esquerda ( DPilhas *pilhas, Registro *registro )
 {
     return excluir ( pilhas, registro, 1 );
 }
 
-bool excluir2_dPilhas ( DPilhas *pilhas, Registro *registro )
+bool excluir_direita ( DPilhas *pilhas, Registro *registro )
 {
     return excluir ( pilhas, registro, 2 );
 }

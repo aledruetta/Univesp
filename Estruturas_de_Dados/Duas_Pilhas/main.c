@@ -22,53 +22,54 @@ int main ()
     // inicializar
     printf ("\n Teste %u: inicializar uma pilhas vacia.\n", ntest++);
     DPilhas pilhas;
-    inicializar_dPilhas (&pilhas);
-    mostrar1_dPilhas (&pilhas);
-    mostrar2_dPilhas (&pilhas);
+    inicializar (&pilhas);
+    mostrar_esquerda (&pilhas);
+    mostrar_direita (&pilhas);
 
-    // Adicionar pilha 2
+    // Inserir pela direita
     unsigned quant = 12;
-    printf ("\n Teste %u: Adicionar registros pela direita.\n", ntest++);
+    printf ("\n Teste %u: Inserir registros pela direita.\n", ntest++);
     carregar_pilhas ( &pilhas, quant, 2 );
-    mostrar1_dPilhas ( &pilhas );
-    mostrar2_dPilhas (&pilhas);
+    mostrar_esquerda ( &pilhas );
+    mostrar_direita (&pilhas);
 
-    // Deletar pilha 2
-    printf ("\n Teste %u: Deletar registros pela direita.\n", ntest++);
+    // Excluit pela direita
+    printf ("\n Teste %u: Excluir registros pela direita.\n", ntest++);
     Registro registro;
     for (unsigned i=0; i<quant-4; i++) {
-        bool res = excluir2_dPilhas (&pilhas, &registro);
+        bool res = excluir_direita (&pilhas, &registro);
         if ( res )
-            printf (" Deletando registro chave: %d\n", registro.chave);
+            printf (" Excluir registro chave: %d\n", registro.chave);
         else
             printf (" Erro: A lista está vacia!\n");
     }
-    mostrar1_dPilhas ( &pilhas );
-    mostrar2_dPilhas (&pilhas);
+    mostrar_esquerda ( &pilhas );
+    mostrar_direita (&pilhas);
 
-    // Adicionar pilha 1
+    // Inserir pela esquerda
     quant = 18;
-    printf ("\n Teste %u: Adicionar registros pela esquerda.\n", ntest++);
+    printf ("\n Teste %u: Inserir registros pela esquerda.\n", ntest++);
     carregar_pilhas ( &pilhas, quant, 1 );
-    mostrar1_dPilhas ( &pilhas );
-    mostrar2_dPilhas (&pilhas);
+    mostrar_esquerda ( &pilhas );
+    mostrar_direita (&pilhas);
 
-    // Deletar pilha 1
-    printf ("\n Teste %u: Deletar registros pela esquerda.\n", ntest++);
+    // Excluir pela esquerda
+    printf ("\n Teste %u: Excluir registros pela esquerda.\n", ntest++);
     for (unsigned i=0; i<quant-4; i++) {
-        bool res = excluir1_dPilhas (&pilhas, &registro);
+        bool res = excluir_esquerda (&pilhas, &registro);
         if ( res )
-            printf (" Deletando registro chave: %d\n", registro.chave);
+            printf (" Excluir registro chave: %d\n", registro.chave);
         else
             printf (" Erro: A lista está vacia!\n");
     }
-    mostrar1_dPilhas (&pilhas);
-    mostrar2_dPilhas (&pilhas);
+    mostrar_esquerda (&pilhas);
+    mostrar_direita (&pilhas);
 
+    // Reinicializar
     printf ("\n Teste %u: Reinicializar Pilhas.\n", ntest++);
-    reinicializar_dPilhas (&pilhas);
-    mostrar1_dPilhas (&pilhas);
-    mostrar2_dPilhas (&pilhas);
+    reinicializar (&pilhas);
+    mostrar_esquerda (&pilhas);
+    mostrar_direita (&pilhas);
 
     return 0;
 }
@@ -77,8 +78,8 @@ void carregar_pilhas ( DPilhas *pilhas, unsigned num, unsigned pilha )
 {
     for (unsigned i=0; i<num; i++) {
         Registro registro = {(rand () % 100) - 50};
-        bool res = ( pilha == 1 ) ? inserir1_dPilhas ( pilhas, registro )
-                                  : inserir2_dPilhas ( pilhas, registro );
+        bool res = ( pilha == 1 ) ? inserir_esquerda ( pilhas, registro )
+                                  : inserir_direita ( pilhas, registro );
         if ( res )
             printf (" Adicionando chave: %d\n", registro.chave);
         else

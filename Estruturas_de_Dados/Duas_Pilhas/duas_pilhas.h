@@ -23,15 +23,15 @@ typedef struct
     Registro reg[MAX];
 } DPilhas;
 
-void inicializar_dPilhas ( DPilhas* );
-void mostrar1_dPilhas ( const DPilhas* );
-void mostrar2_dPilhas ( const DPilhas* );
-unsigned tamanho1_dPilhas ( const DPilhas* );
-unsigned tamanho2_dPilhas ( const DPilhas* );
-bool inserir1_dPilhas ( DPilhas*, const Registro );
-bool inserir2_dPilhas ( DPilhas*, const Registro );
-bool excluir1_dPilhas ( DPilhas*, Registro* );
-bool excluir2_dPilhas ( DPilhas*, Registro* );
-void reinicializar_dPilhas ( DPilhas* );
+void inicializar ( DPilhas* );
+void mostrar_esquerda ( const DPilhas* );
+void mostrar_direita ( const DPilhas* );
+unsigned tamanho_esquerda ( const DPilhas* );
+unsigned tamanho_direita ( const DPilhas* );
+bool inserir_esquerda ( DPilhas*, const Registro );
+bool inserir_direita ( DPilhas*, const Registro );
+bool excluir_esquerda ( DPilhas*, Registro* );
+bool excluir_direita ( DPilhas*, Registro* );
+void reinicializar ( DPilhas* );
 
 #endif /* DUAS_PILHAS_H */
