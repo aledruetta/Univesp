@@ -24,7 +24,7 @@ void reinicializar ( DPilhas *pilhas )
 
 void mostrar ( const DPilhas *pilhas, unsigned pilha )
 {
-    printf (" Pilha%s [ ", ( pilha == 1 ) ? " Esquerda" : " Direita ");
+    printf (" Pilha %s [ ", ( pilha == 1 ) ? "Esquerda" : "Direita ");
     unsigned pos = ( pilha == 1 ) ? 0 : MAX - 1;
     unsigned tamanho =  ( pilha == 1 ) ? tamanho_esquerda ( pilhas )
                                        : tamanho_direita ( pilhas );
