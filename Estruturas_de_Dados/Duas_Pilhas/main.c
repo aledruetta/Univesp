@@ -10,7 +10,8 @@
 #include <string.h>
 #include "duas_pilhas.h"
 
-void carregar_pilhas ( DPilhas*, unsigned, unsigned );
+void carregar_esquerda ( DPilhas *pilhas, unsigned num );
+void carregar_direita ( DPilhas *pilhas, unsigned num );
 
 int main ()
 {
@@ -29,7 +30,7 @@ int main ()
     // Inserir pela direita
     unsigned quant = 12;
     printf ("\n Teste %u: Inserir registros pela direita.\n", ntest++);
-    carregar_pilhas ( &pilhas, quant, 2 );
+    carregar_direita ( &pilhas, quant );
     mostrar_esquerda ( &pilhas );
     mostrar_direita (&pilhas);
 
@@ -49,7 +50,7 @@ int main ()
     // Inserir pela esquerda
     quant = 18;
     printf ("\n Teste %u: Inserir registros pela esquerda.\n", ntest++);
-    carregar_pilhas ( &pilhas, quant, 1 );
+    carregar_esquerda ( &pilhas, quant );
     mostrar_esquerda ( &pilhas );
     mostrar_direita (&pilhas);
 
@@ -85,5 +86,15 @@ void carregar_pilhas ( DPilhas *pilhas, unsigned num, unsigned pilha )
         else
             printf (" Erro: A pilhas está completa! chave: %d\n", registro.chave);
     }
+}
+
+void carregar_esquerda ( DPilhas *pilhas, unsigned num )
+{
+    carregar_pilhas ( pilhas, num, 1);
+}
+
+void carregar_direita ( DPilhas *pilhas, unsigned num )
+{
+    carregar_pilhas ( pilhas, num, 2);
 }
 
