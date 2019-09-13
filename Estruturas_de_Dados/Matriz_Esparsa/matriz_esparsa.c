@@ -13,6 +13,7 @@ void inicializar ( MatrizE *matriz, unsigned lin, unsigned col )
     matriz->lin = lin;
     matriz->col = col;
     matriz->nos = ( No** ) malloc ( lin * sizeof ( No* ));
+    for (unsigned i=0; i<lin; i++) matriz->nos[i] = NULL;
 }
 
 void mostrar (const MatrizE *matriz)
@@ -39,26 +40,38 @@ void mostrar (const MatrizE *matriz)
 bool atribuir ( MatrizE *matriz, unsigned lin, unsigned col, double valor )
 {
     if ( lin > matriz->lin - 1 || col > matriz->col - 1 ) return false;
-    unsigned pos = 0;
-    No **nop = &matriz->nos[lin];
-    No **pre = NULL;
-    while ( *nop != NULL && (*nop)->col < col ) {
-        pre = nop;
-        *nop = (*nop)->prox;
-        pos++;
+    No *pre = NULL;
+    No *no = matriz->nos[lin];
+    while ( no != NULL && no->col < col ) {
+        pre = no;
+        no = pre->prox;
     }
-    if ( *nop == NULL ) *nop = ( No* ) malloc ( sizeof ( No ));
-    if ( pre != NULL ) {
-        (*nop)->prox = (*pre)->prox;
-        (*pre)->prox = *nop;
+    if ( no != NULL && no->col == col ) {
+        if ( valor == 0.0 ) {
+            if ( pre == NULL ) matriz->nos[lin] = no->prox;
+            else pre->prox = no->prox;
+            free ( no );
+        }
+        else no->valor = valor;
     }
-    (*nop)->valor = valor;
-    (*nop)->col = col;
+    else if ( valor != 0.0 ) {
+        No *novo = ( No* ) malloc ( sizeof ( No ));
+        novo->col = col;
+        novo->valor = valor;
+        novo->prox = no;
+        if ( pre == NULL ) matriz->nos[lin] = novo;
+        else pre->prox = novo;
+    }
 
     return true;
 }
 
-// bool acessar (MatrizE *matriz, Chave chave)
-// {
-// }
+double acessar (MatrizE *matriz, unsigned lin, unsigned col )
+{
+    if ( lin > matriz->lin - 1 || col > matriz->col - 1 ) return false;
+    No *no = matriz->nos[lin];
+    while ( no != NULL && no->col < col ) no = no->prox;
+    if ( no == NULL || no->col > col ) return 0.0;
+    return no->valor;
+}
 

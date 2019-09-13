@@ -23,7 +23,7 @@ typedef struct
 void inicializar ( MatrizE*, unsigned, unsigned );
 void mostrar ( const MatrizE* );
 bool atribuir ( MatrizE*, unsigned, unsigned, double );
-// bool acessar (MatrizE*, Chave);
+double acessar (MatrizE*, unsigned, unsigned );
 
 #endif /* MATRIZ_ESPARSA_H */
 
