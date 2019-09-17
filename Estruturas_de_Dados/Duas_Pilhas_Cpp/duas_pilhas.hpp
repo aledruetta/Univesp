@@ -9,11 +9,12 @@
 
 typedef int Chave;
 
-typedef struct
+class Registro
 {
-    Chave chave;
-    // outros membros
-} Registro;
+    public:
+        Chave chave;
+        // outros membros
+};
 
 class DPilhas
 {
