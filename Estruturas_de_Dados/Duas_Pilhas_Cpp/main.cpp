@@ -1,6 +1,8 @@
 /*
  * File: Duas_Pilhas_Cpp/main.cpp
  * @author: Alejandro Druetta
+ *
+ * Build: g++ -g -Wall main.cpp duas_pilhas.cpp
  */
 
 #include <iostream>

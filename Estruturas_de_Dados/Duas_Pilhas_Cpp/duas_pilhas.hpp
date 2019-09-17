@@ -1,6 +1,8 @@
 /*
  * File: Duas_Pilhas_Cpp/duas_pilhas.hpp
  * @author: Alejandro Druetta
+ *
+ * Build: g++ -g -Wall main.cpp duas_pilhas.cpp
  */
 
 #ifndef DUAS_PILHAS_HPP
