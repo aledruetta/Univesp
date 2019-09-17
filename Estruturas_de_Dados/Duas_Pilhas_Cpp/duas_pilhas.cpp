@@ -11,36 +11,36 @@ using namespace std;
 
 DPilhas::DPilhas ( )
 {
-    topo1 = -1;
-    topo2 = MAX;
+    esquerda = -1;
+    direita = MAX;
 }
 
 void DPilhas::reinicializar ()
 {
-    topo1 = -1;
-    topo2 = MAX;
+    esquerda = -1;
+    direita = MAX;
 }
 
 void DPilhas::mostrar ( unsigned extremo ) const
 {
-    cout << " Pilha " << (( extremo == 1 ) ? "Esquerda" : "Direita ") << " [ ";
-    unsigned pos = ( extremo == 1 ) ? 0 : MAX - 1;
-    unsigned tamanho =  ( extremo == 1 ) ? tamanho_esquerda ()
-                                       : tamanho_direita ();
+    cout << " Pilha " << (( extremo == ESQUERDA ) ? "Esquerda" : "Direita ") << " [ ";
+    unsigned pos = ( extremo == ESQUERDA ) ? 0 : MAX - 1;
+    unsigned tamanho =  ( extremo == ESQUERDA ) ? tamanho_esquerda ()
+                                                : tamanho_direita ();
     unsigned cont = tamanho;
     while ( cont > 0 ) {
         cout << reg[pos].chave << " ";
         cont--;
-        ( extremo == 1 ) ? pos++ : pos--;
+        ( extremo == ESQUERDA ) ? pos++ : pos--;
     }
     cout << "] Tamanho: " << tamanho << endl;
 }
 
 bool DPilhas::inserir ( const Registro registro, unsigned extremo )
 {
-    if ( topo2 == topo1 + 1 ) return false;
-    ( extremo == 1 ) ? topo1++ : topo2--;
-    int topo = ( extremo == 1 ) ? topo1 : topo2;
+    if ( direita == esquerda + 1 ) return false;
+    ( extremo == ESQUERDA ) ? esquerda++ : direita--;
+    int topo = ( extremo == ESQUERDA ) ? esquerda : direita;
     reg[ topo ] = registro;
 
     return true;
@@ -48,50 +48,50 @@ bool DPilhas::inserir ( const Registro registro, unsigned extremo )
 
 bool DPilhas::excluir ( Registro &registro, unsigned extremo )
 {
-    int topo = ( extremo == 1 ) ? topo1 : topo2;
+    int topo = ( extremo == ESQUERDA ) ? esquerda : direita;
     if ( topo == -1 || topo == MAX ) return false;
     registro = reg[ topo ];
-    ( extremo == 1 ) ? topo1-- : topo2++;
+    ( extremo == ESQUERDA ) ? esquerda-- : direita++;
     return true;
 }
 
 bool DPilhas::inserir_esquerda ( const Registro registro )
 {
-    return inserir ( registro, 1);
+    return inserir ( registro, ESQUERDA);
 }
 
 bool DPilhas::inserir_direita ( const Registro registro )
 {
-    return inserir ( registro, 2);
+    return inserir ( registro, DIREITA);
 }
 
 unsigned DPilhas::tamanho_esquerda () const
 {
-    return topo1 + 1;
+    return esquerda + 1;
 }
 
 unsigned DPilhas::tamanho_direita () const
 {
-    return MAX - topo2;
+    return MAX - direita;
 }
 
 void DPilhas::mostrar_esquerda () const
 {
-    mostrar ( 1 );
+    mostrar ( ESQUERDA );
 }
 
 void DPilhas::mostrar_direita () const
 {
-    mostrar ( 2 );
+    mostrar ( DIREITA );
 }
 
 bool DPilhas::excluir_esquerda ( Registro &registro )
 {
-    return excluir ( registro, 1 );
+    return excluir ( registro, ESQUERDA );
 }
 
 bool DPilhas::excluir_direita ( Registro &registro )
 {
-    return excluir ( registro, 2 );
+    return excluir ( registro, DIREITA );
 }
 

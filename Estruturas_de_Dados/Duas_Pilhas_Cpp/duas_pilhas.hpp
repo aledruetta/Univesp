@@ -8,6 +8,8 @@
 #ifndef DUAS_PILHAS_HPP
 #define DUAS_PILHAS_HPP
 #define MAX 20
+#define ESQUERDA 1
+#define DIREITA  2
 
 typedef int Chave;
 
@@ -38,8 +40,8 @@ class DPilhas
         void mostrar ( unsigned extremo ) const;
 
         Registro reg[MAX];
-        int topo1;
-        int topo2;
+        int esquerda;
+        int direita;
 };
 
 #endif /* DUAS_PILHAS_HPP */
