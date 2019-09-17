@@ -7,33 +7,36 @@
 #define DUAS_PILHAS_HPP
 #define MAX 20
 
-namespace pilhaDupla
+typedef int Chave;
+
+typedef struct
 {
-    typedef int Chave;
+    Chave chave;
+    // outros membros
+} Registro;
 
-    typedef struct
-    {
-        Chave chave;
-        // outros membros
-    } Registro;
+class DPilhas
+{
+    public:
+        DPilhas ();
+        void reinicializar ();
+        void mostrar_esquerda () const;
+        void mostrar_direita () const;
+        unsigned tamanho_esquerda () const;
+        unsigned tamanho_direita () const;
+        bool inserir_esquerda ( const Registro );
+        bool inserir_direita ( const Registro );
+        bool excluir_esquerda ( Registro& );
+        bool excluir_direita ( Registro& );
 
-    typedef struct
-    {
+    private:
+        bool inserir ( const Registro, unsigned extremo );
+        bool excluir ( Registro&, unsigned extremo );
+        void mostrar ( unsigned extremo ) const;
+
+        Registro reg[MAX];
         int topo1;
         int topo2;
-        Registro reg[MAX];
-    } DPilhas;
-
-    void inicializar ( DPilhas& );
-    void mostrar_esquerda ( const DPilhas& );
-    void mostrar_direita ( const DPilhas& );
-    unsigned tamanho_esquerda ( const DPilhas& );
-    unsigned tamanho_direita ( const DPilhas& );
-    bool inserir_esquerda ( DPilhas&, const Registro );
-    bool inserir_direita ( DPilhas&, const Registro );
-    bool excluir_esquerda ( DPilhas&, Registro& );
-    bool excluir_direita ( DPilhas&, Registro& );
-    void reinicializar ( DPilhas& );
-}
+};
 
 #endif /* DUAS_PILHAS_HPP */

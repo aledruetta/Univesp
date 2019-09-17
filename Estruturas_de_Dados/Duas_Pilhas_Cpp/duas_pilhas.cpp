@@ -1,5 +1,5 @@
 /*
- * File: Duas_Pilhas_Cpp/duas_pilhas.cpp
+ * File: Duas_Pilhas_Cpp/duas.cpp
  * @author: Alejandro Druetta
  */
 
@@ -7,95 +7,89 @@
 #include "duas_pilhas.hpp"
 using namespace std;
 
-namespace pilhaDupla
+DPilhas::DPilhas ( )
 {
-    bool inserir ( DPilhas&, const Registro, unsigned );
-    bool excluir ( DPilhas&, Registro&, unsigned );
-    void mostrar ( const DPilhas&, unsigned );
+    topo1 = -1;
+    topo2 = MAX;
+}
 
-    void inicializar ( DPilhas &pilhas )
-    {
-        pilhas.topo1 = -1;
-        pilhas.topo2 = MAX;
+void DPilhas::reinicializar ()
+{
+    topo1 = -1;
+    topo2 = MAX;
+}
+
+void DPilhas::mostrar ( unsigned extremo ) const
+{
+    cout << " Pilha " << (( extremo == 1 ) ? "Esquerda" : "Direita ") << " [ ";
+    unsigned pos = ( extremo == 1 ) ? 0 : MAX - 1;
+    unsigned tamanho =  ( extremo == 1 ) ? tamanho_esquerda ()
+                                       : tamanho_direita ();
+    unsigned cont = tamanho;
+    while ( cont > 0 ) {
+        cout << reg[pos].chave << " ";
+        cont--;
+        ( extremo == 1 ) ? pos++ : pos--;
     }
+    cout << "] Tamanho: " << tamanho << endl;
+}
 
-    void reinicializar ( DPilhas &pilhas )
-    {
-        inicializar ( pilhas );
-    }
+bool DPilhas::inserir ( const Registro registro, unsigned extremo )
+{
+    if ( topo2 == topo1 + 1 ) return false;
+    ( extremo == 1 ) ? topo1++ : topo2--;
+    int topo = ( extremo == 1 ) ? topo1 : topo2;
+    reg[ topo ] = registro;
 
-    void mostrar ( const DPilhas &pilhas, unsigned pilha )
-    {
-        cout << " Pilha " << (( pilha == 1 ) ? "Esquerda" : "Direita ") << " [ ";
-        unsigned pos = ( pilha == 1 ) ? 0 : MAX - 1;
-        unsigned tamanho =  ( pilha == 1 ) ? tamanho_esquerda ( pilhas )
-                                           : tamanho_direita ( pilhas );
-        unsigned cont = tamanho;
-        while ( cont > 0 ) {
-            cout << pilhas.reg[pos].chave << " ";
-            cont--;
-            ( pilha == 1 ) ? pos++ : pos--;
-        }
-        cout << "] Tamanho: " << tamanho << endl;
-    }
+    return true;
+}
 
-    bool inserir ( DPilhas &pilhas, const Registro registro, unsigned pilha )
-    {
-        if ( pilhas.topo2 == pilhas.topo1 + 1 ) return false;
-        ( pilha == 1 ) ? pilhas.topo1++ : pilhas.topo2--;
-        int topo = ( pilha == 1 ) ? pilhas.topo1 : pilhas.topo2;
-        pilhas.reg[ topo ] = registro;
+bool DPilhas::excluir ( Registro &registro, unsigned extremo )
+{
+    int topo = ( extremo == 1 ) ? topo1 : topo2;
+    if ( topo == -1 || topo == MAX ) return false;
+    registro = reg[ topo ];
+    ( extremo == 1 ) ? topo1-- : topo2++;
+    return true;
+}
 
-        return true;
-    }
+bool DPilhas::inserir_esquerda ( const Registro registro )
+{
+    return inserir ( registro, 1);
+}
 
-    bool excluir ( DPilhas &pilhas, Registro &registro, unsigned pilha )
-    {
-        int topo = ( pilha == 1 ) ? pilhas.topo1 : pilhas.topo2;
-        if ( topo == -1 || topo == MAX ) return false;
-        registro = pilhas.reg[ topo ];
-        ( pilha == 1 ) ? pilhas.topo1-- : pilhas.topo2++;
-        return true;
-    }
+bool DPilhas::inserir_direita ( const Registro registro )
+{
+    return inserir ( registro, 2);
+}
 
-    bool inserir_esquerda ( DPilhas &pilhas, const Registro registro )
-    {
-        return inserir ( pilhas, registro, 1);
-    }
+unsigned DPilhas::tamanho_esquerda () const
+{
+    return topo1 + 1;
+}
 
-    bool inserir_direita ( DPilhas &pilhas, const Registro registro )
-    {
-        return inserir ( pilhas, registro, 2);
-    }
+unsigned DPilhas::tamanho_direita () const
+{
+    return MAX - topo2;
+}
 
-    unsigned tamanho_esquerda ( const DPilhas &pilhas )
-    {
-        return pilhas.topo1 + 1;
-    }
+void DPilhas::mostrar_esquerda () const
+{
+    mostrar ( 1 );
+}
 
-    unsigned tamanho_direita ( const DPilhas &pilhas )
-    {
-        return MAX - pilhas.topo2;
-    }
+void DPilhas::mostrar_direita () const
+{
+    mostrar ( 2 );
+}
 
-    void mostrar_esquerda ( const DPilhas &pilhas )
-    {
-        mostrar ( pilhas, 1 );
-    }
+bool DPilhas::excluir_esquerda ( Registro &registro )
+{
+    return excluir ( registro, 1 );
+}
 
-    void mostrar_direita ( const DPilhas &pilhas )
-    {
-        mostrar ( pilhas, 2 );
-    }
-
-    bool excluir_esquerda ( DPilhas &pilhas, Registro &registro )
-    {
-        return excluir ( pilhas, registro, 1 );
-    }
-
-    bool excluir_direita ( DPilhas &pilhas, Registro &registro )
-    {
-        return excluir ( pilhas, registro, 2 );
-    }
+bool DPilhas::excluir_direita ( Registro &registro )
+{
+    return excluir ( registro, 2 );
 }
 
