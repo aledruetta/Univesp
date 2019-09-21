@@ -7,7 +7,8 @@
 #include <stdlib.h>
 #include "arvore_avl.h"
 
-int comparar ( No, No);
+int max ( int h1, int h2 );
+int altura ( No* no );
 
 No* inicializar ()
 {
@@ -23,6 +24,45 @@ No* criarNo ( Chave chave )
     novo->esq = NULL;
 
     return novo;
+}
+
+No* rotarDir ( No *raiz )
+{
+    No *aux = raiz->esq;
+    raiz->esq = aux->dir;
+    aux->dir = raiz;
+
+    raiz->altura = max ( altura ( raiz->dir ),
+                         altura ( raiz->esq )) + 1;
+    aux->altura = max ( altura ( aux->esq ),
+                        raiz->altura ) + 1;
+
+    return aux;
+}
+
+No* rotarEsq ( No *raiz )
+{
+    No *aux = raiz->dir;
+    raiz->dir = aux->esq;
+    aux->esq = raiz;
+
+    raiz->altura = max ( altura ( raiz->dir ),
+                         altura ( raiz->esq )) + 1;
+    aux->altura = max ( altura ( aux->dir ),
+                        raiz->altura ) + 1;
+
+    return aux;
+}
+
+int max ( int h1, int h2 )
+{
+    if ( h1 > h2) return h1;
+    return h2;
+}
+
+int altura ( No* no )
+{
+    return ( no == NULL ) ? -1 : no->altura;
 }
 
 // No* adicionar ( No *raiz, No *novo )
