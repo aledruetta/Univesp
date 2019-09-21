@@ -21,11 +21,14 @@ typedef struct aux
 
 No* inicializar ();
 No* criarNo ( Chave chave );
-No* rotarDir ( No *raiz );
+No* inserirNo ( No *raiz, Chave chave );
 No* rotarEsq ( No *raiz );
+No* rotarDir ( No *raiz );
+No* rotarEsqDir ( No *raiz );
+No* rotarDirEsq ( No *raiz );
+void mostrarNo ( const No *raiz );
 // void mostrar ( const No *raiz );
 // unsigned tamanho ( const No *raiz );
-// No* adicionar ( No *raiz, No *novo );
 // No* procurar ( No *raiz, Chave chave );
 // No* remover ( No *raiz, Chave chave );
 

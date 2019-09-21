@@ -26,6 +26,30 @@ No* criarNo ( Chave chave )
     return novo;
 }
 
+No* inserirNo ( No *raiz, Chave chave )
+{
+    if ( raiz == NULL ) return criarNo ( chave );
+    if ( chave < raiz->chave ) {
+        raiz->esq = inserirNo ( raiz, chave );
+        if ( altura ( raiz->esq ) - altura ( raiz->dir ) == 2 ) {
+            if ( raiz->esq->chave > chave ) raiz = rotarDir ( raiz );
+            else raiz = rotarEsqDir ( raiz );
+        }
+    }
+    else {
+        if ( chave > raiz->chave ) {
+            raiz->dir = inserirNo ( raiz->dir, chave );
+            if ( altura ( raiz->esq ) - altura ( raiz->dir ) == -2 ) {
+                if ( raiz->dir->chave < chave ) raiz = rotarEsq ( raiz );
+                else raiz = rotarDirEsq ( raiz );
+            }
+        }
+    }
+
+    raiz->altura = max ( altura ( raiz->esq ), altura ( raiz->dir )) + 1;
+    return raiz;
+}
+
 No* rotarDir ( No *raiz )
 {
     No *aux = raiz->esq;
@@ -54,45 +78,40 @@ No* rotarEsq ( No *raiz )
     return aux;
 }
 
+No* rotarEsqDir ( No *raiz )
+{
+    raiz->esq = rotarEsq ( raiz->esq );
+    return rotarDir ( raiz );
+}
+
+No* rotarDirEsq ( No *raiz )
+{
+    raiz->dir = rotarDir ( raiz->dir );
+    return rotarEsq ( raiz );
+}
+
 int max ( int h1, int h2 )
 {
     if ( h1 > h2) return h1;
     return h2;
 }
 
-int altura ( No* no )
+int altura ( No* raiz )
 {
-    return ( no == NULL ) ? -1 : no->altura;
+    return ( raiz == NULL ) ? -1 : raiz->altura;
 }
 
-// No* adicionar ( No *raiz, No *novo )
-// {
-//     if ( raiz == NULL ) return novo;
-//     if ( novo->chave < raiz->chave )
-//         raiz->esq = adicionar ( raiz->esq, novo );
-//     else
-//         raiz->dir = adicionar ( raiz->dir, novo );
-//
-//     return raiz;
-// }
-//
-// unsigned tamanho ( const No *raiz )
-// {
-//     if ( raiz == NULL ) return 0;
-//     return (tamanho ( raiz->esq ) + tamanho ( raiz->dir ) + 1);
-// }
-//
-// void mostrar ( const No *raiz )
-// {
-//     if ( raiz != NULL ) {
-//         printf ("%d", raiz->chave);
-//         printf ("(");
-//         mostrar ( raiz->esq );
-//         mostrar ( raiz->dir );
-//         printf (")");
-//     }
-// }
-//
+void mostrarNo ( const No *raiz )
+{
+    if ( raiz != NULL ) {
+        printf ("%d", raiz->chave);
+        printf ("(");
+        mostrarNo ( raiz->esq );
+        mostrarNo ( raiz->dir );
+        printf (")");
+    }
+}
+
 // No* procurar ( No *raiz, Chave chave )
 // {
 //     if ( raiz == NULL ) return NULL;
