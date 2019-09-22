@@ -30,23 +30,22 @@ No* inserirNo ( No *raiz, Chave chave )
 {
     if ( raiz == NULL ) return criarNo ( chave );
     if ( chave < raiz->chave ) {
-        raiz->esq = inserirNo ( raiz, chave );
+        raiz->esq = inserirNo ( raiz->esq, chave );
         if ( altura ( raiz->esq ) - altura ( raiz->dir ) == 2 ) {
             if ( raiz->esq->chave > chave ) raiz = rotarDir ( raiz );
             else raiz = rotarEsqDir ( raiz );
         }
     }
-    else {
-        if ( chave > raiz->chave ) {
-            raiz->dir = inserirNo ( raiz->dir, chave );
-            if ( altura ( raiz->esq ) - altura ( raiz->dir ) == -2 ) {
-                if ( raiz->dir->chave < chave ) raiz = rotarEsq ( raiz );
-                else raiz = rotarDirEsq ( raiz );
-            }
+    else if ( chave > raiz->chave ) {
+        raiz->dir = inserirNo ( raiz->dir, chave );
+        if ( altura ( raiz->esq ) - altura ( raiz->dir ) == -2 ) {
+            if ( raiz->dir->chave < chave ) raiz = rotarEsq ( raiz );
+            else raiz = rotarDirEsq ( raiz );
         }
     }
 
-    raiz->altura = max ( altura ( raiz->esq ), altura ( raiz->dir )) + 1;
+    if ( chave != raiz->chave )
+        raiz->altura = max ( altura ( raiz->esq ), altura ( raiz->dir )) + 1;
     return raiz;
 }
 

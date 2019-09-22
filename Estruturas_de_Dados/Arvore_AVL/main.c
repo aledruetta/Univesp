@@ -26,7 +26,7 @@ int main ()
     unsigned num = sizeof ( chave ) / sizeof ( Chave );
     for (unsigned i=0; i<num; i++) {
         raiz = inserirNo ( raiz, chave[i] );
-        printf (" Adicionando chave: %d\n", raiz->chave);
+        printf (" Adicionando chave: %d\n", chave[i]);
     }
 
     // Mostrar
