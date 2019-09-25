@@ -7,11 +7,12 @@ int main ()
     iniMat ( &A, 3, 3 );
 
     printf ( "Formato de A: " );
-    forMat ( &A );
-    printf ( "\n" );
 
-    printf ( "Representação de A:\n" );
+    forMat ( &A );
+    printf ( "\n\n" );
+
     impMat ( &A );
+    printf ( "\n" );
 
     return 0;
 }

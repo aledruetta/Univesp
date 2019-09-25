@@ -23,7 +23,7 @@ void impMat ( const Matriz *mat )
     for ( unsigned i=0; i<mat->m; i++ ) {
         printf ( "[ " );
         for ( unsigned j=0; j<mat->n; j++ ) {
-            printf ( "%f ", mat->elem[i][j] );
+            printf ( "%.2f ", mat->elem[i][j] );
         }
         printf ( "]" );
         if ( i < mat->m - 1 ) printf ( "\n " );
