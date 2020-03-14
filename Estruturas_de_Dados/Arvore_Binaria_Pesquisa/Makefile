@@ -1,12 +1,12 @@
 CC=gcc
 CFLAGS = -g -Wall
-DEPS = lista_ligada_estatica.h
-OBJ = main.o lista_ligada_estatica.o
+DEPS = arvore_binaria_busca.h
+OBJ = main.o arvore_binaria_busca.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c $< $(CFLAGS)
 
-lista.out: $(OBJ)
+arvore.out: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 clean:

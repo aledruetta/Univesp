@@ -13,6 +13,11 @@
 
 using namespace std;
 
+Resistor::Resistor () : ElementoPassivo ( 0.0 )
+{
+    resistencia_ = 0.0;
+}
+
 Resistor::Resistor ( double resistencia ) : ElementoPassivo ( resistencia )
 {
     resistencia_ = resistencia;

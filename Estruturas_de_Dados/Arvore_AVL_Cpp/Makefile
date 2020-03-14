@@ -1,12 +1,12 @@
-CC=gcc
+CC=g++
 CFLAGS = -g -Wall
-DEPS = duas_pilhas.h
-OBJ = main.o duas_pilhas.o
+DEPS = arvore_avl.hpp
+OBJ = main.o arvore_avl.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c $< $(CFLAGS)
 
-pilhas.out: $(OBJ)
+arvore.out: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 clean:
