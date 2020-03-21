@@ -3,6 +3,7 @@
 """ Setar variaveis de ambiente com os dados apropriados:
 
     $ export DBNAME=name
+    $ export DBHOST=host
     $ export DBUSER=user
     $ export DBPASS=pass
 
@@ -22,7 +23,7 @@ FUNQTY = 100        # quantidade de funcionários
 def create():
     dbname = os.environ.get('DBNAME')
     mydb = mysql.connector.connect(
-            host="localhost",
+            host=os.environ.get('HOST'),
             user=os.environ.get('DBUSER'),
             passwd=os.environ.get('DBPASS'))
 
