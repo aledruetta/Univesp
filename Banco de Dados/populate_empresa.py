@@ -89,6 +89,8 @@ def create():
         CONSTRAINT `pk_pnumero_projeto` FOREIGN KEY (`pnumero`)
         REFERENCES `projeto` (`numero`))""")
 
+    mydb.close()
+
 
 def departamento(db, cur):
     val = []
