@@ -149,17 +149,18 @@ def gerentes(db, cur):
 
 
 def projeto(db, cur):
-    val = []
-    projetos = ['Carro autônomo', 'Vacina covid-19', 'Automação residencial', 'Colônia em Marte', 'Supercomputador quântico']
+    projetos = ['Carro autônomo', 'Vacina covid-19', 'Automação residencial',
+            'Colônia em Marte', 'Supercomputador quântico',
+            'Drone subacuático', 'HAL 9000', 'Skynet']
 
     cur.execute("SELECT numero FROM departamento")
+
     dptos = [t[0] for t in cur.fetchall()]
+    rand.shuffle(dptos)
+    dptos = dptos[:len(projetos)+1]
 
     sql = "INSERT INTO projeto (nome, dnumero) VALUES (%s, %s)"
-
-    for d in dptos:
-        p = rand.choice(projetos)
-        val.append((p, d))
+    val = list(zip(projetos, dptos))
 
     cur.executemany(sql, val)
     db.commit()
@@ -169,15 +170,16 @@ def projeto(db, cur):
 def trabalha(db, cur):
     val = []
 
-    cur.execute("SELECT ident,dnumero FROM funcionario")
+    cur.execute("""SELECT ident,funcionario.dnumero,numero
+            FROM funcionario
+            JOIN projeto
+            ON funcionario.dnumero = projeto.dnumero""")
     func_dpto = cur.fetchall()
 
-    cur.execute("SELECT numero, dnumero FROM projeto")
-    projetos = cur.fetchall()
-
     sql = "INSERT INTO trabalha_em (fident, pnumero, horas) VALUES (%s, %s, %s)"
-    for func in func_dpto:
-        val.append((func[0], func[1], rand.choice([4, 8, 14, 20, 40])))
+
+    for func, dpto, proj in func_dpto:
+        val.append((func, proj, rand.choice([4, 8, 14, 20, 40])))
 
     cur.executemany(sql, val)
     db.commit()
