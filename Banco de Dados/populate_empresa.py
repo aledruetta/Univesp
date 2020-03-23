@@ -30,12 +30,13 @@ def create():
     mycursor = mydb.cursor()
 
     # CREATE DATABASE
-    mycursor.execute("""DROP DATABASE IF EXISTS %s""" % dbname)
+    mycursor.execute("DROP DATABASE IF EXISTS %s" % dbname)
     mycursor.execute("CREATE DATABASE IF NOT EXISTS %s" % dbname)
     mycursor.execute("USE %s" % dbname)
+    print("Database %s created" % dbname)
 
     # CREATE DEPARTAMENTO
-    mycursor.execute("""DROP TABLE IF EXISTS `departamento`""")
+    mycursor.execute("DROP TABLE IF EXISTS `departamento`")
     mycursor.execute("""CREATE TABLE `departamento` (
         `numero` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
         `nome` varchar(50) NOT NULL,
@@ -43,15 +44,16 @@ def create():
         `dtinicio` date NOT NULL DEFAULT '2020-01-01',
         PRIMARY KEY (`numero`),
         UNIQUE KEY `nome` (`nome`))""")
+    print("Table DEPARTAMENTO created")
 
     # CREATE FUNCIONARIO
-    mycursor.execute("""DROP TABLE IF EXISTS `funcionario`""")
+    mycursor.execute("DROP TABLE IF EXISTS `funcionario`")
     mycursor.execute("""CREATE TABLE `funcionario` (
         `ident` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
         `nome` varchar(50) NOT NULL,
         `sobrenome` varchar(50) NOT NULL,
         `endereco` varchar(100) DEFAULT NULL,
-        `sexo` char(1) NOT NULL,
+        `sexo` enum('M', 'F', 'N') NOT NULL,
         `salario` int(11) NOT NULL,
         `dtnasc` date NOT NULL,
         `dnumero` bigint(20) unsigned NOT NULL,
@@ -61,13 +63,28 @@ def create():
         REFERENCES `departamento` (`numero`),
         CONSTRAINT `fk_supident_funcionario` FOREIGN KEY (`supident`)
         REFERENCES `funcionario` (`ident`))""")
+    print("Table FUNCIONARIO created")
 
     # CREATE DEPARTAMENTO CONSTRAINT
     mycursor.execute("""ALTER TABLE `departamento` ADD CONSTRAINT `fk_gident_funcionario`
         FOREIGN KEY (`gident`) REFERENCES `funcionario` (`ident`)""")
+    print("Table DEPARTAMENTO add constraint")
+
+    # CREATE DEPENDENTE
+    mycursor.execute("DROP TABLE IF EXISTS `dependente`")
+    mycursor.execute("""CREATE TABLE `dependente` (
+        `fident` bigint(20) unsigned NOT NULL,
+        `nome` varchar(100) NOT NULL,
+        `dt_nasc` date NOT NULL,
+        `sexo` enum('M', 'F', 'N') NOT NULL,
+        `relacionamento` enum('filho/a', 'conjuge', 'outro') NOT NULL,
+        PRIMARY KEY (`fident`, `nome`),
+        CONSTRAINT `fk_fident_funcionario` FOREIGN KEY (`fident`)
+        REFERENCES `funcionario` (`ident`))""")
+    print("Table DEPENDENTE created")
 
     # CREATE PROJETO
-    mycursor.execute("""DROP TABLE IF EXISTS `projeto`""")
+    mycursor.execute("DROP TABLE IF EXISTS `projeto`")
     mycursor.execute("""CREATE TABLE `projeto` (
         `numero` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
         `nome` varchar(100) NOT NULL,
@@ -76,9 +93,10 @@ def create():
         PRIMARY KEY (`numero`),
         CONSTRAINT `fk_dnumero_projeto_departamento` FOREIGN KEY (`dnumero`)
         REFERENCES `departamento` (`numero`))""")
+    print("Table PROJETO created")
 
     # CREATE TRABALHA_EM
-    mycursor.execute("""DROP TABLE IF EXISTS `trabalha_em`""")
+    mycursor.execute("DROP TABLE IF EXISTS `trabalha_em`")
     mycursor.execute("""CREATE TABLE `trabalha_em` (
         `fident` bigint(20) unsigned NOT NULL,
         `pnumero` bigint(20) unsigned NOT NULL,
@@ -88,6 +106,7 @@ def create():
         REFERENCES `funcionario` (`ident`),
         CONSTRAINT `pk_pnumero_projeto` FOREIGN KEY (`pnumero`)
         REFERENCES `projeto` (`numero`))""")
+    print("Table TRABALHA_EM created")
 
     mydb.close()
 
@@ -119,7 +138,7 @@ def funcionario(db, cur, fkr):
         nome = fkr.first_name()
         sobrenome = fkr.last_name()
         endereco = fkr.address().replace('\n',' ')
-        sexo = rand.choice(['M', 'F'])
+        sexo = rand.choice(['M', 'F', 'N'])
         salario = fkr.random_int(MINSAL, MAXSAL)
         dtnasc = fkr.date_of_birth()
         dnumero = rand.choice(dptos)
@@ -129,6 +148,30 @@ def funcionario(db, cur, fkr):
     cur.executemany(sql, val)
     db.commit()
     print("FUNCIONARIO:", cur.rowcount, "record inserted")
+
+
+def dependentes(db, cur, fkr):
+    val = []
+
+    cur.execute("SELECT `ident` FROM `funcionario`")
+
+    func = [t[0] for t in cur.fetchall()]
+    rand.shuffle(func)
+    func = func[:len(func)//2]
+
+    sql = """INSERT INTO dependente (`fident`, `nome`, `dt_nasc`, `sexo`, `relacionamento`)
+            VALUES (%s, %s, %s, %s, %s)"""
+
+    for f in func:
+        nome = "%s %s" % (fkr.first_name(), fkr.last_name())
+        dt_nasc = fkr.date_of_birth()
+        sexo = rand.choice(['F', 'M', 'N'])
+        relac = rand.choice(['filho/a', 'conjuge', 'outro'])
+        val.append((f, nome, dt_nasc, sexo, relac))
+
+    cur.executemany(sql, val)
+    db.commit()
+    print("DEPENDENTE:", cur.rowcount, "record inserted")
 
 
 def gerentes(db, cur):
@@ -201,6 +244,7 @@ def main():
 
     departamento(mydb, mycursor)
     funcionario(mydb, mycursor, faker)
+    dependentes(mydb, mycursor, faker)
     gerentes(mydb, mycursor)
     projeto(mydb, mycursor)
     trabalha(mydb, mycursor)
