@@ -116,7 +116,7 @@ def departamento(db, cur):
     dptos = ['Logística', 'Marketing', 'Ventas', 'RH', 'Engenharia', 'Informática',
             'Financeiro', 'Segurança', 'Manutenção', 'Produção']
 
-    sql = "INSERT INTO departamento (nome) VALUES (%s)"
+    sql = "INSERT INTO `departamento` (`nome`) VALUES (%s)"
     val = [(dpto,) for dpto in dptos]
 
     cur.executemany(sql, val)
@@ -127,12 +127,12 @@ def departamento(db, cur):
 def funcionario(db, cur, fkr):
     val = []
 
-    cur.execute("SELECT numero FROM departamento")
+    cur.execute("SELECT `numero` FROM `departamento`")
     dptos = [t[0] for t in cur.fetchall()]
 
     for i in range(FUNQTY):
-        sql = """INSERT INTO funcionario
-        (nome, sobrenome, endereco, sexo, salario, dtnasc, dnumero)
+        sql = """INSERT INTO `funcionario`
+        (`nome`, `sobrenome`, `endereco`, `sexo`, `salario`, `dtnasc`, `dnumero`)
         VALUES (%s, %s, %s, %s, %s, %s, %s)"""
 
         nome = fkr.first_name()
@@ -159,7 +159,7 @@ def dependentes(db, cur, fkr):
     rand.shuffle(func)
     func = func[:len(func)//2]
 
-    sql = """INSERT INTO dependente (`fident`, `nome`, `dt_nasc`, `sexo`, `relacionamento`)
+    sql = """INSERT INTO `dependente` (`fident`, `nome`, `dt_nasc`, `sexo`, `relacionamento`)
             VALUES (%s, %s, %s, %s, %s)"""
 
     for f in func:
@@ -175,15 +175,15 @@ def dependentes(db, cur, fkr):
 
 
 def gerentes(db, cur):
-    cur.execute("SELECT numero FROM departamento")
+    cur.execute("SELECT `numero` FROM `departamento`")
     dptos = [t[0] for t in cur.fetchall()]
 
-    cur.execute("""SELECT ident FROM funcionario
-            ORDER BY salario DESC
+    cur.execute("""SELECT `ident` FROM `funcionario`
+            ORDER BY `salario` DESC
             LIMIT %s""" % len(dptos))
     gerentes = [g[0] for g in cur.fetchall()]
 
-    sql = "UPDATE departamento SET gident = %s WHERE numero = %s"
+    sql = "UPDATE `departamento` SET `gident` = %s WHERE `numero` = %s"
     val = list(zip(gerentes, dptos))
 
     cur.executemany(sql, val)
@@ -196,13 +196,13 @@ def projeto(db, cur):
             'Colônia em Marte', 'Supercomputador quântico',
             'Drone subacuático', 'HAL 9000', 'Skynet']
 
-    cur.execute("SELECT numero FROM departamento")
+    cur.execute("SELECT `numero` FROM `departamento`")
 
     dptos = [t[0] for t in cur.fetchall()]
     rand.shuffle(dptos)
     dptos = dptos[:len(projetos)+1]
 
-    sql = "INSERT INTO projeto (nome, dnumero) VALUES (%s, %s)"
+    sql = "INSERT INTO `projeto` (`nome`, `dnumero`) VALUES (%s, %s)"
     val = list(zip(projetos, dptos))
 
     cur.executemany(sql, val)
@@ -213,13 +213,13 @@ def projeto(db, cur):
 def trabalha(db, cur):
     val = []
 
-    cur.execute("""SELECT ident,funcionario.dnumero,numero
-            FROM funcionario
-            JOIN projeto
-            ON funcionario.dnumero = projeto.dnumero""")
+    cur.execute("""SELECT `ident`, `funcionario`.`dnumero`, `numero`
+            FROM `funcionario`
+            JOIN `projeto`
+            ON `funcionario`.`dnumero` = `projeto`.`dnumero`""")
     func_dpto = cur.fetchall()
 
-    sql = "INSERT INTO trabalha_em (fident, pnumero, horas) VALUES (%s, %s, %s)"
+    sql = "INSERT INTO `trabalha_em` (`fident`, `pnumero`, `horas`) VALUES (%s, %s, %s)"
 
     for func, dpto, proj in func_dpto:
         val.append((func, proj, rand.choice([4, 8, 14, 20, 40])))
