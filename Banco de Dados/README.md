@@ -3,7 +3,8 @@
 ## Semana 3 - Empresa
 
 Script Python para popular o banco de dados: [populate_empresa.py](populate_empresa.py)
-Dump do banco de dados: [empresa_dump.py](empresa_dump.py)
+
+Dump do banco de dados: [empresa_dump.sql](empresa_dump.sql)
 
 Setar as variáveis de ambiente:
 
