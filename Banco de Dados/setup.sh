@@ -6,6 +6,12 @@
 # Uso:
 #     ./setup.sh
 
+FAKER=$(pip list | grep -i faker)
+
+if [[ -z "$FAKER" ]]; then
+  pip install faker
+fi
+
 export DBNAME=empresa
 export DBHOST=localhost
 export DBUSER=user
