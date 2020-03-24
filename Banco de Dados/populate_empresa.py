@@ -159,8 +159,8 @@ def dependentes(db, cur, fkr):
     rand.shuffle(func)
     func = func[:len(func)//2]
 
-    sql = """INSERT INTO `dependente` (`fident`, `nome`, `dt_nasc`, `sexo`, `relacionamento`)
-            VALUES (%s, %s, %s, %s, %s)"""
+    sql = """INSERT INTO `dependente` (`fident`, `nome`, `dt_nasc`, `sexo`,
+            `relacionamento`) VALUES (%s, %s, %s, %s, %s)"""
 
     for f in func:
         nome = "%s %s" % (fkr.first_name(), fkr.last_name())
@@ -175,12 +175,22 @@ def dependentes(db, cur, fkr):
 
 
 def gerentes(db, cur):
+    """ Seleciona o maior salário de cada departamento e insere
+        o id do funcionário como gerente do departamento
+        na tabela departamento.
+    """
     cur.execute("SELECT `numero` FROM `departamento`")
     dptos = [t[0] for t in cur.fetchall()]
 
+    jtable = """SELECT `dnumero`, max(`salario`) as `maxsal`
+            FROM `funcionario`
+            GROUP BY `dnumero`"""
+
     cur.execute("""SELECT `ident` FROM `funcionario`
-            ORDER BY `salario` DESC
-            LIMIT %s""" % len(dptos))
+            JOIN (%s) as jtable
+            ON `funcionario`.`salario` = maxsal
+            ORDER BY `jtable`.`dnumero`""" % jtable)
+
     gerentes = [g[0] for g in cur.fetchall()]
 
     sql = "UPDATE `departamento` SET `gident` = %s WHERE `numero` = %s"
