@@ -2,9 +2,18 @@
 
 ## Semana 3 - Empresa
 
+Script Setup: [setup.sh](setup.sh)
+
+```bash
+chmod 755 setup.sh
+./setup.sh -u dbuser -p dbpass
+```
+
 Script Python para popular o banco de dados: [populate_empresa.py](populate_empresa.py)
 
 Dump do banco de dados: [empresa_dump.sql](empresa_dump.sql)
+
+### Instruções manuais
 
 Setar as variáveis de ambiente:
 
