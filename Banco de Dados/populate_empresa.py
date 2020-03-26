@@ -33,7 +33,7 @@ def create():
     mycursor.execute("DROP DATABASE IF EXISTS %s" % dbname)
     mycursor.execute("CREATE DATABASE IF NOT EXISTS %s" % dbname)
     mycursor.execute("USE %s" % dbname)
-    print("Database %s created" % dbname)
+    print("==> Creating database %s" % dbname)
 
     # CREATE DEPARTAMENTO
     mycursor.execute("DROP TABLE IF EXISTS `departamento`")
@@ -44,7 +44,7 @@ def create():
         `dtinicio` date NOT NULL DEFAULT '2020-01-01',
         PRIMARY KEY (`numero`),
         UNIQUE KEY `nome` (`nome`))""")
-    print("Table DEPARTAMENTO created")
+    print("==> Creating table DEPARTAMENTO")
 
     # CREATE FUNCIONARIO
     mycursor.execute("DROP TABLE IF EXISTS `funcionario`")
@@ -63,12 +63,12 @@ def create():
         REFERENCES `departamento` (`numero`),
         CONSTRAINT `fk_supident_funcionario` FOREIGN KEY (`supident`)
         REFERENCES `funcionario` (`ident`))""")
-    print("Table FUNCIONARIO created")
+    print("==> Creating table FUNCIONARIO")
 
     # CREATE DEPARTAMENTO CONSTRAINT
     mycursor.execute("""ALTER TABLE `departamento` ADD CONSTRAINT `fk_gident_funcionario`
         FOREIGN KEY (`gident`) REFERENCES `funcionario` (`ident`)""")
-    print("Table DEPARTAMENTO add constraint")
+    print("==> Adding constraint for DEPARTAMENTO")
 
     # CREATE DEPENDENTE
     mycursor.execute("DROP TABLE IF EXISTS `dependente`")
@@ -81,7 +81,7 @@ def create():
         PRIMARY KEY (`fident`, `nome`),
         CONSTRAINT `fk_fident_funcionario` FOREIGN KEY (`fident`)
         REFERENCES `funcionario` (`ident`))""")
-    print("Table DEPENDENTE created")
+    print("==> Creating table DEPENDENTE")
 
     # CREATE PROJETO
     mycursor.execute("DROP TABLE IF EXISTS `projeto`")
@@ -93,7 +93,7 @@ def create():
         PRIMARY KEY (`numero`),
         CONSTRAINT `fk_dnumero_projeto_departamento` FOREIGN KEY (`dnumero`)
         REFERENCES `departamento` (`numero`))""")
-    print("Table PROJETO created")
+    print("==> Creating table PROJETO")
 
     # CREATE TRABALHA_EM
     mycursor.execute("DROP TABLE IF EXISTS `trabalha_em`")
@@ -106,7 +106,7 @@ def create():
         REFERENCES `funcionario` (`ident`),
         CONSTRAINT `pk_pnumero_projeto` FOREIGN KEY (`pnumero`)
         REFERENCES `projeto` (`numero`))""")
-    print("Table TRABALHA_EM created")
+    print("==> Creating table TRABALHA_EM")
 
     mydb.close()
 
@@ -121,7 +121,7 @@ def departamento(db, cur):
 
     cur.executemany(sql, val)
     db.commit()
-    print("DEPARTAMENTO:", cur.rowcount, "record inserted")
+    print("==> DEPARTAMENTO:", cur.rowcount, "record inserted")
 
 
 def funcionario(db, cur, fkr):
@@ -147,7 +147,7 @@ def funcionario(db, cur, fkr):
 
     cur.executemany(sql, val)
     db.commit()
-    print("FUNCIONARIO:", cur.rowcount, "record inserted")
+    print("==> FUNCIONARIO:", cur.rowcount, "record inserted")
 
 
 def dependentes(db, cur, fkr):
@@ -171,7 +171,7 @@ def dependentes(db, cur, fkr):
 
     cur.executemany(sql, val)
     db.commit()
-    print("DEPENDENTE:", cur.rowcount, "record inserted")
+    print("==> DEPENDENTE:", cur.rowcount, "record inserted")
 
 
 def gerentes(db, cur):
@@ -198,7 +198,7 @@ def gerentes(db, cur):
 
     cur.executemany(sql, val)
     db.commit()
-    print("GERENTES:", cur.rowcount, "record updated")
+    print("==> GERENTES:", cur.rowcount, "record updated")
 
 
 def projeto(db, cur):
@@ -217,7 +217,7 @@ def projeto(db, cur):
 
     cur.executemany(sql, val)
     db.commit()
-    print("PROJETO:", cur.rowcount, "record inserted")
+    print("==> PROJETO:", cur.rowcount, "record inserted")
 
 
 def trabalha(db, cur):
@@ -236,7 +236,7 @@ def trabalha(db, cur):
 
     cur.executemany(sql, val)
     db.commit()
-    print("TRABALHA:", cur.rowcount, "record inserted")
+    print("==> TRABALHA:", cur.rowcount, "record inserted")
 
 
 def main():
