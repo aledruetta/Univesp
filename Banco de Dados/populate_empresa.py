@@ -53,9 +53,9 @@ def create():
         `nome` varchar(50) NOT NULL,
         `sobrenome` varchar(50) NOT NULL,
         `endereco` varchar(100) DEFAULT NULL,
-        `sexo` enum('M', 'F', 'N') NOT NULL,
-        `salario` int(11) NOT NULL,
-        `dtnasc` date NOT NULL,
+        `sexo` BOOLEAN,
+        `salario` DECIMAL(10,2),
+        `dtnasc` date,
         `dnumero` bigint(20) unsigned NOT NULL,
         `supident` bigint(20) unsigned DEFAULT NULL,
         PRIMARY KEY (`ident`),
@@ -76,7 +76,7 @@ def create():
         `fident` bigint(20) unsigned NOT NULL,
         `nome` varchar(100) NOT NULL,
         `dt_nasc` date NOT NULL,
-        `sexo` enum('M', 'F', 'N') NOT NULL,
+        `sexo` BOOLEAN NOT NULL,
         `relacionamento` enum('filho/a', 'conjuge', 'outro') NOT NULL,
         PRIMARY KEY (`fident`, `nome`),
         CONSTRAINT `fk_fident_funcionario` FOREIGN KEY (`fident`)
@@ -138,8 +138,8 @@ def funcionario(db, cur, fkr):
         nome = fkr.first_name()
         sobrenome = fkr.last_name()
         endereco = fkr.address().replace('\n',' ')
-        sexo = rand.choice(['M', 'F', 'N'])
-        salario = fkr.random_int(MINSAL, MAXSAL)
+        sexo = rand.choice([0, 1])
+        salario = rand.random() * (MAXSAL - MINSAL) + MINSAL
         dtnasc = fkr.date_of_birth()
         dnumero = rand.choice(dptos)
 
@@ -165,7 +165,7 @@ def dependentes(db, cur, fkr):
     for f in func:
         nome = "%s %s" % (fkr.first_name(), fkr.last_name())
         dt_nasc = fkr.date_of_birth()
-        sexo = rand.choice(['F', 'M', 'N'])
+        sexo = rand.choice([0, 1])
         relac = rand.choice(['filho/a', 'conjuge', 'outro'])
         val.append((f, nome, dt_nasc, sexo, relac))
 
