@@ -207,6 +207,41 @@ def gerentes(db, cur):
     print("==> GERENTES:", cur.rowcount, "record updated")
 
 
+def supervisores(db, cur):
+    """ Seleciona um funcionário de bom salário e insere
+        o id do funcionário como supervisor de outro funcionário.
+    """
+    val = []
+
+    cur.execute("SELECT `numero` FROM `departamento`")
+    dptos = [t[0] for t in cur.fetchall()]
+
+    for dpto in dptos:
+        cur.execute("""SELECT `ident`
+                FROM `funcionario`
+                WHERE `dnumero` = %s
+                ORDER BY `salario` DESC""" % dpto)
+
+        funs_all = [f[0] for f in cur.fetchall()]
+
+        gerente = funs_all[0]
+        sups = funs_all[1:3]
+        others = funs_all[3:]
+
+        for s in sups:
+            val.append((gerente, s))
+
+        for f in others:
+            val.append((rand.choice(sups), f))
+
+    sql = "UPDATE `funcionario` SET `supident` = %s WHERE `ident` = %s"
+
+    cur.executemany(sql, val)
+    db.commit()
+
+    print("==> SUPERVISORES:", cur.rowcount, "record updated")
+
+
 def projeto(db, cur):
     projetos = ['Carro autônomo', 'Vacina covid-19', 'Automação residencial',
             'Colônia em Marte', 'Supercomputador quântico',
@@ -270,6 +305,7 @@ def main():
     funcionario(mydb, mycursor, faker)
     dependentes(mydb, mycursor, faker)
     gerentes(mydb, mycursor)
+    supervisores(mydb, mycursor)
     projeto(mydb, mycursor)
     trabalha(mydb, mycursor)
 
