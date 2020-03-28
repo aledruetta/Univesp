@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-""" Setar variaveis de ambiente com os dados apropriados:
+""" Executa setup.sh ou setar variaveis de ambiente
+    com os dados apropriados:
 
     $ export DBNAME=name
     $ export DBHOST=host
@@ -91,7 +92,7 @@ def create():
         `numero` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
         `nome` varchar(100) NOT NULL,
         `dnumero` bigint(20) unsigned NOT NULL,
-        `localizacao` bigint(20) unsigned,
+        `localizacao` varchar(50),
         PRIMARY KEY (`numero`),
         FOREIGN KEY (`dnumero`) REFERENCES `departamento` (`numero`))""")
 
@@ -211,14 +212,20 @@ def projeto(db, cur):
             'Colônia em Marte', 'Supercomputador quântico',
             'Drone subacuático', 'HAL 9000', 'Skynet']
 
+    cidades = ['São Paulo', 'Buenos Aires', 'Salvador',
+            'Montevideu', 'Santiago']
+
     cur.execute("SELECT `numero` FROM `departamento`")
 
     dptos = [t[0] for t in cur.fetchall()]
     rand.shuffle(dptos)
     dptos = dptos[:len(projetos)+1]
 
-    sql = "INSERT INTO `projeto` (`nome`, `dnumero`) VALUES (%s, %s)"
-    val = list(zip(projetos, dptos))
+    locales = [rand.choice(cidades) for p in projetos]
+
+    sql = """INSERT INTO `projeto` (`nome`, `dnumero`, `localizacao`)
+            VALUES (%s, %s, %s)"""
+    val = list(zip(projetos, dptos, locales))
 
     cur.executemany(sql, val)
     db.commit()
