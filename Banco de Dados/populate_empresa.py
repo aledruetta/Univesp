@@ -38,8 +38,8 @@ def create():
     print("==> Creating database %s" % dbname)
 
     # CREATE DEPARTAMENTO
-    mycursor.execute("DROP TABLE IF EXISTS `departamento`")
-    mycursor.execute("""CREATE TABLE `departamento` (
+    mycursor.execute("DROP TABLE IF EXISTS `DEPARTAMENTO`")
+    mycursor.execute("""CREATE TABLE `DEPARTAMENTO` (
         `numero` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
         `nome` varchar(50) NOT NULL,
         `gident` bigint(20) unsigned,
@@ -50,8 +50,8 @@ def create():
     print("==> Creating table DEPARTAMENTO")
 
     # CREATE FUNCIONARIO
-    mycursor.execute("DROP TABLE IF EXISTS `funcionario`")
-    mycursor.execute("""CREATE TABLE `funcionario` (
+    mycursor.execute("DROP TABLE IF EXISTS `FUNCIONARIO`")
+    mycursor.execute("""CREATE TABLE `FUNCIONARIO` (
         `ident` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
         `nome` varchar(50) NOT NULL,
         `sobrenome` varchar(50) NOT NULL,
@@ -62,51 +62,51 @@ def create():
         `dnumero` bigint(20) unsigned NOT NULL,
         `supident` bigint(20) unsigned,
         PRIMARY KEY (`ident`),
-        FOREIGN KEY (`dnumero`) REFERENCES `departamento` (`numero`),
-        FOREIGN KEY (`supident`) REFERENCES `funcionario` (`ident`))""")
+        FOREIGN KEY (`dnumero`) REFERENCES `DEPARTAMENTO` (`numero`),
+        FOREIGN KEY (`supident`) REFERENCES `FUNCIONARIO` (`ident`))""")
 
     print("==> Creating table FUNCIONARIO")
 
     # CREATE DEPARTAMENTO CONSTRAINT
-    mycursor.execute("""ALTER TABLE `departamento`
-        ADD FOREIGN KEY (`gident`) REFERENCES `funcionario` (`ident`)""")
+    mycursor.execute("""ALTER TABLE `DEPARTAMENTO`
+        ADD FOREIGN KEY (`gident`) REFERENCES `FUNCIONARIO` (`ident`)""")
 
     print("==> Adding constraint for DEPARTAMENTO")
 
     # CREATE DEPENDENTE
-    mycursor.execute("DROP TABLE IF EXISTS `dependente`")
-    mycursor.execute("""CREATE TABLE `dependente` (
+    mycursor.execute("DROP TABLE IF EXISTS `DEPENDENTE`")
+    mycursor.execute("""CREATE TABLE `DEPENDENTE` (
         `fident` bigint(20) unsigned NOT NULL,
         `nome` varchar(100) NOT NULL,
         `dt_nasc` date NOT NULL,
         `sexo` BOOLEAN NOT NULL,
         `relacionamento` enum('filho/a', 'conjuge', 'outro') NOT NULL,
         PRIMARY KEY (`fident`, `nome`),
-        FOREIGN KEY (`fident`) REFERENCES `funcionario` (`ident`))""")
+        FOREIGN KEY (`fident`) REFERENCES `FUNCIONARIO` (`ident`))""")
 
     print("==> Creating table DEPENDENTE")
 
     # CREATE PROJETO
-    mycursor.execute("DROP TABLE IF EXISTS `projeto`")
-    mycursor.execute("""CREATE TABLE `projeto` (
+    mycursor.execute("DROP TABLE IF EXISTS `PROJETO`")
+    mycursor.execute("""CREATE TABLE `PROJETO` (
         `numero` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
         `nome` varchar(100) NOT NULL,
         `dnumero` bigint(20) unsigned NOT NULL,
         `localizacao` varchar(50),
         PRIMARY KEY (`numero`),
-        FOREIGN KEY (`dnumero`) REFERENCES `departamento` (`numero`))""")
+        FOREIGN KEY (`dnumero`) REFERENCES `DEPARTAMENTO` (`numero`))""")
 
     print("==> Creating table PROJETO")
 
     # CREATE TRABALHA_EM
-    mycursor.execute("DROP TABLE IF EXISTS `trabalha_em`")
-    mycursor.execute("""CREATE TABLE `trabalha_em` (
+    mycursor.execute("DROP TABLE IF EXISTS `TRABALHA_EM`")
+    mycursor.execute("""CREATE TABLE `TRABALHA_EM` (
         `fident` bigint(20) unsigned NOT NULL,
         `pnumero` bigint(20) unsigned NOT NULL,
         `horas` smallint(6),
         PRIMARY KEY (`fident`,`pnumero`),
-        FOREIGN KEY (`fident`) REFERENCES `funcionario` (`ident`),
-        FOREIGN KEY (`pnumero`) REFERENCES `projeto` (`numero`))""")
+        FOREIGN KEY (`fident`) REFERENCES `FUNCIONARIO` (`ident`),
+        FOREIGN KEY (`pnumero`) REFERENCES `PROJETO` (`numero`))""")
 
     print("==> Creating table TRABALHA_EM")
 
@@ -118,7 +118,7 @@ def departamento(db, cur):
     dptos = ['Logística', 'Marketing', 'Ventas', 'RH', 'Engenharia', 'Informática',
             'Financeiro', 'Segurança', 'Manutenção', 'Produção']
 
-    sql = "INSERT INTO `departamento` (`nome`) VALUES (%s)"
+    sql = "INSERT INTO `DEPARTAMENTO` (`nome`) VALUES (%s)"
     val = [(dpto,) for dpto in dptos]
 
     cur.executemany(sql, val)
@@ -130,11 +130,11 @@ def departamento(db, cur):
 def funcionario(db, cur, fkr):
     val = []
 
-    cur.execute("SELECT `numero` FROM `departamento`")
+    cur.execute("SELECT `numero` FROM `DEPARTAMENTO`")
     dptos = [t[0] for t in cur.fetchall()]
 
     for i in range(FUNQTY):
-        sql = """INSERT INTO `funcionario`
+        sql = """INSERT INTO `FUNCIONARIO`
         (`nome`, `sobrenome`, `endereco`, `sexo`, `salario`, `dtnasc`, `dnumero`)
         VALUES (%s, %s, %s, %s, %s, %s, %s)"""
 
@@ -157,13 +157,13 @@ def funcionario(db, cur, fkr):
 def dependentes(db, cur, fkr):
     val = []
 
-    cur.execute("SELECT `ident` FROM `funcionario`")
+    cur.execute("SELECT `ident` FROM `FUNCIONARIO`")
 
     func = [t[0] for t in cur.fetchall()]
     rand.shuffle(func)
     func = func[:len(func)//2]
 
-    sql = """INSERT INTO `dependente` (`fident`, `nome`, `dt_nasc`, `sexo`,
+    sql = """INSERT INTO `DEPENDENTE` (`fident`, `nome`, `dt_nasc`, `sexo`,
             `relacionamento`) VALUES (%s, %s, %s, %s, %s)"""
 
     for f in func:
@@ -184,21 +184,21 @@ def gerentes(db, cur):
         o id do funcionário como gerente do departamento
         na tabela departamento.
     """
-    cur.execute("SELECT `numero` FROM `departamento`")
+    cur.execute("SELECT `numero` FROM `DEPARTAMENTO`")
     dptos = [t[0] for t in cur.fetchall()]
 
     jtable = """SELECT `dnumero`, max(`salario`) as `maxsal`
-            FROM `funcionario`
+            FROM `FUNCIONARIO`
             GROUP BY `dnumero`"""
 
-    cur.execute("""SELECT `ident` FROM `funcionario`
+    cur.execute("""SELECT `ident` FROM `FUNCIONARIO`
             JOIN (%s) as jtable
-            ON `funcionario`.`salario` = maxsal
+            ON `FUNCIONARIO`.`salario` = maxsal
             ORDER BY `jtable`.`dnumero`""" % jtable)
 
     gerentes = [g[0] for g in cur.fetchall()]
 
-    sql = "UPDATE `departamento` SET `gident` = %s WHERE `numero` = %s"
+    sql = "UPDATE `DEPARTAMENTO` SET `gident` = %s WHERE `numero` = %s"
     val = list(zip(gerentes, dptos))
 
     cur.executemany(sql, val)
@@ -213,12 +213,12 @@ def supervisores(db, cur):
     """
     val = []
 
-    cur.execute("SELECT `numero` FROM `departamento`")
+    cur.execute("SELECT `numero` FROM `DEPARTAMENTO`")
     dptos = [t[0] for t in cur.fetchall()]
 
     for dpto in dptos:
         cur.execute("""SELECT `ident`
-                FROM `funcionario`
+                FROM `FUNCIONARIO`
                 WHERE `dnumero` = %s
                 ORDER BY `salario` DESC""" % dpto)
 
@@ -234,7 +234,7 @@ def supervisores(db, cur):
         for f in others:
             val.append((rand.choice(sups), f))
 
-    sql = "UPDATE `funcionario` SET `supident` = %s WHERE `ident` = %s"
+    sql = "UPDATE `FUNCIONARIO` SET `supident` = %s WHERE `ident` = %s"
 
     cur.executemany(sql, val)
     db.commit()
@@ -250,7 +250,7 @@ def projeto(db, cur):
     cidades = ['São Paulo', 'Buenos Aires', 'Salvador',
             'Montevideu', 'Santiago']
 
-    cur.execute("SELECT `numero` FROM `departamento`")
+    cur.execute("SELECT `numero` FROM `DEPARTAMENTO`")
 
     dptos = [t[0] for t in cur.fetchall()]
     rand.shuffle(dptos)
@@ -258,7 +258,7 @@ def projeto(db, cur):
 
     locales = [rand.choice(cidades) for p in projetos]
 
-    sql = """INSERT INTO `projeto` (`nome`, `dnumero`, `localizacao`)
+    sql = """INSERT INTO `PROJETO` (`nome`, `dnumero`, `localizacao`)
             VALUES (%s, %s, %s)"""
     val = list(zip(projetos, dptos, locales))
 
@@ -271,13 +271,13 @@ def projeto(db, cur):
 def trabalha(db, cur):
     val = []
 
-    cur.execute("""SELECT `ident`, `funcionario`.`dnumero`, `numero`
-            FROM `funcionario`
-            JOIN `projeto`
-            ON `funcionario`.`dnumero` = `projeto`.`dnumero`""")
+    cur.execute("""SELECT `ident`, `FUNCIONARIO`.`dnumero`, `numero`
+            FROM `FUNCIONARIO`
+            JOIN `PROJETO`
+            ON `FUNCIONARIO`.`dnumero` = `PROJETO`.`dnumero`""")
     func_dpto = cur.fetchall()
 
-    sql = "INSERT INTO `trabalha_em` (`fident`, `pnumero`, `horas`) VALUES (%s, %s, %s)"
+    sql = "INSERT INTO `TRABALHA_EM` (`fident`, `pnumero`, `horas`) VALUES (%s, %s, %s)"
 
     for func, dpto, proj in func_dpto:
         val.append((func, proj, rand.choice([4, 8, 14, 20, 40])))
