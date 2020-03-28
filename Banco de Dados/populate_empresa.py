@@ -161,17 +161,17 @@ def dependentes(db, cur, fkr):
 
     func = [t[0] for t in cur.fetchall()]
     rand.shuffle(func)
-    func = func[:len(func)//2]
 
     sql = """INSERT INTO `DEPENDENTE` (`fident`, `nome`, `dt_nasc`, `sexo`,
             `relacionamento`) VALUES (%s, %s, %s, %s, %s)"""
 
     for f in func:
-        nome = "%s %s" % (fkr.first_name(), fkr.last_name())
-        dt_nasc = fkr.date_of_birth()
-        sexo = rand.choice([0, 1])
-        relac = rand.choice(['filho/a', 'conjuge', 'outro'])
-        val.append((f, nome, dt_nasc, sexo, relac))
+        for q in range(rand.randint(0, 2)):
+            nome = "%s %s" % (fkr.first_name(), fkr.last_name())
+            dt_nasc = fkr.date_of_birth()
+            sexo = rand.choice([0, 1])
+            relac = rand.choice(['filho/a', 'conjuge', 'outro'])
+            val.append((f, nome, dt_nasc, sexo, relac))
 
     cur.executemany(sql, val)
     db.commit()
