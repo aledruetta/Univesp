@@ -27,7 +27,7 @@ class BoolM:
         ret = '  |'
         for item in self.A:
             ret += f' {item}'
-        ret += '\n' + '-' * (2 * lenA + 4)
+        ret += '\n--+' + '-' * (2 * lenA + 1)
         for i in range(lenA):
             line = ''
             for j in self.M[i].astype(int):
