@@ -5,3 +5,4 @@ test.*
 **/codeblocks/
 ^.ibnb*
 .ipynb*/
+__*
