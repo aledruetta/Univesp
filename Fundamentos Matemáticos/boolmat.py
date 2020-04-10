@@ -138,6 +138,25 @@ def main():
     print(f'Matriz transposta:\n\n{t}\n')
     print(f'Prod. Cartesiano de M x Transposta:\n\n{prod}\n')
 
+    I = np.identity(len(b.A), dtype=bool)
+    M = b.M.astype(bool)
+    T = t.M.astype(bool)
+    Z = np.zeros(len(b.A), dtype=bool)
+    O = np.ones(len(b.A), dtype=bool)
+
+    is_R = (M & I == I).all()
+    is_I = (M & I == Z).all()
+    is_S = (M == T).all()
+    is_A = (M & T | I == I).all()
+    is_T = (M.dot(T) == M).all()
+
+    print('A matriz booleana:\n')
+    print(f'- {"É" if is_R else "Não é"} Reflexiva')
+    print(f'- {"É" if is_I else "Não é"} Irreflexiva')
+    print(f'- {"É" if is_S else "Não é"} Simétrica')
+    print(f'- {"É" if is_A else "Não é"} Anti-simétrica')
+    print(f'- {"É" if is_T else "Não é"} Transitiva')
+    print()
 
 if __name__ == '__main__':
     main()
