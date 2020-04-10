@@ -59,22 +59,26 @@ class BoolM:
         """
 
         lenA = len(self.A)
-        maxitem = 0
+        pad = 0
 
         for item in self.A:
-            if len(str(item)) > maxitem:
-                maxitem = len(str(item))
-        maxitem += 1
+            lenItem = len(str(item))
+            if lenItem > pad:
+                pad = lenItem
 
-        ret = f'{" ".rjust(maxitem)} |'
+        pad += 1
+        ret = f'{" ".rjust(pad)} |'
+
         for item in self.A:
-            ret += f'{str(item).rjust(maxitem)}'
-        ret += f'\n{"-" * (maxitem + 1)}+{"-" * (maxitem * (lenA + 1))}'
+            ret += f'{str(item).rjust(pad)}'
+
+        ret += f'\n{"-" * pad}-+-{"-" * pad * lenA}'
+
         for i in range(lenA):
             line = ''
             for j in self.M[i].astype(int):
-                line += f'{str(j).rjust(maxitem)}'
-            ret += f'\n{str(self.A[i]).rjust(maxitem)} |{line}'
+                line += f'{str(j).rjust(pad)}'
+            ret += f'\n{str(self.A[i]).rjust(pad)} |{line}'
 
         return ret
 
