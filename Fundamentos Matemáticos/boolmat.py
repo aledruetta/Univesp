@@ -78,14 +78,18 @@ def main():
 
     pares = []
     pattern = re.compile(r'\d')
+
     print('\n===== Gerador de Matrizes Booleanas =====\n')
     print('Ingrese os pares no formato "a, b"\n')
     qty = int(input('Quantidade? '))
+
     for i in range(qty):
         par = input(f'[{i+1}] ')
         a, b = re.findall(pattern, par)
         pares.append((int(a), int(b)))
+
     b = BoolM(pares)
+
     print(f'\nA = {b.A}')
     print(f'R = {b.R}\n')
     print(f'Matriz booleana:\n\n{b}\n')
