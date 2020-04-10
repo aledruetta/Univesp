@@ -77,7 +77,7 @@ def main():
     """
 
     pares = []
-    pattern = re.compile(r'\d')
+    pattern = re.compile(r'\d{1,}')
 
     print('\n===== Gerador de Matrizes Booleanas =====\n')
     print('Ingrese os pares no formato "a, b"\n')
