@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
 
+""" Engenharia da Computação - Univesp
+    Fundamentos Matemáticos da Computação
+
+    ===== Gerador de Matrizes Booleanas =====
+
+    Autor: Alejandro Druetta
+    Data:  09/04/2020
+"""
+
 import numpy as np
 import re
 
@@ -40,7 +49,7 @@ class BoolM:
             self.M[self.A.index(a), self.A.index(b)] = True
 
     def __str__(self):
-        """ Retorna uma representação como string da matriz M.
+        """ Imprime uma representação como string da matriz M.
         """
 
         lenA = len(self.A)
@@ -59,8 +68,6 @@ class BoolM:
 
 def main():
     """ Pede pro usuário ingresar um conjunto de pares ordenados.
-        Imprime na tela o conjunto A, a relação R e a representação
-        em forma de tabela da matriz booleana M.
     """
 
     pares = []
