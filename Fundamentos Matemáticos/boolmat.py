@@ -23,7 +23,6 @@ class BoolM:
             self.A          - Conjunto domínio e imagem
             self.R          - Relação em A x A
             self.M          - Matriz booleana
-            self.T          - Matriz transposta
     """
 
     def __init__(self, R):
@@ -57,12 +56,13 @@ class BoolM:
             self.M[self.A.index(a), self.A.index(b)] = True
 
     def genT(self):
+        """ Retorna a Transposta de M """
+
         R = [(b, a) for a, b in self.R]
         return BoolM(R)
 
     def __str__(self):
-        """ Imprime uma representação como string da matriz M.
-        """
+        """ Imprime uma representação como string da matriz M """
 
         lenA = len(self.A)
         pad = 0
@@ -90,8 +90,7 @@ class BoolM:
 
 
 def main():
-    """ Pede pro usuário ingresar um conjunto de pares ordenados.
-    """
+    """ Pede pro usuário ingresar um conjunto de pares ordenados """
 
     pares = []
     pattern = re.compile(r'\d{1,}')
