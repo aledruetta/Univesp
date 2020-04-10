@@ -148,7 +148,7 @@ def main():
     is_I = (M & I == Z).all()
     is_S = (M == T).all()
     is_A = (M & T | I == I).all()
-    is_T = (M.dot(T) == M).all()
+    is_T = (M.dot(M) == M).all()
 
     print('A matriz booleana:\n')
     print(f'- {"É" if is_R else "Não é"} Reflexiva')
