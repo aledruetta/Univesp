@@ -17,6 +17,12 @@ class BoolM:
     """ Essa classe apresenta um permite gerar uma matriz booleana
         a partir de um conjunto de pares ordenados pertencentes
         a uma relação do tipo A x A.
+
+        Atributos:
+
+            self.A          - Conjunto domínio e imagem
+            self.R          - Relação em A x A
+            self.M          - Matriz booleana
     """
 
     def __init__(self, R):
