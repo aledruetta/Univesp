@@ -118,7 +118,7 @@ def main():
     """ Pede pro usuário ingresar um conjunto de pares ordenados """
 
     pares = []
-    pattern = re.compile(r'\d{1,}')
+    pattern = re.compile(r'-?\d{1,}')
     print('\n===== Gerador de Matrizes Booleanas =====\n')
     print('Ingrese os pares no formato "a, b"\n')
     qty = int(input('Quantidade? '))
