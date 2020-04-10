@@ -25,11 +25,11 @@ class BoolM:
             self.M          - Matriz booleana
     """
 
-    def __init__(self, R):
-        self.R = R      # relação
-        self.A = []     # conjunto
-        self.M = []     # matriz
-        self.T = []     # transposta
+    def __init__(self, R, A=None):
+        self.R = R              # relação
+        self.A = A              # conjunto
+        self.M = []             # matriz
+        self.T = []             # transposta
 
         self.setA()
         self.genM()
@@ -40,7 +40,11 @@ class BoolM:
             Retorna uma lista ordenada.
         """
 
-        self.A = list({subitem for item in self.R for subitem in item})
+        if self.A is None:
+            self.A = list({subitem for item in self.R for subitem in item})
+        else:
+            self.A = list(set(self.A))
+
         self.A.sort()
 
     def genM(self):
@@ -60,6 +64,27 @@ class BoolM:
 
         R = [(b, a) for a, b in self.R]
         return BoolM(R)
+
+    def to_BoolM(self, other):
+        """ Retorna uma instância de BoolM a partir de um objeto
+            np.ndarray.
+        """
+
+        R = []
+        for i in range(len(other)):
+            for j in range(len(other[i])):
+                if other[i, j]:
+                    R.append((self.A[i], self.A[j]))
+
+        return BoolM(R, self.A)
+
+    def dot(self, other):
+        """ Faz o produto cartesiano entre duas instâncias de
+            BoolM.
+        """
+
+        prod = (self.M).dot(other.M)
+        return self.to_BoolM(prod)
 
     def __str__(self):
         """ Imprime uma representação como string da matriz M """
@@ -94,7 +119,6 @@ def main():
 
     pares = []
     pattern = re.compile(r'\d{1,}')
-
     print('\n===== Gerador de Matrizes Booleanas =====\n')
     print('Ingrese os pares no formato "a, b"\n')
     qty = int(input('Quantidade? '))
@@ -106,11 +130,13 @@ def main():
 
     b = BoolM(pares)
     t = b.genT()
+    prod = b.dot(t)
 
     print(f'\nA = {b.A}')
     print(f'R = {b.R}\n')
     print(f'Matriz booleana:\n\n{b}\n')
     print(f'Matriz transposta:\n\n{t}\n')
+    print(f'Prod. Cartesiano de M x Transposta:\n\n{prod}\n')
 
 
 if __name__ == '__main__':
