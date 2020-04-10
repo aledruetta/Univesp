@@ -17,7 +17,8 @@ class BoolM:
         self.A.sort()
 
     def genM(self):
-        shape = (len(self.A), len(self.A))
+        lenA = len(self.A)
+        shape = (lenA, lenA)
         self.M = np.zeros(shape, dtype=bool)
         for a, b in self.R:
             self.M[self.A.index(a), self.A.index(b)] = True
