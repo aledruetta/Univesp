@@ -5,18 +5,34 @@ import re
 
 
 class BoolM:
+    """ Essa classe apresenta um permite gerar uma matriz booleana
+        a partir de um conjunto de pares ordenados pertencentes
+        a uma relação do tipo A x A.
+    """
+
     def __init__(self, R):
-        self.R = R
-        self.A = []
-        self.M = []
+        self.R = R      # relação
+        self.A = []     # conjunto
+        self.M = []     # matriz
+
         self.setA()
         self.genM()
 
     def setA(self):
+        """ Cria um conjunto com todos os elementos pertencentes
+            à relação R.
+            Retorna uma lista ordenada.
+        """
+
         self.A = list({subitem for item in self.R for subitem in item})
         self.A.sort()
 
     def genM(self):
+        """ Gera uma matriz booleana M do produto cartesiano A x A,
+            setando com o valor 'True' os elementos de cada um dos
+            pares ordenados da relação R.
+        """
+
         lenA = len(self.A)
         shape = (lenA, lenA)
         self.M = np.zeros(shape, dtype=bool)
@@ -24,6 +40,9 @@ class BoolM:
             self.M[self.A.index(a), self.A.index(b)] = True
 
     def __str__(self):
+        """ Retorna uma representação como string da matriz M.
+        """
+
         lenA = len(self.A)
         ret = '  |'
         for item in self.A:
@@ -39,6 +58,11 @@ class BoolM:
 
 
 def main():
+    """ Pede pro usuário ingresar um conjunto de pares ordenados.
+        Imprime na tela o conjunto A, a relação R e a representação
+        em forma de tabela da matriz booleana M.
+    """
+
     pares = []
     pattern = re.compile(r'\d')
     print('\n===== Gerador de Matrizes Booleanas =====\n')
