@@ -23,12 +23,14 @@ class BoolM:
             self.A          - Conjunto domínio e imagem
             self.R          - Relação em A x A
             self.M          - Matriz booleana
+            self.T          - Matriz transposta
     """
 
     def __init__(self, R):
         self.R = R      # relação
         self.A = []     # conjunto
         self.M = []     # matriz
+        self.T = []     # transposta
 
         self.setA()
         self.genM()
@@ -53,6 +55,10 @@ class BoolM:
         self.M = np.zeros(shape, dtype=bool)
         for a, b in self.R:
             self.M[self.A.index(a), self.A.index(b)] = True
+
+    def genT(self):
+        R = [(b, a) for a, b in self.R]
+        return BoolM(R)
 
     def __str__(self):
         """ Imprime uma representação como string da matriz M.
@@ -100,10 +106,12 @@ def main():
         pares.append((int(a), int(b)))
 
     b = BoolM(pares)
+    t = b.genT()
 
     print(f'\nA = {b.A}')
     print(f'R = {b.R}\n')
     print(f'Matriz booleana:\n\n{b}\n')
+    print(f'Matriz transposta:\n\n{t}\n')
 
 
 if __name__ == '__main__':
