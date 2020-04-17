@@ -30,7 +30,7 @@ class Graph:
 
     def _check_edges(self):
         """ Checks if every edge connect two vertices and
-            if they are tuples.
+            if they are a 2-len list of vertices.
         """
         self.E.sort()
 
@@ -43,7 +43,8 @@ class Graph:
                 raise VertexNotExistsError
 
     def __str__(self):
-        return 'Vertices: {}\nEdges: {}'.format(self.V, self.E)
+        return '{}\n\tV: {}\n\tE: {}>'.format(
+                str(self.__class__)[:-1], self.V, self.E)
 
 
 class SimpleGraph(Graph):
