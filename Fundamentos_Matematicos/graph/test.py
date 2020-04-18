@@ -2,10 +2,13 @@
 
 import unittest
 import numpy as np
-from graph import Graph
+from graph import (
+        Graph,
+        UndirectedGraph)
 from graph_exceptions import (
         VertexNotExistsError,
-        VertexEmptyListError)
+        VertexEmptyListError,
+        IsNotUndirectedGraphError)
 
 """ Usage:
     python3 -m unittest -v test
@@ -26,7 +29,7 @@ class TestGraph(unittest.TestCase):
         result = len(graph.E)
         self.assertTrue(result <= v ** 2)
 
-    def test_vertices(self):
+    def test_graph_vertices(self):
         # Empty list
         with self.assertRaises(VertexEmptyListError):
             Graph([], [[1, 1]])
@@ -43,7 +46,7 @@ class TestGraph(unittest.TestCase):
         with self.assertRaises(TypeError):
             Graph([1, [2, 1]], [[1, 1]])
 
-    def test_edges(self):
+    def test_graph_edges(self):
         # Edge has non existing vertex
         with self.assertRaises(VertexNotExistsError):
             Graph([1, 2], [[1, 3]])
@@ -56,7 +59,7 @@ class TestGraph(unittest.TestCase):
         with self.assertRaises(TypeError):
             Graph([1, 2], [[1, 2, 1]])
 
-    def test_adjacency(self):
+    def test_graph_adjacency(self):
         g = Graph([1, 2, 3], [[1, 2], [3, 2]])
         m1 = g.to_adjacency()
 
@@ -67,6 +70,11 @@ class TestGraph(unittest.TestCase):
 
         # Is adjacency matrix
         self.assertTrue((m1 == m2).all())
+
+    def test_ugraph_edges(self):
+        with self.assertRaises(IsNotUndirectedGraphError):
+            UndirectedGraph(
+                    [1, 2, 3], [[1, 1], [1, 3], [3, 1], [2, 1]])
 
 
 if __name__ == '__main__':

@@ -13,6 +13,10 @@ class VertexEmptyListError(GraphError):
     pass
 
 
+class IsNotUndirectedGraphError(GraphError):
+    pass
+
+
 class IsNotSimpleGraphError(GraphError):
     pass
 

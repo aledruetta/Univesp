@@ -5,7 +5,8 @@ from random import randrange, choice
 from graph_exceptions import (
         VertexNotExistsError,
         VertexEmptyListError,
-        IsNotSimpleGraphError)
+        IsNotSimpleGraphError,
+        IsNotUndirectedGraphError)
 
 
 class Graph:
@@ -56,12 +57,20 @@ class Graph:
                     edge[1] not in self.V):
                 raise VertexNotExistsError
 
-    def to_adjacency(self, boolean=False):
-        """ Generate the graph's incidence matrix.
+    def zeros(self, boolean=False):
+        """ Returns a zeros or False squared matrix.
         """
         lenA = len(self.V)
         shape = (lenA, lenA)
-        M = np.zeros(shape, dtype=int)
+
+        return np.zeros(
+                shape,
+                dtype=(bool if boolean else int))
+
+    def to_adjacency(self, boolean=False):
+        """ Returns the graph's incidence matrix.
+        """
+        M = self.zeros()
 
         for a, b in self.E:
             M[self.V.index(a), self.V.index(b)] += 1
@@ -88,26 +97,39 @@ class Graph:
                 str(self.__class__)[:-1], self.V, self.E)
 
 
-class SimpleGraph(Graph):
+class UndirectedGraph(Graph):
     """
     """
     def __init__(self, V, E):
         super().__init__(V, E)
 
-        self._check_sedges()
+        self._check_ugedges()
 
-    def _check_sgEdges(self):
+    def _check_ugedges(self):
+        lenV = len(self.V)
+        Ident = np.identity(lenV, dtype=bool)
+        M = self.to_adjacency(boolean=True)
+        M = M & ~Ident
+
+        if (M & M.T).any():
+            raise IsNotUndirectedGraphError
+
+
+class SimpleGraph(UndirectedGraph):
+    """
+    """
+    def __init__(self, V, E):
+        super().__init__(V, E)
+
+        self._check_sgedges()
+
+    def _check_sgedges(self):
         self.E = list(set(self.E))
         for edge in self.E:
             if (
                     edge[0] == edge[1] or
                     (edge[1], edge[0]) in self.E):
                 raise IsNotSimpleGraphError
-
-
-class SimpleUGraph(SimpleGraph):
-    def __init__(self, V, E):
-        super().__init__(V, E)
 
 
 def main():
