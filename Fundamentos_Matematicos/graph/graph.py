@@ -56,20 +56,20 @@ class Graph:
                     edge[1] not in self.V):
                 raise VertexNotExistsError
 
-    def to_incidenceM(self, boolean=False):
+    def to_adjacency(self, boolean=False):
         """ Generate the graph's incidence matrix.
         """
         lenA = len(self.V)
         shape = (lenA, lenA)
-        M = np.zeros(shape, dtype=bool)
+        M = np.zeros(shape, dtype=int)
 
         for a, b in self.E:
-            M[a, b] = True
+            M[self.V.index(a), self.V.index(b)] += 1
 
         if boolean:
-            return M
+            return M.astype(bool)
 
-        return M.astype(int)
+        return M
 
     @classmethod
     def rand(cls, v):
