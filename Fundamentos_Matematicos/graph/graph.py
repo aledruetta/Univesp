@@ -67,7 +67,7 @@ class Graph:
                 shape,
                 dtype=(bool if boolean else int))
 
-    def to_adjacency(self, boolean=False):
+    def to_adjacency(self, dtype=int):
         """ Returns the graph's incidence matrix.
         """
         M = self.zeros()
@@ -75,10 +75,7 @@ class Graph:
         for a, b in self.E:
             M[self.V.index(a), self.V.index(b)] += 1
 
-        if boolean:
-            return M.astype(bool)
-
-        return M
+        return M.astype(dtype)
 
     @classmethod
     def rand(cls, v):
@@ -98,7 +95,7 @@ class Graph:
 
 
 class UndirectedGraph(Graph):
-    """
+    """ This class represent an undireted graph.
     """
     def __init__(self, V, E):
         super().__init__(V, E)
@@ -108,7 +105,7 @@ class UndirectedGraph(Graph):
     def _check_ugedges(self):
         lenV = len(self.V)
         Ident = np.identity(lenV, dtype=bool)
-        M = self.to_adjacency(boolean=True)
+        M = self.to_adjacency(dtype=bool)
         M = M & ~Ident
 
         if (M & M.T).any():
@@ -116,20 +113,26 @@ class UndirectedGraph(Graph):
 
 
 class SimpleGraph(UndirectedGraph):
-    """
+    """ This class represent a simple or strict graph:
+        An undirected graph without loops.
     """
     def __init__(self, V, E):
-        super().__init__(V, E)
+        try:
+            super().__init__(V, E)
+        except IsNotUndirectedGraphError as err:
+            raise IsNotSimpleGraphError(err)
 
         self._check_sgedges()
 
     def _check_sgedges(self):
-        self.E = list(set(self.E))
-        for edge in self.E:
-            if (
-                    edge[0] == edge[1] or
-                    (edge[1], edge[0]) in self.E):
-                raise IsNotSimpleGraphError
+        """
+        """
+        lenV = len(self.V)
+        Ident = np.identity(lenV, dtype=bool)
+        M = self.to_adjacency()
+
+        if (M.astype(bool) & Ident).any() or (M > 1).any():
+            raise IsNotSimpleGraphError
 
 
 def main():

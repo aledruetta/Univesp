@@ -4,11 +4,13 @@ import unittest
 import numpy as np
 from graph import (
         Graph,
-        UndirectedGraph)
+        UndirectedGraph,
+        SimpleGraph)
 from graph_exceptions import (
         VertexNotExistsError,
         VertexEmptyListError,
-        IsNotUndirectedGraphError)
+        IsNotUndirectedGraphError,
+        IsNotSimpleGraphError)
 
 """ Usage:
     python3 -m unittest -v test
@@ -75,6 +77,17 @@ class TestGraph(unittest.TestCase):
         with self.assertRaises(IsNotUndirectedGraphError):
             UndirectedGraph(
                     [1, 2, 3], [[1, 1], [1, 3], [3, 1], [2, 1]])
+
+    def test_sgraph_edges(self):
+        # Checks for loops
+        with self.assertRaises(IsNotSimpleGraphError):
+            SimpleGraph(
+                    [1, 2, 3], [[1, 1], [2, 1], [1, 3]])
+
+        # Checks for simetry
+        with self.assertRaises(IsNotSimpleGraphError):
+            SimpleGraph(
+                    [1, 2, 3], [[1, 3], [2, 1], [1, 2]])
 
 
 if __name__ == '__main__':
