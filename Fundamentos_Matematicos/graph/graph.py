@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# import numpy as np
+import numpy as np
 from random import randrange, choice
 from graph_exceptions import (
         VertexNotExistsError,
@@ -55,6 +55,21 @@ class Graph:
                     edge[0] not in self.V or
                     edge[1] not in self.V):
                 raise VertexNotExistsError
+
+    def to_incidenceM(self, boolean=False):
+        """ Generate the graph's incidence matrix.
+        """
+        lenA = len(self.V)
+        shape = (lenA, lenA)
+        M = np.zeros(shape, dtype=bool)
+
+        for a, b in self.E:
+            M[a, b] = True
+
+        if boolean:
+            return M
+
+        return M.astype(int)
 
     @classmethod
     def rand(cls, v):
