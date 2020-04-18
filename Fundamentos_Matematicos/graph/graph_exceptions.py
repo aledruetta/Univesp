@@ -9,6 +9,10 @@ class VertexNotExistsError(GraphError):
     pass
 
 
+class VertexEmptyListError(GraphError):
+    pass
+
+
 class IsNotSimpleGraphError(GraphError):
     pass
 
