@@ -34,35 +34,23 @@ class TestGraph(unittest.TestCase):
     def test_graph_vertices(self):
         # Empty list
         with self.assertRaises(VertexEmptyListError):
-            Graph([], [[1, 1]])
-
-        # Mix allowed types
-        with self.assertRaises(TypeError):
-            Graph([1, 'a'], [[1, 1]])
-
-        # Not allowed type
-        with self.assertRaises(TypeError):
-            Graph([1, 2.3], [[1, 1]])
-
-        # Not individual items
-        with self.assertRaises(TypeError):
-            Graph([1, [2, 1]], [[1, 1]])
+            Graph(0, [])
 
     def test_graph_edges(self):
         # Edge has non existing vertex
         with self.assertRaises(VertexNotExistsError):
-            Graph([1, 2], [[1, 3]])
+            Graph(2, [[0, 2]])
 
         # Edge isn't a list
         with self.assertRaises(TypeError):
-            Graph([1, 2], [(1, 2)])
+            Graph(2, [(0, 1)])
 
         # Edge is not 2-len
         with self.assertRaises(TypeError):
-            Graph([1, 2], [[1, 2, 1]])
+            Graph(2, [[0, 0, 1]])
 
     def test_graph_adjacency(self):
-        g = Graph([1, 2, 3], [[1, 2], [3, 2]])
+        g = Graph(3, [[0, 1], [2, 1]])
         m1 = g.to_adjacency()
 
         # Matrix is ndarray instance
@@ -75,19 +63,16 @@ class TestGraph(unittest.TestCase):
 
     def test_ugraph_edges(self):
         with self.assertRaises(IsNotUndirectedGraphError):
-            UndirectedGraph(
-                    [1, 2, 3], [[1, 1], [1, 3], [3, 1], [2, 1]])
+            UndirectedGraph(3, [[0, 0], [0, 2], [2, 0], [1, 0]])
 
     def test_sgraph_edges(self):
         # Checks for loops
         with self.assertRaises(IsNotSimpleGraphError):
-            SimpleGraph(
-                    [1, 2, 3], [[1, 1], [2, 1], [1, 3]])
+            SimpleGraph(3, [[0, 0], [1, 0], [0, 2]])
 
         # Checks for simetry
         with self.assertRaises(IsNotSimpleGraphError):
-            SimpleGraph(
-                    [1, 2, 3], [[1, 3], [2, 1], [1, 2]])
+            SimpleGraph(3, [[0, 2], [1, 0], [0, 1]])
 
 
 if __name__ == '__main__':
