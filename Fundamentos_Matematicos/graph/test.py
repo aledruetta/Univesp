@@ -74,9 +74,14 @@ class TestGraph(unittest.TestCase):
         self.assertTrue((m1 == m2).all())
 
     def test_graph_reflexive(self):
-        #
+        # is_reflexive must return True if matrix is reflexive
         g = Graph(3, [[0, 0], [0, 2], [0, 1], [1, 1], [2, 2]])
         self.assertTrue(g.is_reflexive())
+
+    def test_graph_irreflexive(self):
+        # is_irreflexive must return True if matrix is irreflexive
+        g = Graph(3, [[0, 2], [0, 1], [1, 2], [2, 1]])
+        self.assertTrue(g.is_irreflexive())
 
     def test_ugraph_edges(self):
         with self.assertRaises(IsNotUndirectedGraphError):

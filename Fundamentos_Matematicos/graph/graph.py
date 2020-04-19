@@ -99,6 +99,13 @@ class Graph:
 
         return (M & I == I).all()
 
+    def is_irreflexive(self):
+        M = self.to_adjacency(dtype=bool)
+        I = np.identity(len(M), dtype=bool)
+        Z = self.zeros(dtype=bool)
+
+        return (M & I == Z).all()
+
     @classmethod
     def rand(cls, v):
         """ Generate a random graph """
