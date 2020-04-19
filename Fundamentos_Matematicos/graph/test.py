@@ -73,6 +73,11 @@ class TestGraph(unittest.TestCase):
         # Is adjacency matrix
         self.assertTrue((m1 == m2).all())
 
+    def test_graph_reflexive(self):
+        #
+        g = Graph(3, [[0, 0], [0, 2], [0, 1], [1, 1], [2, 2]])
+        self.assertTrue(g.is_reflexive())
+
     def test_ugraph_edges(self):
         with self.assertRaises(IsNotUndirectedGraphError):
             UndirectedGraph(3, [[0, 0], [0, 2], [2, 0], [1, 0]])

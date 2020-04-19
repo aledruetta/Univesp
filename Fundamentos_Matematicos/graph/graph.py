@@ -93,6 +93,12 @@ class Graph:
 
         return M.astype(dtype)
 
+    def is_reflexive(self):
+        M = self.to_adjacency(dtype=bool)
+        I = np.identity(len(M), dtype=bool)
+
+        return (M & I == I).all()
+
     @classmethod
     def rand(cls, v):
         """ Generate a random graph """
