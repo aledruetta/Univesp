@@ -94,17 +94,36 @@ class Graph:
         return M.astype(dtype)
 
     def is_reflexive(self):
+        """ Cheks reflexivity.
+        """
         M = self.to_adjacency(dtype=bool)
         I = np.identity(len(M), dtype=bool)
 
         return (M & I == I).all()
 
     def is_irreflexive(self):
+        """ Cheks irreflexivity.
+        """
         M = self.to_adjacency(dtype=bool)
         I = np.identity(len(M), dtype=bool)
         Z = self.zeros(dtype=bool)
 
         return (M & I == Z).all()
+
+    def is_simetric(self):
+        """ Cheks simetry.
+        """
+        M = self.to_adjacency(dtype=bool)
+
+        return (M == M.T).all()
+
+    def is_antisimetric(self):
+        """ Cheks antisimetry.
+        """
+        I = np.identity(len(self.V), dtype=bool)
+        M = self.to_adjacency(dtype=bool) & ~I
+
+        return not (M & M.T).any()
 
     @classmethod
     def rand(cls, v):

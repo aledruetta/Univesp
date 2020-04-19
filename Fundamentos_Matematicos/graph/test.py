@@ -78,10 +78,31 @@ class TestGraph(unittest.TestCase):
         g = Graph(3, [[0, 0], [0, 2], [0, 1], [1, 1], [2, 2]])
         self.assertTrue(g.is_reflexive())
 
+        g = Graph(3, [[0, 0], [0, 2], [0, 1], [1, 0], [2, 2]])
+        self.assertFalse(g.is_reflexive())
+
     def test_graph_irreflexive(self):
         # is_irreflexive must return True if matrix is irreflexive
         g = Graph(3, [[0, 2], [0, 1], [1, 2], [2, 1]])
         self.assertTrue(g.is_irreflexive())
+
+        g = Graph(3, [[0, 2], [1, 1], [1, 2], [2, 1]])
+        self.assertFalse(g.is_irreflexive())
+
+    def test_is_simetric(self):
+        g = Graph(3, [[0, 2], [1, 2], [2, 1], [2, 0], [2, 2]])
+        self.assertTrue(g.is_simetric())
+
+        g = Graph(3, [[0, 1], [1, 2], [2, 1], [2, 0], [2, 2]])
+        self.assertFalse(g.is_simetric())
+
+
+    def test_is_antisimetric(self):
+        g = Graph(3, [[0, 2], [1, 0], [1, 2], [2, 2]])
+        self.assertTrue(g.is_antisimetric())
+
+        g = Graph(3, [[0, 2], [1, 0], [1, 2], [2, 0], [2, 2]])
+        self.assertFalse(g.is_antisimetric())
 
     def test_ugraph_edges(self):
         with self.assertRaises(IsNotUndirectedGraphError):
