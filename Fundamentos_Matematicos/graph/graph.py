@@ -2,8 +2,10 @@
 
 import numpy as np
 import string
+
 from random import randrange, choice
 from itertools import combinations_with_replacement as combine
+
 from graph_exceptions import (
         VertexNotExistsError,
         VertexEmptyListError,
@@ -46,9 +48,9 @@ class Graph:
     def named_edges(self):
         named = {}
 
-        strings = string.ascii_lowercase
+        strings = list(string.ascii_lowercase)
         key_len = (len(self.E) // len(strings) + 1) + 1
-        keys = list(combine(strings, key_len))
+        keys = strings + list(combine(strings, key_len))
 
         i = 0
         for edge in self.E:
@@ -58,23 +60,36 @@ class Graph:
 
         return named
 
-    def zeros(self, boolean=False):
+    def zeros(self, shape=None, dtype=int):
         """ Returns a zeros or False squared matrix.
         """
-        lenA = len(self.V)
-        shape = (lenA, lenA)
+        if shape is None:
+            lenA = len(self.V)
+            shape = (lenA, lenA)
 
-        return np.zeros(
-                shape,
-                dtype=(bool if boolean else int))
+        return np.zeros(shape, dtype=dtype)
 
     def to_adjacency(self, dtype=int):
-        """ Returns the graph's incidence matrix.
+        """ Returns the graph's adjacency matrix.
         """
         M = self.zeros()
 
         for a, b in self.E:
-            M[self.V.index(a), self.V.index(b)] += 1
+            M[a, b] += 1
+
+        return M.astype(dtype)
+
+    def to_incidence(self, dtype=int):
+        """ Return de graph's incidence matrix.
+        """
+        shape = (len(self.V), len(self.E))
+        M = self.zeros(shape)
+
+        names = sorted(list(self.named_edges.keys()))
+        for name, edge in self.named_edges.items():
+            i = names.index(name)
+            M[edge[0], i] += 1
+            M[edge[1], i] += 1
 
         return M.astype(dtype)
 
