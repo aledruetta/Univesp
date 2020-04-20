@@ -3,6 +3,7 @@
 *.o
 test.*
 **/codeblocks/
+**/.vscode/
 ^.ibnb*
 .ipynb*/
 __*
