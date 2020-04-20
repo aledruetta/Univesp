@@ -222,17 +222,7 @@ class SimpleGraph(UndirectedGraph):
 
 
 def main():
-    g = Graph.rand(4)
-
-    print('\n{}\n'.format(g))
-    print('Adjacency Matrix:\n{}\n'.format(g.to_adjacency()))
-    print('Incidence Matrix:\n{}\n'.format(g.to_incidence()))
-    print('\nReflexive: {}'.format(g.is_reflexive()))
-    print('Irreflexive: {}'.format(g.is_irreflexive()))
-    print('Simetric: {}'.format(g.is_simetric()))
-    print('Antisimetric: {}'.format(g.is_antisimetric()))
-    print('Transitive: {}\n'.format(g.is_transitive()))
-
+    pass
 
 if __name__ == '__main__':
     main()
