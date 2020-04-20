@@ -160,13 +160,26 @@ class UndirectedGraph(Graph):
         self._check_ugedges()
 
     def _check_ugedges(self):
-        lenV = len(self.V)
-        Ident = np.identity(lenV, dtype=bool)
-        M = self.to_adjacency(dtype=bool)
-        M = M & ~Ident
-
-        if (M & M.T).any():
+        if not self.is_antisimetric():
             raise IsNotUndirectedGraphError
+
+    @classmethod
+    def rand(cls, v):
+        """
+        """
+        edges = Graph.rand(v).E
+
+        for edge in edges:
+            rev = [edge[1], edge[0]]
+            if rev != edge and rev in edges:
+                while True:
+                    try:
+                        i = edges.index(rev)
+                        edges[i].reverse()
+                    except ValueError:
+                        break
+
+        return cls(v, edges)
 
 
 class SimpleGraph(UndirectedGraph):

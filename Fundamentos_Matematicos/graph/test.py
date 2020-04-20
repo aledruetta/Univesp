@@ -111,11 +111,21 @@ class TestGraph(unittest.TestCase):
         g = Graph(3, [[0, 0], [0, 1], [1, 1], [2, 0]])
         self.assertFalse(g.is_transitive())
 
+class TestUndirectedGraph(unittest.TestCase):
     def test_ugraph_edges(self):
+        # Checks for antisimetry
+        g = UndirectedGraph.rand(5)
+        self.assertTrue(g.is_antisimetric())
+
         with self.assertRaises(IsNotUndirectedGraphError):
             UndirectedGraph(3, [[0, 0], [0, 2], [2, 0], [1, 0]])
 
+class TestSimpleGraph(unittest.TestCase):
     def test_sgraph_edges(self):
+        # Checks for irreflexivity
+        g = UndirectedGraph.rand(5)
+        self.assertTrue(g.is_irreflexive())
+
         # Checks for loops
         with self.assertRaises(IsNotSimpleGraphError):
             SimpleGraph(3, [[0, 0], [1, 0], [0, 2]])
