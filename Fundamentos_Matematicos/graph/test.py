@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+""" Usage:
+    python3 -m unittest -v test
+"""
+
 import unittest
 import numpy as np
 from graph import (
@@ -11,10 +15,6 @@ from graph_exceptions import (
         VertexEmptyListError,
         IsNotUndirectedGraphError,
         IsNotSimpleGraphError)
-
-""" Usage:
-    python3 -m unittest -v test
-"""
 
 
 class TestGraph(unittest.TestCase):
@@ -123,7 +123,7 @@ class TestUndirectedGraph(unittest.TestCase):
 class TestSimpleGraph(unittest.TestCase):
     def test_sgraph_edges(self):
         # Checks for irreflexivity
-        g = UndirectedGraph.rand(5)
+        g = SimpleGraph.rand(5)
         self.assertTrue(g.is_irreflexive())
 
         # Checks for loops

@@ -135,6 +135,14 @@ class Graph:
         return (C | M == M).all()
 
     @classmethod
+    def from_m(cls, M):
+        M = M.astype(bool)
+        lm = len(M)
+        edges = [[i, j] for i in range(lm) for j in range(lm) if M[i, j] == True]
+
+        return cls(lm, edges)
+
+    @classmethod
     def rand(cls, v):
         """ Generate a random graph """
 
@@ -160,6 +168,8 @@ class UndirectedGraph(Graph):
         self._check_ugedges()
 
     def _check_ugedges(self):
+        """
+        """
         if not self.is_antisimetric():
             raise IsNotUndirectedGraphError
 
@@ -189,20 +199,26 @@ class SimpleGraph(UndirectedGraph):
     def __init__(self, V, E):
         try:
             super().__init__(V, E)
-        except IsNotUndirectedGraphError as err:
-            raise IsNotSimpleGraphError(err)
+        except IsNotUndirectedGraphError:
+            raise IsNotSimpleGraphError
 
         self._check_sgedges()
 
     def _check_sgedges(self):
         """
         """
-        lenV = len(self.V)
-        Ident = np.identity(lenV, dtype=bool)
-        M = self.to_adjacency()
-
-        if (M.astype(bool) & Ident).any() or (M > 1).any():
+        if not self.is_irreflexive():
             raise IsNotSimpleGraphError
+
+    @classmethod
+    def rand(cls, v):
+        """
+        """
+        U = UndirectedGraph.rand(v).to_adjacency(dtype=bool)
+        I = np.identity(v, dtype=bool)
+        S = (U & ~I).astype(int)
+
+        return cls.from_m(S)
 
 
 def main():
