@@ -2,6 +2,7 @@
 
 import numpy as np
 import string
+import re
 
 from random import randrange, choice
 from itertools import combinations_with_replacement as combine
@@ -125,6 +126,14 @@ class Graph:
 
         return not (M & M.T).any()
 
+    def is_transitive(self):
+        """ Checks transitivity.
+        """
+        M = self.to_adjacency(dtype=bool)
+        C = M.dot(M)
+
+        return (C | M == M).all()
+
     @classmethod
     def rand(cls, v):
         """ Generate a random graph """
@@ -184,7 +193,16 @@ class SimpleGraph(UndirectedGraph):
 
 
 def main():
-    pass
+    g = Graph.rand(4)
+
+    print('\n{}\n'.format(g))
+    print('Adjacency Matrix:\n{}\n'.format(g.to_adjacency()))
+    print('Incidence Matrix:\n{}\n'.format(g.to_incidence()))
+    print('\nReflexive: {}'.format(g.is_reflexive()))
+    print('Irreflexive: {}'.format(g.is_irreflexive()))
+    print('Simetric: {}'.format(g.is_simetric()))
+    print('Antisimetric: {}'.format(g.is_antisimetric()))
+    print('Transitive: {}\n'.format(g.is_transitive()))
 
 
 if __name__ == '__main__':

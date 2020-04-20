@@ -104,6 +104,13 @@ class TestGraph(unittest.TestCase):
         g = Graph(3, [[0, 2], [1, 0], [1, 2], [2, 0], [2, 2]])
         self.assertFalse(g.is_antisimetric())
 
+    def test_is_transitive(self):
+        g = Graph(3, [[0, 0], [0, 1], [1, 1]])
+        self.assertTrue(g.is_transitive())
+
+        g = Graph(3, [[0, 0], [0, 1], [1, 1], [2, 0]])
+        self.assertFalse(g.is_transitive())
+
     def test_ugraph_edges(self):
         with self.assertRaises(IsNotUndirectedGraphError):
             UndirectedGraph(3, [[0, 0], [0, 2], [2, 0], [1, 0]])
