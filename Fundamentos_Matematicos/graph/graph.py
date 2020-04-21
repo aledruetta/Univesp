@@ -134,6 +134,24 @@ class Graph:
 
         return (C | M == M).all()
 
+    def report(self):
+        """
+        """
+        fstr = """
+    Reflexiva:     {}
+    Irreflexiva:   {}
+    Simétrica:     {}
+    Antisimétrica: {}
+    Transitiva:    {}
+        """.format(
+                self.is_reflexive(),
+                self.is_irreflexive(),
+                self.is_simetric(),
+                self.is_antisimetric(),
+                self.is_transitive())
+
+        return fstr
+
     @classmethod
     def from_m(cls, M):
         M = M.astype(bool)
