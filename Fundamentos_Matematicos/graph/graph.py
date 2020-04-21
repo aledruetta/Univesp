@@ -150,9 +150,11 @@ class Graph:
     Transitiva:    {}
 
     Matriz de adjacência:
+
 {}
 
     Matriz de incidência:
+
 {}
         """.format(
                 self.__class__,
