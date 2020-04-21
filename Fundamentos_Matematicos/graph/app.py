@@ -25,7 +25,7 @@ def main():
 
     if tipo == 'r':
         tipo = random.choice(['m', 's', 'u'])
-        v = random.randint(1, 10)
+        v = random.randint(2, 5)
     else:
         pattern = re.compile(r'\d{1,}')
 
@@ -53,10 +53,7 @@ def main():
     else:
         return
 
-    print('\n{}\n'.format(g))
-    print('{}\n'.format(g.report()))
-    print('Matriz de adjacência:\n{}\n'.format(g.to_adjacency()))
-    print('Matriz de incidência:\n{}\n'.format(g.to_incidence()))
+    print(g.report())
 
 
 if __name__ == '__main__':

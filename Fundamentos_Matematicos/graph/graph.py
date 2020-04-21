@@ -138,17 +138,33 @@ class Graph:
         """
         """
         fstr = """
+    Tipo: {}
+
+    Vértices: {}
+    Arestas:  {}
+
     Reflexiva:     {}
     Irreflexiva:   {}
     Simétrica:     {}
     Antisimétrica: {}
     Transitiva:    {}
+
+    Matriz de adjacência:
+{}
+
+    Matriz de incidência:
+{}
         """.format(
+                self.__class__,
+                self.V,
+                self.E,
                 self.is_reflexive(),
                 self.is_irreflexive(),
                 self.is_simetric(),
                 self.is_antisimetric(),
-                self.is_transitive())
+                self.is_transitive(),
+                self.to_adjacency(),
+                self.to_incidence())
 
         return fstr
 
