@@ -146,6 +146,7 @@ class Graph:
         """
         """
         A = self.to_adjacency(dtype=bool).astype(int)
+
         for i in range(len(A)):
             lin = A[i,:]
             if sum(lin) >= len(lin):
@@ -157,12 +158,35 @@ class Graph:
         """
         """
         A = self.to_adjacency(dtype=bool).astype(int)
+
         for j in range(len(A)):
             col = A[:,j]
             if sum(col) >= len(col):
                 return j
 
         return None
+
+    def maximal(self):
+        maximals = []
+        A = self.to_adjacency(dtype=bool).astype(int)
+
+        for i in range(len(A)):
+            lin = A[i,:]
+            if sum(lin) == 1:
+                maximals.append(i)
+
+        return maximals
+
+    def minimal(self):
+        minimals = []
+        A = self.to_adjacency(dtype=bool).astype(int)
+
+        for j in range(len(A)):
+            col = A[:,j]
+            if sum(col) == 1:
+                minimals.append(j)
+
+        return minimals
 
     def report(self):
         """
@@ -180,8 +204,10 @@ class Graph:
     Transitiva:    {}
 
     Relação de ordem: {}
-    Máximo: {}
-    Mínimo: {}
+    Máximo:   {}
+    Mínimo:   {}
+    Maximais: {}
+    Minimais: {}
 
     Matriz de adjacência:
 
@@ -202,6 +228,8 @@ class Graph:
                 self.is_order(),
                 self.max(),
                 self.min(),
+                self.maximal(),
+                self.minimal(),
                 self.to_adjacency(),
                 self.to_incidence())
 
