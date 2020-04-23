@@ -43,7 +43,8 @@ def main():
             print('Ingrese as arestas no formato "a,b":\n')
 
             for i in range(a_qty):
-                aresta = input('[{}] '.format(i+1))
+                padding = (len(str(a_qty)) - len(str(i + 1))) * ' '
+                aresta = input('{}[{}] '.format(padding, i+1))
                 match = re.findall(pattern, aresta)
 
                 if match and len(match) == 2:
