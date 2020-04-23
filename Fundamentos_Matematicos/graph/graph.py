@@ -134,6 +134,36 @@ class Graph:
 
         return (C | M == M).all()
 
+    def is_order(self):
+        """
+        """
+        return (
+                self.is_reflexive() and
+                self.is_antisimetric() and
+                self.is_transitive())
+
+    def min(self):
+        """
+        """
+        A = self.to_adjacency(dtype=bool).astype(int)
+        for i in range(len(A)):
+            lin = A[i,:]
+            if sum(lin) >= len(lin):
+                return i
+
+        return None
+
+    def max(self):
+        """
+        """
+        A = self.to_adjacency(dtype=bool).astype(int)
+        for j in range(len(A)):
+            col = A[:,j]
+            if sum(col) >= len(col):
+                return j
+
+        return None
+
     def report(self):
         """
         """
@@ -148,6 +178,10 @@ class Graph:
     Simétrica:     {}
     Antisimétrica: {}
     Transitiva:    {}
+
+    Relação de ordem: {}
+    Máximo: {}
+    Mínimo: {}
 
     Matriz de adjacência:
 
@@ -165,6 +199,9 @@ class Graph:
                 self.is_simetric(),
                 self.is_antisimetric(),
                 self.is_transitive(),
+                self.is_order(),
+                self.max(),
+                self.min(),
                 self.to_adjacency(),
                 self.to_incidence())
 
