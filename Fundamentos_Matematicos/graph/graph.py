@@ -221,7 +221,7 @@ class Graph:
 
 
 class UndirectedGraph(Graph):
-    """ This class represent an undireted graph.
+    """ This class represents an undireted graph.
     """
     def __init__(self, V, E):
         super().__init__(V, E)
@@ -236,7 +236,7 @@ class UndirectedGraph(Graph):
 
     @classmethod
     def rand(cls, v_qty):
-        """
+        """ Return a random generated undirected graph.
         """
         edges = Graph.rand(v_qty).E
 
@@ -254,10 +254,11 @@ class UndirectedGraph(Graph):
 
 
 class OrderedGraph(UndirectedGraph):
+    """ This class represents an ordered graph.
     """
-    """
-    def __init__(self, V, E):
+    def __init__(self, V, E, minority=True):
         super().__init__(V, E)
+        self.minority=minority
 
         self._check_properties()
 
@@ -266,8 +267,32 @@ class OrderedGraph(UndirectedGraph):
             raise IsNotOrderedGraphError
 
     @classmethod
+    def order(cls, G, minority=True):
+        A = G.to_adjacency(dtype=bool)
+        len_a = len(A)
+        ident = np.identity(len_a, dtype=bool)
+        S = A | ident          # make simetric
+
+        if minority:
+            E = [[i, j] for i in range(len_a) for j in range(i, len_a)
+                    if S[i, j]]
+        else:
+            E = [[i, j] for i in range(len_a) for j in range(i+1)
+                    if S[i, j]]
+
+        return OrderedGraph(len_a, E, minority)
+
+    @classmethod
     def rand(cls, v_qty):
-        pass
+        while True:
+            R = Graph.rand(v_qty)
+            try:
+                O = OrderedGraph.order(R, minority=choice([True, False]))
+            except IsNotOrderedGraphError:
+                continue
+            else:
+                break
+        return O
 
 
 class SimpleGraph(UndirectedGraph):

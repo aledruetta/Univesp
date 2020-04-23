@@ -9,7 +9,8 @@ import random
 from graph import (
         Graph,
         UndirectedGraph,
-        SimpleGraph)
+        SimpleGraph,
+        OrderedGraph)
 
 
 def main():
@@ -23,6 +24,7 @@ def main():
 [S] Simple
 [U] Não orientado
 [M] Multigrafo
+[O] Ordenado
 [R] Randômico
 """)
 
@@ -30,7 +32,7 @@ def main():
         arestas = []
 
         if tipo in ['r', '']:
-            tipo = random.choice(['m', 's', 'u'])
+            tipo = random.choice(['m', 's', 'u', 'o'])
             v_qty = random.randint(2, 7)
         else:
             pattern = re.compile(r'\d{1,}')
@@ -55,6 +57,16 @@ def main():
             graph = UndirectedGraph(v_qty, arestas) if arestas else UndirectedGraph.rand(v_qty)
         elif tipo == 's':
             graph = SimpleGraph(v_qty, arestas) if arestas else SimpleGraph.rand(v_qty)
+        elif tipo == 'o':
+            if arestas:
+                opt = ''
+                while opt not in ['m', 'M']:
+                    opt = input('\nInforme minofidade ou maioridade (m/M): ')
+
+                minority = opt == 'm'
+
+            graph = OrderedGraph(v_qty, arestas, minority) \
+                    if arestas else OrderedGraph.rand(v_qty)
         else:
             return
 
