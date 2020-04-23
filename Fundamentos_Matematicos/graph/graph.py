@@ -173,7 +173,7 @@ class Graph:
 
         return None
 
-    def maximal(self):
+    def maximal(self, minority=True):
         maximals = []
         A = self.to_adjacency(dtype=bool).astype(int)
 
@@ -182,9 +182,12 @@ class Graph:
             if sum(lin) == 1:
                 maximals.append(i)
 
-        return maximals
+        if minority:
+            return maximals
+        else:
+            return self.minimal()
 
-    def minimal(self):
+    def minimal(self, minority=True):
         minimals = []
         A = self.to_adjacency(dtype=bool).astype(int)
 
@@ -193,7 +196,10 @@ class Graph:
             if sum(col) == 1:
                 minimals.append(j)
 
-        return minimals
+        if minority:
+            return minimals
+        else:
+            return self.maximal()
 
     @classmethod
     def from_m(cls, M):
