@@ -26,12 +26,12 @@ def main():
 [R] Randômico
 """)
 
-        tipo = input('Selecione o tipo de grafo: ').lower()
+        tipo = input('Selecione o tipo de grafo (R padrão): ').lower()
         arestas = []
 
-        if tipo == 'r':
+        if tipo in ['r', '']:
             tipo = random.choice(['m', 's', 'u'])
-            v_qty = random.randint(2, 5)
+            v_qty = random.randint(2, 7)
         else:
             pattern = re.compile(r'\d{1,}')
 
@@ -58,6 +58,7 @@ def main():
         else:
             return
 
+        order = ""
         if graph.is_order():
             order = """\n
 Máximo:   {}

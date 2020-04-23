@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 
-import numpy as np
-import string
-import re
+""" A bunch of classes for graph matrix fun.
+"""
 
-from random import randrange, choice
+import string
+
 from itertools import combinations_with_replacement as combine
+from random import randrange, choice
+
+import numpy as np
+
 
 from graph_exceptions import (
         VertexNotExistsError,
@@ -18,8 +22,8 @@ class Graph:
     """ This class represents a generic graph. It's has a set
         of vertices and a list of edges (a 2-len list of vertices).
     """
-    def __init__(self, lenV, E):
-        self.V = list(range(lenV))      # list of vertices
+    def __init__(self, len_v, E):
+        self.V = list(range(len_v))      # list of vertices
         self.E = E                      # list of edges
 
         self._check_vertices()
@@ -40,13 +44,15 @@ class Graph:
         for edge in self.E:
             if not isinstance(edge, list) or len(edge) != 2:
                 raise TypeError
-            elif (
+            if (
                     edge[0] not in self.V or
                     edge[1] not in self.V):
                 raise VertexNotExistsError
 
     @property
     def named_edges(self):
+        """ Return a dictionary of named edges.
+        """
         named = {}
 
         strings = list(string.ascii_lowercase)
@@ -65,8 +71,8 @@ class Graph:
         """ Returns a zeros or False squared matrix.
         """
         if shape is None:
-            lenA = len(self.V)
-            shape = (lenA, lenA)
+            len_a = len(self.V)
+            shape = (len_a, len_a)
 
         return np.zeros(shape, dtype=dtype)
 
@@ -76,7 +82,7 @@ class Graph:
         M = self.zeros()
 
         for a, b in self.E:
-            M[a, b] += 1
+            M[a, b] = 1
 
         return M.astype(dtype)
 
