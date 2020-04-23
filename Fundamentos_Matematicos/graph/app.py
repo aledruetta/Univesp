@@ -29,11 +29,10 @@ def main():
     else:
         pattern = re.compile(r'\d{1,}')
 
-        v = int(input('Quantidade de vértices: '))
-        a = int(input('Quantidade de arestas: '))
-
-        print('\nIngrese as arestas no formato "a,b"')
-        print('Vértices: {}\n'.format(list(range(v))))
+        v = int(input('\nQuantidade de vértices: '))
+        print('Vértices: {}'.format(list(range(v))))
+        a = int(input('\nQuantidade de arestas: '))
+        print('Ingrese as arestas no formato "a,b":\n')
 
         for i in range(a):
             aresta = input('[{}] '.format(i+1))
