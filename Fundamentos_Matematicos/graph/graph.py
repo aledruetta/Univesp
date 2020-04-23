@@ -191,6 +191,19 @@ class Graph:
     def report(self):
         """
         """
+        order = ""
+        if self.is_order():
+            order = """\n
+    Máximo:   {}
+    Mínimo:   {}
+    Maximais: {}
+    Minimais: {}
+    """.format(
+            self.max(),
+            self.min(),
+            self.maximal(),
+            self.minimal())
+
         fstr = """
     Tipo: {}
 
@@ -203,11 +216,7 @@ class Graph:
     Antisimétrica: {}
     Transitiva:    {}
 
-    Relação de ordem: {}
-    Máximo:   {}
-    Mínimo:   {}
-    Maximais: {}
-    Minimais: {}
+    Relação de ordem: {}{}
 
     Matriz de adjacência:
 
@@ -226,10 +235,7 @@ class Graph:
                 self.is_antisimetric(),
                 self.is_transitive(),
                 self.is_order(),
-                self.max(),
-                self.min(),
-                self.maximal(),
-                self.minimal(),
+                order,
                 self.to_adjacency(),
                 self.to_incidence())
 
