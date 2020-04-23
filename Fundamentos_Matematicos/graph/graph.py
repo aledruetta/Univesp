@@ -15,7 +15,8 @@ from graph_exceptions import (
         VertexNotExistsError,
         VertexEmptyListError,
         IsNotSimpleGraphError,
-        IsNotUndirectedGraphError)
+        IsNotUndirectedGraphError,
+        IsNotOrderedGraphError)
 
 
 class Graph:
@@ -203,16 +204,16 @@ class Graph:
         return cls(lm, edges)
 
     @classmethod
-    def rand(cls, v):
+    def rand(cls, v_qty):
         """ Generate a random graph """
 
         E = []
-        V = list(range(v))
+        V = list(range(v_qty))
 
-        for i in range(randrange(v ** 2)):
+        for i in range(randrange(v_qty ** 2)):
             E.append([choice(V), choice(V)])
 
-        return cls(v, E)
+        return cls(v_qty, E)
 
     def __str__(self):
         return '{}\n\tV: {}\n\tE: {}>'.format(
@@ -234,10 +235,10 @@ class UndirectedGraph(Graph):
             raise IsNotUndirectedGraphError
 
     @classmethod
-    def rand(cls, v):
+    def rand(cls, v_qty):
         """
         """
-        edges = Graph.rand(v).E
+        edges = Graph.rand(v_qty).E
 
         for edge in edges:
             rev = [edge[1], edge[0]]
@@ -249,7 +250,24 @@ class UndirectedGraph(Graph):
                     except ValueError:
                         break
 
-        return cls(v, edges)
+        return cls(v_qty, edges)
+
+
+class OrderedGraph(UndirectedGraph):
+    """
+    """
+    def __init__(self, V, E):
+        super().__init__(V, E)
+
+        self._check_properties()
+
+    def _check_properties(self):
+        if not self.is_order():
+            raise IsNotOrderedGraphError
+
+    @classmethod
+    def rand(cls, v_qty):
+        pass
 
 
 class SimpleGraph(UndirectedGraph):
@@ -271,11 +289,11 @@ class SimpleGraph(UndirectedGraph):
             raise IsNotSimpleGraphError
 
     @classmethod
-    def rand(cls, v):
+    def rand(cls, v_qty):
         """
         """
-        U = UndirectedGraph.rand(v).to_adjacency(dtype=bool)
-        I = np.identity(v, dtype=bool)
+        U = UndirectedGraph.rand(v_qty).to_adjacency(dtype=bool)
+        I = np.identity(v_qty, dtype=bool)
         S = (U & ~I).astype(int)
 
         return cls.from_m(S)

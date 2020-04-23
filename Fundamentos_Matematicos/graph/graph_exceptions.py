@@ -21,6 +21,10 @@ class IsNotSimpleGraphError(GraphError):
     pass
 
 
+class IsNotOrderedGraphError(GraphError):
+    pass
+
+
 def main():
     pass
 
