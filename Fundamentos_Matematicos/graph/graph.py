@@ -188,59 +188,6 @@ class Graph:
 
         return minimals
 
-    def report(self):
-        """
-        """
-        order = ""
-        if self.is_order():
-            order = """\n
-    Máximo:   {}
-    Mínimo:   {}
-    Maximais: {}
-    Minimais: {}
-    """.format(
-            self.max(),
-            self.min(),
-            self.maximal(),
-            self.minimal())
-
-        fstr = """
-    Tipo: {}
-
-    Vértices: {}
-    Arestas:  {}
-
-    Reflexiva:     {}
-    Irreflexiva:   {}
-    Simétrica:     {}
-    Antisimétrica: {}
-    Transitiva:    {}
-
-    Relação de ordem: {}{}
-
-    Matriz de adjacência:
-
-{}
-
-    Matriz de incidência:
-
-{}
-        """.format(
-                self.__class__,
-                self.V,
-                self.E,
-                self.is_reflexive(),
-                self.is_irreflexive(),
-                self.is_simetric(),
-                self.is_antisimetric(),
-                self.is_transitive(),
-                self.is_order(),
-                order,
-                self.to_adjacency(),
-                self.to_incidence())
-
-        return fstr
-
     @classmethod
     def from_m(cls, M):
         M = M.astype(bool)

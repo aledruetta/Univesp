@@ -14,11 +14,11 @@ def main():
     """
     print("""\n ===== Gerador de Grafos =====
 
-    [S] Simple
-    [U] Não orientado
-    [M] Multigrafo
-    [R] Randômico
-    """)
+[S] Simple
+[U] Não orientado
+[M] Multigrafo
+[R] Randômico
+""")
 
     tipo = input('Selecione o tipo de grafo: ').lower()
     arestas = []
@@ -52,7 +52,51 @@ def main():
     else:
         return
 
-    print(g.report())
+    order = """\n
+Máximo:   {}
+Mínimo:   {}
+Maximais: {}
+Minimais: {}
+    """.format(
+            g.max(),
+            g.min(),
+            g.maximal(),
+            g.minimal())
+
+    print("""
+Tipo: {}
+
+Vértices: {}
+Arestas:  {}
+
+Reflexiva:     {}
+Irreflexiva:   {}
+Simétrica:     {}
+Antisimétrica: {}
+Transitiva:    {}
+
+Relação de ordem: {}{}
+
+Matriz de adjacência:
+
+{}
+
+Matriz de incidência:
+
+{}
+""".format(
+        g.__class__,
+        g.V,
+        g.E,
+        g.is_reflexive(),
+        g.is_irreflexive(),
+        g.is_simetric(),
+        g.is_antisimetric(),
+        g.is_transitive(),
+        g.is_order(),
+        order,
+        g.to_adjacency(),
+        g.to_incidence()))
 
 
 if __name__ == '__main__':
