@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+""" Aplicativo para linha de comandos.
+"""
+
 import re
 import random
 
@@ -10,7 +13,7 @@ from graph import (
 
 
 def main():
-    """
+    """ Função main.
     """
     mais = 's'
 
@@ -28,16 +31,16 @@ def main():
 
         if tipo == 'r':
             tipo = random.choice(['m', 's', 'u'])
-            v = random.randint(2, 5)
+            v_qty = random.randint(2, 5)
         else:
             pattern = re.compile(r'\d{1,}')
 
-            v = int(input('\nQuantidade de vértices: '))
-            print('Vértices: {}'.format(list(range(v))))
-            a = int(input('\nQuantidade de arestas: '))
+            v_qty = int(input('\nQuantidade de vértices: '))
+            print('Vértices: {}'.format(list(range(v_qty))))
+            a_qty = int(input('\nQuantidade de arestas: '))
             print('Ingrese as arestas no formato "a,b":\n')
 
-            for i in range(a):
+            for i in range(a_qty):
                 aresta = input('[{}] '.format(i+1))
                 match = re.findall(pattern, aresta)
 
@@ -47,24 +50,25 @@ def main():
                     arestas.append(match)
 
         if tipo == 'm':
-            g = Graph(v, arestas) if arestas else Graph.rand(v)
+            graph = Graph(v_qty, arestas) if arestas else Graph.rand(v_qty)
         elif tipo == 'u':
-            g = UndirectedGraph(v, arestas) if arestas else UndirectedGraph.rand(v)
+            graph = UndirectedGraph(v_qty, arestas) if arestas else UndirectedGraph.rand(v_qty)
         elif tipo == 's':
-            g = SimpleGraph(v, arestas) if arestas else SimpleGraph.rand(v)
+            graph = SimpleGraph(v_qty, arestas) if arestas else SimpleGraph.rand(v_qty)
         else:
             return
 
-        order = """\n
+        if graph.is_order():
+            order = """\n
 Máximo:   {}
 Mínimo:   {}
 Maximais: {}
 Minimais: {}
-    """.format(
-            g.max(),
-            g.min(),
-            g.maximal(),
-            g.minimal())
+""".format(
+        graph.max(),
+        graph.min(),
+        graph.maximal(),
+        graph.minimal())
 
         print("""
 Tipo: {}
@@ -88,18 +92,18 @@ Matriz de incidência:
 
 {}
 """.format(
-        g.__class__,
-        g.V,
-        g.E,
-        g.is_reflexive(),
-        g.is_irreflexive(),
-        g.is_simetric(),
-        g.is_antisimetric(),
-        g.is_transitive(),
-        g.is_order(),
+        graph.__class__,
+        graph.V,
+        graph.E,
+        graph.is_reflexive(),
+        graph.is_irreflexive(),
+        graph.is_simetric(),
+        graph.is_antisimetric(),
+        graph.is_transitive(),
+        graph.is_order(),
         order,
-        g.to_adjacency(),
-        g.to_incidence()))
+        graph.to_adjacency(),
+        graph.to_incidence()))
 
         mais = input('\nMais um (S/n)? ').lower()
 
