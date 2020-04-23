@@ -12,7 +12,10 @@ from graph import (
 def main():
     """
     """
-    print("""\n ===== Gerador de Grafos =====
+    mais = 's'
+
+    while mais != 'n':
+        print("""\n ===== Gerador de Grafos =====
 
 [S] Simple
 [U] Não orientado
@@ -20,39 +23,39 @@ def main():
 [R] Randômico
 """)
 
-    tipo = input('Selecione o tipo de grafo: ').lower()
-    arestas = []
+        tipo = input('Selecione o tipo de grafo: ').lower()
+        arestas = []
 
-    if tipo == 'r':
-        tipo = random.choice(['m', 's', 'u'])
-        v = random.randint(2, 5)
-    else:
-        pattern = re.compile(r'\d{1,}')
+        if tipo == 'r':
+            tipo = random.choice(['m', 's', 'u'])
+            v = random.randint(2, 5)
+        else:
+            pattern = re.compile(r'\d{1,}')
 
-        v = int(input('\nQuantidade de vértices: '))
-        print('Vértices: {}'.format(list(range(v))))
-        a = int(input('\nQuantidade de arestas: '))
-        print('Ingrese as arestas no formato "a,b":\n')
+            v = int(input('\nQuantidade de vértices: '))
+            print('Vértices: {}'.format(list(range(v))))
+            a = int(input('\nQuantidade de arestas: '))
+            print('Ingrese as arestas no formato "a,b":\n')
 
-        for i in range(a):
-            aresta = input('[{}] '.format(i+1))
-            match = re.findall(pattern, aresta)
+            for i in range(a):
+                aresta = input('[{}] '.format(i+1))
+                match = re.findall(pattern, aresta)
 
-            if match and len(match) == 2:
-                match[0] = int(match[0])
-                match[1] = int(match[1])
-                arestas.append(match)
+                if match and len(match) == 2:
+                    match[0] = int(match[0])
+                    match[1] = int(match[1])
+                    arestas.append(match)
 
-    if tipo == 'm':
-        g = Graph(v, arestas) if arestas else Graph.rand(v)
-    elif tipo == 'u':
-        g = UndirectedGraph(v, arestas) if arestas else UndirectedGraph.rand(v)
-    elif tipo == 's':
-        g = SimpleGraph(v, arestas) if arestas else SimpleGraph.rand(v)
-    else:
-        return
+        if tipo == 'm':
+            g = Graph(v, arestas) if arestas else Graph.rand(v)
+        elif tipo == 'u':
+            g = UndirectedGraph(v, arestas) if arestas else UndirectedGraph.rand(v)
+        elif tipo == 's':
+            g = SimpleGraph(v, arestas) if arestas else SimpleGraph.rand(v)
+        else:
+            return
 
-    order = """\n
+        order = """\n
 Máximo:   {}
 Mínimo:   {}
 Maximais: {}
@@ -63,7 +66,7 @@ Minimais: {}
             g.maximal(),
             g.minimal())
 
-    print("""
+        print("""
 Tipo: {}
 
 Vértices: {}
@@ -97,6 +100,8 @@ Matriz de incidência:
         order,
         g.to_adjacency(),
         g.to_incidence()))
+
+        mais = input('\nMais umi (S/n)? ').lower()
 
 
 if __name__ == '__main__':
