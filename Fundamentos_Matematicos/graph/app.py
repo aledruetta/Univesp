@@ -101,7 +101,7 @@ Matriz de incidência:
         g.to_adjacency(),
         g.to_incidence()))
 
-        mais = input('\nMais umi (S/n)? ').lower()
+        mais = input('\nMais um (S/n)? ').lower()
 
 
 if __name__ == '__main__':
