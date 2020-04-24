@@ -149,58 +149,6 @@ class Graph:
                 self.is_antisimetric() and
                 self.is_transitive())
 
-    def min(self):
-        """
-        """
-        A = self.to_adjacency(dtype=bool).astype(int)
-
-        for i in range(len(A)):
-            lin = A[i,:]
-            if sum(lin) >= len(lin):
-                return i
-
-        return None
-
-    def max(self):
-        """
-        """
-        A = self.to_adjacency(dtype=bool).astype(int)
-
-        for j in range(len(A)):
-            col = A[:,j]
-            if sum(col) >= len(col):
-                return j
-
-        return None
-
-    def maximal(self, minority=True):
-        maximals = []
-        A = self.to_adjacency(dtype=bool).astype(int)
-
-        for i in range(len(A)):
-            lin = A[i,:]
-            if sum(lin) == 1:
-                maximals.append(i)
-
-        if minority:
-            return maximals
-        else:
-            return self.minimal()
-
-    def minimal(self, minority=True):
-        minimals = []
-        A = self.to_adjacency(dtype=bool).astype(int)
-
-        for j in range(len(A)):
-            col = A[:,j]
-            if sum(col) == 1:
-                minimals.append(j)
-
-        if minority:
-            return minimals
-        else:
-            return self.maximal()
-
     @classmethod
     def from_m(cls, M):
         M = M.astype(bool)
@@ -272,8 +220,60 @@ class OrderedGraph(UndirectedGraph):
         if not self.is_order():
             raise IsNotOrderedGraphError
 
+    def min(self):
+        """
+        """
+        A = self.to_adjacency(dtype=bool).astype(int)
+
+        for i in range(len(A)):
+            lin = A[i,:]
+            if sum(lin) >= len(lin):
+                return i
+
+        return None
+
+    def max(self):
+        """
+        """
+        A = self.to_adjacency(dtype=bool).astype(int)
+
+        for j in range(len(A)):
+            col = A[:,j]
+            if sum(col) >= len(col):
+                return j
+
+        return None
+
+    def maximal(self, minority=True):
+        maximals = []
+        A = self.to_adjacency(dtype=bool).astype(int)
+
+        for i in range(len(A)):
+            lin = A[i,:]
+            if sum(lin) == 1:
+                maximals.append(i)
+
+        if minority:
+            return maximals
+        else:
+            return self.minimal()
+
+    def minimal(self, minority=True):
+        minimals = []
+        A = self.to_adjacency(dtype=bool).astype(int)
+
+        for j in range(len(A)):
+            col = A[:,j]
+            if sum(col) == 1:
+                minimals.append(j)
+
+        if minority:
+            return minimals
+        else:
+            return self.maximal()
+
     @classmethod
-    def order(cls, G, minority=True):
+    def to_order(cls, G, minority=True):
         A = G.to_adjacency(dtype=bool)
         len_a = len(A)
         ident = np.identity(len_a, dtype=bool)
@@ -293,7 +293,7 @@ class OrderedGraph(UndirectedGraph):
         while True:
             R = Graph.rand(v_qty)
             try:
-                O = OrderedGraph.order(R, minority=choice([True, False]))
+                O = OrderedGraph.to_order(R, minority=choice([True, False]))
             except IsNotOrderedGraphError:
                 continue
             else:

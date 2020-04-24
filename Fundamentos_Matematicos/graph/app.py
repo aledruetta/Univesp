@@ -72,7 +72,7 @@ def main():
             return
 
         order = ""
-        if graph.is_order():
+        if isinstance(graph, OrderedGraph) and graph.is_order():
             order = """\n
 Máximo:   {}
 Mínimo:   {}
