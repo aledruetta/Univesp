@@ -23,12 +23,12 @@ class TestGraph(unittest.TestCase):
         graph = Graph.rand(v)
 
         # Length of domain and image
-        result = len(graph.V)
+        result = len(graph.vertices)
         self.assertEqual(result, v)
 
         # Length of ordered pairs must be least or equal
         # of the length of cartesian product
-        result = len(graph.E)
+        result = len(graph.edges)
         self.assertTrue(result <= v ** 2)
 
     def test_graph_vertices(self):

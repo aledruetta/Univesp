@@ -107,8 +107,8 @@ Matriz de incidência:
 {}
 """.format(
         graph.__class__,
-        graph.V,
-        graph.E,
+        graph.vertices,
+        graph.edges,
         graph.is_reflexive(),
         graph.is_irreflexive(),
         graph.is_simetric(),

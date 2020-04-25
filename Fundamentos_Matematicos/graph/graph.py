@@ -23,9 +23,9 @@ class Graph:
     """ This class represents a generic graph. It's has a set
         of vertices and a list of edges (a 2-len list of vertices).
     """
-    def __init__(self, len_v, E):
-        self.V = list(range(len_v))      # list of vertices
-        self.E = E                      # list of edges
+    def __init__(self, len_v, edges):
+        self.vertices = list(range(len_v))      # list of vertices
+        self.edges = edges                      # list of edges
 
         self._check_vertices()
         self._check_edges()
@@ -33,21 +33,21 @@ class Graph:
     def _check_vertices(self):
         """ Checks V is not an empty list.
         """
-        if len(self.V) == 0:
+        if len(self.vertices) == 0:
             raise VertexEmptyListError
 
     def _check_edges(self):
         """ Checks if every edge connect two vertices and
             if they are a 2-len list of vertices.
         """
-        self.E.sort()
+        self.edges.sort()
 
-        for edge in self.E:
+        for edge in self.edges:
             if not isinstance(edge, list) or len(edge) != 2:
                 raise TypeError
             if (
-                    edge[0] not in self.V or
-                    edge[1] not in self.V):
+                    edge[0] not in self.vertices or
+                    edge[1] not in self.vertices):
                 raise VertexNotExistsError
 
     @property
@@ -57,11 +57,11 @@ class Graph:
         named = {}
 
         strings = list(string.ascii_lowercase)
-        key_len = (len(self.E) // len(strings) + 1) + 1
+        key_len = (len(self.edges) // len(strings) + 1) + 1
         keys = strings + list(combine(strings, key_len))
 
         i = 0
-        for edge in self.E:
+        for edge in self.edges:
             key = ''.join(keys[i])
             named[key] = edge
             i += 1
@@ -72,7 +72,7 @@ class Graph:
         """ Returns a zeros or False squared matrix.
         """
         if shape is None:
-            len_a = len(self.V)
+            len_a = len(self.vertices)
             shape = (len_a, len_a)
 
         return np.zeros(shape, dtype=dtype)
@@ -82,7 +82,7 @@ class Graph:
         """
         M = self.zeros()
 
-        for a, b in self.E:
+        for a, b in self.edges:
             M[a, b] = 1
 
         return M.astype(dtype)
@@ -90,7 +90,7 @@ class Graph:
     def to_incidence(self, dtype=int):
         """ Return de graph's incidence matrix.
         """
-        shape = (len(self.V), len(self.E))
+        shape = (len(self.vertices), len(self.edges))
         M = self.zeros(shape)
 
         names = sorted(list(self.named_edges.keys()))
@@ -128,7 +128,7 @@ class Graph:
     def is_antisimetric(self):
         """ Cheks antisimetry.
         """
-        I = np.identity(len(self.V), dtype=bool)
+        I = np.identity(len(self.vertices), dtype=bool)
         M = self.to_adjacency(dtype=bool) & ~I
 
         return not (M & M.T).any()
@@ -180,14 +180,14 @@ class Graph:
 
     def __str__(self):
         return '{}\n\tV: {}\n\tE: {}>'.format(
-                str(self.__class__)[:-1], self.V, self.E)
+                str(self.__class__)[:-1], self.vertices, self.edges)
 
 
 class UndirectedGraph(Graph):
     """ This class represents an undireted graph.
     """
-    def __init__(self, V, E):
-        super().__init__(V, E)
+    def __init__(self, vertices, edges):
+        super().__init__(vertices, edges)
 
         self._check_ugedges()
 
@@ -201,7 +201,7 @@ class UndirectedGraph(Graph):
     def rand(cls, v_qty):
         """ Return a random generated undirected graph.
         """
-        edges = Graph.rand(v_qty).E
+        edges = Graph.rand(v_qty).edges
 
         for edge in edges:
             rev = [edge[1], edge[0]]
@@ -219,8 +219,8 @@ class UndirectedGraph(Graph):
 class OrderedGraph(UndirectedGraph):
     """ This class represents an ordered graph.
     """
-    def __init__(self, V, E, minority=True):
-        super().__init__(V, E)
+    def __init__(self, vertices, edges, minority=True):
+        super().__init__(vertices, edges)
         self.minority=minority
 
         self._check_properties()
@@ -315,9 +315,9 @@ class SimpleGraph(UndirectedGraph):
     """ This class represent a simple or strict graph:
         An undirected graph without loops.
     """
-    def __init__(self, V, E):
+    def __init__(self, vertices, edges):
         try:
-            super().__init__(V, E)
+            super().__init__(vertices, edges)
         except IsNotUndirectedGraphError:
             raise IsNotSimpleGraphError
 
