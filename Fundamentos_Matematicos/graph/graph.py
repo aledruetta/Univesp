@@ -161,6 +161,9 @@ class Graph:
     def transpose(cls, graph):
         T = graph.to_adjacency().T
 
+        if isinstance(graph, OrderedGraph):
+            return cls.from_m(T, minority=(not graph.minority))
+
         return cls.from_m(T)
 
     @classmethod
@@ -226,63 +229,58 @@ class OrderedGraph(UndirectedGraph):
         if not self.is_order():
             raise IsNotOrderedGraphError
 
-    def min(self, minority=True):
-        """
-        """
-        if not minority:
-            return self.max()
-
+    def only_one_is_true(self, line):
+        values = []
         A = self.to_adjacency(dtype=bool).astype(int)
 
         for i in range(len(A)):
-            lin = A[i,:]
-            if sum(lin) >= len(lin):
+            if line:
+                axis = A[i,:]
+            else:
+                axis = A[:,i]
+
+            if sum(axis) == 1:
+                values.append(i)
+
+        return values
+
+    def all_is_true(self, line):
+        A = self.to_adjacency(dtype=bool).astype(int)
+
+        for i in range(len(A)):
+            if line:
+                axis = A[i,:]
+            else:
+                axis = A[:,i]
+
+            if sum(axis) == len(axis):
                 return i
 
         return None
 
-    def max(self, minority=True):
+    def min(self):
         """
         """
-        if not minority:
-            return self.min()
+        if not self.minority:
+            return self.all_is_true(False)
+        return self.all_is_true(True)
 
-        A = self.to_adjacency(dtype=bool).astype(int)
+    def max(self):
+        """
+        """
+        if not self.minority:
+            return self.all_is_true(True)
+        return self.all_is_true(False)
 
-        for j in range(len(A)):
-            col = A[:,j]
-            if sum(col) >= len(col):
-                return j
+    def maximal(self):
+        if not self.minority:
+            return self.only_one_is_true(False)
+        return self.only_one_is_true(True)
 
-        return None
-
-    def maximal(self, minority=True):
-        if not minority:
-            return self.minimal()
-
-        maximals = []
-        A = self.to_adjacency(dtype=bool).astype(int)
-
-        for i in range(len(A)):
-            lin = A[i,:]
-            if sum(lin) == 1:
-                maximals.append(i)
-
-        return maximals
-
-    def minimal(self, minority=True):
-        if not minority:
-            return self.maximal()
-
-        minimals = []
-        A = self.to_adjacency(dtype=bool).astype(int)
-
-        for j in range(len(A)):
-            col = A[:,j]
-            if sum(col) == 1:
-                minimals.append(j)
-
-        return minimals
+    def minimal(self):
+        if not self.minority:
+            return self.only_one_is_true(True)
+        return self.only_one_is_true(False)
 
     @classmethod
     def to_order(cls, G, minority=True):

@@ -81,8 +81,8 @@ Minimais: {}
 """.format(
         graph.max(),
         graph.min(),
-        graph.maximal(minority=minority),
-        graph.minimal(minority=minority))
+        graph.maximal(),
+        graph.minimal())
 
         print("""
 Tipo: {}
