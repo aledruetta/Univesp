@@ -89,20 +89,20 @@ class TestGraph(unittest.TestCase):
         g = Graph(3, [[0, 2], [1, 1], [1, 2], [2, 1]])
         self.assertFalse(g.is_irreflexive())
 
-    def test_is_simetric(self):
+    def test_is_symmetric(self):
         g = Graph(3, [[0, 2], [1, 2], [2, 1], [2, 0], [2, 2]])
-        self.assertTrue(g.is_simetric())
+        self.assertTrue(g.is_symmetric())
 
         g = Graph(3, [[0, 1], [1, 2], [2, 1], [2, 0], [2, 2]])
-        self.assertFalse(g.is_simetric())
+        self.assertFalse(g.is_symmetric())
 
 
-    def test_is_antisimetric(self):
+    def test_is_antisymmetric(self):
         g = Graph(3, [[0, 2], [1, 0], [1, 2], [2, 2]])
-        self.assertTrue(g.is_antisimetric())
+        self.assertTrue(g.is_antisymmetric())
 
         g = Graph(3, [[0, 2], [1, 0], [1, 2], [2, 0], [2, 2]])
-        self.assertFalse(g.is_antisimetric())
+        self.assertFalse(g.is_antisymmetric())
 
     def test_is_transitive(self):
         g = Graph(3, [[0, 0], [0, 1], [1, 1]])
@@ -115,7 +115,7 @@ class TestUndirectedGraph(unittest.TestCase):
     def test_ugraph_edges(self):
         # Checks for antisimetry
         g = UndirectedGraph.rand(5)
-        self.assertTrue(g.is_antisimetric())
+        self.assertTrue(g.is_antisymmetric())
 
         with self.assertRaises(IsNotUndirectedGraphError):
             UndirectedGraph(3, [[0, 0], [0, 2], [2, 0], [1, 0]])

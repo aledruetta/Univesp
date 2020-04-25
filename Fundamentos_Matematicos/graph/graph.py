@@ -118,14 +118,14 @@ class Graph:
 
         return (M & I == Z).all()
 
-    def is_simetric(self):
+    def is_symmetric(self):
         """ Cheks simetry.
         """
         M = self.to_adjacency(dtype=bool)
 
         return (M == M.T).all()
 
-    def is_antisimetric(self):
+    def is_antisymmetric(self):
         """ Cheks antisimetry.
         """
         I = np.identity(len(self.vertices), dtype=bool)
@@ -146,7 +146,7 @@ class Graph:
         """
         return (
                 self.is_reflexive() and
-                self.is_antisimetric() and
+                self.is_antisymmetric() and
                 self.is_transitive())
 
     @classmethod
@@ -194,7 +194,7 @@ class UndirectedGraph(Graph):
     def _check_ugedges(self):
         """
         """
-        if not self.is_antisimetric():
+        if not self.is_antisymmetric():
             raise IsNotUndirectedGraphError
 
     @classmethod
@@ -287,7 +287,7 @@ class OrderedGraph(UndirectedGraph):
         A = G.to_adjacency(dtype=bool)
         len_a = len(A)
         ident = np.identity(len_a, dtype=bool)
-        S = A | ident          # make simetric
+        S = A | ident          # make symmetric
 
         if minority:
             E = [[i, j] for i in range(len_a) for j in range(i, len_a)
