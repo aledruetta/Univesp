@@ -158,6 +158,12 @@ class Graph:
         return cls(lm, edges)
 
     @classmethod
+    def transpose(cls, graph):
+        T = graph.to_adjacency().T
+
+        return cls.from_m(T)
+
+    @classmethod
     def rand(cls, v_qty):
         """ Generate a random graph """
 
@@ -220,9 +226,12 @@ class OrderedGraph(UndirectedGraph):
         if not self.is_order():
             raise IsNotOrderedGraphError
 
-    def min(self):
+    def min(self, minority=True):
         """
         """
+        if not minority:
+            return self.max()
+
         A = self.to_adjacency(dtype=bool).astype(int)
 
         for i in range(len(A)):
@@ -232,9 +241,12 @@ class OrderedGraph(UndirectedGraph):
 
         return None
 
-    def max(self):
+    def max(self, minority=True):
         """
         """
+        if not minority:
+            return self.min()
+
         A = self.to_adjacency(dtype=bool).astype(int)
 
         for j in range(len(A)):
@@ -245,6 +257,9 @@ class OrderedGraph(UndirectedGraph):
         return None
 
     def maximal(self, minority=True):
+        if not minority:
+            return self.minimal()
+
         maximals = []
         A = self.to_adjacency(dtype=bool).astype(int)
 
@@ -253,12 +268,12 @@ class OrderedGraph(UndirectedGraph):
             if sum(lin) == 1:
                 maximals.append(i)
 
-        if minority:
-            return maximals
-        else:
-            return self.minimal()
+        return maximals
 
     def minimal(self, minority=True):
+        if not minority:
+            return self.maximal()
+
         minimals = []
         A = self.to_adjacency(dtype=bool).astype(int)
 
@@ -267,10 +282,7 @@ class OrderedGraph(UndirectedGraph):
             if sum(col) == 1:
                 minimals.append(j)
 
-        if minority:
-            return minimals
-        else:
-            return self.maximal()
+        return minimals
 
     @classmethod
     def to_order(cls, G, minority=True):
