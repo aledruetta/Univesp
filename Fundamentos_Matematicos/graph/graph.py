@@ -149,6 +149,18 @@ class Graph:
                 self.is_antisymmetric() and
                 self.is_transitive())
 
+    @staticmethod
+    def symmetric_closure(A):
+        """
+        """
+        lenA = len(A)
+        for i in range(lenA):
+            for j in range(lenA):
+                if A[i, j]:
+                    A[j, i] = A[i, j]
+
+        return A
+
     @classmethod
     def from_m(cls, M):
         M = M.astype(bool)
@@ -311,31 +323,29 @@ class OrderedGraph(UndirectedGraph):
         return O
 
 
-class SimpleGraph(UndirectedGraph):
+class SimpleGraph(Graph):
     """ This class represent a simple or strict graph:
         An undirected graph without loops.
     """
     def __init__(self, vertices, edges):
-        try:
-            super().__init__(vertices, edges)
-        except IsNotUndirectedGraphError:
-            raise IsNotSimpleGraphError
+        super().__init__(vertices, edges)
 
         self._check_sgedges()
 
     def _check_sgedges(self):
         """
         """
-        if not self.is_irreflexive():
+        if not (self.is_irreflexive() and self.is_symmetric()):
             raise IsNotSimpleGraphError
 
     @classmethod
     def rand(cls, v_qty):
         """
         """
-        U = UndirectedGraph.rand(v_qty).to_adjacency(dtype=bool)
+        U = Graph.rand(v_qty).to_adjacency(dtype=bool)
         I = np.identity(v_qty, dtype=bool)
-        S = (U & ~I).astype(int)
+        R = (U & ~I).astype(int)
+        S = cls.symmetric_closure(R)
 
         return cls.from_m(S)
 
