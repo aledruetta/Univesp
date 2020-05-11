@@ -1,6 +1,6 @@
 package univesp_POO_semana1;
 
-public class Data {
+public class Data implements Cloneable {
 	int dia;
 	int mes;
 	int ano;
@@ -39,20 +39,21 @@ public class Data {
 		return this.dia + "/" + this.mes + "/" + this.ano;
 	}
 	
-	public void trocarCom(Data data) {
-		// Data tmp = (Data) data.clone();
+	@Override
+	public Data clone() throws CloneNotSupportedException {
+		return (Data) super.clone();
+	}
+	
+	public void trocarCom(Data data) throws CloneNotSupportedException {
+		Data tmp = (Data) data.clone();
 		
-		int dia = data.dia;
-		int mes = data.mes;
-		int ano = data.ano;
-
 		data.setDia(this.dia);
 		data.setMes(this.mes);
 		data.setAno(this.ano);
 
-		this.dia = dia;
-		this.mes = mes;
-		this.ano = ano;
+		this.dia = tmp.getDia();
+		this.mes = tmp.getMes();
+		this.ano = tmp.getAno();
 	}
 
 }

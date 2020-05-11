@@ -10,7 +10,12 @@ public class UnivespPooSemana1 {
 		System.out.println("Data inicial:\t" + dataInicio);
 		System.out.println("Data final:\t" + dataFinal + "\n");
 		
-		dataInicio.trocarCom(dataFinal);
+		try {
+			dataInicio.trocarCom(dataFinal);
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println("Data inicial:\t" + dataInicio);
 		System.out.println("Data final:\t" + dataFinal);
