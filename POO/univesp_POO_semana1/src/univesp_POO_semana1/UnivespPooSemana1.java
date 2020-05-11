@@ -7,13 +7,13 @@ public class UnivespPooSemana1 {
 		Data dataInicio = new Data(1, 1, 2019);
 		Data dataFinal = new Data(31, 12, 2019);
 		
-		System.out.println(dataInicio);
-		System.out.println(dataFinal);
+		System.out.println("Data inicial:\t" + dataInicio);
+		System.out.println("Data final:\t" + dataFinal + "\n");
 		
 		dataInicio.trocarCom(dataFinal);
 		
-		System.out.println(dataInicio);
-		System.out.println(dataFinal);
+		System.out.println("Data inicial:\t" + dataInicio);
+		System.out.println("Data final:\t" + dataFinal);
 
 	}
 

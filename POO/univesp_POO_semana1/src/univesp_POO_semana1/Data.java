@@ -40,15 +40,19 @@ public class Data {
 	}
 	
 	public void trocarCom(Data data) throws CloneNotSupportedException {
-		Data tmp = (Data) data.clone();
+		// Data tmp = (Data) data.clone();
+		
+		int dia = data.dia;
+		int mes = data.mes;
+		int ano = data.ano;
 
 		data.setDia(this.dia);
 		data.setMes(this.mes);
 		data.setAno(this.ano);
 
-		this.dia = tmp.getDia();
-		this.mes = tmp.getMes();
-		this.ano = tmp.getAno();
+		this.dia = dia;
+		this.mes = mes;
+		this.ano = ano;
 	}
 
 }
