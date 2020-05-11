@@ -39,14 +39,8 @@ public class Data {
 		return this.dia + "/" + this.mes + "/" + this.ano;
 	}
 	
-	public void trocarCom(Data data) {
-		Data tmp = null;
-
-		try {
-			tmp = (Data) data.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
+	public void trocarCom(Data data) throws CloneNotSupportedException {
+		Data tmp = (Data) data.clone();
 
 		data.setDia(this.dia);
 		data.setMes(this.mes);
