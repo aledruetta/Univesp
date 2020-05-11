@@ -11,3 +11,4 @@ venv
 .classpath
 .project
 bin/
+.settings/
