@@ -13,7 +13,6 @@ public class UnivespPooSemana1 {
 		try {
 			dataInicio.trocarCom(dataFinal);
 		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
