@@ -1,4 +1,4 @@
-package univesp_POO_semana2;
+package poo_semana2;
 
 public class TesteFormas {
 

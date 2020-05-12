@@ -1,4 +1,4 @@
-package univesp_POO_semana1;
+package poo_semana1;
 
 public class Data implements Cloneable {
 	private int dia;
