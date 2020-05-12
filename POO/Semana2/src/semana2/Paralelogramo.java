@@ -11,12 +11,12 @@ public class Paralelogramo {
 		this.theta = theta;
 	}
 	
-	public double calcularArea() {
-		return this.a * this.h;
+	public final double calcularArea() {
+		return a * h;
 	}
 	
-	public double calcularPerimetro() {
-		return 2 * (a + h / Math.sin(this.theta));
+	public final double calcularPerimetro() {
+		return 2 * (a + h / Math.sin(theta));
 	}
 	
 	public void setParalelogramo(double h, double a, double theta) {
@@ -34,11 +34,11 @@ public class Paralelogramo {
 	}
 	
 	public double getAngulo() {
-		return this.theta;
+		return theta;
 	}
 	
 	public String toString() {
-		return "Paralelogramo: { base: " + this.a + ", altura: " + this.h +
-				", angulo: " + this.theta + " }";
+		return "Paralelogramo: { base: " + a + ", altura: " + h +
+				", angulo: " + theta + " }";
 	}
 }
