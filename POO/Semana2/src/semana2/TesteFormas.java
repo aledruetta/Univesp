@@ -4,9 +4,9 @@ public class TesteFormas {
 
 	public static void main(String[] args) {
 		
-		Paralelogramo p = new Paralelogramo(10, 4, Math.PI/4);
-		Retangulo r = new Retangulo(9.3, 5);
-		Quadrado q = new Quadrado(6.8);
+		Paralelogramo p = new Paralelogramo(4.0, 1.0, Math.PI/4);
+		Retangulo r = new Retangulo(3.0, 2.0);
+		Quadrado q = new Quadrado(1.0);
 
 		Paralelogramo[] formas = {p, r, q};
 		

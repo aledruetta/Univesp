@@ -1,21 +1,16 @@
 package semana2;
 
 public class Retangulo extends Paralelogramo {
-	private double a;
-	private double h;
-	
 	Retangulo(double a, double h) {
-		super(a, h, Math.PI / 2);
-		this.a = a;
-		this.h = h;
+		super(a, h, Math.PI / 2.0);
 	}
 
 	public void setRetangulo(double a, double h) {
-		this.a = a;
-		this.h = h;
+		super.setParalelogramo(h, a, Math.PI / 2.0);
 	}
 	
 	public String toString() {
-		return "Retangulo: { lado1: " + this.a + ", lado2: " + this.h + " }";
+		return "Retangulo: { lado1: " + super.getAresta() + ", lado2: "
+				+ super.getAltura() + " }";
 	}
 }

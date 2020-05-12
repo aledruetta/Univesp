@@ -1,18 +1,15 @@
 package semana2;
 
 public class Quadrado extends Paralelogramo {
-	private double a;
-	
 	Quadrado(double a) {
-		super(a, a, Math.PI / 2);
-		this.a = a;
+		super(a, a, Math.PI / 2.0);
 	}
 	
 	public void setQuadrado(double a) {
-		this.a = a;
+		super.setParalelogramo(a, a, Math.PI / 2.0);
 	}
 	
 	public String toString() {
-		return "Quadrado: { lado: " + this.a + " }";
+		return "Quadrado: { lado: " + super.getAresta() + " }";
 	}
 }
