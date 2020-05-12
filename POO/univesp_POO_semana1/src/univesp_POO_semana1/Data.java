@@ -1,9 +1,9 @@
 package univesp_POO_semana1;
 
 public class Data implements Cloneable {
-	int dia;
-	int mes;
-	int ano;
+	private int dia;
+	private int mes;
+	private int ano;
 	
 	public Data(int dia, int mes, int ano) {
 		this.dia = dia;
