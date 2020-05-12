@@ -1,4 +1,4 @@
-package poo_semana2;
+package semana2;
 
 public class Quadrado extends Paralelogramo {
 	private double a;

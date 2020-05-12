@@ -1,4 +1,4 @@
-package poo_semana1;
+package semana1;
 
 public class DataTeste {
 

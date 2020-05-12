@@ -1,4 +1,4 @@
-package poo_semana2;
+package semana2;
 
 public class Paralelogramo {
 	private double h;
