@@ -1,6 +1,6 @@
 package Desafio;
 
-public class PessoaJuridica extends PessoaAbstract {
+public final class PessoaJuridica extends PessoaAbstract {
 	private int cnpj;
 	
 	public PessoaJuridica(String nome, String tipo, Contato contato, int cnpj) {

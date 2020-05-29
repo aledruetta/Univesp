@@ -1,6 +1,6 @@
 package Desafio;
 
-public class PessoaFisica extends PessoaAbstract {
+public final class PessoaFisica extends PessoaAbstract {
 	private int rg;
 	private int cpf;
 	
