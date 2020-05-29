@@ -4,9 +4,8 @@ public class PessoaFisica extends PessoaAbstract {
 	private int rg;
 	private int cpf;
 	
-	public PessoaFisica(String nome, String tipo, Endereco endereco,
-			Contato contato, int rg, int cpf) {
-		super(nome, tipo, endereco, contato);
+	public PessoaFisica(String nome, String tipo, Contato contato, int rg, int cpf) {
+		super(nome, tipo, contato);
 		this.rg = rg;
 		this.cpf = cpf;
 	}

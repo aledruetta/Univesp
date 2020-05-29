@@ -3,9 +3,8 @@ package Desafio;
 public class PessoaJuridica extends PessoaAbstract {
 	private int cnpj;
 	
-	public PessoaJuridica(String nome, String tipo, Endereco endereco,
-			Contato contato, int cnpj) {
-		super(nome, tipo, endereco, contato);
+	public PessoaJuridica(String nome, String tipo, Contato contato, int cnpj) {
+		super(nome, tipo, contato);
 		this.cnpj = cnpj;
 	}
 
