@@ -17,7 +17,7 @@ public class Apoio1 {
 					+ "conjuntos e mapas. O que são mapas?";
 		}
 
-		System.out.println("\n" + Tokenizer.toString(line));
+		System.out.println("\n" + Tokenizer.get(line));
 
 	}
 
