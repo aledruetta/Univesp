@@ -14,10 +14,8 @@ class Tinta:
         self.preco = preco
 
     def fmt_lata(self):
-        if self.lata_lts < 1:
-            ml = self.lata_lts * 1000
-            return f'{int(ml)} ml'
-        return f'{self.lata_lts} lt'
+        lt = self.lata_lts
+        return f'{int(lt * 1000)} ml' if self.lata_lts < 1 else f'{lt} lt'
 
     def calc_latas(self, area):
         return math.ceil(area / self.cobertura)
