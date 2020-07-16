@@ -17,8 +17,6 @@ class Tinta:
         if self.lata_lts < 1:
             ml = self.lata_lts * 1000
             return f'{int(ml)} ml'
-        elif self.lata_lts >= 2:
-            return f'{self.lata_lts} lts'
         return f'{self.lata_lts} lt'
 
     def calc_latas(self, area):
