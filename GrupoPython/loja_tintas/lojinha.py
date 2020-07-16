@@ -41,10 +41,9 @@ def main():
     opt = input(mensagem)
     while opt not in '1234':
         opt = input(mensagem)
+
     tinta = tintas[int(opt)-1]
-
     metros = float(input('Quantos metros quadrados precisa cobrir: '))
-
     latas = tinta.calc_latas(metros)
     preco = tinta.preco * latas
 
