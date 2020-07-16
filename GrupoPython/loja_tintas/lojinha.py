@@ -46,8 +46,11 @@ def main():
     metros = float(input('Quantos metros quadrados precisa cobrir: '))
 
     latas = tinta.calc_latas(metros)
+    preco = tinta.preco * latas
+
     print(f'Você vai precisar {latas} latas de tinta.')
-    print(f'Preço: R$ {tinta.preco * latas}')
+    print(f'Preço: R$ {preco}')
+
     print('\n**** Volte sempre! ****\n')
 
 
