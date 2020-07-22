@@ -8,10 +8,8 @@ def countdown(n):
         n -= 1
 
 threads = []
-threads.append(Thread(target=countdown, args=[COUNT//4]))
-threads.append(Thread(target=countdown, args=[COUNT//4]))
-threads.append(Thread(target=countdown, args=[COUNT//4]))
-threads.append(Thread(target=countdown, args=[COUNT//4]))
+for i in range(4):
+    threads.append(Thread(target=countdown, args=[COUNT//4]))
 
 start = time.time()
 for t in threads:
