@@ -8,6 +8,7 @@ test.*
 .ipynb*/
 __*
 venv
+.venv
 .classpath
 .project
 bin/
