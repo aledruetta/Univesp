@@ -19,8 +19,8 @@ main()
 
     for (i=0; i<NCHARS; i++) {
         for (j=0; j<histo[i]; j++)
-            printf("%c", i + 'a');
+            putchar(i + 'a');
         if (histo[i] != 0)
-            printf("\n");
+            putchar('\n');
     }
 }
