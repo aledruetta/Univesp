@@ -2,29 +2,36 @@
 #include <string.h>
 #include "strlib.h"
 
+
 int main()
 {
-    char * buf = (char *) malloc(256);
+    char buf[256];
 
-    /* Capitalize */
+    printf("\n=== Tests ===\n");
 
-    buf = strcpy(buf, "uma FraSe quaLqueR.");
+    printf("\nFrase: ");
+    fgets(buf, sizeof buf, stdin);
 
-    printf("=== Capitalize ===\n");
-    printf("original : %s\n", buf);
-    printf("formatted: %s\n", capitalize(buf, strlen(buf)));
-    printf("chars    : %ld\n", strlen(buf));
+    printf("1 - capitalize\n");
+    printf("2 - title\n");
+    printf("3 - isalnum\n");
 
-    /* Title */
+    printf("Opção: ");
+    char op = getchar();
+    switch (op) {
+        case '1':
+            printf("test : %s", py_capitalize(buf, strlen(buf)));
+            break;
+        case '2':
+            printf("test : %s", py_title(buf, strlen(buf)));
+            break;
+        case '3':
+            printf("test : %s", (py_isalnum(buf, strlen(buf)))? "true" : "false");
+            printf("\n");
+            break;
+    }
 
-    buf = strcpy(buf, "  habIa una  veZ una vaca...");
-
-    printf("=== Title ===\n");
-    printf("original : %s\n", buf);
-    printf("formatted: %s\n", title(buf, strlen(buf)));
-    printf("chars    : %ld\n", strlen(buf));
-
-    free(buf);
+    printf("chars: %ld\n", strlen(buf));
 
     return 0;
 }
