@@ -1,3 +1,4 @@
 #include <stdlib.h>
 
-char * capitalize(char * str, size_t len);
+char * capitalize(const char * str, size_t len);
+char * title(const char * str, size_t len);
