@@ -2,7 +2,7 @@
 
 #define NCHARS 25
 
-main()
+int main()
 {
     char c;
     int i, j, histo[NCHARS];
@@ -23,4 +23,6 @@ main()
         if (histo[i] != 0)
             putchar('\n');
     }
+
+    return 0;
 }
