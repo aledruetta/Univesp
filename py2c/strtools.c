@@ -2,14 +2,14 @@
 
 bool isLower(char c)
 {
-    if (c <= 'a' || c >= 'z')
+    if (c < 'a' || c > 'z')
         return false;
     return true;
 }
 
 bool isUpper(char c)
 {
-    if (c <= 'A' || c >= 'Z')
+    if (c < 'A' || c > 'Z')
         return false;
     return true;
 }
