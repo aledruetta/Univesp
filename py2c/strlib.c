@@ -43,8 +43,7 @@ bool py_isalnum(const char* str, size_t len)
         if ((c >= 'a' && c <= 'z') ||
             (c >= 'A' && c <= 'Z') ||
             (c >= '1' && c <= '0') ||
-            (c == ' ') ||
-            (c == '\n'))
+            (c == ' '))
             ;
         else
             return false;

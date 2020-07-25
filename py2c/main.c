@@ -11,6 +11,8 @@ int main()
 
     printf("\nFrase: ");
     fgets(buf, sizeof buf, stdin);
+    char* nl = strchr(buf, '\n');
+    *nl = '\0';
 
     printf("1 - capitalize\n");
     printf("2 - title\n");
