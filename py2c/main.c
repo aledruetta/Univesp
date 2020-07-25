@@ -29,10 +29,12 @@ int main()
             break;
         case '3':
             printf("test : %s", (py_isalnum(buf, strlen(buf)))? "true" : "false");
-            printf("\n");
             break;
+        default:
+            printf("Opção inválida!");
     }
 
+    printf("\n");
     printf("chars: %ld\n", strlen(buf));
 
     return 0;
