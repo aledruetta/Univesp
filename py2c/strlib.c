@@ -1,7 +1,7 @@
 #include "strlib.h"
 #include "strtools.h"
 
-char* py_capitalize(const char* str, size_t len)
+char* py_capitalize(const char str[], size_t len)
 {
     size_t i;
     char* new_str = (char*) malloc(len);
@@ -13,7 +13,7 @@ char* py_capitalize(const char* str, size_t len)
     return new_str;
 }
 
-char* py_title(const char* str, size_t len)
+char* py_title(const char str[], size_t len)
 {
     size_t i;
     char prev = ' ';
@@ -30,7 +30,7 @@ char* py_title(const char* str, size_t len)
     return new_str;
 }
 
-bool py_isalnum(const char* str, size_t len)
+bool py_isalnum(const char str[], size_t len)
 {
     if (len < 1)
         return false;
