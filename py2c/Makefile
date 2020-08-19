@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS = -g -Wall
-DEPS = strlib.h strtools.h
-OBJ = main.o strlib.o strtools.o
+DEPS = py_strlib.h strtools.h
+OBJ = main.o py_strlib.o strtools.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c $< $(FLAGS)

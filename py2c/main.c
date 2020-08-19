@@ -3,20 +3,19 @@
  */
 
 #include <stdio.h>
-#include <string.h>
-#include "strlib.h"
-
+#include "strtools.h"
+#include "py_strlib.h"
 
 int main()
 {
-    char buf[256];
+    char buf[MAXLINE];
+    char new_str[MAXLINE];
+    int len;
 
-    printf("\n=== Tests ===\n");
+    printf("\n=== Test ===\n");
 
     printf("\nFrase: ");
-    fgets(buf, sizeof buf, stdin);
-    char* nl = strchr(buf, '\n');
-    *nl = '\0';
+    len = my_getline(buf, MAXLINE);
 
     printf("1 - capitalize\n");
     printf("2 - title\n");
@@ -26,20 +25,22 @@ int main()
     char op = getchar();
     switch (op) {
         case '1':
-            printf("test : %s", py_capitalize(buf, strlen(buf)));
+            py_capitalize(buf, new_str, len);
+            printf("test : '%s'", new_str);
             break;
         case '2':
-            printf("test : %s", py_title(buf, strlen(buf)));
+            py_title(buf, new_str, len);
+            printf("test : '%s'", new_str);
             break;
         case '3':
-            printf("test : %s", (py_isalnum(buf, strlen(buf)))? "true" : "false");
+            printf("test : '%s'", (py_isalnum(buf, len))? "true" : "false");
             break;
         default:
             printf("Opção inválida!");
     }
 
     printf("\n");
-    printf("chars: %ld\n", strlen(buf));
+    printf("chars: %d\n", len);
 
     return 0;
 }
