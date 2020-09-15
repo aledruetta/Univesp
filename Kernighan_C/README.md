@@ -27,7 +27,7 @@ reverse order, that is, from 300 degrees to 0.
 string of one or more blanks by a single blank.
 
 **Exercise 1-10:** Write a program to copy its input to its output, replacing each
-tab by \t, each backspace by \b, and each backslash by \\. This makes tabs and
+tab by \t, each backspace by \b, and each backslash by \\\. This makes tabs and
 backspaces visible in an unambiguous way.
 
 **Exercise 1-11:** How would you test the word count program? What kinds of input
