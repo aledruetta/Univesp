@@ -35,7 +35,11 @@ are most likely to uncover bugs if there are any?
 
 [**Exercise 1-12:**](exercise_01_12.c) Write a program that prints its input one word per line.
 
-[**Exercise 1-13:**](exercise_01_13.c) Write a program to print a histogram of the lengths of words in
+[**Exercise 1-13a:**](exercise_01_13a.c) Write a program to print a histogram of the lengths of words in
+its input. It is easy to draw the histogram with the bars horizontal; a
+vertical orientation is more challenging.
+
+[**Exercise 1-13b:**](exercise_01_13b.c) Write a program to print a histogram of the lengths of words in
 its input. It is easy to draw the histogram with the bars horizontal; a
 vertical orientation is more challenging.
 
