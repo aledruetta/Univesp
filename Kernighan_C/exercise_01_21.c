@@ -1,4 +1,4 @@
-/* Exercise 1-20 */
+/* Exercise 1-21 */
 
 #include <stdio.h>
 #include "functions.h"
@@ -11,9 +11,8 @@ int main()
     int len;
 
     while ((len = get_line(line, MAXLINE)) != EOF) {
-        detab(line, len);
-        if (len > 0)
-            printf("%s\n", line);
+        entab(line, len);
+        printf("%s\n", line);
     }
 
     return 0;
