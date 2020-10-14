@@ -65,7 +65,7 @@ int main(int argc, char** argv)
 void init()
 {
     glClearColor(1.0, 1.0, 1.0, 1.0);
-    glOrtho(0, 256, 0, 256, -1, 1);
+    glOrtho(0, 600, 0, 300, -1, 1);
 }
 
 void display()
