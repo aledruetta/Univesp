@@ -7,7 +7,7 @@
  *      make lab1
  *
  * executar:
- *      ./a.out
+ *      ./a.out <nome_arq.txt>
  */
 
 #include <GL/glut.h>
@@ -32,7 +32,7 @@ int main(int argc, char** argv)
 {
     int x, y;
 
-    char *file_name = "lab1.txt";
+    char *file_name = argv[1];
     FILE *in_file = fopen(file_name, "r");
 
     if (in_file == NULL) {
