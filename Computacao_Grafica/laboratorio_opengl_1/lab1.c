@@ -1,12 +1,18 @@
 /* Laboratório OpenGL 1
  * Computação Gráfica
  * UNIVESP
+ * Autor: Alejandro Druetta
+ *
+ * compilar:
+ *      make lab1
+ *
+ * executar:
+ *      ./a.out
  */
 
 #include <GL/glut.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 #define MAXPOINTS 50
 
