@@ -64,7 +64,7 @@ int main(int argc, char** argv)
 
 void init()
 {
-    glClearColor(1.0, 1.0, 1.0, 1.0);
+    glClearColor(1.0, 1.0, 1.0, 0.0);
     glOrtho(0, 600, 0, 300, -1, 1);
 }
 
@@ -77,6 +77,8 @@ void display()
     glLineWidth(2.0);
 
     glBegin(GL_LINES);
+    // glBegin(GL_LINE_STRIP);
+    // glBegin(GL_POLYGON);
 
     while (nro < nro_points-1) {
         glVertex2i(points[nro].x, points[nro].y);
