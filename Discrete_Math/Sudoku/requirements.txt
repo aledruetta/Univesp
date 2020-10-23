@@ -1,0 +1,4 @@
+pynvim
+jedi
+ipython
+numpy

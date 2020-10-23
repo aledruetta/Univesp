@@ -1,4 +1,5 @@
-wheel
+pynvim
+jedi
 jupyter
 numpy
 pandas
