@@ -18,7 +18,7 @@ void display(void)
     glPopMatrix();
 
     glFlush();
-    glXSwapBuffers(glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB), glutCreateWindow("Title"));
+    glXSwapBuffers(glXDisplay(), glXWindow());
 }
 
 int main(int argc, char ** argv)
