@@ -1,0 +1,1 @@
+/usr/bin/c++   -fopenmp -D_LINUX -std=c++0x  -rdynamic CMakeFiles/ktxview.dir/src/ktxview/ktxview.cpp.o  -o ../bin/ktxview   -L/home/alejandro/Devel/Univesp/Computacao_Grafica/SuperBible/sb7code/lib  -Wl,-rpath,/home/alejandro/Devel/Univesp/Computacao_Grafica/SuperBible/sb7code/lib lib/libsb7.a -lglfw3 -lX11 -lXrandr -lXinerama -lXi -lXxf86vm -lXcursor -lGL -lrt -ldl 

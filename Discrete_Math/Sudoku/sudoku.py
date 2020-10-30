@@ -42,3 +42,4 @@ class Sudoku:
 if __name__ == "__main__":
     s = Sudoku()
     print(s)
+    print(s.get_block(5))
