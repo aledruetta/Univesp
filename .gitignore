@@ -13,3 +13,5 @@ venv
 .project
 bin/
 .settings/
+.vagrant/
+*.log
