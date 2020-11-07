@@ -3,6 +3,7 @@
 
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
+  config.vm.hostname = "bionic64-client"
   # config.vm.box_check_update = false
   # config.vm.network "forwarded_port", guest: 80, host: 8080
   # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
@@ -14,7 +15,7 @@ Vagrant.configure("2") do |config|
     vb.gui = false
     vb.memory = "2048"
   end
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   apt-get install -y apache2
-  # SHELL
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get install -y python
+  SHELL
 end

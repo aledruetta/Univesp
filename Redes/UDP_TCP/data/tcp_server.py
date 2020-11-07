@@ -1,18 +1,24 @@
 #!/usr/bin/env python3
 
-"""Simple UDP Server App"""
+"""Simple TCP Server App"""
 
 import socket
 
 SERVER_PORT = 12000
 
 # Create IPv4 (AF_INET) and UDP (SOCK_DGRAM) server socket
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind(('', SERVER_PORT))
+server_socket.listen(1)
+
 print('The server is ready to receive')
 
 while True:
-    message, client_address = server_socket.recvfrom(2048)
+    connection_socket, addr = server_socket.accept()
+
+    message = connection_socket.recv(2048)
     modified_message = message.upper()
+    connection_socket.send(modified_message)
     print(message.decode(), '->', modified_message.decode())
-    server_socket.sendto(modified_message, client_address)
+
+    connection_socket.close()
