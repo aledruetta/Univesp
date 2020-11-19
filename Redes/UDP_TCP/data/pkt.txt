@@ -1,0 +1,34 @@
+192.168.33.10 → 192.168.33.11 TCP 74 49472 → 12000 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM=1 TSval=3092447107 TSecr=0 WS=128
+192.168.33.11 → 192.168.33.10 TCP 74 12000 → 49472 [SYN, ACK] Seq=0 Ack=1 Win=65160 Len=0 MSS=1460 SACK_PERM=1 TSval=213795146 TSecr=3092447107 WS=128
+192.168.33.10 → 192.168.33.11 TCP 66 49472 → 12000 [ACK] Seq=1 Ack=1 Win=64256 Len=0 TSval=3092447108 TSecr=213795146
+192.168.33.10 → 192.168.33.11 TCP 71 49472 → 12000 [PSH, ACK] Seq=1 Ack=1 Win=64256 Len=5 TSval=3092450409 TSecr=213795146
+192.168.33.11 → 192.168.33.10 TCP 66 12000 → 49472 [ACK] Seq=1 Ack=6 Win=65280 Len=0 TSval=213798448 TSecr=3092450409
+192.168.33.11 → 192.168.33.10 TCP 71 12000 → 49472 [PSH, ACK] Seq=1 Ack=6 Win=65280 Len=5 TSval=213798449 TSecr=3092450409
+192.168.33.10 → 192.168.33.11 TCP 66 49472 → 12000 [ACK] Seq=6 Ack=6 Win=64256 Len=0 TSval=3092450411 TSecr=213798449
+192.168.33.10 → 192.168.33.11 TCP 66 49472 → 12000 [FIN, ACK] Seq=6 Ack=6 Win=64256 Len=0 TSval=3092450412 TSecr=213798449
+192.168.33.11 → 192.168.33.10 TCP 66 12000 → 49472 [FIN, ACK] Seq=6 Ack=7 Win=65280 Len=0 TSval=213798450 TSecr=3092450412
+192.168.33.10 → 192.168.33.11 TCP 66 49472 → 12000 [ACK] Seq=7 Ack=7 Win=64256 Len=0 TSval=3092450413 TSecr=213798450
+
+######################################################################################################################################################
+
+							HANDSHAKE
+
+10 → 11 [SYN] 		Seq=0 	    	Len=0		A inicia conexao	 	envia 0
+11 → 10 [SYN, ACK] 	Seq=0 Ack=1 	Len=0		B responde ACK		 	envia 0 espera 1
+10 → 11 [ACK] 		Seq=1 Ack=1 	Len=0		A responde ACK		 	envia 1 espera 1
+
+							REQUEST
+
+10 → 11 [PSH, ACK] 	Seq=1 Ack=1 	Len=5		A envia hello		 	envia 1 espera 1
+11 → 10 [ACK] 		Seq=1 Ack=6 	Len=0		B responde ACK		 	envia 1 espera 6
+
+							RESPONSE
+
+11 → 10 [PSH, ACK] 	Seq=1 Ack=6 	Len=5		B envia HELLO		 	envia 1 espera 6
+10 → 11 [ACK] 		Seq=6 Ack=6 	Len=0		A responde ACK		 	envia 6 espera 6
+
+							CLOSE
+
+10 → 11 [FIN, ACK] 	Seq=6 Ack=6 	Len=0		A pede finalizar conexao 	envia 6 espera 6
+11 → 10 [FIN, ACK] 	Seq=6 Ack=7 	Len=0		B finaliza conexao	 	envia 6 espera 7
+10 → 11 [ACK] 		Seq=7 Ack=7 	Len=0		A responde ACK		 	envia 7 espera 7
