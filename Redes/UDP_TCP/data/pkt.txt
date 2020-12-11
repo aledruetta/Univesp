@@ -1,34 +1,74 @@
-192.168.33.10 → 192.168.33.11 TCP 74 49472 → 12000 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM=1 TSval=3092447107 TSecr=0 WS=128
-192.168.33.11 → 192.168.33.10 TCP 74 12000 → 49472 [SYN, ACK] Seq=0 Ack=1 Win=65160 Len=0 MSS=1460 SACK_PERM=1 TSval=213795146 TSecr=3092447107 WS=128
-192.168.33.10 → 192.168.33.11 TCP 66 49472 → 12000 [ACK] Seq=1 Ack=1 Win=64256 Len=0 TSval=3092447108 TSecr=213795146
-192.168.33.10 → 192.168.33.11 TCP 71 49472 → 12000 [PSH, ACK] Seq=1 Ack=1 Win=64256 Len=5 TSval=3092450409 TSecr=213795146
-192.168.33.11 → 192.168.33.10 TCP 66 12000 → 49472 [ACK] Seq=1 Ack=6 Win=65280 Len=0 TSval=213798448 TSecr=3092450409
-192.168.33.11 → 192.168.33.10 TCP 71 12000 → 49472 [PSH, ACK] Seq=1 Ack=6 Win=65280 Len=5 TSval=213798449 TSecr=3092450409
-192.168.33.10 → 192.168.33.11 TCP 66 49472 → 12000 [ACK] Seq=6 Ack=6 Win=64256 Len=0 TSval=3092450411 TSecr=213798449
-192.168.33.10 → 192.168.33.11 TCP 66 49472 → 12000 [FIN, ACK] Seq=6 Ack=6 Win=64256 Len=0 TSval=3092450412 TSecr=213798449
-192.168.33.11 → 192.168.33.10 TCP 66 12000 → 49472 [FIN, ACK] Seq=6 Ack=7 Win=65280 Len=0 TSval=213798450 TSecr=3092450412
-192.168.33.10 → 192.168.33.11 TCP 66 49472 → 12000 [ACK] Seq=7 Ack=7 Win=64256 Len=0 TSval=3092450413 TSecr=213798450
+192.168.33.10 → 192.168.33.11 TCP 74 49472 → server [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM=1 TSval=3092447107 TSecr=0 WS=128
+192.168.33.11 → 192.168.33.10 TCP 74 server → 49472 [SYN, ACK] Seq=0 Ack=1 Win=65160 Len=0 MSS=1460 SACK_PERM=1 TSval=213795146 TSecr=3092447107 WS=128
+192.168.33.10 → 192.168.33.11 TCP 66 49472 → server [ACK] Seq=1 Ack=1 Win=64256 Len=0 TSval=3092447108 TSecr=213795146
+192.168.33.10 → 192.168.33.11 TCP 71 49472 → server [PSH, ACK] Seq=1 Ack=1 Win=64256 Len=5 TSval=3092450409 TSecr=213795146
+192.168.33.11 → 192.168.33.10 TCP 66 server → 49472 [ACK] Seq=1 Ack=6 Win=65280 Len=0 TSval=213798448 TSecr=3092450409
+192.168.33.11 → 192.168.33.10 TCP 71 server → 49472 [PSH, ACK] Seq=1 Ack=6 Win=65280 Len=5 TSval=213798449 TSecr=3092450409
+192.168.33.10 → 192.168.33.11 TCP 66 49472 → server [ACK] Seq=6 Ack=6 Win=64256 Len=0 TSval=3092450411 TSecr=213798449
+192.168.33.10 → 192.168.33.11 TCP 66 49472 → server [FIN, ACK] Seq=6 Ack=6 Win=64256 Len=0 TSval=3092450412 TSecr=213798449
+192.168.33.11 → 192.168.33.10 TCP 66 server → 49472 [FIN, ACK] Seq=6 Ack=7 Win=65280 Len=0 TSval=213798450 TSecr=3092450412
+192.168.33.10 → 192.168.33.11 TCP 66 49472 → server [ACK] Seq=7 Ack=7 Win=64256 Len=0 TSval=3092450413 TSecr=213798450
 
 ######################################################################################################################################################
 
 							HANDSHAKE
 
-10 → 11 [SYN] 		Seq=0 	    	Len=0		A inicia conexao	 	envia 0
-11 → 10 [SYN, ACK] 	Seq=0 Ack=1 	Len=0		B responde ACK		 	envia 0 espera 1
-10 → 11 [ACK] 		Seq=1 Ack=1 	Len=0		A responde ACK		 	envia 1 espera 1
+10 → 11 [SYN] 		Seq=0 	    	Len=0		A inicia conexao	 	    envia 0
+11 → 10 [SYN, ACK] 	Seq=0 Ack=1 	Len=0		B responde ACK		 	    envia 0 espera 1
+10 → 11 [ACK] 		Seq=1 Ack=1 	Len=0		A responde ACK		 	    envia 1 espera 1
 
 							REQUEST
 
-10 → 11 [PSH, ACK] 	Seq=1 Ack=1 	Len=5		A envia hello		 	envia 1 espera 1
-11 → 10 [ACK] 		Seq=1 Ack=6 	Len=0		B responde ACK		 	envia 1 espera 6
+10 → 11 [PSH, ACK] 	Seq=1 Ack=1 	Len=5		A envia hello		 	    envia 1 espera 1
+11 → 10 [ACK] 		Seq=1 Ack=6 	Len=0		B responde ACK		 	    envia 1 espera 6
 
 							RESPONSE
 
-11 → 10 [PSH, ACK] 	Seq=1 Ack=6 	Len=5		B envia HELLO		 	envia 1 espera 6
-10 → 11 [ACK] 		Seq=6 Ack=6 	Len=0		A responde ACK		 	envia 6 espera 6
+11 → 10 [PSH, ACK] 	Seq=1 Ack=6 	Len=5		B envia HELLO		 	    envia 1 espera 6
+10 → 11 [ACK] 		Seq=6 Ack=6 	Len=0		A responde ACK		 	    envia 6 espera 6
 
 							CLOSE
 
 10 → 11 [FIN, ACK] 	Seq=6 Ack=6 	Len=0		A pede finalizar conexao 	envia 6 espera 6
-11 → 10 [FIN, ACK] 	Seq=6 Ack=7 	Len=0		B finaliza conexao	 	envia 6 espera 7
-10 → 11 [ACK] 		Seq=7 Ack=7 	Len=0		A responde ACK		 	envia 7 espera 7
+11 → 10 [FIN, ACK] 	Seq=6 Ack=7 	Len=0		B finaliza conexao	 	    envia 6 espera 7
+10 → 11 [ACK] 		Seq=7 Ack=7 	Len=0		A responde ACK		 	    envia 7 espera 7
+
+######################################################################################################################################################
+
+Capturing on 'any'
+    1 0.000000000 192.168.33.10 → 192.168.33.11 TCP 76 client → server [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM=1 TSval=1233672617 TSecr=0 WS=128
+    2 0.000058643 192.168.33.11 → 192.168.33.10 TCP 76 server → client [SYN, ACK] Seq=0 Ack=1 Win=65160 Len=0 MSS=1460 SACK_PERM=1 TSval=1710308436 TSecr=1233672617 WS=128
+    3 0.000659880 192.168.33.10 → 192.168.33.11 TCP 68 client → server [ACK] Seq=1 Ack=1 Win=64256 Len=0 TSval=1233672618 TSecr=1710308436
+    4 2.527847803 192.168.33.10 → 192.168.33.11 TCP 71 client → server [PSH, ACK] Seq=1 Ack=1 Win=64256 Len=3 TSval=1233675143 TSecr=1710308436
+    5 2.527906937 192.168.33.11 → 192.168.33.10 TCP 68 server → client [ACK] Seq=1 Ack=4 Win=65280 Len=0 TSval=1710310963 TSecr=1233675143
+    6 2.528805869 192.168.33.11 → 192.168.33.10 TCP 71 server → client [PSH, ACK] Seq=1 Ack=4 Win=65280 Len=3 TSval=1710310964 TSecr=1233675143
+    7 2.529153688 192.168.33.11 → 192.168.33.10 TCP 68 server → client [FIN, ACK] Seq=4 Ack=4 Win=65280 Len=0 TSval=1710310964 TSecr=1233675143
+    8 2.530884428 192.168.33.10 → 192.168.33.11 TCP 68 client → server [ACK] Seq=4 Ack=4 Win=64256 Len=0 TSval=1233675146 TSecr=1710310964
+    9 2.531847983 192.168.33.10 → 192.168.33.11 TCP 68 client → server [FIN, ACK] Seq=4 Ack=5 Win=64256 Len=0 TSval=1233675147 TSecr=1710310964
+   10 2.531887447 192.168.33.11 → 192.168.33.10 TCP 68 server → client [ACK] Seq=5 Ack=5 Win=65280 Len=0 TSval=1710310967 TSecr=1233675147
+^C10 packets captured
+
+######################################################################################################################################################
+
+                    HANDSHAKE
+
+client → server [SYN]         Seq=0             Len=0       client open
+server → client [SYN, ACK]    Seq=0     Ack=1   Len=0       server ack
+client → server [ACK]         Seq=1     Ack=1   Len=0       client ack
+
+                    REQUEST 
+
+client → server [PSH, ACK]    Seq=1     Ack=1   Len=3       client send
+server → client [ACK]         Seq=1     Ack=4   Len=0       server ack
+
+                    RESPONSE
+
+server → client [PSH, ACK]    Seq=1     Ack=4   Len=3       server send
+client → server [ACK]         Seq=4     Ack=4   Len=0       client ack
+
+                    CLOSE
+
+server → client [FIN, ACK]    Seq=4     Ack=4   Len=0       server close
+client → server [FIN, ACK]    Seq=4     Ack=5   Len=0       client ack
+server → client [ACK]         Seq=5     Ack=5   Len=0       server ack
+
