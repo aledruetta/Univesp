@@ -1,0 +1,46 @@
+from datetime import datetime
+from sqlalchemy import create_engine, MetaData
+from sqlalchemy import Table, Column, ForeignKey, Index
+from sqlalchemy import Integer, String, Numeric, DateTime
+from sqlalchemy import PrimaryKeyConstraint, UniqueConstraint, CheckConstraint
+
+# engine = create_engine('postgresql+psycopg2://sqlalchemy'
+#         ':12345678@localhost:5432/mydb', echo=True)
+
+# engine = create_engine('mysql+pymysql://sqlalchemy'
+#         ':12345678@localhost:3306/mydb', pool_recycle=3600, echo=True)
+
+engine = create_engine('sqlite:///cookies.db', echo=True)
+connection = engine.connect()
+metadata = MetaData()
+
+users = Table(
+    'users',
+    metadata,
+    Column('user_id', Integer(), primary_key=True),
+    Column('username', String(15), nullable=False, unique=True),
+    Column('email_address', String(255), nullable=False),
+    Column('phone', String(20), nullable=False),
+    Column('password', String(25), nullabel=False),
+    Column('created_on', DateTime(), default=datetime.now),
+    Column('updated_on',
+           DateTime(),
+           default=datetime.now,
+           onupdate=datetime.now),
+    # Alternatively:
+    # PrimaryKeyConstraint('user_id', name='user_pk')
+    # UniqueConstraint('username', name='uix_username')
+)
+
+cookies = Table(
+    'cookies',
+    metadata,
+    Column('cookie_id', Integer(), primary_key=True),
+    Column('cookie_name', String(50), index=True),
+    Column('cookie_recipe_url', String(255)),
+    Column('cookie_sku', String(55)),
+    Column('quantity', Integer()),
+    Column('unit_cost', Numeric(12, 2)),
+    CheckConstraint('unit_cost >= 0.00', name='unit_cost_positive'),
+    Index('ix_cookies_cookie_name', 'cookie_name')
+)

@@ -3,3 +3,4 @@ jedi
 pylint
 pynvim
 yapf
+ipython
