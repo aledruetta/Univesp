@@ -4,3 +4,4 @@ pylint
 pynvim
 yapf
 ipython
+pretty-errors

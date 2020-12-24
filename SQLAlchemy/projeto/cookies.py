@@ -1,17 +1,16 @@
 from datetime import datetime
-from sqlalchemy import (create_engine, MetaData, Table, Column, ForeignKey,
-                        Integer, String, Numeric, DateTime, Boolean)
+from sqlalchemy import (create_engine, insert, MetaData, Table, Column,
+                        ForeignKey, Integer, String, Numeric, DateTime,
+                        Boolean)
 # from sqlalchemy import (Index,
 #                         ForeignKeyConstraint,
 #                         PrimaryKeyConstraint,
 #                         UniqueConstraint,
 #                         CheckConstraint)
 
-# engine = create_engine('postgresql+psycopg2://sqlalchemy'
-#         ':12345678@localhost:5432/mydb', echo=True)
-
-# engine = create_engine('mysql+pymysql://sqlalchemy'
-#         ':12345678@localhost:3306/mydb', pool_recycle=3600, echo=True)
+POSTGRES_URI_DATABASE = 'postgresql+psycopg2://sqlalchemy:12345678@localhost:5432/mydb'
+MYSQL_URI_DATABASE = 'mysql+pymysql://sqlalchemy:12345678@localhost:3306/mydb'
+SQLITE_URI_DATABASE = 'sqlite:///cookies.db'
 
 metadata = MetaData()
 
@@ -64,6 +63,29 @@ line_items = Table(
 )
 
 if __name__ == "__main__":
-    engine = create_engine('sqlite:///:memory:', echo=True)
+    # engine = create_engine(POSTGRES_URI_DATABASE, echo=True)
+    # engine = create_engine(MYSQL_URI_DATABASE, pool_recycle=3600, echo=True)
+    engine = create_engine(SQLITE_URI_DATABASE, echo=True)
     metadata.create_all(engine)
-    # connection = engine.connect()
+    connection = engine.connect()
+
+    # insert as a Table instance method
+    ins = cookies.insert().values(cookie_name="chocolate chip",
+                                  cookie_recipe_url="http://some.com",
+                                  cookie_sku="CC01",
+                                  quantity="12",
+                                  unit_cost="0.50")
+
+    # insert as a top level function
+    # ins = insert(cookies).values(cookie_name="chocolate chip",
+    #                              cookie_recipe_url="http://some.com",
+    #                              cookie_sku="CC01",
+    #                              quantity="12",
+    #                              unit_cost="0.50")
+
+    print(f"\n{str(ins)}")
+    print(f"\n{str(ins.compile().params)}\n")
+
+    result = connection.execute(ins)
+
+    print(result.inserted_primary_key)
