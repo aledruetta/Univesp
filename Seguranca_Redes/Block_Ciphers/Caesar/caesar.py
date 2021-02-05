@@ -10,7 +10,7 @@ printables = string.ascii_letters + string.punctuation + "áéíóúñÁÉÍÓÚ
 
 class Ceasar:
     def __init__(self, offset):
-        self.offset = offset
+        self.offset = int(offset)
 
     def encrypt(self, plaintext):
         cyphertext = ""
@@ -20,6 +20,14 @@ class Ceasar:
 
         return cyphertext
 
+    def decrypt(self, cyphertext):
+        plaintext = ""
+        for char in cyphertext:
+            index = (printables.find(char) - self.offset)
+            plaintext += printables[index]
+
+        return plaintext
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -27,9 +35,13 @@ def main():
     parser.add_argument("-o", "--offset", default=3)
     args = parser.parse_args()
 
-    ceasar = Ceasar(args.k)
-    print(f"plaintext:\t '{args.plain}'")
-    print(f"cyphertext:\t '{ceasar.encrypt(args.plain)}'")
+    ceasar = Ceasar(args.offset)
+
+    cyphertext = ceasar.encrypt(args.plain)
+    print(f"encrypt -> '{cyphertext}'")
+
+    plaintext = ceasar.decrypt(cyphertext)
+    print(f"decrypt -> '{plaintext}'")
 
 
 if __name__ == "__main__":
