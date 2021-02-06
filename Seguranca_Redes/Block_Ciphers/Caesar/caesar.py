@@ -3,45 +3,53 @@
 # file: ceasar.py
 
 import argparse
+import random
 import string
 
-printables = string.ascii_letters + string.punctuation + "áéíóúñÁÉÍÓÚÑ "
+PRINTABLES = string.ascii_letters + \
+        string.punctuation + \
+        "áâàãéêèêíóôòõúñçÁÂÀÃÉÊÈẼÍÓÔÒÕÚÑÇ 1234567890"
 
 
-class Ceasar:
+class Caesar(Cypher):
     def __init__(self, offset):
+        self.key = list(PRINTABLES)
         self.offset = int(offset)
+
+        random.shuffle(self.key)
 
     def encrypt(self, plaintext):
         cyphertext = ""
         for char in plaintext:
-            index = (printables.find(char) + self.offset) % len(printables)
-            cyphertext += printables[index]
+            index = (self.key.index(char) + self.offset) % len(self.key)
+            cyphertext += self.key[index]
 
         return cyphertext
 
     def decrypt(self, cyphertext):
         plaintext = ""
         for char in cyphertext:
-            index = (printables.find(char) - self.offset)
-            plaintext += printables[index]
+            index = (self.key.index(char) - self.offset)
+            plaintext += self.key[index]
 
         return plaintext
 
 
 def main():
+    pass
     parser = argparse.ArgumentParser()
     parser.add_argument("plain", help="Message in plaintext")
     parser.add_argument("-o", "--offset", default=3)
     args = parser.parse_args()
 
-    ceasar = Ceasar(args.offset)
+    caesar = Caesar(args.offset)
+    print(f'cypher  -> {"".join(caesar.key)}')
 
-    cyphertext = ceasar.encrypt(args.plain)
-    print(f"encrypt -> '{cyphertext}'")
+    cyphertext = caesar.encrypt(args.plain)
+    print(f"encrypt -> {cyphertext}")
 
-    plaintext = ceasar.decrypt(cyphertext)
-    print(f"decrypt -> '{plaintext}'")
+    plaintext = caesar.decrypt(cyphertext)
+    print(f"decrypt -> {plaintext}")
 
 
 if __name__ == "__main__":
