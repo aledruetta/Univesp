@@ -1,0 +1,16 @@
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/bin/Debug/net5.0/SingleResponsability
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/bin/Debug/net5.0/SingleResponsability.deps.json
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/bin/Debug/net5.0/SingleResponsability.runtimeconfig.json
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/bin/Debug/net5.0/SingleResponsability.runtimeconfig.dev.json
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/bin/Debug/net5.0/SingleResponsability.dll
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/bin/Debug/net5.0/ref/SingleResponsability.dll
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/bin/Debug/net5.0/SingleResponsability.pdb
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/obj/Debug/net5.0/SingleResponsability.csprojAssemblyReference.cache
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/obj/Debug/net5.0/SingleResponsability.GeneratedMSBuildEditorConfig.editorconfig
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/obj/Debug/net5.0/SingleResponsability.AssemblyInfoInputs.cache
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/obj/Debug/net5.0/SingleResponsability.AssemblyInfo.cs
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/obj/Debug/net5.0/SingleResponsability.csproj.CoreCompileInputs.cache
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/obj/Debug/net5.0/SingleResponsability.dll
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/obj/Debug/net5.0/ref/SingleResponsability.dll
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/obj/Debug/net5.0/SingleResponsability.pdb
+/home/alejandro/Devel/Univesp/Design_Patterns/CSharp_DotNet/SingleResponsability/obj/Debug/net5.0/SingleResponsability.genruntimeconfig.cache
