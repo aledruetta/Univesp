@@ -16,3 +16,6 @@ bin/
 .vagrant/
 *.log
 *.db
+*.cache
+*.dll
+*.pdb
