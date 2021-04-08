@@ -7,7 +7,7 @@ namespace HtmlBuilder
   class HtmlElement
   {
     public string Name, Text;
-    public List<HtmlElement> Elements = new List<HtmlElement>();
+    public List<HtmlElement> Children = new List<HtmlElement>();
     private const int indentSize = 2;
 
     public HtmlElement()
@@ -33,7 +33,7 @@ namespace HtmlBuilder
         sb.Append("\n");
       }
 
-      foreach (var e in Elements)
+      foreach (var e in Children)
         sb.Append(e.ToStringImpl(indent + 1));
 
       sb.Append($"{i}</{Name}>\n");
@@ -61,13 +61,13 @@ namespace HtmlBuilder
     public void AddChild(string childName, string childText)
     {
       var e = new HtmlElement(childName, childText);
-      _root.Elements.Add(e);
+      _root.Children.Add(e);
     }
 
     public HtmlBuilder AddChildFluent(string childName, string childText)
     {
       var e = new HtmlElement(childName, childText);
-      _root.Elements.Add(e);
+      _root.Children.Add(e);
 
       return this;
     }

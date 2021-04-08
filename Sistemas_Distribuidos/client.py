@@ -7,14 +7,19 @@ from socket import *
 HOST = "192.168.1.2"
 PORT = 5001
 
-s = socket(AF_INET, SOCK_STREAM)
-s.connect((HOST, PORT))
+def upper_rcp(msg):
+    s = socket(AF_INET, SOCK_STREAM)
+    s.connect((HOST, PORT))
+    s.send(msg.encode())
+    data = s.recv(1024)
 
-msg = input("say> ")
-s.send(msg.encode())
+    s.close()
 
-data = s.recv(1024)
-print(f"echo> {data.decode()}")
+    return data.decode()
 
-s.close()
+if __name__ == "__main__":
+    msg = input("say> ")
+    resp = upper_rcp(msg)
+
+    print(f"echo> {resp}")
 
