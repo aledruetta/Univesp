@@ -28,6 +28,10 @@ docker exec -it mssql-server 'bash'
 2> GO
 ```
 
+```bash
+sqlcmd -S localhost,1433 -U SA -P 'NewStrong!Password'
+```
+
 ```docker
 docker start mssql-server
 docker stop mssql-server
