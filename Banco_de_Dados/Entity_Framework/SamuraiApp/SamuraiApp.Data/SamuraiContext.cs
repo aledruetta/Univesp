@@ -11,7 +11,7 @@ namespace SamuraiApp.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "Server=localhost,1433; DataBase=SamuraiAppData; User=SA; Password=Strong!Password; Trusted_Connection=False;"
+                "Server=localhost,1433; DataBase=SamuraiAppData; User=SA; Password=NewStrong!Password; Trusted_Connection=False;"
             );
         }
     }
