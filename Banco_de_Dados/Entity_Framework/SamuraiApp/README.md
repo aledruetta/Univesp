@@ -48,12 +48,31 @@ Comandos docker
 
 ```docker
 docker start mssql-server
-docker stop mssql-server
 docker restart mssql-server
+docker stop mssql-server
+docker rm mssql-server
 docker kill mssql-server
 ```
 
 ## DotNet Core
+
+```bash
+dotnet new sln -o SamuraiApp
+
+cd SamuraiApp
+dotnet new gitignore
+
+dotnet new classlib -o SamuraiApp.Domain
+dotnet new classlib -o SamuraiApp.Data
+dotnet new classlib -o SamuraiApp.UI
+
+dotnet sln add SamuraiApp.Domain/SamuraiApp.Domain.csproj
+dotnet sln add SamuraiApp.Data/SamuraiApp.Data.csproj
+dotnet sln add SamuraiApp.UI/SamuraiApp.UI.csproj
+
+dotnet add SamuraiApp.Data package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add SamuraiApp.Data reference SamuraiApp.Domain/SamuraiApp.Domain.csproj
+```
 
 Executar
 
