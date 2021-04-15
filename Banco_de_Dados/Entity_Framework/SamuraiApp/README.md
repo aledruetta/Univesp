@@ -76,6 +76,26 @@ dotnet add SamuraiApp.Data reference SamuraiApp.Domain/SamuraiApp.Domain.csproj
 
 Executar
 
-```dotnet
+```bash
 dotnet run -p SamuraiApp.UI/
+```
+
+## Entity Framework Core
+
+```bash
+dotnet tool list --global
+dotnet tool install --global dotnet-ef
+dotnet tool update --global dotnet-ef
+```
+
+```bash
+dotnet add SamuraiApp.Data package Microsoft.EntityFrameworkCore.Design
+```
+
+O container precisa estar rodando:
+
+```bash
+dotnet ef migrations add -p SamuraiApp.Data init
+dotnet ef migrations list -p SamuraiApp.Data
+dotnet ef database update -p SamuraiApp.Data
 ```
