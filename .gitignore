@@ -20,3 +20,4 @@ bin/
 *.dll
 *.pdb
 **/obj/
+secret.*
