@@ -3,11 +3,20 @@
 #include <PubSubClient.h>
 #include "secret.h"
 
+/* Constants defined in secret.h
+
+   const char* mqtt_server
+   const char* root_ca
+   const char* ssid
+   const char* password
+   const char* mqtt_user
+   const char* mqtt_pass
+*/
+
 void setup_wifi(void);
 void callback(char* topic, byte* message, unsigned int length);
 
 WiFiClientSecure wifiClient;
-// const char* mqtt_server defined in secret.h
 PubSubClient mqttClient(mqtt_server, 8883, callback, wifiClient);
 
 long lastMsg = 0;
@@ -20,23 +29,18 @@ void setup() {
   Serial.begin(115200);
   setup_wifi();
 
-  // const char* cacert defined in secret.h
-  // const char* client_cert defined in secret.h
-  // const char* privkey defined in secret.h
-  wifiClient.setCACert(cacert);
-  wifiClient.setCertificate(client_cert);
-  wifiClient.setPrivateKey(privkey);
+  // openssl s_client -connect domain.com:8883 -showcerts
+  // copiar o segundo certificado
+  wifiClient.setCACert(root_ca);
 }
 
 void setup_wifi() {
   delay(10);
   Serial.println();
-  Serial.print("Connecting to ");
-  // const char* ssid defined in secret.h
+  Serial.print("Conectando a ");
   Serial.println(ssid);
 
   WiFi.mode(WIFI_STA);
-  // const char* password defined in secret.h
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {
@@ -45,15 +49,15 @@ void setup_wifi() {
   }
 
   Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.print("IP address: ");
+  Serial.println("WiFi conectado");
+  Serial.print("Endereço IP: ");
   Serial.println(WiFi.localIP());
 }
 
 void callback(char* topic, byte* message, unsigned int length) {
-  Serial.print("Message arrived on topic: ");
+  Serial.print("Tópico da mensagem recebida: ");
   Serial.print(topic);
-  Serial.print(". Message: ");
+  Serial.print(". Mensagem: ");
   String messageTemp;
   
   for (int i = 0; i < length; i++) {
@@ -65,18 +69,16 @@ void callback(char* topic, byte* message, unsigned int length) {
 
 void reconnect() {
   while (!mqttClient.connected()) {
-    Serial.print("Attempting MQTT connection...");
+    Serial.print("Tentando conectar com o broker MQTT...");
     String clientId = "ESP32Client-";
     clientId += String(random(0xffff), HEX);
 
-    // const char* mqtt_user defined in secret.h
-    // const char* mqtt_pass defined in secret.h
     if (mqttClient.connect(clientId.c_str(), mqtt_user, mqtt_pass)) {
-      Serial.println("connected");
+      Serial.println("conectado");
     } else {
-      Serial.print("failed, rc=");
+      Serial.print("erro, rc=");
       Serial.print(mqttClient.state());
-      Serial.println(" try again in 5 seconds");
+      Serial.println(" tentando de novo em 5 segundos");
       delay(5000);
     }
   }
@@ -91,10 +93,7 @@ void loop() {
   if (now - lastMsg > 5000) {
     lastMsg = now;
     
-    char tempString[8];
-    dtostrf(temperature, 1, 2, tempString);
-    Serial.print("Temperature: ");
-    Serial.println(tempString);
-    mqttClient.publish("esp32/temperature", tempString);
+    Serial.println("Publicando...");
+    mqttClient.publish("esp32/test", "Teste");
   }
 }
