@@ -1,4 +1,4 @@
-/* 
+/** 
   # Essas constantes precisam estar definidas em um arquivo secret.h
 
     const char* mqtt_server = "example.com"
@@ -20,7 +20,7 @@
 
     Instalar cliente Mosquitto e executar:
 
-    mosquitto_sub -h example.com -t test -p 8883 --capath /etc/ssl/certs/ -u "mqtt_user" -P "mqtt_pass"
+    mosquitto_sub -h example.com -t esp32/test -p 8883 --capath /etc/ssl/certs/ -u "mqtt_user" -P "mqtt_pass"
 
   # Liks usados para consulta:
 
