@@ -1,5 +1,5 @@
 from flask import Flask
-# from flask_cors import CORS
+from flask_cors import CORS
 from flask_mqtt import Mqtt
 
 
@@ -19,7 +19,7 @@ def handle_mqtt_message(client, userdata, message):
 
 def create_app():
     app = Flask(__name__)
-    # CORS(app)
+    CORS(app)
     app.config.from_object("webapp.config.DevConfig")
     mqtt.init_app(app)
 
