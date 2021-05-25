@@ -1,32 +1,37 @@
 /* 
   # Essas constantes precisam estar definidas em um arquivo secret.h
 
-  const char* mqtt_server = "example.com"
-  const char* root_ca = \
-    "-----BEGIN CERTIFICATE-----\n" \
-    "copiar aqui o certificado obtido pelo comando openssl\n" \
-    "formatando cada linha como está em este modelo\n" \
-    "-----END CERTIFICATE-----";
-  const char* ssid = "identificador da rede wifi"
-  const char* password = "senha da rede wifi"
-  const char* mqtt_user = "usuário para autenticação no broker"
-  const char* mqtt_pass = "senha para autenticação no broker"
+    const char* mqtt_server = "example.com"
+    const char* root_ca = \
+      "-----BEGIN CERTIFICATE-----\n" \
+      "copiar aqui o certificado obtido pelo comando openssl\n" \
+      "formatando cada linha como está em este modelo\n" \
+      "-----END CERTIFICATE-----";
+    const char* ssid = "identificador da rede wifi"
+    const char* password = "senha da rede wifi"
+    const char* mqtt_user = "usuário para autenticação no broker"
+    const char* mqtt_pass = "senha para autenticação no broker"
 
   # Para obter o certificado SSL (copiar o segundo certificado)
 
-  openssl s_client -connect example.com:8883 -showcerts
+    openssl s_client -connect example.com:8883 -showcerts
 
   # Comando para testar o cliente
 
-  mosquitto_sub -h example.com -t test -p 8883 --capath /etc/ssl/certs/ -u "mqtt_user" -P "mqtt_pass"
+    Instalar cliente Mosquitto e executar:
+
+    mosquitto_sub -h example.com -t test -p 8883 --capath /etc/ssl/certs/ -u "mqtt_user" -P "mqtt_pass"
 
   # Liks usados para consulta:
 
-  https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04
-  https://www.digitalocean.com/community/tutorials/how-to-use-certbot-standalone-mode-to-retrieve-let-s-encrypt-ssl-certificates-on-ubuntu-1804
-  https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-the-mosquitto-mqtt-messaging-broker-on-ubuntu-18-04
-  https://pubsubclient.knolleary.net/api
-  https://github.com/knolleary/pubsubclient/blob/master/examples/mqtt_esp8266/mqtt_esp8266.ino
+    https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04
+    https://www.digitalocean.com/community/tutorials/how-to-use-certbot-standalone-mode-to-retrieve-let-s-encrypt-ssl-certificates-on-ubuntu-1804
+    https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-the-mosquitto-mqtt-messaging-broker-on-ubuntu-18-04
+    https://pubsubclient.knolleary.net/api
+    https://github.com/knolleary/pubsubclient/blob/master/examples/mqtt_esp8266/mqtt_esp8266.ino
+    https://randomnerdtutorials.com/what-is-mqtt-and-how-it-works/
+    https://randomnerdtutorials.com/esp32-useful-wi-fi-functions-arduino
+    https://randomnerdtutorials.com/esp32-mqtt-publish-subscribe-arduino-ide/
 */
 
 #include <WiFi.h>
