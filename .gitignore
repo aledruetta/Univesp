@@ -6,7 +6,6 @@ test.*
 **/.vscode/
 ^.ibnb*
 .ipynb*/
-__*
 venv
 .venv
 .classpath
