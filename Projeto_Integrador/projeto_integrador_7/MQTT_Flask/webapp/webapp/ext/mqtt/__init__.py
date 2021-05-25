@@ -2,17 +2,17 @@ from flask_mqtt import Mqtt
 
 mqtt = Mqtt()
 
+
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
-    mqtt.subscribe('esp32/test')
+    mqtt.subscribe("esp32/test")
+
 
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
-    data = dict(
-        topic=message.topic,
-        payload=message.payload.decode()
-    )
+    data = dict(topic=message.topic, payload=message.payload.decode())
     print(data)
+
 
 def init_app(app):
     mqtt.init_app(app)
