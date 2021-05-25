@@ -11,10 +11,14 @@ install:
 updb:
 	# flask db init
 	# flask db migrate
-	FLASK_APP=webapp/app flask db upgrade; \
+	FLASK_APP=webapp/app flask db upgrade
 
 shell:
 	FLASK_APP=webapp/app flask shell
+
+check:
+	isort .
+	black -l 120 -t py38 .
 
 run:
     # export FLASK_ENV=development
