@@ -16,7 +16,7 @@
 
     openssl s_client -connect example.com:8883 -showcerts
 
-  # Comando para testar o cliente
+  # Comando para testar o broker
 
     Instalar cliente Mosquitto e executar:
 
@@ -40,29 +40,32 @@
 #include "secret.h"
 
 void setup_wifi(void);
-void callback(char* topic, byte* message, unsigned int length);
+void callback(char *topic, byte *message, unsigned int length);
 
 WiFiClientSecure wifiClient;
 PubSubClient mqttClient(mqtt_server, 8883, callback, wifiClient);
 
 long lastMsg = 0;
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
   setup_wifi();
   wifiClient.setCACert(root_ca);
 }
 
-void setup_wifi() {
+void setup_wifi()
+{
   delay(10);
   Serial.println();
   Serial.print("Conectando a ");
   Serial.println(ssid);
 
-  WiFi.mode(WIFI_STA);  // modo estação
+  WiFi.mode(WIFI_STA); // modo estação
   WiFi.begin(ssid, password);
 
-  while (WiFi.status() != WL_CONNECTED) {
+  while (WiFi.status() != WL_CONNECTED)
+  {
     delay(500);
     Serial.print(".");
   }
@@ -75,13 +78,15 @@ void setup_wifi() {
 
 // O callback serve para receber mensagens.
 // A gente por enquanto não usa.
-void callback(char* topic, byte* message, unsigned int length) {
+void callback(char *topic, byte *message, unsigned int length)
+{
   Serial.print("Tópico da mensagem recebida: ");
   Serial.print(topic);
   Serial.print(". Mensagem: ");
   String messageTemp;
-  
-  for (int i = 0; i < length; i++) {
+
+  for (int i = 0; i < length; i++)
+  {
     Serial.print((char)message[i]);
     messageTemp += (char)message[i];
   }
@@ -89,15 +94,20 @@ void callback(char* topic, byte* message, unsigned int length) {
 }
 
 // Rotina para reconexão do cliente MQTT.
-void reconnect() {
-  while (!mqttClient.connected()) {
+void reconnect()
+{
+  while (!mqttClient.connected())
+  {
     Serial.print("Tentando conectar com o broker MQTT...");
     String clientId = "ESP32Client-";
     clientId += String(random(0xffff), HEX);
 
-    if (mqttClient.connect(clientId.c_str(), mqtt_user, mqtt_pass)) {
+    if (mqttClient.connect(clientId.c_str(), mqtt_user, mqtt_pass))
+    {
       Serial.println("conectado");
-    } else {
+    }
+    else
+    {
       Serial.print("erro, rc=");
       Serial.print(mqttClient.state());
       Serial.println(" tentando de novo em 5 segundos");
@@ -106,16 +116,19 @@ void reconnect() {
   }
 }
 
-void loop() {
-  if (!mqttClient.connected()) {
+void loop()
+{
+  if (!mqttClient.connected())
+  {
     reconnect();
   }
   mqttClient.loop();
 
   long now = millis();
-  if (now - lastMsg > 5000) {
+  if (now - lastMsg > 5000)
+  {
     lastMsg = now;
-    
+
     // Publicando mensagem "Teste" para o tópico "esp32/test"
     Serial.println("Publicando...");
     mqttClient.publish("esp32/test", "Teste");

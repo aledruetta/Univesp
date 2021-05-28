@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 
-from webapp.ext import mqtt
+from .ext import mqtt
 
 
 def create_app():
