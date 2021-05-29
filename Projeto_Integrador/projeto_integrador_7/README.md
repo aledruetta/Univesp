@@ -37,16 +37,6 @@ mosquitto_sub -h example.com -t esp32/test \
     certs/ -u "mqtt_user" -P "mqtt_pass"
 ```
 
-### Referências:
-
-- [DigitalOcean - Initial Server Setup with Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04)
-- [DigitalOcean - How to use Certbot standalone mode to retrieve Letsencrypt certificates on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-use-certbot-standalone-mode-to-retrieve-let-s-encrypt-ssl-certificates-on-ubuntu-1804)
-- [DigitalOcean - How to install and secure the Mosquitto MQTT messaging broker on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-the-mosquitto-mqtt-messaging-broker-on-ubuntu-18-04)
-- [Knolleary - PubSubClient API](https://pubsubclient.knolleary.net/api)
-- [Random Nerd Tutorials - What is MQTT and how it works](https://randomnerdtutorials.com/what-is-mqtt-and-how-it-works/)
-- [Random Nerd Tutorials - ESP32 useful WiFi functions](https://randomnerdtutorials.com/esp32-useful-wi-fi-functions-arduino)
-- [Random Nerd Tutorials - ESP32 MQTT publish subscribe](https://randomnerdtutorials.com/esp32-mqtt-publish-subscribe-arduino-ide/)
-
 ## Flask MQTT WebApp
 
 [[Código fonte](https://github.com/aledruetta/Univesp/tree/master/Projeto_Integrador/projeto_integrador_7/Flask_MQTT/webapp)]
@@ -63,3 +53,13 @@ Executar:
 ```bash
 make run
 ```
+
+### Referências:
+
+- [DigitalOcean - Initial Server Setup with Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04)
+- [DigitalOcean - How to use Certbot standalone mode to retrieve Letsencrypt certificates on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-use-certbot-standalone-mode-to-retrieve-let-s-encrypt-ssl-certificates-on-ubuntu-1804)
+- [DigitalOcean - How to install and secure the Mosquitto MQTT messaging broker on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-the-mosquitto-mqtt-messaging-broker-on-ubuntu-18-04)
+- [Knolleary - PubSubClient API](https://pubsubclient.knolleary.net/api)
+- [Random Nerd Tutorials - What is MQTT and how it works](https://randomnerdtutorials.com/what-is-mqtt-and-how-it-works/)
+- [Random Nerd Tutorials - ESP32 useful WiFi functions](https://randomnerdtutorials.com/esp32-useful-wi-fi-functions-arduino)
+- [Random Nerd Tutorials - ESP32 MQTT publish subscribe](https://randomnerdtutorials.com/esp32-mqtt-publish-subscribe-arduino-ide/)
