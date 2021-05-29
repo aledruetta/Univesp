@@ -54,6 +54,13 @@ Executar:
 make run
 ```
 
+Vagrant:
+
+```bash
+cd webapp
+vagrant up
+```
+
 ### Referências:
 
 - [DigitalOcean - Initial Server Setup with Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04)
