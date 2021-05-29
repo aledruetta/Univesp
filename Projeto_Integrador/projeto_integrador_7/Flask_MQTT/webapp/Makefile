@@ -21,7 +21,6 @@ check:
 	black -l 120 -t py38 .
 
 run:
-    # export FLASK_ENV=development
 	FLASK_APP=webapp/app flask run --host=0.0.0.0
 
 clean:

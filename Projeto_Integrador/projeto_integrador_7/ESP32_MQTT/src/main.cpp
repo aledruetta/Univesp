@@ -39,11 +39,14 @@
 #include <PubSubClient.h>
 #include "secret.h"
 
+const bool DEBUG = true;
+
 void setup_wifi(void);
 void callback(char *topic, byte *message, unsigned int length);
 
-WiFiClientSecure wifiClient;
-PubSubClient mqttClient(mqtt_server, 8883, callback, wifiClient);
+WiFiClientSecure wifiClientSecure;
+WiFiClient wifiClient;
+PubSubClient mqttClient;
 
 long lastMsg = 0;
 
@@ -51,7 +54,19 @@ void setup()
 {
   Serial.begin(115200);
   setup_wifi();
-  wifiClient.setCACert(root_ca);
+  wifiClientSecure.setCACert(root_ca);
+  mqttClient.setCallback(callback);
+
+  if (DEBUG)
+  {
+    mqttClient.setClient(wifiClient);
+    mqttClient.setServer("192.168.0.100", 1883);
+  }
+  else
+  {
+    mqttClient.setClient(wifiClientSecure);
+    mqttClient.setServer(mqtt_server, 8883);
+  }
 }
 
 void setup_wifi()
@@ -102,7 +117,14 @@ void reconnect()
     String clientId = "ESP32Client-";
     clientId += String(random(0xffff), HEX);
 
-    if (mqttClient.connect(clientId.c_str(), mqtt_user, mqtt_pass))
+    bool conectado = false;
+
+    if (DEBUG)
+      conectado = mqttClient.connect(clientId.c_str(), "test", "test");
+    else
+      conectado = mqttClient.connect(clientId.c_str(), mqtt_user, mqtt_pass);
+
+    if (conectado)
     {
       Serial.println("conectado");
     }

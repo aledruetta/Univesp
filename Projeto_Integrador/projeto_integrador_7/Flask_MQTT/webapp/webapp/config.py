@@ -19,8 +19,6 @@ class Config:
 
 
 class Production(Config):
-    DEBUG = True
-
     SQLALCHEMY_DATABASE_URI = os.getenv("PROD_DATABASE_URI")
 
     MQTT_BROKER_URL = os.getenv("MQTT_BROKER_URL")
@@ -34,9 +32,11 @@ class Production(Config):
 
 
 class Development(Config):
+    DEBUG = True
+
     SQLALCHEMY_DATABASE_URI = os.getenv("DEV_DATABASE_URI")
 
-    MQTT_BROKER_URL = "localhost"
+    MQTT_BROKER_URL = "192.168.0.100"
     MQTT_BROKER_PORT = 1883
     MQTT_USERNAME = "test"
     MQTT_PASSWORD = "test"
@@ -45,3 +45,5 @@ class Development(Config):
 class Testing(Config):
     DEBUG = True
     TESTING = True
+
+    SQLALCHEMY_DATABASE_URI = os.getenv("TEST_DATABASE_URI")
