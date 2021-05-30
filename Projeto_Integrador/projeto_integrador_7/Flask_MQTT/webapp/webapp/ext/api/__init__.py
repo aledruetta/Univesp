@@ -1,32 +1,14 @@
-from flask_restful import Resource, Api
+from flask_restful import Api
+
+from webapp.ext.api.views import ApiThing, ApiThingAll, ApiUser, ApiUserAll
 
 api = Api()
 
 
-class UserAll(Resource):
-    def get(self):
-        return "Users"
-
-
-class User(Resource):
-    def get(self, user_id):
-        return {"User": user_id}
-
-
-class TopicAll(Resource):
-    def get(self):
-        return "Topic"
-
-
-class Topic(Resource):
-    def get(self, topic_id):
-        return {"Topic": topic_id}
-
-
-api.add_resource(UserAll, "/api/user")
-api.add_resource(User, "/api/user/<string:user_id>")
-api.add_resource(TopicAll, "/api/topic")
-api.add_resource(Topic, "/api/topic/<string:topic_id>")
+api.add_resource(ApiUserAll, "/api/user")
+api.add_resource(ApiUser, "/api/user/<string:user_id>")
+api.add_resource(ApiThingAll, "/api/topic")
+api.add_resource(ApiThing, "/api/topic/<string:topic_id>")
 
 
 def init_app(app):

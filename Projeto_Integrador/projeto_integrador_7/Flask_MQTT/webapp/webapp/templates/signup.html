@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<section class="hero is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container">
+            <form method="POST" action="{{ url_for('auth.signup') }}">
+                {{ form.csrf_token }}
+
+                <div class="columns is-vcentered">
+                    <div class="column is-one-third is-offset-one-third">
+                        <div class="field">
+                            <p class="control has-icons-left has-icons-right">
+                                {{ form.email(class="input", placeholder="Email") }}
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                <span class="icon is-small is-right">
+                                    <i class="fa fa-check"></i>
+                                </span>
+                            </p>
+                        </div>
+
+                        <div class="field">
+                            <p class="control has-icons-left">
+                                {{ form.password(class="input", placeholder="Password") }}
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                            </p>
+                        </div>
+
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <div class="notification is-danger is-light">
+                            {{ messages[0] }}
+                        </div>
+                        {% endif %}
+                        {% endwith %}
+
+                        <div class="field">
+                            <p class="control">
+                                <button class="button is-success">
+                                    Sign up
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

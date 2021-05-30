@@ -17,8 +17,8 @@ shell:
 	FLASK_APP=webapp/app flask shell
 
 check:
-	isort .
-	black -l 120 -t py38 .
+	isort -l 99 webapp
+	black -l 99 -t py38 webapp
 
 run:
 	FLASK_APP=webapp/app flask run --host=0.0.0.0

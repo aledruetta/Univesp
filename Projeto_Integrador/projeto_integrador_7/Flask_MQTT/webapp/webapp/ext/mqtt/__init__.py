@@ -1,4 +1,5 @@
 import os
+
 from flask_mqtt import Mqtt
 
 mqtt = Mqtt()
@@ -17,7 +18,7 @@ def handle_mqtt_message(client, userdata, message):
 
 @mqtt.on_log()
 def handle_logging(client, userdata, level, buf):
-    if (os.environ["FLASK_ENV"] == "development"):
+    if os.environ["FLASK_ENV"] == "development":
         print(level, buf)
 
 
