@@ -12,7 +12,7 @@
 
 // DEBUG = true para desenvolvimento local sem TLS
 // DEBUG = false para comunicação segura com broker remoto
-const bool DEBUG = true;
+const bool DEBUG = false;
 
 void setup_wifi(void);
 void callback(char *topic, byte *message, unsigned int length);
@@ -24,12 +24,17 @@ PubSubClient mqttClient;
 long lastMsg = 0;
 
 int cycles_on = 0;
-int cycles_on_max = 3;
+int cycles_on_max = 2;
 int cycle_millis = 10000;
 
 bool last_status = false,
      new_status = false;
 
+String clientId;
+
+/**
+ * Setup_wifi function
+ */
 void setup_wifi()
 {
   delay(10);
@@ -50,10 +55,16 @@ void setup_wifi()
   Serial.println("WiFi conectado");
   Serial.print("Endereço IP: ");
   Serial.println(WiFi.localIP());
+  Serial.print("Endereço MAC: ");
+  Serial.println(WiFi.macAddress());
 }
 
-// O callback serve para receber mensagens.
-// A gente por enquanto não usa.
+/**
+ * callback function
+ * 
+ * O callback serve para receber mensagens.
+ * A gente por enquanto não usa.
+ */
 void callback(char *topic, byte *message, unsigned int length)
 {
   Serial.print("Tópico da mensagem recebida: ");
@@ -69,16 +80,19 @@ void callback(char *topic, byte *message, unsigned int length)
   Serial.println();
 }
 
-// Rotina para reconexão do cliente MQTT.
+/**
+ * Rotina para reconexão do cliente MQTT.
+ */
 void reconnect()
 {
   while (!mqttClient.connected())
   {
-    Serial.println("Tentando conectar com o broker MQTT...");
-    String clientId = "ESP32Client-";
-    clientId += String(random(0xffff), HEX);
-    Serial.println("ClientId: " + clientId);
+    // clientId = "ESP32Client-" + String(random(0xffff), HEX);
+    clientId = "esp32-" + WiFi.macAddress();
     bool conectado = false;
+
+    Serial.println("Tentando conectar com o broker MQTT...");
+    Serial.println("ClientId: " + clientId);
 
     if (DEBUG)
       conectado = mqttClient.connect(clientId.c_str(), "test", "test");
@@ -150,8 +164,10 @@ void loop()
 
     if (cycles_on > cycles_on_max)
     {
-      Serial.println("Publicando alarme...");
-      mqttClient.publish("esp32/alarme", "Perigo!");
+      String topic = clientId + "/alarme";
+
+      Serial.println("Publicando topic: " + topic);
+      mqttClient.publish(topic.c_str(), "Perigo!");
     }
   }
 }
