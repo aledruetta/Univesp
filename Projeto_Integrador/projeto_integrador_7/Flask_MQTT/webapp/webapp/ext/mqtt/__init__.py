@@ -7,7 +7,7 @@ mqtt = Mqtt()
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
-    mqtt.subscribe("esp32/test")
+    mqtt.subscribe("esp32/alarme")
 
 
 @mqtt.on_message()

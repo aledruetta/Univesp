@@ -10,8 +10,9 @@
 #include <PubSubClient.h>
 #include "secret.h"
 
-const bool DEBUG = true; // true para desenvolvimento local sem TLS
-                         // false para comunicação segura com broker remoto
+// DEBUG = true para desenvolvimento local sem TLS
+// DEBUG = false para comunicação segura com broker remoto
+const bool DEBUG = true;
 
 void setup_wifi(void);
 void callback(char *topic, byte *message, unsigned int length);
@@ -22,24 +23,12 @@ PubSubClient mqttClient;
 
 long lastMsg = 0;
 
-void setup()
-{
-  Serial.begin(115200);
-  setup_wifi();
-  wifiClientSecure.setCACert(root_ca);
-  mqttClient.setCallback(callback);
+int cycles_on = 0;
+int cycles_on_max = 3;
+int cycle_millis = 10000;
 
-  if (DEBUG)
-  {
-    mqttClient.setClient(wifiClient);
-    mqttClient.setServer("192.168.0.100", 1883);
-  }
-  else
-  {
-    mqttClient.setClient(wifiClientSecure);
-    mqttClient.setServer(mqtt_server, 8883);
-  }
-}
+bool last_status = false,
+     new_status = false;
 
 void setup_wifi()
 {
@@ -85,10 +74,10 @@ void reconnect()
 {
   while (!mqttClient.connected())
   {
-    Serial.print("Tentando conectar com o broker MQTT...");
+    Serial.println("Tentando conectar com o broker MQTT...");
     String clientId = "ESP32Client-";
     clientId += String(random(0xffff), HEX);
-
+    Serial.println("ClientId: " + clientId);
     bool conectado = false;
 
     if (DEBUG)
@@ -110,6 +99,33 @@ void reconnect()
   }
 }
 
+bool readSensor()
+{
+  // aqui vai a lógica da leitura do sensor
+  // a função retorna true se o fogão está acesso ou false no caso contrário
+
+  return true;
+}
+
+void setup()
+{
+  Serial.begin(115200);
+  setup_wifi();
+  wifiClientSecure.setCACert(root_ca);
+  mqttClient.setCallback(callback);
+
+  if (DEBUG)
+  {
+    mqttClient.setClient(wifiClient);
+    mqttClient.setServer(mqtt_server_local, 1883);
+  }
+  else
+  {
+    mqttClient.setClient(wifiClientSecure);
+    mqttClient.setServer(mqtt_server, 8883);
+  }
+}
+
 void loop()
 {
   if (!mqttClient.connected())
@@ -119,12 +135,23 @@ void loop()
   mqttClient.loop();
 
   long now = millis();
-  if (now - lastMsg > 5000)
+
+  if (now - lastMsg > cycle_millis)
   {
     lastMsg = now;
+    last_status = new_status;
 
-    // Publicando mensagem "Teste" para o tópico "esp32/test"
-    Serial.println("Publicando...");
-    mqttClient.publish("esp32/test", "Teste");
+    new_status = readSensor();
+
+    if (new_status && last_status)
+      cycles_on++;
+    else
+      cycles_on = 0;
+
+    if (cycles_on > cycles_on_max)
+    {
+      Serial.println("Publicando alarme...");
+      mqttClient.publish("esp32/alarme", "Perigo!");
+    }
   }
 }
