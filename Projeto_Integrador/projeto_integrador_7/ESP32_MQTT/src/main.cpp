@@ -24,13 +24,15 @@ PubSubClient mqttClient;
 long lastMsg = 0;
 
 int cycles_on = 0;
-int cycles_on_max = 2;
+int yellow_max = 2;
+int red_max = 2 * yellow_max;
 int cycle_millis = 10000;
 
 bool last_status = false,
      new_status = false;
 
 String clientId;
+String status = "Green";
 
 /**
  * Setup_wifi function
@@ -87,8 +89,7 @@ void reconnect()
 {
   while (!mqttClient.connected())
   {
-    // clientId = "ESP32Client-" + String(random(0xffff), HEX);
-    clientId = "esp32-" + WiFi.macAddress();
+    clientId = "esp32-" + WiFi.macAddress().substring(9, 17);
     bool conectado = false;
 
     Serial.println("Tentando conectar com o broker MQTT...");
@@ -160,14 +161,22 @@ void loop()
     if (new_status && last_status)
       cycles_on++;
     else
-      cycles_on = 0;
-
-    if (cycles_on > cycles_on_max)
     {
-      String topic = clientId + "/alarme";
-
-      Serial.println("Publicando topic: " + topic);
-      mqttClient.publish(topic.c_str(), "Perigo!");
+      cycles_on = 0;
+      status = "Green";
     }
+
+    String topic = clientId + "/alarme";
+
+    if (cycles_on > yellow_max && cycles_on <= red_max)
+      status = "Yellow";
+    else if (cycles_on > red_max)
+      status = "Red";
+
+    mqttClient.publish(topic.c_str(), status.c_str());
+    Serial.println("Publicando topic: " + topic);
+    Serial.print("Cycles: ");
+    Serial.print(cycles_on);
+    Serial.println(", Status: " + status);
   }
 }
