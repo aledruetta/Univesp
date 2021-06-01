@@ -22,7 +22,7 @@ long lastMsg = 0;
 int cycles_on = 0;
 int yellow_max = 2;
 int red_max = 2 * yellow_max;
-int cycle_millis = 10000;
+int cycle_millis = 10000; // 10 segundos
 
 bool last_status = false,
      new_status = false;
@@ -107,14 +107,20 @@ void reconnect()
   }
 }
 
+/**
+ * Lógica da leitura do sensor
+ * A função retorna true se o fogão está acesso ou false no caso contrário
+ */
 bool readSensor()
 {
-  // aqui vai a lógica da leitura do sensor
-  // a função retorna true se o fogão está acesso ou false no caso contrário
+  // implementar
 
   return true;
 }
 
+/**
+ * Setup function
+ */
 void setup()
 {
   Serial.begin(115200);
@@ -125,6 +131,9 @@ void setup()
   mqttClient.setServer(mqtt_server, 8883);
 }
 
+/**
+ * Main loop function
+ */
 void loop()
 {
   if (!mqttClient.connected())
