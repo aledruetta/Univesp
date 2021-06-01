@@ -10,10 +10,6 @@
 #include <PubSubClient.h>
 #include "secret.h"
 
-// DEBUG = true para desenvolvimento local sem TLS
-// DEBUG = false para comunicação segura com broker remoto
-const bool DEBUG = false;
-
 void setup_wifi(void);
 void callback(char *topic, byte *message, unsigned int length);
 
@@ -95,10 +91,7 @@ void reconnect()
     Serial.println("Tentando conectar com o broker MQTT...");
     Serial.println("ClientId: " + clientId);
 
-    if (DEBUG)
-      conectado = mqttClient.connect(clientId.c_str(), "test", "test");
-    else
-      conectado = mqttClient.connect(clientId.c_str(), mqtt_user, mqtt_pass);
+    conectado = mqttClient.connect(clientId.c_str(), mqtt_user, mqtt_pass);
 
     if (conectado)
     {
@@ -128,17 +121,8 @@ void setup()
   setup_wifi();
   wifiClientSecure.setCACert(root_ca);
   mqttClient.setCallback(callback);
-
-  if (DEBUG)
-  {
-    mqttClient.setClient(wifiClient);
-    mqttClient.setServer(mqtt_server_local, 1883);
-  }
-  else
-  {
-    mqttClient.setClient(wifiClientSecure);
-    mqttClient.setServer(mqtt_server, 8883);
-  }
+  mqttClient.setClient(wifiClientSecure);
+  mqttClient.setServer(mqtt_server, 8883);
 }
 
 void loop()
