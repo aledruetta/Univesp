@@ -6,7 +6,7 @@ from webapp.ext.auth.models import UserAuth
 
 def authenticate(email, password):
     user = UserAuth.query.filter_by(email=email).first()
-    if user and sha256_crypt.verify(password, user.password):
+    if sha256_crypt.verify(password, user.password):
         return user
 
 

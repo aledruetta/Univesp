@@ -1,4 +1,4 @@
-Flask==2.0.1
+Flask
 Flask-Admin
 Flask-Cors
 Flask-JWT
@@ -10,8 +10,8 @@ Flask-SQLAlchemy
 Flask-WTF
 Jinja2
 passlib
+py3-validate-email
 psycopg2-binary
 python-dotenv
 requests
-WTForms
 wtforms[email]

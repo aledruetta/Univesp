@@ -7,8 +7,20 @@ class Thing(db.Model):
     __tablename__ = "thing"
 
     id = db.Column("id", db.Integer, primary_key=True)
-    created_on = db.Column("created_on", db.DateTime, default=datetime.now)
-    updated_on = db.Column("updated_on", db.DateTime, default=datetime.now, onupdate=datetime.now)
+    mac = db.Column("mac", db.String, unique=True, nullable=False)
+    created_on = db.Column(
+        "created_on",
+        db.DateTime(timezone=True),
+        nullable=False,
+        default=datetime.utcnow,
+    )
+    updated_on = db.Column(
+        "updated_on",
+        db.DateTime(timezone=True),
+        nullable=False,
+        default=datetime.utcnow,
+        onupdate=datetime.utcnow,
+    )
 
     user_id = db.Column("user_id", db.Integer, db.ForeignKey("user_auth.id"), nullable=False)
     user = db.relationship(
@@ -17,7 +29,13 @@ class Thing(db.Model):
     )
 
     def json(self) -> dict:
-        return {"id": self.id, "created_on": self.created_on, "user_id": self.user_id}
+        return {
+            "id": self.id,
+            "created_on": datetime.timestamp(self.created_on),
+            "updated_on": datetime.timestamp(self.updated_on),
+            "user_id": self.user_id,
+            "mac": self.mac,
+        }
 
     def __repr__(self) -> str:
-        return f"ThingId: {self.id}"
+        return f"Thing: {self.mac}"
