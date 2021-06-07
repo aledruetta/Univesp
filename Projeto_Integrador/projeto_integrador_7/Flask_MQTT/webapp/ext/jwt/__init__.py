@@ -1,7 +1,7 @@
 from flask_jwt import JWT
 from passlib.hash import sha256_crypt
 
-from webapp.ext.auth.models import UserAuth
+from webapp.ext.api.models import UserAuth
 
 
 def authenticate(email, password):

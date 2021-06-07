@@ -6,7 +6,7 @@ from passlib.hash import sha256_crypt
 from validate_email import validate_email
 
 from webapp.ext.api.models import Thing
-from webapp.ext.auth import UserAuth
+from webapp.ext.api.models import UserAuth
 from webapp.ext.db import db
 
 HTTP_RESPONSE_CREATED = 201
