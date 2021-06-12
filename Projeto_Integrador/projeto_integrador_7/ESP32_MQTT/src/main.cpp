@@ -10,12 +10,14 @@
 #include <PubSubClient.h>
 #include "secret.h"
 
+bool DEBUG = false;
+
 void setup_wifi(void);
 void callback(char *topic, byte *message, unsigned int length);
 
 WiFiClientSecure wifiClientSecure;
 WiFiClient wifiClient;
-PubSubClient mqttClient;
+PubSubClient pubSubClient;
 
 long lastMsg = 0;
 
@@ -86,23 +88,25 @@ void callback(char *topic, byte *message, unsigned int length)
  */
 void reconnect()
 {
-  while (!mqttClient.connected())
+  while (!pubSubClient.connected())
   {
-    clientId = "esp32-" + WiFi.macAddress().substring(9, 17);
+    String mac = WiFi.macAddress().substring(9, 17);
+    mac.replace(":", "");
+    clientId = "esp32-" + mac;
     bool conectado = false;
 
     Serial.print("Tentando conectar com o broker MQTT... ");
     Serial.println(mqtt_server);
     Serial.println("ClientId: " + clientId);
 
-    conectado = mqttClient.connect(clientId.c_str(), mqtt_user, mqtt_pass);
+    conectado = pubSubClient.connect(clientId.c_str(), mqtt_user, mqtt_pass);
 
     if (conectado)
       Serial.println("conectado");
     else
     {
       Serial.print("erro, rc=");
-      Serial.print(mqttClient.state());
+      Serial.print(pubSubClient.state());
       Serial.println(" tentando de novo em 5 segundos");
       delay(5000);
     }
@@ -129,9 +133,9 @@ void setup()
   setup_wifi();
 
   wifiClientSecure.setCACert(root_ca);
-  mqttClient.setCallback(callback);
-  mqttClient.setClient(wifiClientSecure);
-  mqttClient.setServer(mqtt_server, 8883);
+  pubSubClient.setCallback(callback);
+  pubSubClient.setClient(wifiClientSecure);
+  pubSubClient.setServer(mqtt_server, 8883);
 }
 
 /**
@@ -139,11 +143,11 @@ void setup()
  */
 void loop()
 {
-  if (!mqttClient.connected())
+  if (!pubSubClient.connected())
   {
     reconnect();
   }
-  mqttClient.loop();
+  pubSubClient.loop();
 
   long now = millis();
 
@@ -169,7 +173,7 @@ void loop()
     else if (cycles_on > red_max)
       status = "vermelho";
 
-    mqttClient.publish(topic.c_str(), status.c_str());
+    pubSubClient.publish(topic.c_str(), status.c_str());
     Serial.print("Tópico: " + topic);
     Serial.println(", Msg: " + status);
   }
