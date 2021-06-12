@@ -72,7 +72,12 @@ void reconnect()
     bool conectado = false;
 
     Serial.print("Tentando conectar com o broker MQTT... ");
-    Serial.println(mqtt_server);
+
+    if (DEBUG)
+      Serial.println(mqtt_server_debug);
+    else
+      Serial.println(mqtt_server);
+
     Serial.println("ClientId: " + clientId);
 
     conectado = pubSubClient.connect(clientId.c_str(), mqtt_user, mqtt_pass);
