@@ -20,15 +20,15 @@ PubSubClient mqttClient;
 long lastMsg = 0;
 
 int cycles_on = 0;
-int yellow_max = 2;
-int red_max = 2 * yellow_max;
-int cycle_millis = 10000; // 10 segundos
+int yellow_max = 3;           // Número de ciclos para pasar a amarelo
+int red_max = 2 * yellow_max; // Número de ciclos para pasar a vermelho
+int cycle_millis = 10 * 1000; // Segundos por ciclo
 
 bool last_status = false,
      new_status = false;
 
 String clientId;
-String status = "Green";
+String status = "verde";
 
 /**
  * Setup_wifi function
@@ -36,6 +36,7 @@ String status = "Green";
 void setup_wifi()
 {
   delay(10);
+
   Serial.println();
   Serial.print("Conectando a ");
   Serial.println(ssid);
@@ -66,8 +67,9 @@ void setup_wifi()
 void callback(char *topic, byte *message, unsigned int length)
 {
   Serial.print("Tópico da mensagem recebida: ");
-  Serial.print(topic);
-  Serial.print(". Mensagem: ");
+  Serial.println(topic);
+  Serial.println("Mensagem: ");
+
   String messageTemp;
 
   for (int i = 0; i < length; i++)
@@ -75,6 +77,7 @@ void callback(char *topic, byte *message, unsigned int length)
     Serial.print((char)message[i]);
     messageTemp += (char)message[i];
   }
+
   Serial.println();
 }
 
@@ -88,15 +91,14 @@ void reconnect()
     clientId = "esp32-" + WiFi.macAddress().substring(9, 17);
     bool conectado = false;
 
-    Serial.println("Tentando conectar com o broker MQTT...");
+    Serial.print("Tentando conectar com o broker MQTT... ");
+    Serial.println(mqtt_server);
     Serial.println("ClientId: " + clientId);
 
     conectado = mqttClient.connect(clientId.c_str(), mqtt_user, mqtt_pass);
 
     if (conectado)
-    {
       Serial.println("conectado");
-    }
     else
     {
       Serial.print("erro, rc=");
@@ -125,6 +127,7 @@ void setup()
 {
   Serial.begin(115200);
   setup_wifi();
+
   wifiClientSecure.setCACert(root_ca);
   mqttClient.setCallback(callback);
   mqttClient.setClient(wifiClientSecure);
@@ -156,20 +159,18 @@ void loop()
     else
     {
       cycles_on = 0;
-      status = "Green";
+      status = "verde";
     }
 
     String topic = clientId + "/alarme";
 
     if (cycles_on > yellow_max && cycles_on <= red_max)
-      status = "Yellow";
+      status = "amarelo";
     else if (cycles_on > red_max)
-      status = "Red";
+      status = "vermelho";
 
     mqttClient.publish(topic.c_str(), status.c_str());
-    Serial.println("Publicando topic: " + topic);
-    Serial.print("Cycles: ");
-    Serial.print(cycles_on);
-    Serial.println(", Status: " + status);
+    Serial.print("Tópico: " + topic);
+    Serial.println(", Msg: " + status);
   }
 }
