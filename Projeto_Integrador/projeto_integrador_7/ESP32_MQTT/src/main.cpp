@@ -13,7 +13,6 @@
 bool DEBUG = false;
 
 void setup_wifi(void);
-void callback(char *topic, byte *message, unsigned int length);
 
 WiFiClientSecure wifiClientSecure;
 WiFiClient wifiClient;
@@ -58,29 +57,6 @@ void setup_wifi()
   Serial.println(WiFi.localIP());
   Serial.print("Endereço MAC: ");
   Serial.println(WiFi.macAddress());
-}
-
-/**
- * callback function
- * 
- * O callback serve para receber mensagens.
- * A gente por enquanto não usa.
- */
-void callback(char *topic, byte *message, unsigned int length)
-{
-  Serial.print("Tópico da mensagem recebida: ");
-  Serial.println(topic);
-  Serial.println("Mensagem: ");
-
-  String messageTemp;
-
-  for (int i = 0; i < length; i++)
-  {
-    Serial.print((char)message[i]);
-    messageTemp += (char)message[i];
-  }
-
-  Serial.println();
 }
 
 /**
@@ -132,10 +108,17 @@ void setup()
   Serial.begin(115200);
   setup_wifi();
 
-  wifiClientSecure.setCACert(root_ca);
-  pubSubClient.setCallback(callback);
-  pubSubClient.setClient(wifiClientSecure);
-  pubSubClient.setServer(mqtt_server, 8883);
+  if (DEBUG)
+  {
+    pubSubClient.setClient(wifiClient);
+    pubSubClient.setServer(mqtt_server_debug, 1883);
+  }
+  else
+  {
+    wifiClientSecure.setCACert(root_ca);
+    pubSubClient.setClient(wifiClientSecure);
+    pubSubClient.setServer(mqtt_server, 8883);
+  }
 }
 
 /**
