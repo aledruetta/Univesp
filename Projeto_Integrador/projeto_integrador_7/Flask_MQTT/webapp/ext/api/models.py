@@ -6,6 +6,10 @@ from sqlalchemy.sql import func
 from webapp.ext.db import db
 
 
+def json_datetime(dt):
+    return dt.strftime("%d-%m-%Y %H:%M:%S") + " UTC"
+
+
 class UserAuth(UserMixin, db.Model):
     __tablename__ = "user_auth"
 
@@ -31,8 +35,8 @@ class UserAuth(UserMixin, db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            "created_on": datetime.timestamp(self.created_on),
-            "updated_on": datetime.timestamp(self.updated_on),
+            "created_on": json_datetime(self.created_on),
+            "updated_on": json_datetime(self.updated_on),
             "is_admin": self.is_admin,
         }
 
@@ -68,9 +72,9 @@ class Thing(db.Model):
     def json(self) -> dict:
         return {
             "id": self.id,
-            "created_on": datetime.timestamp(self.created_on),
-            "updated_on": datetime.timestamp(self.updated_on),
-            "user_id": self.user_id,
+            "created_on": json_datetime(self.created_on),
+            "updated_on": json_datetime(self.updated_on),
+            "user_id": self.user.email,
             "mac": self.mac,
         }
 

@@ -20,7 +20,7 @@ PubSubClient pubSubClient;
 
 long lastMsg = 0;
 
-int cycles_on = 0;
+int cycles_on = 0;            // Contador de ciclos
 int yellow_max = 3;           // Número de ciclos para pasar a amarelo
 int red_max = 2 * yellow_max; // Número de ciclos para pasar a vermelho
 int cycle_millis = 10 * 1000; // Segundos por ciclo
@@ -66,9 +66,8 @@ void reconnect()
 {
   while (!pubSubClient.connected())
   {
-    String mac = WiFi.macAddress().substring(9, 17);
-    mac.replace(":", "");
-    clientId = "esp32-" + mac;
+    clientId = WiFi.macAddress().substring(9, 17);
+    clientId.replace(":", "");
     bool conectado = false;
 
     Serial.print("Tentando conectar com o broker MQTT... ");

@@ -2,12 +2,12 @@ import sqlalchemy
 from flask import request
 from flask_jwt import jwt_required
 from flask_restful import Resource
-from passlib.hash import sha256_crypt
+from passlib.hash import pbkdf2_sha512
 from validate_email import validate_email
 
-from webapp.ext.api.models import Thing
-from webapp.ext.api.models import UserAuth
-from webapp.ext.db import db
+from webapp.ext.api.repository import ThingRepository as thing
+from webapp.ext.api.repository import UserRepository as user
+from webapp.ext.api.repository import MqttRepository as mqtt
 
 HTTP_RESPONSE_CREATED = 201
 HTTP_RESPONSE_BAD_REQUEST = 400
@@ -22,20 +22,20 @@ class ApiUser(Resource):
         if not validate_email(email, check_smtp=False):
             return {"error": "Email inválido!"}, HTTP_RESPONSE_BAD_REQUEST
 
-        password = sha256_crypt.hash(request.json["password"])
+        password = request.json["password"]
+        hashed_password = pbkdf2_sha512.hash(password)
 
         try:
-            user = UserAuth(email=email, password=password)
-            db.session.add(user)
-            db.session.commit()
+            user.save(email, hashed_password)
+            mqtt.save_user(email, password)
         except sqlalchemy.exc.IntegrityError:
             return {"error": "A conta de usuário já existe!"}, HTTP_RESPONSE_BAD_REQUEST
 
-        return {"response": "Created!"}, HTTP_RESPONSE_CREATED
+        return {"resposta": "Created!"}, HTTP_RESPONSE_CREATED
 
     @jwt_required()
     def get(self):
-        users = UserAuth.query.all()
+        users = user.get_all()
         return {"usuarios": [user.json() for user in users]}
 
 
@@ -43,9 +43,8 @@ class ApiUserId(Resource):
     @jwt_required()
     def get(self, user_id):
         try:
-            user = UserAuth.query.get(user_id)
-            return {"usuario": user.json()}
-
+            u = user.get_by_id(user_id)
+            return {"usuario": u.json()}
         except AttributeError:
             return {"error": "Recurso inexistente!"}, HTTP_RESPONSE_NOT_FOUND
 
@@ -53,17 +52,20 @@ class ApiUserId(Resource):
 class ApiThing(Resource):
     @jwt_required()
     def post(self):
-        body = request.json
-        user = UserAuth.query.filter_by(email=body["email"]).first()
-        thing = Thing(mac=body["mac"], user=user)
-        db.session.add(thing)
-        db.session.commit()
+        mac = request.json["mac"]
+        email = request.json["email"]
 
-        return {"response": "Created!"}, HTTP_RESPONSE_CREATED
+        try:
+            u = user.get_by_email(email)
+            thing.save(mac, u)
+            mqtt.save_thing(mac, email)
+            return {"resposta": "Created!"}, HTTP_RESPONSE_CREATED
+        except AttributeError:
+            return {"error": "Recurso inexistente!"}, HTTP_RESPONSE_NOT_FOUND
 
     @jwt_required()
     def get(self):
-        things = Thing.query.all()
+        things = thing.get_all()
 
         return {"coisas": [thing.json() for thing in things]}
 
@@ -72,8 +74,8 @@ class ApiThingId(Resource):
     @jwt_required()
     def get(self, thing_id):
         try:
-            thing = UserAuth.query.get(thing_id)
-            return {"usuario": thing.json()}
+            t = thing.get_by_id(thing_id)
+            return {"thing": t.json()}
 
         except AttributeError:
             return {"error": "Recurso inexistente!"}, HTTP_RESPONSE_NOT_FOUND

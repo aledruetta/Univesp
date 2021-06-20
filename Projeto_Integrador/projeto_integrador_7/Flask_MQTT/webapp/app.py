@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import logging
 import os
 
 from flask import Flask
@@ -9,6 +10,7 @@ from webapp.ext import api, db, jwt
 
 def create_app():
     app = Flask(__name__)
+    logging.basicConfig(filename="log.txt", level=logging.DEBUG)
 
     if os.environ["FLASK_ENV"] == "production":
         app.config.from_object("webapp.config.Production")
