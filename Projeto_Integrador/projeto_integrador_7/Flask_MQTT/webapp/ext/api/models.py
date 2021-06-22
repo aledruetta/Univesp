@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from flask_login import UserMixin
-from sqlalchemy.sql import func
 
 from webapp.ext.db import db
 

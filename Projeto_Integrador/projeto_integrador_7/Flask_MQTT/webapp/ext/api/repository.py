@@ -4,6 +4,25 @@ from webapp.ext.api.models import Thing, UserAuth
 from webapp.ext.db import db
 
 
+def mqtt_reload():
+    cmd = ["/usr/bin/sudo", "/usr/bin/systemctl", "reload", "mosquitto.service"]
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    # output, error = process.communicate()
+
+
+def mqtt_passwd(email, password):
+    cmd = [
+        "/usr/bin/sudo",
+        "/usr/bin/mosquitto_passwd",
+        "-b",
+        "/etc/mosquitto/passwd",
+        email,
+        password,
+    ]
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    # output, error = process.communicate()
+
+
 class UserRepository:
     @staticmethod
     def get_all():
@@ -40,46 +59,33 @@ class ThingRepository:
         db.session.commit()
 
 
-def mqtt_reload():
-    cmd = ["/usr/bin/sudo", "/usr/bin/systemctl", "reload", "mosquitto.service"]
-    process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-    # output, error = process.communicate()
-
-
-def mqtt_passwd(cmd):
-    process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-    # output, error = process.communicate()
-
-
 class MqttRepository:
     @staticmethod
     def save_user(email, password):
-        cmd = [
-            "/usr/bin/sudo",
-            "/usr/bin/mosquitto_passwd",
-            "-b",
-            "/etc/mosquitto/passwd",
-            email,
-            password,
-        ]
-        mqtt_passwd(cmd)
+        mqtt_passwd(email, password)
         mqtt_reload()
 
     @staticmethod
     def save_thing(mac, email):
         acls = "/etc/mosquitto/acls"
-        exist = False
+        topic_line = f"topic readwrite {mac}/alarme\n"
+        user_line = f"user {email}\n"
+        index = 0
 
-        with open(acls, "r") as f:
-            for line in f:
-                if line[:-1] == f"user {email}":
-                    exist = True
+        with open(acls, "r+") as fd:
+            lines = fd.readlines()
+
+            for line in lines:
+                if line.find(email) < 0:
+                    index += 1
+                else:
+                    lines.insert(index + 1, topic_line)
                     break
 
-        if not exist:
-            lines = [f"user {email}\n", f"topic readwrite {mac}/alarme\n", "\n"]
+            if index == len(lines):
+                lines.extend([user_line, topic_line, "\n"])
 
-            with open(acls, "a") as f:
-                f.writelines(lines)
+            fd.seek(0)
+            fd.writelines(lines)
 
-            mqtt_reload()
+        mqtt_reload()

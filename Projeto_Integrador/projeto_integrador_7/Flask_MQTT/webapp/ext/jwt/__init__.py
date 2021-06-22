@@ -5,15 +5,17 @@ from webapp.ext.api.models import UserAuth
 
 
 def authenticate(email, password):
-    user = UserAuth.query.filter_by(email=email).first()
+    user = UserAuth.query.filter(UserAuth.email == email).scalar()
     if pbkdf2_sha512.verify(password, user.password):
         return user
 
 
 def identity(payload):
-    user_id = payload["identity"]
-    return UserAuth.query.get(user_id)
+    return UserAuth.query.filter(UserAuth.id == payload["identity"]).scalar()
 
 
 def init_app(app):
-    jwt = JWT(app, authenticate, identity)
+    jwt = JWT()
+    jwt.authentication_handler(authenticate)
+    jwt.identity_handler(identity)
+    jwt.init_app(app)

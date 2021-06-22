@@ -9,6 +9,7 @@ Flask-RESTful
 Flask-SQLAlchemy
 Flask-WTF
 Jinja2
+marshmallow
 passlib
 py3-validate-email
 psycopg2-binary
