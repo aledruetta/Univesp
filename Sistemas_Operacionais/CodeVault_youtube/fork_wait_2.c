@@ -10,7 +10,7 @@ int main()
 	if (pid == 0)
 		n = 1;
 	else
-		n = 6;
+		n = 26;
 
 	if (pid != 0) // if pid != 0, then is the parent process and wait child to finish
 		wait(&pid);
