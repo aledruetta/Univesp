@@ -1,0 +1,6 @@
+<div class="form-group">
+  <label for="usr">Name:</label>
+  <input [(ngModel)]="username" type="text" class="form-control" id="usr">
+  <p>{{ username }}</p>
+  <input type="button" class="btn btn-primary" value="Submit" [disabled]="username === ''" (click)="username = ''">
+</div>
