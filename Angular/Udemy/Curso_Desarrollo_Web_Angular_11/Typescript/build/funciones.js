@@ -23,4 +23,4 @@ console.log(nombreCompleto("Fulano", "de Tal"));
 function nombreCompleto2(nombre, ...resto) {
     return nombre + ", " + resto.join(", ");
 }
-console.log(nombreCompleto2('Ana', 'María', 'Dolores', 'García', 'Hector'));
+console.log(nombreCompleto2("Ana", "María", "Dolores", "García", "Hector"));

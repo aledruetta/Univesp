@@ -2,4 +2,4 @@
  *          tsc para compilar todo
  *          node prueba.ts para ejecutar
  */
-console.log('Hola Typescript');
+console.log("Hola Typescript");
