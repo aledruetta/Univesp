@@ -1,0 +1,11 @@
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 1em;
+  text-align: center;
+}
+
+.sumador {
+  border: 1px solid black;
+  width: 7em;
+}
