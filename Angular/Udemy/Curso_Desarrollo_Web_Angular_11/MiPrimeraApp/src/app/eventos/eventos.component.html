@@ -1,1 +1,11 @@
 <button (click)="clicar()">Pulsar!</button>
+
+<select (change)="getOption($event)">
+  <option value="uno">Uno</option>
+  <option value="dos">Dos</option>
+  <option value="tres">Tres</option>
+</select>
+
+<div class="cuadrado" (mouseenter)="getMouseEnter()" (mouseout)="getMouseOut()">
+  {{ mensaje }}
+</div>
