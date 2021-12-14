@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MiPrimeraApp';
+  peliculas: string[];
+
+  constructor() {
+    this.peliculas = ['Jurassic Park', 'Star War', 'Jumanji'];
+  }
 }
