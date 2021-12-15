@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SaludoComponent } from './saludo/saludo.component';
@@ -24,7 +25,8 @@ import { AlertaComponent } from './alerta/alerta.component';
     AlertaComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule               // para poder usar ngModel
   ],
   providers: [],
   bootstrap: [AppComponent]
