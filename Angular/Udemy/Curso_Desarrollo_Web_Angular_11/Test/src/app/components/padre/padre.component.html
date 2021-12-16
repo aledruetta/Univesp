@@ -1,5 +1,7 @@
 <div class="padre">
   <app-hijo [padreDijo]="padreDijo"></app-hijo>
-  <p (hijoDice)="onHijoDice($event)">Hijo dijo: {{ hijoDijo }}</p>
+
+  <p (alert)="onAlert($event)">Hijo dijo: {{ hijoDijo }}</p>
+
   <app-hermano></app-hermano>
 </div>

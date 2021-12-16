@@ -3,23 +3,24 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-hijo',
   templateUrl: './hijo.component.html',
-  styleUrls: ['./hijo.component.css']
+  styleUrls: ['./hijo.component.css'],
 })
 export class HijoComponent implements OnInit {
   @Input() padreDijo: string;
-  @Output() hijoDice: EventEmitter<string>;
+
+  @Output() alert: EventEmitter<string>;
 
   constructor() {
     this.padreDijo = '';
-    this.hijoDice = new EventEmitter();
+
+    this.alert = new EventEmitter();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onClick() {
-    this.hijoDice.emit('Hola Padre!');
-    console.log("En función decir()");
-  }
+    this.alert.emit('Hola Padre!');
 
+    console.log('En función onClick()');
+  }
 }

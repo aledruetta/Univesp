@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-padre',
@@ -7,17 +7,20 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PadreComponent implements OnInit {
   padreDijo: string;
+
   hijoDijo: string;
 
   constructor() {
     this.padreDijo = 'Hola hijo!';
+
     this.hijoDijo = '';
   }
 
   ngOnInit(): void {}
 
-  onHijoDice($event: any) {
+  onAlert($event: any) {
     this.hijoDijo = $event;
-    console.log('En función onDecir()');
+
+    console.log('En función onHijoDice()');
   }
 }
