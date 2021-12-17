@@ -7,16 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ColoresComponent implements OnInit {
 
-  colorDeFondo: any;
+  cuadrado: any;
+  rango: number;
 
   constructor() {
-    this.colorDeFondo = {'backgroundColor': 'red'};
+    this.cuadrado = {'backgroundColor': 'red', 'width': '100px', 'height': '100px'};
+    this.rango = 0;
   }
 
   ngOnInit(): void {
   }
 
   cambiaColor(color: string) {
-    this.colorDeFondo.backgroundColor = color;
+    this.cuadrado.backgroundColor = color;
+  }
+
+  onChange($event: any) {
+    this.rango = $event.target.value;
+    this.cuadrado.width = this.rango + 'px';
+    this.cuadrado.height = this.rango + 'px';
   }
 }

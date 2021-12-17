@@ -1,9 +1,21 @@
-<div class="colores-container">
+<div class="container">
 
-  <div class="color" [ngStyle]="colorDeFondo"></div>
+  <div class="color" [ngStyle]="cuadrado"></div>
 
-  <button class="rojo" (click)="cambiaColor('red')">ROJO</button>
-  <button class="azul" (click)="cambiaColor('blue')">AZUL</button>
-  <button class="amarillo" (click)="cambiaColor('yellow')">AMARILLO</button>
+  <div class="container">
+    <label for="color-text-field">Give a color: </label>
+    <input type="text" id="color-text-field" [(ngModel)]="cuadrado.backgroundColor">
+  </div>
+
+  <div class="container">
+    <button class="rojo" (click)="cambiaColor('red')">ROJO</button>
+    <button class="azul" (click)="cambiaColor('blue')">AZUL</button>
+    <button class="amarillo" (click)="cambiaColor('yellow')">AMARILLO</button>
+  </div>
+
+  <div class="container">
+    <input type="range" min="100" max="300" step="20" (change)="onChange($event)">
+    <span>{{ rango }}</span>
+  </div>
 
 </div>
