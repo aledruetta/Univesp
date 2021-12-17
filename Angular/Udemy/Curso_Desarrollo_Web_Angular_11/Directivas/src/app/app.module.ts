@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ColoresComponent } from './colores/colores.component';
+import { SemaforoComponent } from './semaforo/semaforo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ColoresComponent
+    ColoresComponent,
+    SemaforoComponent
   ],
   imports: [
     BrowserModule,
