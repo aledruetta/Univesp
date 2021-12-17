@@ -14,8 +14,9 @@
   </div>
 
   <div class="container">
-    <input type="range" min="100" max="300" step="20" (change)="onChange($event)">
-    <span>{{ rango }}</span>
+    <input type="range" min="100" max="300" step="20" (input)="onChangeOrInput($event)">
+    <!-- <input type="range" min="100" max="300" step="20" (change)="onChangeOrInput($event)"> -->
+    <span>{{ rango }}px</span>
   </div>
 
 </div>

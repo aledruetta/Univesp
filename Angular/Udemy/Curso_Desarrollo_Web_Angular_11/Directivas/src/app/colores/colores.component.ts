@@ -12,7 +12,7 @@ export class ColoresComponent implements OnInit {
 
   constructor() {
     this.cuadrado = {'backgroundColor': 'red', 'width': '100px', 'height': '100px'};
-    this.rango = 0;
+    this.rango = 100;
   }
 
   ngOnInit(): void {
@@ -22,7 +22,7 @@ export class ColoresComponent implements OnInit {
     this.cuadrado.backgroundColor = color;
   }
 
-  onChange($event: any) {
+  onChangeOrInput($event: any) {
     this.rango = $event.target.value;
     this.cuadrado.width = this.rango + 'px';
     this.cuadrado.height = this.rango + 'px';
