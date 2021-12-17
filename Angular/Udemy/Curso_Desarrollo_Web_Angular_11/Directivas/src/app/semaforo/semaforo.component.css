@@ -1,8 +1,18 @@
+.container {
+  padding: 1em;
+  text-align: center;
+}
+
 .semaforo {
-  width: 300px;
-  height: 300px;
+  margin: 0 auto;
   border-radius: 50%;
   background-color: gray;
+  width: 300px;
+  height: 300px;
+}
+
+.semaforo-out {
+  height: 300px;
 }
 
 .red {

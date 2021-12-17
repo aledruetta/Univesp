@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SemaforoComponent implements OnInit {
   clase: string;
+  mostrar: boolean;
 
   constructor() {
     this.clase = '';
+    this.mostrar = true;
   }
 
   ngOnInit(): void {
@@ -22,6 +24,14 @@ export class SemaforoComponent implements OnInit {
       let clases = ['red', 'yellow', 'green'];
       this.clase = clases[i % 3];
       i++;
-    }, 3000);
+    }, 500);
+  }
+
+  toggle() {
+    if (this.mostrar) {
+      this.mostrar = false;
+    } else {
+      this.mostrar = true;
+    }
   }
 }

@@ -1,1 +1,8 @@
-<div class="semaforo" [ngClass]="clase"></div>
+<div class="container">
+  <div class="container semaforo-out">
+    <div class="semaforo" [ngClass]="clase" *ngIf="mostrar"></div>
+  </div>
+  <div class="container">
+    <button (click)="toggle()">Mostrar / Ocultar</button>
+  </div>
+</div>
