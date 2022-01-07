@@ -5,12 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ColoresComponent } from './colores/colores.component';
 import { SemaforoComponent } from './semaforo/semaforo.component';
+import { BuclesComponent } from './bucles/bucles.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ColoresComponent,
-    SemaforoComponent
+    SemaforoComponent,
+    BuclesComponent
   ],
   imports: [
     BrowserModule,

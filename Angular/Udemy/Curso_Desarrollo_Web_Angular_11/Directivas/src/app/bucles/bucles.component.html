@@ -1,0 +1,14 @@
+<div class="personas1">
+  <ul>
+    <li *ngFor="let persona of personas">
+      {{ persona.nombre }} {{ persona.apellido }} - {{ persona.edad }}
+    </li>
+  </ul>
+</div>
+
+<div class="personas2">
+  <div class="persona" *ngFor="let persona of personas">
+    <h4>{{ persona.nombre }} {{ persona.apellido }}</h4>
+    <p>{{ persona.edad }}</p>
+  </div>
+</div>

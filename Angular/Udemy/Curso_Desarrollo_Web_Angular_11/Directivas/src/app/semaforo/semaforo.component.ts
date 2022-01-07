@@ -22,16 +22,11 @@ export class SemaforoComponent implements OnInit {
     let i = 0;
     setInterval(() => {
       let clases = ['red', 'yellow', 'green'];
-      this.clase = clases[i % 3];
-      i++;
-    }, 500);
+      this.clase = clases[i++ % 3];
+    }, 1000);
   }
 
   toggle() {
-    if (this.mostrar) {
-      this.mostrar = false;
-    } else {
-      this.mostrar = true;
-    }
+    this.mostrar = !this.mostrar;
   }
 }
