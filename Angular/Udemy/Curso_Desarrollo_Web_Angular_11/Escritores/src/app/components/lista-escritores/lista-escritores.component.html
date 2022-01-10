@@ -1,0 +1,15 @@
+<div class="opciones">
+  <select (change)="onChange($event)">
+    <option value="españa">España</option>
+    <option value="chile">Chile</option>
+    <option value="reino unido">Reino Unido</option>
+    <option value="canadá">Canadá</option>
+  </select>
+</div>
+<div class="escritores">
+  <div class="escritor" *ngFor="let escritor of escritoresPorPais">
+    <h3>{{ escritor.nombre }} {{ escritor.apellidos }}</h3>
+    <img [src]="escritor.imagen" alt="">
+    <p>{{ escritor.pais }}</p>
+  </div>
+</div>
