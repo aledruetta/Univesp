@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  background-color: blanchedalmond;
+}
+
+.navbar {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 2em;
+}
+
+.navbar.left {
+  justify-content: flex-start;
+  flex-grow: 4;
+}
+
+.navbar.right {
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.brand {
+  font-size: 1.5em;
+  width: 4em;
+  text-align: center;
+  background-color: black;
+  color: aliceblue;
+}
+
+.btn {
+  background-color: black;
+  color: aliceblue;
+  border: 0;
+  font-size: 1em;
+}
