@@ -1,0 +1,36 @@
+.container {
+  padding: 1em;
+}
+
+.escritores {
+  margin-bottom: 1em;
+}
+
+.escritores th {
+  background-color: lavender;
+  padding: 5px;
+}
+
+.escritores td {
+  background-color: aliceblue;
+  padding: 5px;
+}
+
+.field {
+  margin-bottom: 0.3em;
+}
+
+.field label {
+  display: inline-block;
+  width: 5em;
+}
+
+.field input {
+  border: 0;
+  border-bottom: 1px solid gray;
+  width: 15em;
+}
+
+.btn {
+  margin-top: 1em;
+}

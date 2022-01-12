@@ -1,1 +1,31 @@
-<p>escritores works!</p>
+<div class="container">
+  <table class="escritores">
+
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>País</th>
+
+    <tr class="escritor" *ngFor="let escritor of listaEscritores">
+      <td>{{ escritor.id }}</td>
+      <td>{{ escritor.nombre }}</td>
+      <td>{{ escritor.pais }}</td>
+    </tr>
+
+  </table>
+
+  <form novalidate (ngSubmit)="onSubmit()" [formGroup]="escritor">
+
+    <div class="field">
+      <label for="nombre">Nombre: </label>
+      <input type="text" id="nombre" formControlName="nombre">
+    </div>
+    <div class="field">
+      <label for="pais">País: </label>
+      <input type="text" name="pais" formControlName="pais">
+    </div>
+
+    <button class="btn" type="submit">Agregar</button>
+
+  </form>
+
+</div>

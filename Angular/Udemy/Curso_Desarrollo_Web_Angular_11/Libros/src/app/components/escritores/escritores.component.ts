@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Escritor } from 'src/app/models/escritor.model';
+import { EscritoresService } from 'src/app/services/escritores.service';
 
 @Component({
   selector: 'app-escritores',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EscritoresComponent implements OnInit {
 
-  constructor() { }
+  listaEscritores: Escritor[];
+  escritor: FormGroup;
 
-  ngOnInit(): void {
+  constructor(private escritoresService: EscritoresService) {
+    this.listaEscritores = new Array<Escritor>();
+    this.escritor = new FormGroup({
+      nombre: new FormControl(),
+      pais: new FormControl()
+    });
   }
 
+  async ngOnInit() {
+    this.listaEscritores = await this.escritoresService.getAll();
+  }
+
+  onSubmit() {
+    this.escritoresService.add(this.escritor.value);
+    this.escritor.reset();
+  }
 }
