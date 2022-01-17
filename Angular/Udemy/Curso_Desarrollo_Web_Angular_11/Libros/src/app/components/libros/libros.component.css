@@ -1,25 +1,13 @@
-.container {
-  padding: 1em;
-}
-
-.row {
-  display: flex;
-}
-
-.col {
-  width: 50%;
-}
-
-.escritores {
+.libros {
   margin-bottom: 1em;
 }
 
-.escritores th {
+.libros th {
   background-color: lavender;
   padding: 5px;
 }
 
-.escritores td {
+.libros td {
   background-color: aliceblue;
   padding: 5px;
 }

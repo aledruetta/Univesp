@@ -1,31 +1,38 @@
 <div class="container">
-  <table class="escritores">
 
-    <th>ID</th>
-    <th>Nombre</th>
-    <th>País</th>
+  <div class="row">
+    <div class="col">
 
-    <tr class="escritor" *ngFor="let escritor of listaEscritores">
-      <td>{{ escritor.id }}</td>
-      <td>{{ escritor.nombre }}</td>
-      <td>{{ escritor.pais }}</td>
-    </tr>
+      <table class="escritores">
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>País</th>
 
-  </table>
+        <tr class="escritor" *ngFor="let escritor of listaEscritores" (click)="onClick(escritor.id)">
+          <td>{{ escritor.id }}</td>
+          <td>{{ escritor.nombre }}</td>
+          <td>{{ escritor.pais }}</td>
+        </tr>
+      </table>
 
-  <form novalidate (ngSubmit)="onSubmit()" [formGroup]="escritor">
+      <form novalidate (ngSubmit)="onSubmit()" [formGroup]="escritorForm">
+        <div class="field">
+          <label for="nombre">Nombre: </label>
+          <input type="text" id="nombre" formControlName="nombre">
+        </div>
+        <div class="field">
+          <label for="pais">País: </label>
+          <input type="text" name="pais" formControlName="pais">
+        </div>
 
-    <div class="field">
-      <label for="nombre">Nombre: </label>
-      <input type="text" id="nombre" formControlName="nombre">
+        <button class="btn" type="submit">Agregar</button>
+      </form>
+
     </div>
-    <div class="field">
-      <label for="pais">País: </label>
-      <input type="text" name="pais" formControlName="pais">
+
+    <div class="col">
+      <app-libros [listaLibros]="listaLibros" [escritorId]="escritorId"></app-libros>
     </div>
 
-    <button class="btn" type="submit">Agregar</button>
-
-  </form>
-
+  </div>
 </div>

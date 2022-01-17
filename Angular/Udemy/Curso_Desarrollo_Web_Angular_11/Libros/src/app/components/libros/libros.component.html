@@ -1,0 +1,26 @@
+<table class="libros">
+
+  <th>ID</th>
+  <th>Título</th>
+  <th>Género</th>
+
+  <tr class="libro" *ngFor="let libro of listaLibros">
+    <td>{{ libro.id }}</td>
+    <td>{{ libro.titulo }}</td>
+    <td>{{ libro.genero }}</td>
+  </tr>
+
+</table>
+
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="libroForm">
+  <div class="field">
+    <label for="titulo">Título: </label>
+    <input type="text" id="titulo" formControlName="titulo">
+  </div>
+  <div class="field">
+    <label for="genero">Género: </label>
+    <input type="text" name="genero" formControlName="genero">
+  </div>
+
+  <button class="btn" type="submit">Agregar</button>
+</form>

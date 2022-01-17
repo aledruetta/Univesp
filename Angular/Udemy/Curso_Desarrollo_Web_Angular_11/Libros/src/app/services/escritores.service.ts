@@ -11,7 +11,7 @@ export class EscritoresService {
   }
 
   getAll(): Promise<Escritor[]> {
-    return new Promise((resolve, reject) => resolve(escritoresDB));
+    return new Promise((resolve, rejects) => resolve(escritoresDB));
   }
 
   async add(escritor: Escritor) {
