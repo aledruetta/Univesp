@@ -61,20 +61,13 @@ CHIP ALU {
     And16 (a=nxout, b=nyout, out=xAndy);
     Mux16 (a=xAndy, b=xAddy, sel=f, out=fout);
 
-    // no
+    // no, ng
     Not16 (in=fout, out=nfout);
-    Mux16 (a=fout, b=nfout, sel=no, out[0..7]=low);
-    Mux16 (a=fout, b=nfout, sel=no, out[8..15]=high);
-    Mux16 (a=fout, b=nfout, sel=no, out[15]=msb);
-    Or16  (a[0..7]=low, b[8..15]=high, out=out);
+    Mux16 (a=fout, b=nfout, sel=no, out[0..7]=low, out[8..15]=high, out[15]=ng, out=out);
 
     // zr
-    Or8Way (in=low, out=orlow);
-    Or8Way (in=high, out=orhigh);
-    Or     (a=orlow, b=orhigh, out=lowOrHigh);
+    Or8Way (in=low, out=lowOut);
+    Or8Way (in=high, out=highOut);
+    Or     (a=lowOut, b=highOut, out=lowOrHigh);
     Not    (in=lowOrHigh, out=zr);
-
-    // ng
-    And(a=msb, b=true, out=ng);
-
 }
