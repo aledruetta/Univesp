@@ -9,4 +9,70 @@
 // This program only needs to handle arguments that satisfy
 // R0 >= 0, R1 >= 0, and R0*R1 < 32768.
 
-// Put your code here.
+// Pseudocode:
+//
+// R2 = 0
+// if R0 <= R1 then
+//      n = R0
+//      m = R1
+// else
+//      n = R1
+//      m = R0
+
+    @0
+    D=A
+    @R2
+    M=D                 // R2 = 0
+
+    @R0
+    D=M
+    @R1
+    D=D-M               // R0 - R1 > 0
+
+    @GREATER
+    D;JGT
+
+    @R0
+    D=M
+    @n
+    M=D                 // n = R0
+    @R1
+    D=M
+    @m
+    M=D                 // m = R1
+
+    @MULT
+    0;JMP
+
+(GREATER)
+
+    @R0
+    D=M
+    @m
+    M=D                 // m = R0
+    @R1
+    D=M
+    @n
+    M=D                 // n = R1
+
+// Pseudocode:
+//
+// while n < 0 then
+//      R2 = R2 + m
+
+(MULT)
+
+    @m
+    D=M
+    @R2
+    M=D+M
+
+    @n
+    M=M-1
+    D=M
+    @MULT
+    D;JGT
+
+(END)
+    @END
+    0;JMP
