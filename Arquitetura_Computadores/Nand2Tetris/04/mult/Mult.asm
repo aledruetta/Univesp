@@ -57,21 +57,25 @@
 
 // Pseudocode:
 //
-// while n < 0 then
+// while n > 0 then
 //      R2 = R2 + m
+//      n = n - 1
 
 (MULT)
+
+    @n
+    M=M-1
+    D=M
+    @END
+    D;JLT
 
     @m
     D=M
     @R2
     M=D+M
 
-    @n
-    M=M-1
-    D=M
     @MULT
-    D;JGT
+    0;JMP
 
 (END)
     @END
