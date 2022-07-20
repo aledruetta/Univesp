@@ -1,25 +1,25 @@
 // This file is part of www.nand2tetris.org
 // and the book "The Elements of Computing Systems"
-// by Nisan and Schocken, MIT Press.
+// by AorCinstsan and Schocken,  MIT Press.
 // File name: projects/05/CPU.hdl
 
 /**
- * The Hack CPU (Central Processing unit), consisting of an ALU,
- * two registers named A and D, and a program counter named PC.
+ * The Hack CPU (Central Processing uAorCinstt),  consisting of an ALU, 
+ * two registers named A and D,  and a program counter named PC.
  * The CPU is designed to fetch and execute instructions written in 
- * the Hack machine language. In particular, functions as follows:
+ * the Hack machine language. In particular,  functions as follows:
  * Executes the inputted instruction according to the Hack machine 
  * language specification. The D and A in the language specification
- * refer to CPU-resident registers, while M refers to the external
- * memory location addressed by A, i.e. to Memory[A]. The inM input 
+ * refer to CPU-resident registers,  while M refers to the external
+ * memory location addressed by A,  i.e. to Memory[A]. The inM input 
  * holds the value of this location. If the current instruction needs 
- * to write a value to M, the value is placed in outM, the address 
- * of the target location is placed in the addressM output, and the 
- * writeM control bit is asserted. (When writeM==0, any value may 
+ * to write a value to M,  the value is placed in outM,  the address 
+ * of the target location is placed in the addressM output,  and the 
+ * writeM control bit is asserted. (When writeM==0,  any value may 
  * appear in outM). The outM and writeM outputs are combinational: 
  * they are affected instantaneously by the execution of the current 
  * instruction. The addressM and pc outputs are clocked: although they 
- * are affected by the execution of the current instruction, they commit 
+ * are affected by the execution of the current instruction,  they commit 
  * to their new values only in the next time step. If reset==1 then the 
  * CPU jumps to address 0 (i.e. pc is set to 0 in next time step) rather 
  * than to the address resulting from executing the current instruction. 
@@ -27,50 +27,61 @@
 
 CHIP CPU {
 
-    IN  inM[16],         // M value input  (M = contents of RAM[A])
-        instruction[16], // Instruction for execution
-        reset;           // Signals whether to re-start the current
-                         // program (reset==1) or continue executing
-                         // the current program (reset==0).
+    IN  inM[16],          // M value input  (M = contents of RAM[A])
+        instruction[16],  // Instruction for execution
+        reset;            // Signals whether to re-start the current
+                          // program (reset==1) or continue executing
+                          // the current program (reset==0).
 
-    OUT outM[16],                   // M value output
-        writeM=instruction[12],     // Write to M? 
-        addressM[15],               // Address in data memory (of M)
-        pc[15];                     // address of next instruction
+    OUT outM[16],                    // M value output
+        writeM,                      // Write to M? 
+        addressM[15],                // Address in data memory (of M)
+        pc[15];                      // address of next instruction
 
     PARTS:
-    Not(in=instruction[15], out=out1);       // 0 if C-Instruction, 1 if A-Instruction
-    Mux16 (a=outAlu, b=instruction, sel=out1, out=out2);
+    Not(in=instruction[15], out=AorCinst);                          // true if A-Instruction, false if C-Instruction
+	Mux16(a=AluOut, b=instruction, sel=AorCinst, out=Ainput);       // select instruction or ALU output as A register source
 
-    Or(a=instruction[5], b=out1, out=out3);      // true if A-Instruction or A is selected
-    Register (in=out2, load=out3, out=A, out[0..14]=addressM);       // A register
+	Or(a=AorCinst, b=instruction[5], out=selA);                     // true if A-Instruction or A register is selected as destination
+	ARegister(in=Ainput, load=selA, out=A, out[0..14]=addressM);    // A Register
 
-    And(a=instruction[15], b=instruction[4], out=out4);     // true if C-Instruction and D is selected
-    Register (in=outAlu, load=instruction[4], out=D);                        // D register
+	And(a=instruction[15], b=instruction[12], out=AorM);            // if C-Instruction and bit 'a' is on, select inM as ALU source
+	Mux16(a=A, b=inM, sel=AorM, out=AluSource);                     // else, select A register as a source
 
-    And(a=instruction[12], b=instruction[15], out=out5);    // inM only if 'a' bit select M as source and C-Instruction
-    Mux16 (a=A, b=inM, sel=out5, out=out6);
-
-    ALU (x=D, 
-         y=out6, 
-         zx=instruction[11], 
-         nx=instruction[10], 
-         zy=instruction[9], 
-         ny=instruction[8], 
-         f=instruction[7], 
-         no=instruction[6], 
-         out=outM, 
-         out=outAlu,
-         zr=zr, 
-         ng=ng
+	And(a=instruction[15], b=instruction[4], out=selD);             // true if C-Instruction and D register is selected as destination
+	DRegister(in=AluOut, load=selD, out=D);                         // D Register
+	
+	ALU(x=D, 
+        y=AluSource, 
+        zx=instruction[11], 
+        nx=instruction[10], 
+        zy=instruction[9], 
+        ny=instruction[8], 
+        f=instruction[7], 
+        no=instruction[6], 
+        out=AluOut, 
+        out=outM, 
+        zr=zr, 
+        ng=ng
     );
-    
-    And(a=instruction[15], b=instruction[3], out=writeM);   // writeM if C-Instruction and M as destination
-    
-    PC (in=A, load=, inc=true, reset=reset, out=PC);
-}
 
-/*
-    @n          0 000000000010000
-    M=0         111 0 101010 001 000
-*/
+	And(a=instruction[15], b=instruction[3], out=writeM);           // writeM if C-Instruction and M is selected as destination
+
+	Not(in=ng, out=pos);                                            // ALU output is positive
+	Not(in=zr, out=nzr);                                            // ALU output isn't zero
+
+	And(a=instruction[15], b=instruction[0], out=gt);
+	And(a=pos, b=nzr, out=posnzr);
+	And(a=gt, b=posnzr, out=JGT);                                   // Jump if greatest than zero
+
+	And(a=instruction[15], b=instruction[1], out=eq);
+	And(a=eq, b=zr, out=JEQ);                                       // Jump if equal to zero
+
+	And(a=instruction[15], b=instruction[2], out=lt);
+	And(a=lt, b=ng, out=JLT);                                       // Jump if less than zero
+
+	Or(a=JGT, b=JEQ, out=gtoreq);
+	Or(a=gtoreq, b=JLT, out=JMP);                                   // Jump
+
+	PC(in=A, load=JMP, inc=true, reset=reset, out[0..14]=pc);       // Program Counter
+}
