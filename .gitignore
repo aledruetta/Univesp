@@ -1,6 +1,7 @@
 *.swp
 *.out
 *.o
+__pycache__
 test.*
 **/codeblocks/
 **/.vscode/
