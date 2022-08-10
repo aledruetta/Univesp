@@ -1,8 +1,8 @@
 from utilities import *
 
 class CodeWriter:
-    def __init__(self, path) -> None:
-        self.path = path
+    def __init__(self, filename) -> None:
+        self.filename = filename
 
     def write_arithmetic(self, command):
         pass
@@ -17,5 +17,5 @@ class CodeWriter:
             self.__write(code)
 
     def __write(self, code):
-        with open(self.path, "a") as fp:
+        with open("./output/" + self.filename, "a") as fp:
             fp.write("\n".join(code) + "\n")

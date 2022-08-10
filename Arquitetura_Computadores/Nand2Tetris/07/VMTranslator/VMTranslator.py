@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 
 import sys
+from pathlib import Path
 
 from parser import Parser
 from codewriter import CodeWriter
 from utilities import *
 
 def main():
-    parser = Parser(sys.argv[1].strip())
-    codewriter = CodeWriter("./output/Out.asm")
+    path = Path(sys.argv[1].strip())
+    parser = Parser(path)
+    codewriter = CodeWriter(path.name.replace("vm", "asm"))
 
     while parser.has_more_lines():
         parser.advance()
