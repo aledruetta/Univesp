@@ -8,7 +8,7 @@ from utilities import *
 
 def main():
     parser = Parser(sys.argv[1].strip())
-    codewriter = CodeWriter("./output/Out.hack")
+    codewriter = CodeWriter("./output/Out.asm")
 
     while parser.has_more_lines():
         parser.advance()

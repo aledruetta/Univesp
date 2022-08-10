@@ -17,6 +17,21 @@ segments = {
 }
 
 templates = {
-    "pop": ["@SP", "M=M-1", "A=M", "D=M", "@SEGM", "M=D"],
+    "pop": [
+        "@SP", 
+        "M=M-1", 
+        "@SEGM", 
+        "D=M", 
+        "@IDX", 
+        "D=D+A", 
+        "@R13", 
+        "M=D", 
+        "@SP", 
+        "A=M", 
+        "D=M", 
+        "@R13", 
+        "A=M", 
+        "M=D"
+    ],
     "push": []
 }
