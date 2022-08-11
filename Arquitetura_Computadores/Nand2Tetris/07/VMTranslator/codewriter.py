@@ -5,7 +5,11 @@ class CodeWriter:
         self.filename = filename
 
     def write_arithmetic(self, command):
-        pass
+        code = ["// " + command]
+        for comm in templates[command]:
+            code.append(comm)
+
+        self.__write(code)
 
     def write_push_pop(self, parser):
         segm = parser.arg1()
@@ -19,10 +23,9 @@ class CodeWriter:
 
         for comm in templates[name]:
             if name == "push_const":
-                comm.replace("IDX", str(index)) 
+                code.append(comm.replace("IDX", str(index)))
             else:
-                comm.replace("SEGM", segments[segm]).replace("IDX", str(index)) 
-            code.append(comm)
+                code.append(comm.replace("SEGM", segments[segm]).replace("IDX", str(index)))
 
         self.__write(code)
 

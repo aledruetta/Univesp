@@ -22,13 +22,13 @@ class Parser:
         self.command = [com.strip() for com in command.replace("\n", "").split()]
     
     def command_type(self):
-        com = self.command[0]
+        comm = self.command[0]
 
-        if com == "push":
+        if comm == "push":
             return C_PUSH
-        elif com == "pop":
+        elif comm == "pop":
             return C_POP
-        elif com in ["add", "sub", "neg", "eq", "gt", "lt", "and", "or", "not"]:
+        elif comm in ["add", "sub", "neg", "eq", "gt", "lt", "and", "or", "not"]:
             return C_ARITHMETIC
 
     def arg1(self):

@@ -15,8 +15,11 @@ def main():
     while parser.has_more_lines():
         parser.advance()
         command_type = parser.command_type()
+
         if command_type == C_POP or command_type == C_PUSH:
             codewriter.write_push_pop(parser)
+        elif command_type == C_ARITHMETIC:
+            codewriter.write_arithmetic(parser.command[0])
 
 if __name__ == "__main__":
     main()
