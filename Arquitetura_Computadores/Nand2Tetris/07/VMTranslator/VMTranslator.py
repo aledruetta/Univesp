@@ -14,9 +14,9 @@ def main():
 
     while parser.has_more_lines():
         parser.advance()
-        if parser.command_type() == C_POP or parser.command_type() == C_PUSH:
+        command_type = parser.command_type()
+        if command_type == C_POP or command_type == C_PUSH:
             codewriter.write_push_pop(parser)
-        print(parser.command, parser.command_type(), parser.arg1(), parser.arg2())
 
 if __name__ == "__main__":
     main()

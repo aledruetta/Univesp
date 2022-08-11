@@ -33,5 +33,25 @@ templates = {
         "A=M", 
         "M=D"
     ],
-    "push": []
+    "push": [
+        "@SEGM",
+        "D=M",
+        "@IDX",
+        "A=D+A",
+        "D=M",
+        "@SP",
+        "A=M",
+        "M=D",
+        "@SP",
+        "M=M+1"
+    ],
+    "push_const": [
+        "@IDX",
+        "D=A",
+        "@SP",
+        "A=M",
+        "M=D",
+        "@SP",
+        "M=M+1"
+    ]
 }
