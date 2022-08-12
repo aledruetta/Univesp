@@ -147,8 +147,8 @@ M=M+1
 // pop temp 6
 @SP
 M=M-1
-@TEMP
-D=M
+@5
+D=A
 @6
 D=D+A
 @R13
@@ -247,8 +247,8 @@ D=M
 A=M-1
 M=D-M
 // push temp 6
-@TEMP
-D=M
+@5
+D=A
 @6
 A=D+A
 D=M

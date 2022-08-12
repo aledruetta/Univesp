@@ -15,17 +15,26 @@ class CodeWriter:
         segm = parser.arg1()
         index = parser.arg2()
 
-        name = "push" if parser.command_type() == C_PUSH else "pop"
-        if name == "push" and segm == "constant":
-            name = "push_const"
+        if parser.command_type() == C_PUSH:
+            if segm == "constant":
+                name = "push_const"
+            elif segm == "temp":
+                name = "push_temp"
+            else:
+                name = "push"
+        else:
+            if segm == "constant":
+                name = "pop_const"
+            elif segm == "temp":
+                name = "pop_temp"
+            else:
+                name = "pop"
 
         code = ["// " + " ".join(parser.command)]
 
         for comm in templates[name]:
-            if name == "push_const":
-                code.append(comm.replace("IDX", str(index)))
-            else:
-                code.append(comm.replace("SEGM", segments[segm]).replace("IDX", str(index)))
+            comm = comm.replace("SEGM", segments.setdefault(segm, ""))
+            code.append(comm.replace("IDX", str(index)))
 
         self.__write(code)
 
