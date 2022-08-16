@@ -1,6 +1,8 @@
 from utilities import *
 
 class CodeWriter:
+    label_count = 0
+
     def __init__(self, filename) -> None:
         self.filename = filename
 
@@ -8,9 +10,21 @@ class CodeWriter:
         code = ["// " + command]
         for comm in templates[command]:
             code.append(comm)
-
-        self.__write(code)
-
+        
+        self.__write(self.label_replace(code))
+    
+    def label_replace(self, code):
+        new_code = []
+        for comm in code:
+            if comm.find("_count"):
+                CodeWriter.label_count += 1
+                break
+        for comm in code:
+            if comm.find("_count"):
+                comm = comm.replace("count", str(CodeWriter.label_count))
+            new_code.append(comm)
+        return new_code
+    
     def write_push_pop(self, parser):
         segm = parser.arg1()
         index = parser.arg2()

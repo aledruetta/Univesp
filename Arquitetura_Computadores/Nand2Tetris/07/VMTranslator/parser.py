@@ -16,7 +16,7 @@ class Parser:
 
     def advance(self):
         command = self.lines.pop(0).strip()
-        while command.startswith("/") or len(command) == 0:
+        while len(self.lines) and (command.startswith("/") or len(command)) == 0:
             command = self.lines.pop(0).strip()
 
         self.command = [com.strip() for com in command.replace("\n", "").split()]
