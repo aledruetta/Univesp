@@ -8,22 +8,18 @@ class CodeWriter:
 
     def write_arithmetic(self, command):
         code = ["// " + command]
-        for comm in templates[command]:
+
+        for comm in templates["comp"] if command in ["eq", "lt", "gt"] else templates[command]:
+            if command == "eq":
+                comm = comm.replace("COMP", "JEQ")
+            elif command == "lt":
+                comm = comm.replace("COMP", "JLT")
+            elif command == "gt":
+                comm = comm.replace("COMP", "JGT")
+
             code.append(comm)
         
         self.__write(self.label_replace(code))
-    
-    def label_replace(self, code):
-        new_code = []
-        for comm in code:
-            if comm.find("_count"):
-                CodeWriter.label_count += 1
-                break
-        for comm in code:
-            if comm.find("_count"):
-                comm = comm.replace("count", str(CodeWriter.label_count))
-            new_code.append(comm)
-        return new_code
     
     def write_push_pop(self, parser):
         segm = parser.arg1()
@@ -51,6 +47,21 @@ class CodeWriter:
             code.append(comm.replace("IDX", str(index)))
 
         self.__write(code)
+    
+    def label_replace(self, code):
+        new_code = []
+
+        for comm in code:
+            if comm.find("_count"):
+                CodeWriter.label_count += 1
+                break
+
+        for comm in code:
+            if comm.find("_count"):
+                comm = comm.replace("count", str(CodeWriter.label_count))
+            new_code.append(comm)
+
+        return new_code
 
     def __write(self, code):
         with open("./output/" + self.filename, "a") as fp:

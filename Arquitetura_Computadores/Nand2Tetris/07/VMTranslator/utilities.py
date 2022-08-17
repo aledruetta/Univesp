@@ -97,18 +97,18 @@ templates = {
         "A=M-1",
         "M=D-M"
     ],
-    "eq": [             # ram[0] = 258, ram[256] = 15, ram[257] = 17
+    "comp": [             # ram[0] = 258, ram[256] = 15, ram[257] = 17
         "@SP",          # A = 0
         "AM=M-1",       # A = ram[0] = ram[0] - 1 = 257
         "D=M",          # D = ram[257] = 17
         "A=A-1",        # A = 256
         "D=D-M",        # D = 17 - 15 = 2
         "M=-1",         # ram[256] = 1111111111111111
-        "@ISEQ_count",  # A = @ISEQ
-        "D;JEQ",        # if D = 1111111111111111 goto @ISEQ
+        "@COMP_count",  # A = @ISEQ
+        "D;COMP",        # if D = 1111111111111111 goto @ISEQ
         "@SP",          # A = 0
         "A=M-1",        # A = 256
         "M=0",          # ram[256] = 0000000000000000
-        "(ISEQ_count)"
-    ]
+        "(COMP_count)"
+    ],
 }
