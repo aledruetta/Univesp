@@ -8,14 +8,24 @@ class CodeWriter:
 
     def write_arithmetic(self, command):
         code = ["// " + command]
+        if command in ["eq", "lt", "gt"]:
+            template = "comp"
+        elif command in ["and", "or"]:
+            template = "log"
+        else:
+            template = command
 
-        for comm in templates["comp"] if command in ["eq", "lt", "gt"] else templates[command]:
+        for comm in templates[template]:
             if command == "eq":
                 comm = comm.replace("COMP", "JEQ")
             elif command == "lt":
                 comm = comm.replace("COMP", "JLT")
             elif command == "gt":
                 comm = comm.replace("COMP", "JGT")
+            elif command == "and":
+                comm = comm.replace("LOG", "D&M")
+            elif command == "or":
+                comm = comm.replace("LOG", "D|M")
 
             code.append(comm)
         
