@@ -16,9 +16,7 @@ M=D
 M=M+1
 // add
 @SP
-M=M-1
-A=M
+AM=M-1
 D=M
-@SP
-A=M-1
+A=A-1
 M=D+M
