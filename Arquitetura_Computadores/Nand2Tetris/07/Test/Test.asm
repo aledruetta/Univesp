@@ -1,0 +1,92 @@
+// push constant 1000
+@1000
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 0
+@SP
+M=M-1
+@pointer
+D=A
+@0
+D=D+A
+@R13
+M=D
+@SP
+A=M
+D=M
+@R13
+A=M
+M=D
+// push constant 1010
+@1010
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop pointer 1
+@SP
+M=M-1
+@pointer
+D=A
+@1
+D=D+A
+@R13
+M=D
+@SP
+A=M
+D=M
+@R13
+A=M
+M=D
+// push constant 5
+@5
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// push constant 7
+@7
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+// pop this 3
+@SP
+M=M-1
+@this
+D=M
+@3
+D=D+A
+@R13
+M=D
+@SP
+A=M
+D=M
+@R13
+A=M
+M=D
+// pop that 4
+@SP
+M=M-1
+@that
+D=M
+@4
+D=D+A
+@R13
+M=D
+@SP
+A=M
+D=M
+@R13
+A=M
+M=D

@@ -8,53 +8,79 @@ class CodeWriter:
 
     def write_arithmetic(self, command):
         code = ["// " + command]
-        if command in ["eq", "lt", "gt"]:
-            template = "comp"
+
+        if command == "add":
+            code.extend([
+                "@SP",
+                "AM=M-1",
+                "D=M",
+                "A=A-1",
+                "M=D+M"
+            ])
+        elif command == "sub":
+            code.extend([
+                "@SP",
+                "AM=M-1",
+                "D=-M",
+                "A=A-1",
+                "M=D+M"
+            ])
+        elif command in ["eq", "lt", "gt"]:
+            comp = f"J{command.upper()}"
+
+            code.extend([
+                "@SP",
+                "AM=M-1",
+                "D=M",
+                "A=A-1",
+                "D=D-M",
+                "D=-D",
+                "M=-1",
+                "@COMP_count".replace("COMP", comp),
+                "D;COMP".replace("COMP", comp),
+                "@SP",
+                "A=M-1",
+                "M=0",
+                "(COMP_count)".replace("COMP", comp)
+            ])
+        elif command == "neg":
+            code.extend([
+                "@SP",
+                "A=M-1",
+                "M=-M"
+            ])
         elif command in ["and", "or"]:
-            template = "log"
+            code.extend([
+                "@SP",
+                "AM=M-1",
+                "D=M",
+                "A=A-1",
+                "M=LOG".replace("LOG", "D&M" if command == "and" else "D|M")
+            ])
+        elif command == "not":
+            code.extend([
+                "@SP",
+                "A=M-1",
+                "M=!M"
+            ])
         else:
-            template = command
-
-        for comm in templates[template]:
-            if command == "eq":
-                comm = comm.replace("COMP", "JEQ")
-            elif command == "lt":
-                comm = comm.replace("COMP", "JLT")
-            elif command == "gt":
-                comm = comm.replace("COMP", "JGT")
-            elif command == "and":
-                comm = comm.replace("LOG", "D&M")
-            elif command == "or":
-                comm = comm.replace("LOG", "D|M")
-
-            code.append(comm)
+            pass
         
         self.__write(self.label_replace(code))
-    
-    def write_push_pop(self, parser):
-        segm = parser.arg1()
-        index = parser.arg2()
 
-        if parser.command_type() == C_PUSH:
-            if segm == "constant":
-                name = "push_const"
-            elif segm == "temp":
-                name = "push_temp"
-            else:
-                name = "push"
-        else:
-            if segm == "constant":
-                name = "pop_const"
-            elif segm == "temp":
-                name = "pop_temp"
-            else:
-                name = "pop"
+    def write_push(self, command, segment, index):
+        code = [f"// {command} {segment} {index}"]
 
-        code = ["// " + " ".join(parser.command)]
-
-        for comm in templates[name]:
-            comm = comm.replace("SEGM", segments.setdefault(segm, ""))
-            code.append(comm.replace("IDX", str(index)))
+        if segment == "constant":
+            code.extend([
+                "@" + index,
+                "D=A",
+                "@SP",
+                "A=M",
+                "M=D",
+                "@SP",
+                "M=M+1"
+            ])
 
         self.__write(code)
     

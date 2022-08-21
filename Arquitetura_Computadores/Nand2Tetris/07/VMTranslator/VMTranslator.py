@@ -14,12 +14,17 @@ def main():
 
     while parser.has_more_lines():
         parser.advance()
+        command = parser.command[0]
         command_type = parser.command_type()
+        segment = parser.arg1()
+        index = parser.arg2()
 
-        if command_type == C_POP or command_type == C_PUSH:
-            codewriter.write_push_pop(parser)
+        if command_type == C_PUSH:
+            codewriter.write_push(command, segment, str(index))
+        elif command_type == C_POP:
+            pass
         elif command_type == C_ARITHMETIC:
-            codewriter.write_arithmetic(parser.command[0])
+            codewriter.write_arithmetic(command)
 
 if __name__ == "__main__":
     main()
