@@ -1,8 +1,0 @@
-push constant 1000
-pop pointer 0
-push constant 1010
-pop pointer 1
-push constant 5
-push constant 7
-pop this 3
-pop that 4

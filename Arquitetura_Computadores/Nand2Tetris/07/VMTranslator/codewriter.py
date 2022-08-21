@@ -80,7 +80,7 @@ class CodeWriter:
         # push pointer
         elif segment == "pointer":
             code.extend([
-                "@" + "THIS" if index == 0 else "THAT",
+                "@" + ("THIS" if index == "0" else "THAT"),
                 "D=M",
             ])
         else:
@@ -118,8 +118,8 @@ class CodeWriter:
         # pop pointer
         if segment == "pointer":
             code.extend([
-                "@" + "THIS" if index == 0 else "THAT",
-                "D=M"
+                "@" + ("THIS" if index == "0" else "THAT"),
+                "D=A"
             ])
         else:
             # pop temp
