@@ -17,12 +17,12 @@ def main():
         command = parser.command[0]
         command_type = parser.command_type()
         segment = parser.arg1()
-        index = parser.arg2()
+        index = str(parser.arg2())
 
         if command_type == C_PUSH:
-            codewriter.write_push(command, segment, str(index))
+            codewriter.write_push(command, segment, index)
         elif command_type == C_POP:
-            pass
+            codewriter.write_pop(command, segment, index)
         elif command_type == C_ARITHMETIC:
             codewriter.write_arithmetic(command)
 
