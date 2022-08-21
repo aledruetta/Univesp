@@ -75,26 +75,32 @@ class CodeWriter:
         if segment == "constant":
             code.extend([
                 "@" + index,
-                "D=A",
+                "D=A"
             ])
         # push pointer
         elif segment == "pointer":
             code.extend([
                 "@" + ("THIS" if index == "0" else "THAT"),
-                "D=M",
+                "D=M"
+            ])
+        # push static
+        elif segment == "static":
+            code.extend([
+                f"@{self.filename.removesuffix('.asm')}.{index}",
+                "D=M"
             ])
         else:
             # push temp
             if segment == "temp":
                 code.extend([
                     "@5",
-                    "D=A",
+                    "D=A"
                 ])
             # push this, that, local, argument
             else:
                 code.extend([
                     "@" + segments[segment],
-                    "D=M",
+                    "D=M"
                 ])
             code.extend([
                 "@" + index,
@@ -119,6 +125,12 @@ class CodeWriter:
         if segment == "pointer":
             code.extend([
                 "@" + ("THIS" if index == "0" else "THAT"),
+                "D=A"
+            ])
+        # pop static
+        elif segment == "static":
+            code.extend([
+                f"@{self.filename.removesuffix('.asm')}.{index}",
                 "D=A"
             ])
         else:
