@@ -20,9 +20,9 @@ def main():
         index = str(parser.arg2())
 
         if command_type == C_PUSH:
-            codewriter.write_push(command, segment, index)
+            codewriter.write_push(segment, index)
         elif command_type == C_POP:
-            codewriter.write_pop(command, segment, index)
+            codewriter.write_pop(segment, index)
         elif command_type == C_ARITHMETIC:
             codewriter.write_arithmetic(command)
 

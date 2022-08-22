@@ -86,8 +86,8 @@ class CodeWriter:
         Writes to the output file the assembly code that implements
         the given push command
     """
-    def write_push(self, command: str, segment: str, index: str) -> None:
-        code = [f"// {command} {segment} {index}"]
+    def write_push(self, segment: str, index: str) -> None:
+        code = [f"// push {segment} {index}"]
 
         # push constant
         if segment == "constant":
@@ -142,8 +142,8 @@ class CodeWriter:
         Writes to the output file the assembly code that implements
         the given pop command
     """
-    def write_pop(self, command: str, segment: str, index: str) -> None:
-        code = [f"// {command} {segment} {index}"]
+    def write_pop(self, segment: str, index: str) -> None:
+        code = [f"// pop {segment} {index}"]
 
         # pop pointer
         if segment == "pointer":
@@ -187,6 +187,19 @@ class CodeWriter:
         ])
 
         self.__write(code)
+    
+
+    """ Goto
+
+        Writes assembly code that effects the goto command
+    """
+    def write_goto(self, label: str) -> None:
+        code = [f"// goto {label}"]
+
+        code.extend([
+            "@" + label,
+            "0;JMP"
+        ])
     
     
     """ Label replacing
