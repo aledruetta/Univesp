@@ -7,12 +7,13 @@ class CodeWriter:
         self.filename = filename
 
 
-    """ Arithmetic and Logic
-
-        Writes to the output file the assembly code that implements
-        the given arithmetic-logical command (add, sub, neg, eq, lt, gt, and, or, not)
-    """
     def write_arithmetic(self, command: str) -> None:
+        """ Arithmetic and Logic
+
+            Writes to the output file the assembly code that implements
+            the given arithmetic-logical command (add, sub, neg, eq, lt, gt, and, or, not)
+        """
+
         code = ["// " + command]
 
         # Add command
@@ -81,12 +82,13 @@ class CodeWriter:
         self.__write(self.__label_replace(code))
 
 
-    """ Stack: Push
-    
-        Writes to the output file the assembly code that implements
-        the given push command
-    """
     def write_push(self, segment: str, index: str) -> None:
+        """ Stack: Push
+        
+            Writes to the output file the assembly code that implements
+            the given push command
+        """
+
         code = [f"// push {segment} {index}"]
 
         # push constant
@@ -137,12 +139,13 @@ class CodeWriter:
         self.__write(code)
 
 
-    """ Stack: Pop
-    
-        Writes to the output file the assembly code that implements
-        the given pop command
-    """
     def write_pop(self, segment: str, index: str) -> None:
+        """ Stack: Pop
+        
+            Writes to the output file the assembly code that implements
+            the given pop command
+        """
+
         code = [f"// pop {segment} {index}"]
 
         # pop pointer
@@ -189,11 +192,12 @@ class CodeWriter:
         self.__write(code)
     
 
-    """ GoTo
-
-        Writes assembly code that effects the goto command
-    """
     def write_goto(self, label: str) -> None:
+        """ GoTo
+
+            Writes assembly code that effects the goto command
+        """
+
         code = [f"// goto {label}"]
 
         code.extend([
@@ -204,11 +208,12 @@ class CodeWriter:
         self.__write(code)
     
 
-    """ If-GoTo
-
-        Writes assembly code that effects the if-goto command
-    """
     def write_If(self, label: str) -> None:
+        """ If-GoTo
+
+            Writes assembly code that effects the if-goto command
+        """
+
         code = [f"// if-goto {label}"]
 
         code.extend([
@@ -221,9 +226,9 @@ class CodeWriter:
         self.__write(code)
     
     
-    """ Label replacing
-    """
     def __label_replace(self, code: list) -> list:
+        """ Label replacing """
+
         new_code = []
 
         for comm in code:
@@ -239,8 +244,8 @@ class CodeWriter:
         return new_code
 
 
-    """ Write to a file
-    """
     def __write(self, code: list) -> None:
+        """ Write to a file """
+
         with open("./output/" + self.filename, "a") as fp:
             fp.write("\n".join(code) + "\n")
