@@ -3,12 +3,19 @@ from utilities import *
 class CodeWriter:
     label_count = 0
 
-    def __init__(self, filename) -> None:
+    def __init__(self, filename: str) -> None:
         self.filename = filename
 
-    def write_arithmetic(self, command):
+
+    """ Arithmetic
+
+        Writes to the output file the assembly code that implements
+        the given arithmetic-logical command
+    """
+    def write_arithmetic(self, command: str) -> None:
         code = ["// " + command]
 
+        # Add command
         if command == "add":
             code.extend([
                 "@SP",
@@ -17,6 +24,7 @@ class CodeWriter:
                 "A=A-1",
                 "M=D+M"
             ])
+        # Sub command
         elif command == "sub":
             code.extend([
                 "@SP",
@@ -25,6 +33,7 @@ class CodeWriter:
                 "A=A-1",
                 "M=D+M"
             ])
+        # Comparisson commands
         elif command in ["eq", "lt", "gt"]:
             comp = f"J{command.upper()}"
 
@@ -43,12 +52,14 @@ class CodeWriter:
                 "M=0",
                 "(COMP_count)".replace("COMP", comp)
             ])
+        # Negation command
         elif command == "neg":
             code.extend([
                 "@SP",
                 "A=M-1",
                 "M=-M"
             ])
+        # Logical and, or, commands
         elif command in ["and", "or"]:
             code.extend([
                 "@SP",
@@ -57,6 +68,7 @@ class CodeWriter:
                 "A=A-1",
                 "M=LOG".replace("LOG", "D&M" if command == "and" else "D|M")
             ])
+        # Logical not command
         elif command == "not":
             code.extend([
                 "@SP",
@@ -68,7 +80,13 @@ class CodeWriter:
         
         self.__write(self.__label_replace(code))
 
-    def write_push(self, command, segment, index):
+
+    """ Push
+    
+        Writes to the output file the assembly code that implements
+        the given push command
+    """
+    def write_push(self, command: str, segment: str, index: str) -> None:
         code = [f"// {command} {segment} {index}"]
 
         # push constant
@@ -118,7 +136,13 @@ class CodeWriter:
 
         self.__write(code)
 
-    def write_pop(self, command, segment, index):
+
+    """ Pop
+    
+        Writes to the output file the assembly code that implements
+        the given pop command
+    """
+    def write_pop(self, command: str, segment: str, index: str) -> None:
         code = [f"// {command} {segment} {index}"]
 
         # pop pointer
@@ -164,7 +188,10 @@ class CodeWriter:
 
         self.__write(code)
     
-    def __label_replace(self, code):
+    
+    """ Label replacing
+    """
+    def __label_replace(self, code: list) -> list:
         new_code = []
 
         for comm in code:
@@ -179,6 +206,9 @@ class CodeWriter:
 
         return new_code
 
-    def __write(self, code):
+
+    """ Write to a file
+    """
+    def __write(self, code: list) -> None:
         with open("./output/" + self.filename, "a") as fp:
             fp.write("\n".join(code) + "\n")
