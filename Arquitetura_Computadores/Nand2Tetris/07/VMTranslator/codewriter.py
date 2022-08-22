@@ -8,9 +8,7 @@ class CodeWriter:
 
 
     def write_arithmetic(self, command: str) -> None:
-        """ Arithmetic and Logic
-
-            Writes to the output file the assembly code that implements
+        """ Writes to the output file the assembly code that implements
             the given arithmetic-logical command (add, sub, neg, eq, lt, gt, and, or, not)
         """
 
@@ -83,9 +81,7 @@ class CodeWriter:
 
 
     def write_push(self, segment: str, index: str) -> None:
-        """ Stack: Push
-        
-            Writes to the output file the assembly code that implements
+        """ Writes to the output file the assembly code that implements
             the given push command
         """
 
@@ -140,9 +136,7 @@ class CodeWriter:
 
 
     def write_pop(self, segment: str, index: str) -> None:
-        """ Stack: Pop
-        
-            Writes to the output file the assembly code that implements
+        """ Writes to the output file the assembly code that implements
             the given pop command
         """
 
@@ -193,10 +187,7 @@ class CodeWriter:
     
 
     def write_goto(self, label: str) -> None:
-        """ GoTo
-
-            Writes assembly code that effects the goto command
-        """
+        """ Writes assembly code that effects the goto command """
 
         code = [f"// goto {label}"]
 
@@ -209,10 +200,7 @@ class CodeWriter:
     
 
     def write_If(self, label: str) -> None:
-        """ If-GoTo
-
-            Writes assembly code that effects the if-goto command
-        """
+        """ Writes assembly code that effects the if-goto command """
 
         code = [f"// if-goto {label}"]
 
@@ -245,7 +233,7 @@ class CodeWriter:
 
 
     def __write(self, code: list) -> None:
-        """ Write to a file """
+        """ Writes to a file """
 
         with open("./output/" + self.filename, "a") as fp:
             fp.write("\n".join(code) + "\n")
