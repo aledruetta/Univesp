@@ -7,10 +7,10 @@ class CodeWriter:
         self.filename = filename
 
 
-    """ Arithmetic
+    """ Arithmetic and Logic
 
         Writes to the output file the assembly code that implements
-        the given arithmetic-logical command
+        the given arithmetic-logical command (add, sub, neg, eq, lt, gt, and, or, not)
     """
     def write_arithmetic(self, command: str) -> None:
         code = ["// " + command]
@@ -81,7 +81,7 @@ class CodeWriter:
         self.__write(self.__label_replace(code))
 
 
-    """ Push
+    """ Stack: Push
     
         Writes to the output file the assembly code that implements
         the given push command
@@ -137,7 +137,7 @@ class CodeWriter:
         self.__write(code)
 
 
-    """ Pop
+    """ Stack: Pop
     
         Writes to the output file the assembly code that implements
         the given pop command
@@ -189,7 +189,7 @@ class CodeWriter:
         self.__write(code)
     
 
-    """ Goto
+    """ GoTo
 
         Writes assembly code that effects the goto command
     """
@@ -200,6 +200,25 @@ class CodeWriter:
             "@" + label,
             "0;JMP"
         ])
+
+        self.__write(code)
+    
+
+    """ If-GoTo
+
+        Writes assembly code that effects the if-goto command
+    """
+    def write_If(self, label: str) -> None:
+        code = [f"// if-goto {label}"]
+
+        code.extend([
+            "@SP",
+            "A=M-1",
+            "D=M",
+            "!D;JEQ " + label
+        ])
+
+        self.__write(code)
     
     
     """ Label replacing
