@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 import sys
+from parser import Parser
 from pathlib import Path
 
-from parser import Parser
 from codewriter import CodeWriter
 from utilities import *
 
