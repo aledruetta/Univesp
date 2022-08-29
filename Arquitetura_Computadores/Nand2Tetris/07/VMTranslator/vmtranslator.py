@@ -19,6 +19,9 @@ def main():
             if child.suffix == ".vm":
                 consume(child)
     else:
+        if path.suffix != ".vm":
+            print(f"Error: '{path}' isn't a .vm file!")
+            exit(1)
         consume(path)
 
 
