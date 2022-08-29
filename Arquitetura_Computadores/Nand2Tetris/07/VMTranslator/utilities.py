@@ -7,6 +7,7 @@ C_IF = 5
 C_FUNCTION = 6
 C_RETURN = 7
 C_CALL = 8
+C_TEMP_BASE = 5
 
 segments = {
     "local": "LCL",

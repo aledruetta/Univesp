@@ -1,10 +1,11 @@
+from pathlib import Path
 from utilities import *
 
 class CodeWriter:
     label_count = 0
 
-    def __init__(self, filename: str) -> None:
-        self.filename = filename
+    def __init__(self, path: Path) -> None:
+        self.output = Path(f"./output/").joinpath(path.stem).joinpath(path.name).with_suffix(".asm")
 
 
     def write_arithmetic(self, command: str) -> None:
@@ -109,7 +110,7 @@ class CodeWriter:
             # push temp
             if segment == "temp":
                 code.extend([
-                    "@5",
+                    "@" + C_TEMP_BASE,
                     "D=A"
                 ])
             # push this, that, local, argument
@@ -199,7 +200,7 @@ class CodeWriter:
         self.__write(code)
     
 
-    def write_If(self, label: str) -> None:
+    def write_if(self, label: str) -> None:
         """ Writes assembly code that effects the if-goto command """
 
         code = [f"// if-goto {label}"]
@@ -208,10 +209,21 @@ class CodeWriter:
             "@SP",
             "A=M-1",
             "D=M",
-            "!D;JEQ " + label
+            "@" + label,
+            "D;JLT"        # if D=1111...1 (-1 or true) then jump, else (D=0000...0 or false) continue
         ])
 
         self.__write(code)
+    
+
+    def write_label(self, label: str) -> None:
+        """ Writes assembly code that effects the label command """
+
+        code = [f"// label {label}"]
+
+        code.extend([
+            f"({label})"
+        ])
     
     
     def __label_replace(self, code: list) -> list:
@@ -235,5 +247,7 @@ class CodeWriter:
     def __write(self, code: list) -> None:
         """ Writes to a file """
 
-        with open("./output/" + self.filename, "a") as fp:
+        self.output.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(self.output, "a") as fp:
             fp.write("\n".join(code) + "\n")
