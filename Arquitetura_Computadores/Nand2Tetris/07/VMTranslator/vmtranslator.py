@@ -43,7 +43,7 @@ def consume(path: Path) -> None:
         elif command_type == C_GOTO:
             cw.write_goto(pr.arg1)
         elif command_type == C_IF:
-            cw.write_If(pr.arg1)
+            cw.write_if(pr.arg1)
 
 
 if __name__ == "__main__":

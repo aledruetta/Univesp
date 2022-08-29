@@ -103,14 +103,14 @@ class CodeWriter:
         # push static
         elif segment == "static":
             code.extend([
-                f"@{self.filename.removesuffix('.asm')}.{index}",
+                f"@{self.output.stem}.{index}",
                 "D=M"
             ])
         else:
             # push temp
             if segment == "temp":
                 code.extend([
-                    "@" + C_TEMP_BASE,
+                    "@" + str(C_TEMP_BASE),
                     "D=A"
                 ])
             # push this, that, local, argument
@@ -152,7 +152,7 @@ class CodeWriter:
         # pop static
         elif segment == "static":
             code.extend([
-                f"@{self.filename.removesuffix('.asm')}.{index}",
+                f"@{self.output.stem}.{index}",
                 "D=A"
             ])
         else:
