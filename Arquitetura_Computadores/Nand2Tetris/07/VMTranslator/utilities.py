@@ -9,9 +9,4 @@ C_RETURN = 7
 C_CALL = 8
 C_TEMP_BASE = 5
 
-segments = {
-    "local": "LCL",
-    "argument": "ARG",
-    "this": "THIS",
-    "that": "THAT"
-}
+segments = {"local": "LCL", "argument": "ARG", "this": "THIS", "that": "THAT"}

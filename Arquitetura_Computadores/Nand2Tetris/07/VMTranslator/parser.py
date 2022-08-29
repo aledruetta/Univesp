@@ -9,7 +9,7 @@ class Parser:
         self.path = path
         self.lines = Parser.__readlines(path)
         self.command: List[str] = []
-    
+
     def has_more_lines(self) -> bool:
         return True if len(self.lines) > 0 else False
 
@@ -19,7 +19,7 @@ class Parser:
             command = self.lines.pop(0).strip()
 
         self.command = [com.strip() for com in command.replace("\n", "").split()]
-    
+
     @property
     def command_type(self) -> int | None:
         comm = self.command[0]
@@ -35,7 +35,7 @@ class Parser:
     @property
     def arg1(self) -> str:
         return self.command[0] if self.command_type == C_ARITHMETIC else self.command[1]
-    
+
     @property
     def arg2(self) -> str | None:
         if self.command_type in [C_PUSH, C_POP, C_FUNCTION, C_CALL]:
