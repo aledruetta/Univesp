@@ -140,10 +140,10 @@ class CodeWriter:
         code.extend(
             [
                 "@SP",
-                "A=M-1",
+                "AM=M-1",
                 "D=M",
                 "@" + label,
-                "D;JLT",  # if D=1111...1 (-1 or true) then jump, else (D=0000...0 or false) continue
+                "D;JNE",  # if D=1111...1 (-1 or true) then jump, else (D=0000...0 or false) continue
             ]
         )
 
