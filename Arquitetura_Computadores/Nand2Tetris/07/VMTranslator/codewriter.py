@@ -169,7 +169,7 @@ class CodeWriter:
         code = [f"// function {name} {n_locals}", f"({name})"]
 
         # Push n local variables into the stack
-        for i in range(n):
+        for i in range(n_locals):
             code.extend(self.__create_push("constant", 0))
 
         self.__write(code)
