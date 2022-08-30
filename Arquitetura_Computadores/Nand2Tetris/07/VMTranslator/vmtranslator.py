@@ -35,9 +35,9 @@ def consume(path: Path) -> None:
         command_type = pr.command_type
 
         if command_type == C_PUSH:
-            cw.write_push(pr.arg1, pr.arg2)     # segment, label
+            cw.write_push(pr.arg1, pr.arg2)     # segment, index
         elif command_type == C_POP:
-            cw.write_pop(pr.arg1, pr.arg2)      # segment, label
+            cw.write_pop(pr.arg1, pr.arg2)      # segment, index
         elif command_type == C_ARITHMETIC:
             cw.write_arithmetic(command)
         elif command_type == C_GOTO:

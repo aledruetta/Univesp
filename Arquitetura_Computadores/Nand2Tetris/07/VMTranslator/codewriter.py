@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import List
 
 from utilities import *
 
@@ -74,6 +75,11 @@ class CodeWriter:
         """
 
         code = [f"// push {segment} {index}"]
+        code.extend(self.__create_push(segment, index))
+        self.__write(code)
+    
+    def __create_push(self, segment: str, index: str) -> List[str]:
+        code = []
 
         # push constant
         if segment == "constant":
@@ -95,7 +101,7 @@ class CodeWriter:
 
         code.extend(["@SP", "A=M", "M=D", "@SP", "M=M+1"])
 
-        self.__write(code)
+        return code
 
     def write_pop(self, segment: str, index: str) -> None:
         """Writes to the output file the assembly code that implements
@@ -103,6 +109,11 @@ class CodeWriter:
         """
 
         code = [f"// pop {segment} {index}"]
+        code.extend(self.__create_pop(segment, index))
+        self.__write(code)
+    
+    def __create_pop(self, segment: str, index: str) -> List[str]:
+        code = []
 
         # pop pointer
         if segment == "pointer":
@@ -121,22 +132,19 @@ class CodeWriter:
 
         code.extend(["@R13", "M=D", "@SP", "AM=M-1", "D=M", "@R13", "A=M", "M=D"])
 
-        self.__write(code)
+        return code
 
     def write_goto(self, label: str) -> None:
         """Writes assembly code that effects the goto command"""
 
         code = [f"// goto {label}"]
-
         code.extend(["@" + label, "0;JMP"])
-
         self.__write(code)
 
     def write_if(self, label: str) -> None:
         """Writes assembly code that effects the if-goto command"""
 
         code = [f"// if-goto {label}"]
-
         code.extend(
             [
                 "@SP",
@@ -146,15 +154,25 @@ class CodeWriter:
                 "D;JNE",  # if D=1111...1 (-1 or true) then jump, else (D=0000...0 or false) continue
             ]
         )
-
         self.__write(code)
 
     def write_label(self, label: str) -> None:
         """Writes assembly code that effects the label command"""
 
-        code = [f"// label {label}"]
+        code = [f"// label {label}", f"({label})"]
+        self.__write(code)
+    
+    def write_function(self, name: str, n_locals: int) -> None:
+        """ """
 
-        code.extend([f"({label})"])
+        # Insert comment and label
+        code = [f"// function {name} {n_locals}", f"({name})"]
+
+        # Push n local variables into the stack
+        for i in range(n):
+            code.extend(self.__create_push("constant", 0))
+
+        self.__write(code)
 
     def __label_replace(self, code: list) -> list:
         """Label replacing"""
