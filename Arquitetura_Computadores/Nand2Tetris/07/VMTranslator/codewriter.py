@@ -65,8 +65,6 @@ class CodeWriter:
         # Logical not command
         elif command == "not":
             code.extend(["@SP", "A=M-1", "M=!M"])
-        else:
-            pass
 
         self.__write(self.__label_replace(code))
 
@@ -161,19 +159,11 @@ class CodeWriter:
     def __label_replace(self, code: list) -> list:
         """Label replacing"""
 
-        new_code = []
-
-        for comm in code:
-            if comm.find("_count"):
-                CodeWriter.label_count += 1
-                break
-
-        for comm in code:
-            if comm.find("_count"):
-                comm = comm.replace("count", str(CodeWriter.label_count))
-            new_code.append(comm)
-
-        return new_code
+        if any(cmd.find("_count") for cmd in code):
+            CodeWriter.label_count += 1
+            return [cmd.replace("count", str(CodeWriter.label_count)) for cmd in code]
+        
+        return code
 
     def __write(self, code: list) -> None:
         """Writes to a file"""

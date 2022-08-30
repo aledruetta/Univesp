@@ -35,15 +35,17 @@ def consume(path: Path) -> None:
         command_type = pr.command_type
 
         if command_type == C_PUSH:
-            cw.write_push(pr.arg1, pr.arg2)
+            cw.write_push(pr.arg1, pr.arg2)     # segment, label
         elif command_type == C_POP:
-            cw.write_pop(pr.arg1, pr.arg2)
+            cw.write_pop(pr.arg1, pr.arg2)      # segment, label
         elif command_type == C_ARITHMETIC:
             cw.write_arithmetic(command)
         elif command_type == C_GOTO:
-            cw.write_goto(pr.arg1)
+            cw.write_goto(pr.arg1)              # label
         elif command_type == C_IF:
-            cw.write_if(pr.arg1)
+            cw.write_if(pr.arg1)                # label
+        elif command_type == C_LABEL:
+            cw.write_label(pr.arg1)             # label
 
 
 if __name__ == "__main__":
