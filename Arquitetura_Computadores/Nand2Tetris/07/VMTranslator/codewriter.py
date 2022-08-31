@@ -77,7 +77,7 @@ class CodeWriter:
         code = [f"// push {segment} {index}"]
         code.extend(self.__create_push(segment, index))
         self.__write(code)
-    
+
     def __create_push(self, segment: str, index: str) -> List[str]:
         code = []
 
@@ -111,7 +111,7 @@ class CodeWriter:
         code = [f"// pop {segment} {index}"]
         code.extend(self.__create_pop(segment, index))
         self.__write(code)
-    
+
     def __create_pop(self, segment: str, index: str) -> List[str]:
         code = []
 
@@ -161,7 +161,7 @@ class CodeWriter:
 
         code = [f"// label {label}", f"({label})"]
         self.__write(code)
-    
+
     def write_function(self, name: str, n_locals: int) -> None:
         """ """
 
@@ -170,9 +170,12 @@ class CodeWriter:
 
         # Push n local variables into the stack
         for i in range(n_locals):
-            code.extend(self.__create_push("constant", 0))
+            code.extend(self.__create_push("constant", "0"))
 
         self.__write(code)
+
+    def write_call(self, name: str, n_args: int) -> None:
+        pass
 
     def __label_replace(self, code: list) -> list:
         """Label replacing"""
@@ -180,7 +183,7 @@ class CodeWriter:
         if any(cmd.find("_count") for cmd in code):
             CodeWriter.label_count += 1
             return [cmd.replace("count", str(CodeWriter.label_count)) for cmd in code]
-        
+
         return code
 
     def __write(self, code: list) -> None:

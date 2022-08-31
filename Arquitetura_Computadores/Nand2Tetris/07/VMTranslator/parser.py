@@ -30,6 +30,15 @@ class Parser:
             return C_POP
         elif comm in ["add", "sub", "neg", "eq", "gt", "lt", "and", "or", "not"]:
             return C_ARITHMETIC
+        elif comm == "goto":
+            return C_GOTO
+        elif comm == "if-goto":
+            return C_IF
+        elif comm == "function":
+            return C_FUNCTION
+        elif comm == "call":
+            return C_CALL
+
         return None
 
     @property
@@ -40,6 +49,7 @@ class Parser:
     def arg2(self) -> str | None:
         if self.command_type in [C_PUSH, C_POP, C_FUNCTION, C_CALL]:
             return self.command[2]
+
         return None
 
     @staticmethod
