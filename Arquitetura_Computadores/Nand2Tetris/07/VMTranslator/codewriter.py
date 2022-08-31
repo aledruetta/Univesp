@@ -8,12 +8,13 @@ class CodeWriter:
     label_count = 0
 
     def __init__(self, path: Path) -> None:
-        self.output = (
-            Path(f"./output/")
-            .joinpath(path.stem)
-            .joinpath(path.name)
-            .with_suffix(".asm")
-        )
+        self.path = path.with_suffix(".asm")
+    
+    def write_bootstrap(self) -> None:
+        """ """
+
+        code = ["// bootstrap code", "@256", "D=M", "@0", "M=D"].extend(self.__call("Sys.init", 0))
+        self.__write(code)
 
     def write_arithmetic(self, command: str) -> None:
         """Writes to the output file the assembly code that implements
@@ -75,10 +76,10 @@ class CodeWriter:
         """
 
         code = [f"// push {segment} {index}"]
-        code.extend(self.__create_push(segment, index))
+        code.extend(self.__push(segment, index))
         self.__write(code)
 
-    def __create_push(self, segment: str, index: str) -> List[str]:
+    def __push(self, segment: str, index: str) -> List[str]:
         code = []
 
         # push constant
@@ -89,7 +90,7 @@ class CodeWriter:
             code.extend(["@" + ("THIS" if index == "0" else "THAT"), "D=M"])
         # push static
         elif segment == "static":
-            code.extend([f"@{self.output.stem}.{index}", "D=M"])
+            code.extend([f"@{self.path.stem}.{index}", "D=M"])
         else:
             # push temp
             if segment == "temp":
@@ -109,10 +110,10 @@ class CodeWriter:
         """
 
         code = [f"// pop {segment} {index}"]
-        code.extend(self.__create_pop(segment, index))
+        code.extend(self.__pop(segment, index))
         self.__write(code)
 
-    def __create_pop(self, segment: str, index: str) -> List[str]:
+    def __pop(self, segment: str, index: str) -> List[str]:
         code = []
 
         # pop pointer
@@ -120,7 +121,7 @@ class CodeWriter:
             code.extend(["@" + ("THIS" if index == "0" else "THAT"), "D=A"])
         # pop static
         elif segment == "static":
-            code.extend([f"@{self.output.stem}.{index}", "D=A"])
+            code.extend([f"@{self.path.stem}.{index}", "D=A"])
         else:
             # pop temp
             if segment == "temp":
@@ -170,12 +171,18 @@ class CodeWriter:
 
         # Push n local variables into the stack
         for i in range(n_locals):
-            code.extend(self.__create_push("constant", "0"))
+            code.extend(self.__push("constant", "0"))
 
         self.__write(code)
 
     def write_call(self, name: str, n_args: int) -> None:
-        pass
+        """ """
+    
+    def __call(self, name: str, n_args: int) -> None:
+        """ """
+
+    def write_return(self) -> None:
+        """ """
 
     def __label_replace(self, code: list) -> list:
         """Label replacing"""
@@ -189,7 +196,5 @@ class CodeWriter:
     def __write(self, code: list) -> None:
         """Writes to a file"""
 
-        self.output.parent.mkdir(parents=True, exist_ok=True)
-
-        with open(self.output, "a") as fp:
+        with open(self.path, "a") as fp:
             fp.write("\n".join(code) + "\n")

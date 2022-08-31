@@ -9,8 +9,11 @@ from utilities import *
 
 
 def main():
-    path = Path(sys.argv[1].strip())
-
+    if len(sys.argv) == 1:
+        path = Path(".")
+    else:
+        path = Path(sys.argv[1].strip())
+    
     if not path.exists():
         print(f"Error: '{path}' doesn't exist!")
         exit(1)
@@ -18,16 +21,19 @@ def main():
         for child in path.iterdir():
             if child.suffix == ".vm":
                 consume(child)
+    elif path.suffix != ".vm":
+        print(f"Error: '{path}' isn't a .vm file!")
+        exit(1)
     else:
-        if path.suffix != ".vm":
-            print(f"Error: '{path}' isn't a .vm file!")
-            exit(1)
         consume(path)
 
 
 def consume(path: Path) -> None:
     pr = Parser(path)
     cw = CodeWriter(path)
+
+    with open(path.with_suffix(".asm"), "w") as fp:
+        fp.truncate()
 
     while pr.has_more_lines():
         pr.advance()
@@ -40,16 +46,18 @@ def consume(path: Path) -> None:
             cw.write_pop(pr.arg1, pr.arg2)  # segment, index
         elif command_type == C_ARITHMETIC:
             cw.write_arithmetic(command)
+        elif command_type == C_LABEL:
+            cw.write_label(pr.arg1)  # label
         elif command_type == C_GOTO:
             cw.write_goto(pr.arg1)  # label
         elif command_type == C_IF:
             cw.write_if(pr.arg1)  # label
         elif command_type == C_FUNCTION:
-            cw.write_function(pr.arg1, pr.arg2)  # label, nlocals
+            cw.write_function(pr.arg1, pr.arg2)  # label, n_locals
         elif command_type == C_CALL:
-            cw.write_call(pr.arg1, pr.arg2)  # label, nargs
-        elif command_type == C_LABEL:
-            cw.write_label(pr.arg1)  # label
+            cw.write_call(pr.arg1, pr.arg2)  # label, n_args
+        elif command_type == C_RETURN:
+            cw.write_return()
 
 
 if __name__ == "__main__":
