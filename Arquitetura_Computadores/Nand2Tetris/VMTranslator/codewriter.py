@@ -11,8 +11,8 @@ class CodeWriter:
         self.input = input.with_suffix(".asm")
         self.output = output
         self.filename = input.stem
-        self.func_name = ""
-        self.call_count = 0
+        self.__func_name: str | None = None
+        self.__call_count = 0
 
     def write_bootstrap(self) -> None:
         """ """
@@ -145,7 +145,7 @@ class CodeWriter:
         """Writes assembly code that effects the goto command"""
 
         code = [f"// goto {label}"]
-        code.extend(["@" + self.__func_label(label), "0;JMP"])
+        code.extend(["@" + self.__label(label), "0;JMP"])
         self.__write(code)
 
     def write_if(self, label: str) -> None:
@@ -157,32 +157,38 @@ class CodeWriter:
                 "@SP",
                 "AM=M-1",
                 "D=M",
-                "@" + self.__func_label(label),
+                "@" + self.__label(label),
                 "D;JNE",  # if D=1111...1 (-1 or true) then jump, else (D=0000...0 or false) continue
             ]
         )
         self.__write(code)
 
-    def __func_label(self, label: str) -> str:
-        """ """
-
-        return f"{self.filename}.{self.func_name}${label}"
-
-    def __ret_label(self, label: str) -> str:
-        """ """
-
-        return f"{self.filename}.{self.func_name}${label}.{str(self.call_count)}"
-
     def write_label(self, label: str) -> None:
         """Writes assembly code that effects the label command"""
 
-        code = [f"// label {label}", f"({label})"]
+        code = [f"// label {label}"]
+        code.append(f"({self.__label(label)})")
+
         self.__write(code)
+    
+    def __label(self, label: str) -> str:
+        if self.__func_name:
+            return f"{self.filename}.{self.__func_name}${label}"
+        return f"{self.filename}.{label}"
+
+    def __label_replace(self, code: list) -> List[str]:
+        """Label replacing"""
+
+        if any(cmd.find("_count") for cmd in code):
+            CodeWriter.label_count += 1
+            return [cmd.replace("count", str(CodeWriter.label_count)) for cmd in code]
+
+        return code
 
     def write_function(self, name: str, n_locals: int) -> None:
         """ """
 
-        self.func_name = name
+        self.__func_name = name
 
         # Insert comment and label
         code = [f"// function {name} {n_locals}", f"({name})"]
@@ -207,18 +213,10 @@ class CodeWriter:
 
     def write_return(self) -> None:
         """ """
+        ret_label = f"{self.__label('ret')}.{str(self.__call_count)}"
 
-        self.func_name = ""
-        self.call_count = 0
-
-    def __label_replace(self, code: list) -> List[str]:
-        """Label replacing"""
-
-        if any(cmd.find("_count") for cmd in code):
-            CodeWriter.label_count += 1
-            return [cmd.replace("count", str(CodeWriter.label_count)) for cmd in code]
-
-        return code
+        self.__func_name = ""
+        self.__call_count = 0
 
     def __write(self, code: list) -> None:
         """Writes to a file"""

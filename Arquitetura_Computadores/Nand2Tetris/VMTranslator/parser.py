@@ -30,6 +30,8 @@ class Parser:
             return C_POP
         elif comm in ["add", "sub", "neg", "eq", "gt", "lt", "and", "or", "not"]:
             return C_ARITHMETIC
+        elif comm == "label":
+            return C_LABEL
         elif comm == "goto":
             return C_GOTO
         elif comm == "if-goto":
