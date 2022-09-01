@@ -7,13 +7,19 @@ from utilities import *
 class CodeWriter:
     label_count = 0
 
-    def __init__(self, path: Path) -> None:
-        self.path = path.with_suffix(".asm")
-    
+    def __init__(self, input: Path, output: Path) -> None:
+        self.input = input.with_suffix(".asm")
+        self.output = output
+        self.filename = input.stem
+        self.func_name = ""
+        self.call_count = 0
+
     def write_bootstrap(self) -> None:
         """ """
 
-        code = ["// bootstrap code", "@256", "D=M", "@0", "M=D"].extend(self.__call("Sys.init", 0))
+        code = ["// bootstrap code", "@256", "D=M", "@0", "M=D"]
+        code.extend(self.__call("Sys.init", 0))
+
         self.__write(code)
 
     def write_arithmetic(self, command: str) -> None:
@@ -90,7 +96,7 @@ class CodeWriter:
             code.extend(["@" + ("THIS" if index == "0" else "THAT"), "D=M"])
         # push static
         elif segment == "static":
-            code.extend([f"@{self.path.stem}.{index}", "D=M"])
+            code.extend([f"@{self.filename}.{index}", "D=M"])
         else:
             # push temp
             if segment == "temp":
@@ -121,7 +127,7 @@ class CodeWriter:
             code.extend(["@" + ("THIS" if index == "0" else "THAT"), "D=A"])
         # pop static
         elif segment == "static":
-            code.extend([f"@{self.path.stem}.{index}", "D=A"])
+            code.extend([f"@{self.filename}.{index}", "D=A"])
         else:
             # pop temp
             if segment == "temp":
@@ -139,7 +145,7 @@ class CodeWriter:
         """Writes assembly code that effects the goto command"""
 
         code = [f"// goto {label}"]
-        code.extend(["@" + label, "0;JMP"])
+        code.extend(["@" + self.__func_label(label), "0;JMP"])
         self.__write(code)
 
     def write_if(self, label: str) -> None:
@@ -151,11 +157,21 @@ class CodeWriter:
                 "@SP",
                 "AM=M-1",
                 "D=M",
-                "@" + label,
+                "@" + self.__func_label(label),
                 "D;JNE",  # if D=1111...1 (-1 or true) then jump, else (D=0000...0 or false) continue
             ]
         )
         self.__write(code)
+
+    def __func_label(self, label: str) -> str:
+        """ """
+
+        return f"{self.filename}.{self.func_name}${label}"
+
+    def __ret_label(self, label: str) -> str:
+        """ """
+
+        return f"{self.filename}.{self.func_name}${label}.{str(self.call_count)}"
 
     def write_label(self, label: str) -> None:
         """Writes assembly code that effects the label command"""
@@ -165,6 +181,8 @@ class CodeWriter:
 
     def write_function(self, name: str, n_locals: int) -> None:
         """ """
+
+        self.func_name = name
 
         # Insert comment and label
         code = [f"// function {name} {n_locals}", f"({name})"]
@@ -177,14 +195,23 @@ class CodeWriter:
 
     def write_call(self, name: str, n_args: int) -> None:
         """ """
-    
-    def __call(self, name: str, n_args: int) -> None:
+
+        code = [f"// call {name} {n_args}"]
+
+        self.__write(code)
+
+    def __call(self, name: str, n_args: int) -> List[str]:
         """ """
+
+        return []
 
     def write_return(self) -> None:
         """ """
 
-    def __label_replace(self, code: list) -> list:
+        self.func_name = ""
+        self.call_count = 0
+
+    def __label_replace(self, code: list) -> List[str]:
         """Label replacing"""
 
         if any(cmd.find("_count") for cmd in code):
@@ -196,5 +223,5 @@ class CodeWriter:
     def __write(self, code: list) -> None:
         """Writes to a file"""
 
-        with open(self.path, "a") as fp:
+        with open(self.output, "a") as fp:
             fp.write("\n".join(code) + "\n")

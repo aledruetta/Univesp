@@ -43,14 +43,11 @@ class Parser:
 
     @property
     def arg1(self) -> str:
-        return self.command[0] if self.command_type == C_ARITHMETIC else self.command[1]
+        return self.command[1]
 
     @property
-    def arg2(self) -> str | None:
-        if self.command_type in [C_PUSH, C_POP, C_FUNCTION, C_CALL]:
-            return self.command[2]
-
-        return None
+    def arg2(self) -> str:
+        return self.command[2]
 
     @staticmethod
     def __readlines(path: Path) -> List[str]:
