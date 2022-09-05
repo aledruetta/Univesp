@@ -17,17 +17,16 @@ class CodeWriter:
     def write_bootstrap(self) -> None:
         """ """
 
-        code = ["// bootstrap code", "@256", "D=M", "@0", "M=D"]
-        code.extend(self.__call("Sys.init", 0))
+        self.__write(["// bootstrap code", "@256", "D=M", "@0", "M=D"])
+        self.write_call("Sys.init", 0)
 
-        self.__write(code)
-
-    def write_arithmetic(self, command: str) -> None:
+    def write_arithmetic(self, command: str, comment=True) -> None:
         """Writes to the output file the assembly code that implements
         the given arithmetic-logical command (add, sub, neg, eq, lt, gt, and, or, not)
         """
 
-        code = ["// " + command]
+        if comment:
+            code = ["// " + command]
 
         # Add command
         if command == "add":
@@ -76,17 +75,13 @@ class CodeWriter:
 
         self.__write(self.__label_replace(code))
 
-    def write_push(self, segment: str, index: str) -> None:
+    def write_push(self, segment: str, index: str, comment=True) -> None:
         """Writes to the output file the assembly code that implements
         the given push command
         """
 
-        code = [f"// push {segment} {index}"]
-        code.extend(self.__push(segment, index))
-        self.__write(code)
-
-    def __push(self, segment: str, index: str) -> List[str]:
-        code = []
+        if comment:
+            code = [f"// push {segment} {index}"]
 
         # push constant
         if segment == "constant":
@@ -97,6 +92,8 @@ class CodeWriter:
         # push static
         elif segment == "static":
             code.extend([f"@{self.filename}.{index}", "D=M"])
+        elif segment == "memory":
+            code.extend([f"@{index}", "D=M"])
         else:
             # push temp
             if segment == "temp":
@@ -108,19 +105,15 @@ class CodeWriter:
 
         code.extend(["@SP", "A=M", "M=D", "@SP", "M=M+1"])
 
-        return code
+        self.__write(code)
 
-    def write_pop(self, segment: str, index: str) -> None:
+    def write_pop(self, segment: str, index: str, comment=True) -> None:
         """Writes to the output file the assembly code that implements
         the given pop command
         """
 
-        code = [f"// pop {segment} {index}"]
-        code.extend(self.__pop(segment, index))
-        self.__write(code)
-
-    def __pop(self, segment: str, index: str) -> List[str]:
-        code = []
+        if comment:
+            code = [f"// pop {segment} {index}"]
 
         # pop pointer
         if segment == "pointer":
@@ -128,6 +121,8 @@ class CodeWriter:
         # pop static
         elif segment == "static":
             code.extend([f"@{self.filename}.{index}", "D=A"])
+        elif segment == "memory":
+            code.extend([f"@{index}", "D=A"])
         else:
             # pop temp
             if segment == "temp":
@@ -139,20 +134,23 @@ class CodeWriter:
 
         code.extend(["@R13", "M=D", "@SP", "AM=M-1", "D=M", "@R13", "A=M", "M=D"])
 
-        return code
-
-    def write_goto(self, label: str) -> None:
-        """Writes assembly code that effects the goto command"""
-
-        code = [f"// goto {label}"]
-        code.extend(["@" + self.__label(label), "0;JMP"])
         self.__write(code)
 
-    def write_if(self, label: str) -> None:
+    def write_goto(self, label: str, comment=True) -> None:
+        """Writes assembly code that effects the goto command"""
+
+        if comment:
+            self.__write([f"// goto {label}"])
+
+        self.__write(["@" + self.__label(label), "0;JMP"])
+
+    def write_if(self, label: str, comment=True) -> None:
         """Writes assembly code that effects the if-goto command"""
 
-        code = [f"// if-goto {label}"]
-        code.extend(
+        if comment:
+            self.__write([f"// if-goto {label}"])
+
+        self.__write(
             [
                 "@SP",
                 "AM=M-1",
@@ -161,20 +159,30 @@ class CodeWriter:
                 "D;JNE",  # if D=1111...1 (-1 or true) then jump, else (D=0000...0 or false) continue
             ]
         )
-        self.__write(code)
 
-    def write_label(self, label: str) -> None:
+    def write_label(self, label: str, comment=True) -> None:
         """Writes assembly code that effects the label command"""
 
-        code = [f"// label {label}"]
-        code.append(f"({self.__label(label)})")
+        if comment:
+            self.__write([f"// label {label}"])
+        self.__write([f"({self.__label(label)})"])
 
-        self.__write(code)
-    
     def __label(self, label: str) -> str:
+        """function foo -> (fileName.foo)
+        label bar    -> (fileName.foo$bar)
+        return       -> (fileName.foo$ret.i)
+        """
+
+        new_label = f"{self.filename}."
+
         if self.__func_name:
-            return f"{self.filename}.{self.__func_name}${label}"
-        return f"{self.filename}.{label}"
+            new_label += f"{self.__func_name}${label}"
+            if label == "ret":
+                new_label += f".{str(self.__call_count)}"
+        else:
+            new_label += f"{label}"
+
+        return new_label
 
     def __label_replace(self, code: list) -> List[str]:
         """Label replacing"""
@@ -185,38 +193,50 @@ class CodeWriter:
 
         return code
 
-    def write_function(self, name: str, n_locals: int) -> None:
-        """ """
+    def write_function(self, label: str, nloc: int, comment=True) -> None:
+        """function fileName.foo n"""
 
-        self.__func_name = name
+        self.__func_name = label
 
         # Insert comment and label
-        code = [f"// function {name} {n_locals}", f"({name})"]
+        if comment:
+            self.__write([f"// function {label} {nloc}", f"({label})"])
 
         # Push n local variables into the stack
-        for i in range(n_locals):
-            code.extend(self.__push("constant", "0"))
+        for i in range(nloc):
+            self.write_push("constant", "0")
+            self.write_pop("local", str(i))
 
-        self.__write(code)
-
-    def write_call(self, name: str, n_args: int) -> None:
+    def write_call(self, name: str, nargs: int, comment=True) -> None:
         """ """
 
-        code = [f"// call {name} {n_args}"]
+        if comment:
+            self.__write([f"// call {name} {nargs}"])
 
-        self.__write(code)
-
-    def __call(self, name: str, n_args: int) -> List[str]:
-        """ """
-
-        return []
+        retAddr = self.__label("ret")  # fileName.foo$ret.i
+        self.write_push("constant", retAddr)  # push returnAddress
+        self.__write(  # push LCL, ARG, THIS and THAT
+            [
+                [f"@{segment}", "D=M", "@SP", "A=M", "M=D", "@SP", "M=M+1"]
+                for segment in ("LCL", "ARG", "THIS", "THAT")
+            ]
+        )
+        self.write_push("memory", "SP")  # push *SP
+        self.write_push("constant", "5")  # push constant 5
+        self.write_arithmetic("sub")  # sub
+        self.write_push("constant", str(nargs))  # push constant nargs
+        self.write_arithmetic("sub")  # sub
+        self.write_pop("memory", "ARG")  # pop ARG
 
     def write_return(self) -> None:
         """ """
-        ret_label = f"{self.__label('ret')}.{str(self.__call_count)}"
+
+        code = []
 
         self.__func_name = ""
         self.__call_count = 0
+
+        self.__write(code)
 
     def __write(self, code: list) -> None:
         """Writes to a file"""
