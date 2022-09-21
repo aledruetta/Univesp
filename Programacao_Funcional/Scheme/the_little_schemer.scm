@@ -7,10 +7,10 @@
 )))
 
 (define lat?
-    (lambda (lat)
+    (lambda (l)
         (cond
-            ((null? lat) #t)
-            ((atom? (car lat)) (lat? (cdr lat)))
+            ((null? l) #t)
+            ((atom? (car l)) (lat? (cdr l)) )
             (else #f)
 )))
 
@@ -27,16 +27,21 @@
             ((null? lat) #f)
             (else (or 
                 (eq? (car lat) a)
-                (member? a (cdr lat))))
+                (member? a (cdr lat)) ))
 )))
 
 (define rember
     (lambda (a lat)
         (cond
-            ((null? lat) '())
+            ((null? lat) lat)
             ((eq? (car lat) a) (cdr lat))
-            (else (cons (car lat) (rember a (cdr lat))))
+            (else 
+                (cons (car lat) (rember a (cdr lat)) ))
 )))
 
-; (rember 3 (1 2 3 4))
-; (1 2 4)
+(define firsts
+    (lambda (l)
+        (if 
+            (null? l) l
+            (cons (car (car l)) (firsts (cdr l)) )
+)))
