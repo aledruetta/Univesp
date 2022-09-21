@@ -92,7 +92,7 @@ class CodeWriter:
         # push static
         elif segment == "static":
             code.extend([f"@{self.filename}.{index}", "D=M"])
-        elif segment == "memory":
+        elif segment == "register":
             code.extend([f"@{index}", "D=M"])
         else:
             # push temp
@@ -121,7 +121,7 @@ class CodeWriter:
         # pop static
         elif segment == "static":
             code.extend([f"@{self.filename}.{index}", "D=A"])
-        elif segment == "memory":
+        elif segment == "register":
             code.extend([f"@{index}", "D=A"])
         else:
             # pop temp
@@ -215,28 +215,35 @@ class CodeWriter:
 
         retAddr = self.__label("ret")  # fileName.foo$ret.i
         self.write_push("constant", retAddr)  # push returnAddress
-        self.__write(  # push LCL, ARG, THIS and THAT
-            [
-                [f"@{segment}", "D=M", "@SP", "A=M", "M=D", "@SP", "M=M+1"]
-                for segment in ("LCL", "ARG", "THIS", "THAT")
-            ]
-        )
-        self.write_push("memory", "SP")  # push *SP
+        self.write_push("register", "LCL")  # push *LCL
+        self.write_push("register", "ARG")  # push *ARG
+        self.write_push("register", "THIS")  # push *THIS
+        self.write_push("register", "THAT")  # push *THAT
+        self.write_push("register", "SP")  # push *SP
         self.write_push("constant", "5")  # push constant 5
         self.write_arithmetic("sub")  # sub
         self.write_push("constant", str(nargs))  # push constant nargs
         self.write_arithmetic("sub")  # sub
-        self.write_pop("memory", "ARG")  # pop ARG
+        self.write_pop("register", "ARG")  # pop ARG
+        self.write_push("register", "SP")
+        self.write_pop("register", "LCL")
+        self.write_return()  # return
 
     def write_return(self) -> None:
         """ """
 
-        code = []
+        self.__write([f"// return"])
+
+        self.write_push("register", "LCL")
+        self.write_pop("register", "R14")
+        self.write_push("register", "R14")  # save frame
+        self.write_push("constant", "5")
+        self.write_arithmetic("sub")
+        self.write_pop("register", "R15")  # save returnAddress
+        self.write_pop("register", "ARG")  # reposition returnValue
 
         self.__func_name = ""
-        self.__call_count = 0
-
-        self.__write(code)
+        self.__call_count -= 1
 
     def __write(self, code: list) -> None:
         """Writes to a file"""
