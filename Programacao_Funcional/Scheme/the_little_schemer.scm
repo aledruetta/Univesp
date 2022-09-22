@@ -51,8 +51,7 @@
 (define insertR
     (lambda (new old lat)
         (if (null? lat) '()
-            (if (eq? old (car lat)) (cons old (cons new (cdr lat)))
-                (cons (car lat) (insertR new old (cdr lat)))
+            (cond 
+                ( (eq? old (car lat)) (cons old (cons new (cdr lat))) )
+                (else (cons (car lat) (insertR new old (cdr lat)) ))
 ))))
-
-; (1 2 4 5) -> (2 4 5) -> (2 3 4 5)
