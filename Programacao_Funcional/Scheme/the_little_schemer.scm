@@ -11,7 +11,7 @@
         (cond
             ((null? l) #t)
             ((atom? (car l)) (lat? (cdr l)) )
-            (else #f)
+        (else #f)
 )))
 
 (define append
@@ -25,18 +25,18 @@
     (lambda (a lat)
         (cond
             ((null? lat) #f)
-            (else (or 
-                (eq? (car lat) a)
-                (member? a (cdr lat)) ))
+        (else (or 
+            (eq? (car lat) a)
+            (member? a (cdr lat)) ))
 )))
 
 (define rember
     (lambda (a lat)
         (cond
-            ((null? lat) lat)
+            ((null? lat) '())
             ((eq? (car lat) a) (cdr lat))
-            (else 
-                (cons (car lat) (rember a (cdr lat)) ))
+        (else 
+            (cons (car lat) (rember a (cdr lat)) ))
 )))
 
 (define firsts
@@ -45,3 +45,14 @@
             (null? l) l
             (cons (car (car l)) (firsts (cdr l)) )
 )))
+
+; (insertR 3 2 '(1 2 4 5)) -> (1 2 3 4 5)
+
+(define insertR
+    (lambda (new old lat)
+        (if (null? lat) '()
+            (if (eq? old (car lat)) (cons old (cons new (cdr lat)))
+                (cons (car lat) (insertR new old (cdr lat)))
+))))
+
+; (1 2 4 5) -> (2 4 5) -> (2 3 4 5)
