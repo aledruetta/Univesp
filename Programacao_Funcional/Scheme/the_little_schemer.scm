@@ -53,5 +53,15 @@
         (if (null? lat) '()
             (cond 
                 ( (eq? old (car lat)) (cons old (cons new (cdr lat))) )
-                (else (cons (car lat) (insertR new old (cdr lat)) ))
+                ( else (cons (car lat) (insertR new old (cdr lat))   ))
+))))
+
+; (subst 3 2 '(1 2 4 2)) -> (1 3 4 2)
+
+(define subst
+    (lambda (new old lat) 
+        (if (null? lat) '()
+            (cond
+                ((eq? old (car lat)) (cons new (cdr lat)))
+                (else (cons (car lat) (subst new old (cdr lat))))
 ))))
