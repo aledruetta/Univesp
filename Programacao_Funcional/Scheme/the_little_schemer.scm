@@ -107,3 +107,11 @@
 ))))
 
 ; (multisubst 0 1 '(1 2 3 1 5 1)) -> (0 2 3 0 5 0)
+
+(define multisubst
+    (lambda (new old lat)
+        (if (null? lat) '()
+        (cond
+            ((eq? (car lat) old) (cons new (multisubst new old (cdr lat))))
+            (else (cons (car lat) (multisubst new old (cdr lat))))
+))))
