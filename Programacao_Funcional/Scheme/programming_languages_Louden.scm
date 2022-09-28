@@ -15,6 +15,7 @@
 )))
 
 ; Binary Search
+; (tree '(1 (2 () (3 (4 () ()) (5 () ()))) ())) -> 2 4 3 5 1
 
 (define (left B) (car (cdr B)))
 (define (right B) (car (cdr (cdr B))))
@@ -45,3 +46,11 @@
             (newline)
             (print-squares (+ 1 low) high)
 ))))
+
+(define f (lambda (x) (* x x)))
+
+(define ff (lambda (f) (lambda (x) (f x x))))
+
+(let ((a 2) (b 3))
+    (let ((a (+ a b)))
+        (+ a b)))

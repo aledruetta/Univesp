@@ -95,3 +95,15 @@
             ((eq? (car lat) old) (cons old (cons new (multiinsertR new old (cdr lat)))))
             (else (cons (car lat) (multiinsertR new old (cdr lat))))
 ))))
+
+; (multiinsertL 3 1 '(1 2 3 1 5 1)) -> (0 1 2 3 0 1 5 0 1)
+
+(define multiinsertL
+    (lambda (new old lat)
+        (if (null? lat) '()
+        (cond
+            ((eq? (car lat) old) (cons new (cons old (multiinsertL new old (cdr lat)))))
+            (else (cons (car lat) (multiinsertL new old (cdr lat))))
+))))
+
+; (multisubst 0 1 '(1 2 3 1 5 1)) -> (0 2 3 0 5 0)
