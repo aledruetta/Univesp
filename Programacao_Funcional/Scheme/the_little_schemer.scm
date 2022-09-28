@@ -115,3 +115,16 @@
             ((eq? (car lat) old) (cons new (multisubst new old (cdr lat))))
             (else (cons (car lat) (multisubst new old (cdr lat))))
 ))))
+
+; Numbers
+
+(define add1 (lambda (n) (+ n 1)))
+(define sub1 (lambda (n) (- n 1)))
+
+; (addtup '(1 2 3)) -> 6
+
+(define addtup
+    (lambda (tup)
+        (if (null? tup) 0
+            (+ (car tup) (addtup (cdr tup)))
+)))
