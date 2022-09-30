@@ -128,3 +128,15 @@
         (if (null? tup) 0
             (+ (car tup) (addtup (cdr tup)))
 )))
+
+(define mult
+    (lambda (n m)
+        (if (zero? m) 0
+            (+ n (mult n (- m 1)))
+)))
+
+(define tup+
+    (lambda (tup1 tup2)
+        (if (eq? tup1 '()) '()
+            (cons (+ (car tup1) (car tup2)) (tup+ (cdr tup1) (cdr tup2)))
+)))

@@ -54,3 +54,8 @@
 (let ((a 2) (b 3))
     (let ((a (+ a b)))
         (+ a b)))
+
+; equivalent let and lambda expressions
+
+(let ((a 3) (b 4)) (* a b))
+((lambda (a b) (* a b)) 3 4)
