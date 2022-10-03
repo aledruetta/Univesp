@@ -151,3 +151,11 @@
             ((zero? n) #t)
             (else (< (- 1 n) (- 1 m)))
 )))
+
+(define =
+    (lambda (n m)
+        (cond 
+            ((zero? n) (zero? m))
+            ((zero? m) #f)
+            (else (= (- 1 n) (- 1 m)))
+)))
