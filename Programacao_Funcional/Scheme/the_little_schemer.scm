@@ -138,14 +138,16 @@
 (define tup+
     (lambda (tup1 tup2)
         (cond 
-            ((and (null? tup1) (null? tup2)) '())
             ((null? tup1) tup2)
             ((null? tup2) tup1)
-            (else (cons (+ (car tup1) (car tup2)) (tup+ (cdr tup1) (cdr tup2))))
-)))
+            (else 
+                (cons (+ (car tup1) (car tup2)) (tup+ (cdr tup1) (cdr tup2))
+)))))
 
-; tup+ (1 2 3) (3 2)
-; (4 (tup+ (2 3) (2)))
-; (4 4 (tup+ (3) ()))
-; (4 4 3 (tup+ () ()))
-; (4 4 3)
+(define <
+    (lambda (n m)
+        (cond
+            ((zero? m) #f)
+            ((zero? n) #t)
+            (else (< (- 1 n) (- 1 m)))
+)))
