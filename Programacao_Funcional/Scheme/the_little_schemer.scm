@@ -149,7 +149,7 @@
         (cond
             ((zero? m) #f)
             ((zero? n) #t)
-            (else (< (- 1 n) (- 1 m)))
+            (else (< (- n 1) (- m 1)))
 )))
 
 (define =
@@ -157,5 +157,20 @@
         (cond 
             ((zero? n) (zero? m))
             ((zero? m) #f)
-            (else (= (- 1 n) (- 1 m)))
+            (else (= (- n 1) (- m 1)))
+)))
+
+(define =
+    (lambda (n m)
+        (cond
+            ((< n m) #f)
+            ((> n m) #f)
+            (else #t)
+)))
+
+(define ^
+    (lambda (n m)
+        (cond
+            ((zero? m) 1)
+            (else (* n (^ n (- m 1))))
 )))
