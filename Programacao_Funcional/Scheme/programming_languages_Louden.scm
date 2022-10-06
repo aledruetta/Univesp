@@ -38,6 +38,11 @@
             (cons (* 2 (car lat)) (doblar (cdr lat)))
 )))
 
+(define (doblar lat)
+        (if (null? lat) '()
+            (cons (* 2 (car lat)) (doblar (cdr lat)))
+))
+
 (define print-squares
     (lambda (low high)
         (cond ((> low high) (newline))
@@ -66,3 +71,8 @@
 
 (define (p x y) (if x 1 (y)))
 (p #t (lambda () (/ 1 0)))
+
+(define (take n l)
+    (if (= n 0) '()
+        (cons (car l) (take (- n 1) (cdr l))
+)))

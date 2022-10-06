@@ -174,6 +174,11 @@
             (* n (^ n (- m 1)))
 )))
 
+(define (^ n m)
+        (if (zero? m) 1
+            (* n (^ n (- m 1)))
+)))
+
 (define //
     (lambda (n m)
         (if (< n m) 0
