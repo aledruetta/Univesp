@@ -170,7 +170,12 @@
 
 (define ^
     (lambda (n m)
-        (cond
-            ((zero? m) 1)
-            (else (* n (^ n (- m 1))))
+        (if (zero? m) 1
+            (* n (^ n (- m 1)))
+)))
+
+(define //
+    (lambda (n m)
+        (if (< n m) 0
+            (+ 1 (// (- n m) m))
 )))

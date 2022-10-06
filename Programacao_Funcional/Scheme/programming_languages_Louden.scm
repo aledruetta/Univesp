@@ -51,6 +51,8 @@
 
 (define ff (lambda (f) (lambda (x) (f x x))))
 
+; Scoping
+
 (let ((a 2) (b 3))
     (let ((a (+ a b)))
         (+ a b)))
@@ -59,3 +61,8 @@
 
 (let ((a 3) (b 4)) (* a b))
 ((lambda (a b) (* a b)) 3 4)
+
+; Delayed Evaluation
+
+(define (p x y) (if x 1 (y)))
+(p #t (lambda () (/ 1 0)))
