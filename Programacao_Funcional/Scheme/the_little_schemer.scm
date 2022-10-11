@@ -199,3 +199,10 @@
     (if (eq? n 1) (cdr lat)
         (cons (car lat) (rempick (- n 1) (cdr lat)))
 ))
+
+(define (no-nums lat)
+    (cond 
+        ((null? lat) '())
+        ((number? (car lat)) (no-nums (cdr lat)))
+        (else (cons (car lat) (no-nums (cdr lat))))
+))
