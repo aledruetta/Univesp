@@ -177,7 +177,7 @@
 (define (^ n m)
     (if (zero? m) 1
         (* n (^ n (- m 1)))
-)))
+))
 
 (define //
     (lambda (n m)
@@ -185,8 +185,17 @@
             (+ 1 (// (- n m) m))
 )))
 
-(define length
-    (lambda (lat)
-        (if (null? lat) 0
-            (+ 1 (length (cdr lat)))
-)))
+(define (length lat)
+    (if (null? lat) 0
+        (+ 1 (length (cdr lat)))
+))
+
+(define (pick n lat)
+    (if (eq? n 1) (car lat)
+        (pick (- n 1) (cdr lat))
+))
+
+(define (rempick n lat)
+    (if (eq? n 1) (cdr lat)
+        (cons (car lat) (rempick (- n 1) (cdr lat)))
+))
