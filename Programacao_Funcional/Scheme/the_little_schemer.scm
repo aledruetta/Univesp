@@ -184,3 +184,9 @@
         (if (< n m) 0
             (+ 1 (// (- n m) m))
 )))
+
+(define length
+    (lambda (lat)
+        (if (null? lat) 0
+            (+ 1 (length (cdr lat)))
+)))
