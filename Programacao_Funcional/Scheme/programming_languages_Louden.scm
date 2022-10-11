@@ -39,8 +39,8 @@
 )))
 
 (define (doblar lat)
-        (if (null? lat) '()
-            (cons (* 2 (car lat)) (doblar (cdr lat)))
+    (if (null? lat) '()
+        (cons (* 2 (car lat)) (doblar (cdr lat)))
 ))
 
 (define print-squares

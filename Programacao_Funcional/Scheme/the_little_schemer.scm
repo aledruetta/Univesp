@@ -175,8 +175,8 @@
 )))
 
 (define (^ n m)
-        (if (zero? m) 1
-            (* n (^ n (- m 1)))
+    (if (zero? m) 1
+        (* n (^ n (- m 1)))
 )))
 
 (define //
