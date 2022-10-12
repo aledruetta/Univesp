@@ -221,3 +221,23 @@
         ((number? (car lat)) (cons (car lat) (all-nums (cdr lat))))
         (else (all-nums (cdr lat)))
 ))
+
+; (eqan? 'a 'a) -> #t
+; (eqan? 'a 3) -> #f
+; (eqan? 2 2) -> #t
+
+(define (eqan? a1 a2)
+    (cond
+        ((and (number? a1) (number? a2)) (= a1 a2))
+        ((or (number? a1) (number? a2)) #f)
+        (else (eq? a1 a2))
+))
+
+; (occur 'a '(a b c a d a)) -> 3
+
+(define (occur a lat)
+    (cond
+        ((null? lat) 0)
+        ((eq? a (car lat)) (+ 1 (occur a (cdr lat))))
+        (else (occur a (cdr lat)))
+))
