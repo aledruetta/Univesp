@@ -190,19 +190,34 @@
         (+ 1 (length (cdr lat)))
 ))
 
+; (pick 2 '(a b c)) -> b
+
 (define (pick n lat)
-    (if (eq? n 1) (car lat)
+    (if (= n 1) (car lat)
         (pick (- n 1) (cdr lat))
 ))
 
+; (rempick 2 '(a b c)) -> (a c)
+
 (define (rempick n lat)
-    (if (eq? n 1) (cdr lat)
+    (if (= n 1) (cdr lat)
         (cons (car lat) (rempick (- n 1) (cdr lat)))
 ))
+
+; (no-nums '(a 1 b 2 c d 3)) -> (a b c d)
 
 (define (no-nums lat)
     (cond 
         ((null? lat) '())
         ((number? (car lat)) (no-nums (cdr lat)))
         (else (cons (car lat) (no-nums (cdr lat))))
+))
+
+; (all-nums '(a 1 b 2 c d 3)) -> (1 2 3)
+
+(define (all-nums lat)
+    (cond
+        ((null? lat) '())
+        ((number? (car lat)) (cons (car lat) (all-nums (cdr lat))))
+        (else (all-nums (cdr lat)))
 ))
