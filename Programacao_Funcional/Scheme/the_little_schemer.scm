@@ -241,3 +241,18 @@
         ((eq? a (car lat)) (+ 1 (occur a (cdr lat))))
         (else (occur a (cdr lat)))
 ))
+
+; (one 1) -> #t
+; (one 2) -> #f
+
+(define (one n) (and (number? n) (= n 1)))
+
+; (rember* 'a '(a (b (c a) d a) e f (a g))) -> ((b (c) d) e f (g))
+
+(define (rember* a lat)
+    (cond
+        ((null? lat) '())
+        ((pair? (car lat)) (cons (rember* a (car lat)) (rember* a (cdr lat))))
+        ((eq? a (car lat)) (rember* a (cdr lat)))
+        (else (cons (car lat) (rember* a (cdr lat))))
+))
