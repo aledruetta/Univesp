@@ -1,30 +1,13 @@
 #!/usr/bin/env python3
 
-g = 0
-
 def main():
-    l = 9
-    foo()
-    print(g)
+    fis = []
+    for i in range(5):
+        def f():
+            return lambda : print(i)
+        fis.append(f())
 
-def foo():
-    def bar():
-        print(l)
-    global g
-    g = 1
-    l = 7
-    print(g)
-    bar()
+    for f in fis:
+        f()
 
 main()
-
-# module
-# g, main, foo
-
-# main
-# l
-
-# foo
-# bar, l
-
-# bar

@@ -256,3 +256,11 @@
         ((eq? a (car lat)) (rember* a (cdr lat)))
         (else (cons (car lat) (rember* a (cdr lat))))
 ))
+
+(define (insertR* new old l)
+    (cond
+        ((null? l) '())
+        ((pair? (car l)) (cons (insertR* new old (car l)) (insertR* new old (cdr l))))
+        ((eq? (car l) old) (cons old (cons new (insertR* new old (cdr l)))))
+        (else (cons (car l) (insertR* new old (cdr l))))
+))
