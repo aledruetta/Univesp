@@ -264,3 +264,16 @@
         ((eq? (car l) old) (cons old (cons new (insertR* new old (cdr l)))))
         (else (cons (car l) (insertR* new old (cdr l))))
 ))
+
+(define (occur* a l)
+    (cond
+        ((null? l) 0)
+        ((pair? (car l)) (+ (occur* a (car l)) (occur* a (cdr l))))
+        ((eq? (car l) a) (+ 1 (occur* a (cdr l))))
+        (else (occur* a (cdr l)))
+))
+
+(define (sum lnum)
+    (if (null? lnum) 0
+        (+ (car lnum) (sum (cdr lnum)))
+))
