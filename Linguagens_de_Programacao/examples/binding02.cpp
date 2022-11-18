@@ -7,12 +7,12 @@ class A
     public:
 
     // virtual void p()
-    void p()
+    virtual void p()
     {
         cout << "A::p" << endl;
     }
 
-    void f()
+    void q()
     {
         p();
     }
@@ -33,11 +33,10 @@ int main()
     A a;
     B b;
 
-    // a.p();
-    a.f();
-
-    // b.p();
-    b.f();
+    // A * o = &a;
+    A * o = &b;
+    o->p();
+    o->q();
 
     return 0;
 }
