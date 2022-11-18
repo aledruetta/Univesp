@@ -33,10 +33,14 @@ int main()
     A a;
     B b;
 
-    // A * o = &a;
-    A * o = &b;
-    o->p();
-    o->q();
+    A * x = &b;
+    // if A::p was declared as virtual
+    x->p();     // this->p() is called and this refers to b that is an object of type B
+    x->q();
+    // else if A::p was not declared as virtual
+    // x->p() means A::p()
+    a = b;
+    a.p();      // this.p() is called and this refers to a that is an object of type A
 
     return 0;
 }
