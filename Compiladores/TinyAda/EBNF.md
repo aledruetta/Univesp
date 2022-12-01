@@ -1,5 +1,7 @@
 ```
-In the following grammar
+From Louden & Lambert's "Programming Languages: Principles and Practice"
+
+In the following grammar:
 
     =   means "is defined as"
     " " enclose literal items
