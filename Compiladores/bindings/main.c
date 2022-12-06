@@ -14,20 +14,19 @@ struct List
 
 int main()
 {
-    struct Node next;
-    struct Node first;
-
     struct List list;
     list.count = 0;
 
-    next.value = 7;
-    next.next = NULL;
-
+    struct Node first;
     first.value = 5;
-    first.next = &next;
 
     list.first = &first;
     list.count++;
+
+    struct Node next;
+    next.value = 7;
+
+    first.next = &next;
     list.count++;
 
     printf("list[%d]: ", list.count);

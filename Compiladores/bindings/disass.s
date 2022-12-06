@@ -136,76 +136,73 @@ int main()
     117c:	00 00 
     117e:	48 89 45 f8          	mov    QWORD PTR [rbp-0x8],rax
     1182:	31 c0                	xor    eax,eax
-    struct Node next;
-    struct Node first;
-
     struct List list;
     list.count = 0;
-    1184:	c7 45 e0 00 00 00 00 	mov    DWORD PTR [rbp-0x20],0x0
+    1184:	c7 45 c0 00 00 00 00 	mov    DWORD PTR [rbp-0x40],0x0
 
-    next.value = 7;
-    118b:	c7 45 c0 07 00 00 00 	mov    DWORD PTR [rbp-0x40],0x7
-    next.next = NULL;
-    1192:	48 c7 45 c8 00 00 00 	mov    QWORD PTR [rbp-0x38],0x0
+    struct Node first = { 5, NULL };
+    118b:	c7 45 d0 05 00 00 00 	mov    DWORD PTR [rbp-0x30],0x5
+    1192:	48 c7 45 d8 00 00 00 	mov    QWORD PTR [rbp-0x28],0x0
     1199:	00 
-
-    first.value = 5;
-    119a:	c7 45 d0 05 00 00 00 	mov    DWORD PTR [rbp-0x30],0x5
-    first.next = &next;
-    11a1:	48 8d 45 c0          	lea    rax,[rbp-0x40]
-    11a5:	48 89 45 d8          	mov    QWORD PTR [rbp-0x28],rax
-
     list.first = &first;
-    11a9:	48 8d 45 d0          	lea    rax,[rbp-0x30]
-    11ad:	48 89 45 e8          	mov    QWORD PTR [rbp-0x18],rax
+    119a:	48 8d 45 d0          	lea    rax,[rbp-0x30]
+    119e:	48 89 45 c8          	mov    QWORD PTR [rbp-0x38],rax
     list.count++;
-    11b1:	8b 45 e0             	mov    eax,DWORD PTR [rbp-0x20]
-    11b4:	83 c0 01             	add    eax,0x1
-    11b7:	89 45 e0             	mov    DWORD PTR [rbp-0x20],eax
+    11a2:	8b 45 c0             	mov    eax,DWORD PTR [rbp-0x40]
+    11a5:	83 c0 01             	add    eax,0x1
+    11a8:	89 45 c0             	mov    DWORD PTR [rbp-0x40],eax
+
+    struct Node next = { 7, NULL };
+    11ab:	c7 45 e0 07 00 00 00 	mov    DWORD PTR [rbp-0x20],0x7
+    11b2:	48 c7 45 e8 00 00 00 	mov    QWORD PTR [rbp-0x18],0x0
+    11b9:	00 
+    first.next = &next;
+    11ba:	48 8d 45 e0          	lea    rax,[rbp-0x20]
+    11be:	48 89 45 d8          	mov    QWORD PTR [rbp-0x28],rax
     list.count++;
-    11ba:	8b 45 e0             	mov    eax,DWORD PTR [rbp-0x20]
-    11bd:	83 c0 01             	add    eax,0x1
-    11c0:	89 45 e0             	mov    DWORD PTR [rbp-0x20],eax
+    11c2:	8b 45 c0             	mov    eax,DWORD PTR [rbp-0x40]
+    11c5:	83 c0 01             	add    eax,0x1
+    11c8:	89 45 c0             	mov    DWORD PTR [rbp-0x40],eax
 
     printf("list[%d]: ", list.count);
-    11c3:	8b 45 e0             	mov    eax,DWORD PTR [rbp-0x20]
-    11c6:	89 c6                	mov    esi,eax
-    11c8:	48 8d 05 35 0e 00 00 	lea    rax,[rip+0xe35]        # 2004 <_IO_stdin_used+0x4>
-    11cf:	48 89 c7             	mov    rdi,rax
-    11d2:	b8 00 00 00 00       	mov    eax,0x0
-    11d7:	e8 94 fe ff ff       	call   1070 <printf@plt>
+    11cb:	8b 45 c0             	mov    eax,DWORD PTR [rbp-0x40]
+    11ce:	89 c6                	mov    esi,eax
+    11d0:	48 8d 05 2d 0e 00 00 	lea    rax,[rip+0xe2d]        # 2004 <_IO_stdin_used+0x4>
+    11d7:	48 89 c7             	mov    rdi,rax
+    11da:	b8 00 00 00 00       	mov    eax,0x0
+    11df:	e8 8c fe ff ff       	call   1070 <printf@plt>
     printf("%d -> ", list.first->value);
-    11dc:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
-    11e0:	8b 00                	mov    eax,DWORD PTR [rax]
-    11e2:	89 c6                	mov    esi,eax
-    11e4:	48 8d 05 24 0e 00 00 	lea    rax,[rip+0xe24]        # 200f <_IO_stdin_used+0xf>
-    11eb:	48 89 c7             	mov    rdi,rax
-    11ee:	b8 00 00 00 00       	mov    eax,0x0
-    11f3:	e8 78 fe ff ff       	call   1070 <printf@plt>
+    11e4:	48 8b 45 c8          	mov    rax,QWORD PTR [rbp-0x38]
+    11e8:	8b 00                	mov    eax,DWORD PTR [rax]
+    11ea:	89 c6                	mov    esi,eax
+    11ec:	48 8d 05 1c 0e 00 00 	lea    rax,[rip+0xe1c]        # 200f <_IO_stdin_used+0xf>
+    11f3:	48 89 c7             	mov    rdi,rax
+    11f6:	b8 00 00 00 00       	mov    eax,0x0
+    11fb:	e8 70 fe ff ff       	call   1070 <printf@plt>
     printf("%d\n", list.first->next->value);
-    11f8:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
-    11fc:	48 8b 40 08          	mov    rax,QWORD PTR [rax+0x8]
-    1200:	8b 00                	mov    eax,DWORD PTR [rax]
-    1202:	89 c6                	mov    esi,eax
-    1204:	48 8d 05 0b 0e 00 00 	lea    rax,[rip+0xe0b]        # 2016 <_IO_stdin_used+0x16>
-    120b:	48 89 c7             	mov    rdi,rax
-    120e:	b8 00 00 00 00       	mov    eax,0x0
-    1213:	e8 58 fe ff ff       	call   1070 <printf@plt>
+    1200:	48 8b 45 c8          	mov    rax,QWORD PTR [rbp-0x38]
+    1204:	48 8b 40 08          	mov    rax,QWORD PTR [rax+0x8]
+    1208:	8b 00                	mov    eax,DWORD PTR [rax]
+    120a:	89 c6                	mov    esi,eax
+    120c:	48 8d 05 03 0e 00 00 	lea    rax,[rip+0xe03]        # 2016 <_IO_stdin_used+0x16>
+    1213:	48 89 c7             	mov    rdi,rax
+    1216:	b8 00 00 00 00       	mov    eax,0x0
+    121b:	e8 50 fe ff ff       	call   1070 <printf@plt>
 
     return 0;
-    1218:	b8 00 00 00 00       	mov    eax,0x0
-    121d:	48 8b 55 f8          	mov    rdx,QWORD PTR [rbp-0x8]
-    1221:	64 48 2b 14 25 28 00 	sub    rdx,QWORD PTR fs:0x28
-    1228:	00 00 
-    122a:	74 05                	je     1231 <main+0xc8>
-    122c:	e8 2f fe ff ff       	call   1060 <__stack_chk_fail@plt>
-    1231:	c9                   	leave  
-    1232:	c3                   	ret    
+    1220:	b8 00 00 00 00       	mov    eax,0x0
+    1225:	48 8b 55 f8          	mov    rdx,QWORD PTR [rbp-0x8]
+    1229:	64 48 2b 14 25 28 00 	sub    rdx,QWORD PTR fs:0x28
+    1230:	00 00 
+    1232:	74 05                	je     1239 <main+0xd0>
+    1234:	e8 27 fe ff ff       	call   1060 <__stack_chk_fail@plt>
+    1239:	c9                   	leave  
+    123a:	c3                   	ret    
 
 Disassembly of section .fini:
 
-0000000000001234 <_fini>:
-    1234:	f3 0f 1e fa          	endbr64 
-    1238:	48 83 ec 08          	sub    rsp,0x8
-    123c:	48 83 c4 08          	add    rsp,0x8
-    1240:	c3                   	ret    
+000000000000123c <_fini>:
+    123c:	f3 0f 1e fa          	endbr64 
+    1240:	48 83 ec 08          	sub    rsp,0x8
+    1244:	48 83 c4 08          	add    rsp,0x8
+    1248:	c3                   	ret    
