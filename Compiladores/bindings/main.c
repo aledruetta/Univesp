@@ -1,29 +1,31 @@
 #include <stdio.h>
 
+typedef struct Node Node;   // creates a new type called "Node" that is a "struct Node"
+
 struct Node
 {
     int value;
-    struct Node * next;
+    Node * next;
 };
 
-struct List
+typedef struct
 {
     unsigned int count;
-    struct Node * first;
-};
+    Node * first;
+} List;
 
 int main()
 {
-    struct List list;
+    List list;
     list.count = 0;
 
-    struct Node first;
+    Node first;
     first.value = 5;
 
     list.first = &first;
     list.count++;
 
-    struct Node next;
+    Node next;
     next.value = 7;
 
     first.next = &next;

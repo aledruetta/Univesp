@@ -3,7 +3,7 @@
 ## Show assembly
 
 ```
-gcc -g -03 main.c
+gcc -g -O3 main.c
 gdb
 > disass/m main
 ```
