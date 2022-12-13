@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct Node Node;   // creates a new type called "Node" that is a "struct Node"
 
