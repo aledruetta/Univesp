@@ -1,35 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define POINTS_LEN 5
+
 typedef struct
 {
     unsigned int len;
     int * points;
 } User;
 
-User * user_const(unsigned int len)
+void user_const(User * user)
 {
-    User * user = (User *) malloc(sizeof(User));
-    user->len = len;
-    int * points = (int *) malloc(sizeof(int) * user->len);
+    user->len = POINTS_LEN;
+    int * points = (int *) malloc(sizeof(int) * POINTS_LEN);
     user->points = points;
-
-    return user;
 }
 
 void user_drop(User * user)
 {
     free(user->points);
-    free(user);
+}
+
+int last(unsigned int len)
+{
+    int a[len];
+    int i;
+
+    for (i=0; i<len; i++) {
+        a[i] = i * 2;
+    }
+
+    return a[i-1];
 }
 
 int main()
 {
-    User * user = user_const(5);
-    for (int i=0; i<user->len; i++) {
-        printf("%d\n", user->points[i]);
+    User user;
+    user_const(&user);
+
+    printf("length: %d\n", user.len);
+    for (int i=0; i<user.len; i++) {
+        user.points[i] = i;
+        printf("%d\n", user.points[i]);
     }
-    user_drop(user);
+
+    user_drop(&user);
+
+    printf("last: %d\n", last(19));
 
     return 0;
 }
