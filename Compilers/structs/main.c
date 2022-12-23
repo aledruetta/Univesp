@@ -15,6 +15,7 @@ int main()
     struct CharListNode head = { 'a', &next };
     CharList list = &head;
 
+    printf("%c -> %c\n", (*list).data, (*(*list).next).data);
     printf("%c -> %c\n", list->data, list->next->data);
 
     return 0;
