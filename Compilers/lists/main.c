@@ -22,10 +22,10 @@ void sl_drop(SimpleList);
 void sl_tostring(SimpleList head)
 {
     ListNode * last = head;
-    printf("%s", last->value);
+    printf("List: [%s]", last->value);
     while (last->next != NULL) {
         last = last->next;
-        printf(" -> %s", last->value);
+        printf("->[%s]", last->value);
     }
     printf(".\n");
 }
@@ -38,8 +38,12 @@ void sl_append(SimpleList head, char value[], size_t value_len)
     }
 
     ListNode * node = (ListNode*) malloc(sizeof(ListNode));
-    char * node_value = (char*) malloc(value_len);
-    strncpy(node_value, value, 2);
+
+    int i = 1;
+    while (value[i] != '\0') i++;
+    char * node_value = (char*) malloc(i);
+    strncpy(node_value, value, i);
+
     node->value = node_value;
     node->next = NULL;
     last->next = node;
@@ -47,14 +51,14 @@ void sl_append(SimpleList head, char value[], size_t value_len)
 
 void sl_drop(SimpleList head)
 {
-    ListNode * last = head->next;
-    ListNode * prev;
-    while (last->next != NULL) {
-        prev = last;
-        last = last->next;
-        free(prev);
+    ListNode * node = head->next;
+    ListNode * tmp = head->next;
+    while (node->next != NULL) {
+        tmp = node;
+        node = tmp->next;
+        free(tmp);
     }
-    free(last);
+    free(node);
 }
 
 int main()
@@ -62,8 +66,8 @@ int main()
     ListNode head = { "head", NULL };
     SimpleList sl = &head;
 
-    for (char c='a'; c<='f'; c++) {
-        char str[] = { c, '\0'};
+    for (char c='A'; c<='F'; c++) {
+        char str[] = { '0', 'X', c, '\0'};
         sl_append(sl, str, 2);
     }
 
