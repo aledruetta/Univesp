@@ -27,7 +27,7 @@ void sl_tostring(SimpleList head)
         last = last->next;
         printf(" -> %s", last->value);
     }
-    printf("\n");
+    printf(".\n");
 }
 
 void sl_append(SimpleList head, char value[], size_t value_len)
@@ -43,14 +43,12 @@ void sl_append(SimpleList head, char value[], size_t value_len)
     node->value = node_value;
     node->next = NULL;
     last->next = node;
-
-    sl_tostring(head);
 }
 
 void sl_drop(SimpleList head)
 {
-    ListNode * last = head;
-    ListNode * prev = head;
+    ListNode * last = head->next;
+    ListNode * prev;
     while (last->next != NULL) {
         prev = last;
         last = last->next;
@@ -69,7 +67,7 @@ int main()
         sl_append(sl, str, 2);
     }
 
-    //sl_tostring(sl);
+    sl_tostring(sl);
 
     sl_drop(sl);
 
