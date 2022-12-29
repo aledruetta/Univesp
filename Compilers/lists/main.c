@@ -37,14 +37,14 @@ void sl_append(SimpleList head, char value[])
         last = last->next;
     }
 
-    ListNode * node = (ListNode*) malloc(sizeof(ListNode));
-    if (node == 0) return;
+    ListNode * node = (ListNode*) calloc(1, sizeof(ListNode));
+    if (!node) return;
 
-    size_t str_len = 1;
+    size_t str_len = 0;
     while (value[str_len] != '\0') str_len++;
 
-    char * node_value = (char*) malloc(str_len);
-    if (node_value == 0) {
+    char * node_value = (char*) calloc(str_len + 1, sizeof(char));
+    if (!node_value) {
         free(node);
         return;
     }
