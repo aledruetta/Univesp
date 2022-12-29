@@ -14,7 +14,7 @@ typedef struct ListNode
 // Prototypes
 
 void sl_tostring(SimpleList);
-void sl_append(SimpleList, char*, size_t);
+void sl_append(SimpleList, char*);
 void sl_drop(SimpleList);
 
 // Functions
@@ -30,7 +30,7 @@ void sl_tostring(SimpleList head)
     printf(".\n");
 }
 
-void sl_append(SimpleList head, char value[], size_t value_len)
+void sl_append(SimpleList head, char value[])
 {
     ListNode * last = head;
     while (last->next != NULL) {
@@ -38,11 +38,18 @@ void sl_append(SimpleList head, char value[], size_t value_len)
     }
 
     ListNode * node = (ListNode*) malloc(sizeof(ListNode));
+    if (node == 0) return;
 
-    int i = 1;
-    while (value[i] != '\0') i++;
-    char * node_value = (char*) malloc(i);
-    strncpy(node_value, value, i);
+    size_t str_len = 1;
+    while (value[str_len] != '\0') str_len++;
+
+    char * node_value = (char*) malloc(str_len);
+    if (node_value == 0) {
+        free(node);
+        return;
+    }
+
+    strncpy(node_value, value, str_len);
 
     node->value = node_value;
     node->next = NULL;
@@ -68,7 +75,7 @@ int main()
 
     for (char c='A'; c<='F'; c++) {
         char str[] = { '0', 'X', c, '\0'};
-        sl_append(sl, str, 2);
+        sl_append(sl, str);
     }
 
     sl_tostring(sl);
