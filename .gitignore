@@ -2,7 +2,6 @@
 *.out
 *.o
 __pycache__
-test.*
 **/codeblocks/
 **/.vscode/
 ^.ibnb*
