@@ -1,8 +1,12 @@
 <h2>Componente Personas</h2>
-<button class="btn btn-primary" #button [disabled]="getDisabled()">Agregar</button>
-<p>Este botón está {{ button.disabled.valueOf() === true ? "deshabilitado" : "habilitado" }}</p>
+<label>Nombre:</label>
+<input type="text" class="form-control" (input)="setName($event)"/>
+<button class="btn btn-primary" #button [disabled]=getDisabled() (click)="addPerson()">Agregar</button>
+<div class="alert alert-info" role="alert">Este botón está {{ button.disabled.valueOf() === true ? "deshabilitado" : "habilitado" }}</div>
+<div class="alert alert-info" role="alert">{{ getBtnMessage() }}</div>
 <ul>
   <li>
-    <app-persona></app-persona>
+    Nombre: {{ getName() }}
+    <!-- <app-persona></app-persona> -->
   </li>
 </ul>
