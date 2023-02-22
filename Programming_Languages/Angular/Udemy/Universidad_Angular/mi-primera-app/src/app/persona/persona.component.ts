@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-persona',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./persona.component.css']
 })
 export class PersonaComponent {
-
-  constructor() { }
-
+  nombre: string = 'Juan';
+  apellido: string = 'Perez';
+  edad: number = 28;
 }

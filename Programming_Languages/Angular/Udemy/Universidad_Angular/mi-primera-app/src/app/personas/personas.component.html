@@ -1,4 +1,8 @@
-<h1>Listado de Personas</h1>
-<app-persona></app-persona>
-<app-persona></app-persona>
-<app-persona></app-persona>
+<h2>Componente Personas</h2>
+<button class="btn btn-primary" #button [disabled]="getDisabled()">Agregar</button>
+<p>Este botón está {{ button.disabled.valueOf() === true ? "deshabilitado" : "habilitado" }}</p>
+<ul>
+  <li>
+    <app-persona></app-persona>
+  </li>
+</ul>
