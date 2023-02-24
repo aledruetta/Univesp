@@ -7,23 +7,34 @@ import { Component } from '@angular/core';
 })
 export class PersonasComponent {
   private disabled: boolean = false;
-  private btnMessage: string = 'No se ha agregado ninguna persona';
-  private name: string = '';
+  private btnState: boolean = false;
+  private btnTitle: string = 'Before';
+  private name: string | null = '';
+
+  lastname = 'Lastname';
 
   getDisabled() {
     return this.disabled;
   }
 
-  getBtnMessage() {
-    return this.btnMessage;
+  getBtnTitle() {
+    return this.btnTitle;
   }
 
-  addPerson() {
-    this.btnMessage = 'Persona agregada!';
+  clickBtn() {
+    if (this.btnState === false) {
+      this.btnTitle = 'After';
+      this.btnState = true;
+    }
+    else {
+      this.btnTitle = 'Before';
+      this.btnState = false;
+    }
   }
 
   setName(event: Event) {
     this.name = (<HTMLInputElement>event.target).value;
+    //this.name = (event.target as HTMLElement).textContent;
   }
 
   getName() {

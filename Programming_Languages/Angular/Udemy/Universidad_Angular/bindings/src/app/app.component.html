@@ -1,0 +1,17 @@
+<h1>Property binding</h1>
+
+<button #btn [disabled]="btnIsDisabled">Button</button>
+
+<h1>Template variables</h1>
+
+<div>The button is {{ btn.disabled ? "disabled" : "not disabled" }}.</div>
+
+<h1>Event binding</h1>
+
+<button (click)="onClickToggle($event)">Toggle</button>
+
+<h1>Two-way binding</h1>
+
+<input type="text" class="form-control" [(ngModel)]="twoBindedField">
+<button (click)="onClickAdd($event)">Add</button>
+<div>{{ addedField }}</div>

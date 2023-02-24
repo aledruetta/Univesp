@@ -1,12 +1,13 @@
 <h2>Componente Personas</h2>
+
+<button class="btn btn-primary" #button [disabled]=getDisabled() (click)="clickBtn()">Agregar</button>
+<div class="alert alert-info" role="alert">Este botón está {{ button.disabled.valueOf() === true ? "deshabilitado" : "habilitado" }}</div>
+<div class="alert alert-info" role="alert">{{ getBtnTitle() }}</div>
+
+<div>{{ lastname }}, {{ getName() }}</div>
+
 <label>Nombre:</label>
 <input type="text" class="form-control" (input)="setName($event)"/>
-<button class="btn btn-primary" #button [disabled]=getDisabled() (click)="addPerson()">Agregar</button>
-<div class="alert alert-info" role="alert">Este botón está {{ button.disabled.valueOf() === true ? "deshabilitado" : "habilitado" }}</div>
-<div class="alert alert-info" role="alert">{{ getBtnMessage() }}</div>
-<ul>
-  <li>
-    Nombre: {{ getName() }}
-    <!-- <app-persona></app-persona> -->
-  </li>
-</ul>
+
+<label>Apellido:</label>
+<input type="text" class="form-control" [(ngModel)]="lastname"/>
