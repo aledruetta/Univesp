@@ -1,0 +1,17 @@
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1>Calculadora</h1>
+          <div>
+            <label for="first-operand">First:</label>
+            <input type="number" name="" id="first-operand" [(ngModel)]="first">
+          </div>
+          <div>
+            <label for="second-operand">Second:</label>
+            <input type="number" name="" id="second-operand" [(ngModel)]="second">
+          </div>
+          <button type="submit" (click)="calcSum()">Calcular</button>
+          <span>Result: {{ result }}</span>
+        </div>
+      </div>
+    </div>
