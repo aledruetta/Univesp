@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <h1>Property binding</h1>
+
+      <button #btn class="btn btn-primary" [disabled]="btnIsDisabled">Button</button>
+
+      <h1>Template variables</h1>
+
+      <div>The button is {{ btn.disabled ? "disabled" : "not disabled" }}.</div>
+
+      <h1>Event binding</h1>
+
+      <button class="btn btn-primary" (click)="onClickToggle($event)">Toggle</button>
+
+      <h1>Two-way binding</h1>
+
+      <input type="text" class="form-control" [(ngModel)]="twoBindedField">
+      <button class="btn btn-primary" (click)="onClickAdd($event)">Add</button>
+      <div>{{ addedField }}</div>
+
+      <h1>*ngIf directive</h1>
+
+      <button class="btn btn-primary" (click)="onClickBtnNgIf()">Btn</button>
+      <div *ngIf="btnToggleState; else elseBlock">{{ ngIfMessage1 }}</div>
+      <ng-template #elseBlock><div>{{ ngIfMessage2 }}</div></ng-template>
+
+      <app-formulario></app-formulario>
+
+      <ul>
+        <app-persona *ngFor="let person of persons; let i = index" [person]="person" [i]="i"></app-persona>
+      </ul>
+
+    </div>
+  </div>
+</div>
