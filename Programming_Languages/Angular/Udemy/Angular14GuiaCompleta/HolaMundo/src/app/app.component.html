@@ -1,0 +1,38 @@
+<div class="container mt-4">
+  <div class="row text-center">
+    <div class="col">
+      <h3>Lista de Estudiantes</h3>
+    </div>
+    <div class="col">
+      <button class="btn btn-primary" (click)="toggle()">{{ btnTitle }}</button>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <table class="table" *ngIf="mostrarTable">
+      <thead>
+        <th>Nro</th>
+        <th>Nombre</th>
+        <th>Estado</th>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let student of students; let i=index" [ngSwitch]="student.state">
+          <td>{{ i + 1 }}</td>
+          <td>{{ student.name }}</td>
+          <!-- <td [ngStyle]="{ 'color': student.state === 'Promocionado' ? 'green' : 'blue' }">{{ student.state }}</td> -->
+          <td>
+              <!-- <span [ngClass]="student.state === 'Promocionado' ? 'badge bg-success' : 'badge bg-primary'">{{ student.state }}</span> -->
+              <span *ngSwitchCase="'Promocionado'" class="badge bg-success">{{ student.state }}</span>
+              <span *ngSwitchCase="'Regular'" class="badge bg-secondary">{{ student.state }}</span>
+              <span *ngSwitchCase="'Libre'" class="badge bg-danger">{{ student.state }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-info" *ngIf="students.length === 0">No hay registros para mostrar!</div>
+  </div>
+</div>
