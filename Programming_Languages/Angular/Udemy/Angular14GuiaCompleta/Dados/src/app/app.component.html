@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <div class="p-5 mb-4 bg-light rounded-3 text-center">
+        <button class="btn btn-success btn-lg" (click)="tirarDados()">Tirar Dados</button>
+        <br>
+        <img [src]="dadoIzquierda" class="img">
+        <img [src]="dadoDerecha" class="img">
+        <br>
+        <h1 *ngIf="numero1 === numero2"><span class="badge bg-success">Ganaste!</span></h1>
+      </div>
+
+    </div>
+  </div>
+</div>
