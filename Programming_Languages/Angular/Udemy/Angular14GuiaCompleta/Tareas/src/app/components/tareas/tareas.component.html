@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <input type="text" [(ngModel)]="nombreTarea" (change)="agregarTarea()" class="form-control form-control-lg" placeholder="Ingrese una tarea...">
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-8 offset-2">
+      <div class="alert alert-info" role="alert" *ngIf="tareas.length === 0; else hayTareas">
+        <span>No hay tareas para mostrar!</span>
+      </div>
+      <ng-template #hayTareas>
+        <ul class="list-group">
+          <li class="list-group-item d-flex align-items-center justify-content-between" *ngFor="let tarea of tareas; let i=index">
+            <span class="d-flex flex-grow-1">
+              <span class="pe-3">
+                <i class="cursor text-success" [ngClass]="tarea.estado ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle'" (click)="completarTarea(i)"></i>
+              </span>
+
+              <span *ngIf="editable !== i; else editando">{{ tarea.nombre }}</span>
+              <ng-template #editando>
+                <input type="text" [(ngModel)]="tarea.nombre" class="form-control border-0 p-0 me-3" (change)="editarTarea(i)">
+              </ng-template>
+            </span>
+
+            <span>
+              <span class="pe-3">
+                <i class="fa-pen-to-square text-primary cursor" [ngClass]="editable === i ? 'fa-solid' : 'fa-regular'" (click)="editarTarea(i)"></i>
+              </span>
+
+              <i class="fa-solid fa-trash-can text-danger cursor" (click)="eliminarTarea(i)"></i>
+            </span>
+          </li>
+        </ul>
+      </ng-template>
+    </div>
+  </div>
+
+</div>
