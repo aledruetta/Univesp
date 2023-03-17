@@ -10,7 +10,8 @@
 
   <div class="row">
     <div class="col-lg-6">
-      <select [(ngModel)]="tengoTipo" class="form-select form-select-lg">
+      <label for="tengo" class="form-label">Tengo:</label>
+      <select [(ngModel)]="tengoTipo" class="form-select form-select-lg" id="tengo">
         <option *ngFor="let moneda of monedas" [ngValue]="moneda">
           {{ moneda.code }}
         </option>
@@ -18,7 +19,8 @@
     </div>
 
     <div class="col-lg-6">
-      <select [(ngModel)]="quieroTipo" class="form-select form-select-lg">
+      <label for="quiero" class="form-label">Quiero:</label>
+      <select [(ngModel)]="quieroTipo" class="form-select form-select-lg" id="quiero">
         <option *ngFor="let moneda of monedas" [ngValue]="moneda">
           {{ moneda.code }}
         </option>
