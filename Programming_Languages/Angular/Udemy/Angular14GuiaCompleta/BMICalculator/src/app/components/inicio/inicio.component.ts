@@ -7,4 +7,43 @@ import { Component } from '@angular/core';
 })
 export class InicioComponent {
 
+  private timeoutHandler: ReturnType<typeof setInterval> | null = null;
+
+  altura: Record<string, number> = {
+    valor: 0,
+    min: 0,
+    max: 230,
+  };
+
+  campos: Record<string, number> = {
+    edad: 0,
+    peso: 0,
+  }
+
+  click(operacion: string, campo: string) {
+    this.aumentarDisminuir(operacion, campo);
+  }
+
+  mousedown(operacion: string, campo: string) {
+    this.timeoutHandler = setInterval(() => {
+      this.aumentarDisminuir(operacion, campo);
+    }, 100);
+  }
+
+  mouseup() {
+    if (this.timeoutHandler) {
+      clearInterval(this.timeoutHandler);
+      this.timeoutHandler = null;
+    }
+  }
+
+  aumentarDisminuir(operacion: string, campo: string) {
+    if (operacion === 'aumentar') {
+      this.campos[campo]++;
+    }
+    else if (operacion === 'disminuir' && this.campos[campo] > 0) {
+      this.campos[campo]--;
+    }
+  }
+
 }

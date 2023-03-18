@@ -27,8 +27,8 @@
         <div class="fondoItem">
           <div class="contenedor">
             <p>Altura</p>
-            <div class="estiloNumero">170 <span class="cm">cm</span></div>
-            <input type="range" class="form-range">
+            <div class="estiloNumero">{{ altura['valor'] }} <span class="cm">cm</span></div>
+            <input type="range" class="form-range" [(ngModel)]="altura['valor']" [min]="altura['min']" [max]="altura['max']">
           </div>
         </div>
       </div>
@@ -39,10 +39,10 @@
         <div class="fondoItem">
           <div class="contenedor">
             <p>Peso</p>
-            <div class="estiloNumero">80</div>
+            <div class="estiloNumero">{{ campos['peso'] }}</div>
             <div class="mas-menos-container">
-              <span class="mas-menos"><i class="fa-solid fa-plus"></i></span>
-              <span class="mas-menos"><i class="fa-solid fa-minus"></i></span>
+              <span class="mas-menos" (mousedown)="mousedown('disminuir', 'peso')" (click)="click('disminuir', 'peso')" (mouseup)="mouseup()"><i class="fa-solid fa-minus"></i></span>
+              <span class="mas-menos" (mousedown)="mousedown('aumentar', 'peso')" (click)="click('aumentar', 'peso')"  (mouseup)="mouseup()"><i class="fa-solid fa-plus"></i></span>
             </div>
           </div>
         </div>
@@ -52,10 +52,10 @@
         <div class="fondoItem">
           <div class="contenedor">
             <p>Edad</p>
-            <div class="estiloNumero">51</div>
+            <div class="estiloNumero">{{ campos['edad'] }}</div>
             <div class="mas-menos-container">
-              <span class="mas-menos"><i class="fa-solid fa-plus"></i></span>
-              <span class="mas-menos"><i class="fa-solid fa-minus"></i></span>
+              <span class="mas-menos" (mousedown)="mousedown('disminuir', 'edad')" (click)="click('disminuir', 'edad')" (mouseup)="mouseup()"><i class="fa-solid fa-minus"></i></span>
+              <span class="mas-menos" (mousedown)="mousedown('aumentar', 'edad')" (click)="click('aumentar', 'edad')" (mouseup)="mouseup()"><i class="fa-solid fa-plus"></i></span>
             </div>
           </div>
         </div>
