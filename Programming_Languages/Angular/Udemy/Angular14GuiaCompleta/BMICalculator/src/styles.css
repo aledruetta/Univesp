@@ -15,11 +15,15 @@ body {
   margin-top: 20px;
 }
 
-.fondoItem {
+.fondo-item {
   background-color: #FF111328;
   color: white;
   height: 130px;
   border-radius: 20px;
+}
+
+.fondo-item-select {
+  background-color: #7D2F2F33;
 }
 
 .btn-color {
@@ -51,16 +55,19 @@ body {
 .mas-menos-container {
   display: flex;
   justify-content: space-between;
-  width: 63px;
+  width: 64px;
 }
 
 .mas-menos {
   display: flex;
   align-items: center;
-  cursor: pointer;
   background-color: #FF4C4F5E;
   border-radius: 50%;
   height: 30px;
   width: 30px;
   padding: 8px 8px 8px 8.5px;
+}
+
+.pointer {
+  cursor: pointer;
 }

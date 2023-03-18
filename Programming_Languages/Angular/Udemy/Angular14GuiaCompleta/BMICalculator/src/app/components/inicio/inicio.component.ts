@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -20,6 +21,19 @@ export class InicioComponent {
     peso: 0,
   }
 
+  sexo: string = '';
+
+  constructor(private router: Router) {
+  }
+
+  calcularBMI() {
+    this.router.navigate(['/resultado']);
+  }
+
+  selectSexo(sexoSelected: string) {
+    this.sexo = sexoSelected.toLowerCase();
+  }
+
   onClick(operacion: string, campo: string) {
     this.aumentarDisminuir(operacion, campo);
   }
@@ -38,10 +52,10 @@ export class InicioComponent {
   }
 
   aumentarDisminuir(operacion: string, campo: string) {
-    if (operacion === 'aumentar') {
+    if (operacion.toLowerCase() === 'aumentar') {
       this.campos[campo]++;
     }
-    else if (operacion === 'disminuir' && this.campos[campo] > 0) {
+    else if (operacion.toLowerCase() === 'disminuir' && this.campos[campo] > 0) {
       this.campos[campo]--;
     }
   }
