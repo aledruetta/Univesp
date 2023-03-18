@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  background-color: #0A0E21;
+}
+
+.titulo {
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  text-align: center;
+  margin-top: 25px;
+}
+
+.row {
+  margin-top: 20px;
+}
+
+.fondoItem {
+  background-color: #FF111328;
+  color: white;
+  height: 130px;
+  border-radius: 20px;
+}
+
+.btn-color {
+  background-color: #FF3366;
+  border-color: #FF3366;
+  border-radius: 25px;
+  width: 100%;
+}
+
+.btn-color:hover {
+  background-color: #a93955;
+  border-color: #FF3366;
+}
+
+.contenedor {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.cm {
+  font-size: 16px;
+  font-weight: 400;
+  margin-left: -5px;
+}
+
+.mas-menos-container {
+  display: flex;
+  justify-content: space-between;
+  width: 63px;
+}
+
+.mas-menos {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: #FF4C4F5E;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  padding: 8px 8px 8px 8.5px;
+}

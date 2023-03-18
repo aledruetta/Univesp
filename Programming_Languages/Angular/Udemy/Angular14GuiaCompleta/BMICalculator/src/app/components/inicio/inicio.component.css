@@ -1,0 +1,17 @@
+.sexo {
+  font-size: 40px;
+}
+
+.estiloNumero {
+  font-size: 32px;
+  font-weight: 800;
+  margin-top: -30px;
+}
+
+.form-range {
+  padding: 0px 20px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  background: #FF3366;
+}
