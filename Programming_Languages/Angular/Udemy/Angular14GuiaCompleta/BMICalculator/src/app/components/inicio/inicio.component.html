@@ -41,8 +41,8 @@
             <p>Peso</p>
             <div class="estiloNumero">{{ campos['peso'] }}</div>
             <div class="mas-menos-container">
-              <span class="mas-menos" (mousedown)="mousedown('disminuir', 'peso')" (click)="click('disminuir', 'peso')" (mouseup)="mouseup()"><i class="fa-solid fa-minus"></i></span>
-              <span class="mas-menos" (mousedown)="mousedown('aumentar', 'peso')" (click)="click('aumentar', 'peso')"  (mouseup)="mouseup()"><i class="fa-solid fa-plus"></i></span>
+              <span class="mas-menos" (mousedown)="onMousedown('disminuir', 'peso')" (click)="onClick('disminuir', 'peso')" (mouseup)="onMouseup()"><i class="fa-solid fa-minus"></i></span>
+              <span class="mas-menos" (mousedown)="onMousedown('aumentar', 'peso')" (click)="onClick('aumentar', 'peso')"  (mouseup)="onMouseup()"><i class="fa-solid fa-plus"></i></span>
             </div>
           </div>
         </div>
@@ -54,8 +54,8 @@
             <p>Edad</p>
             <div class="estiloNumero">{{ campos['edad'] }}</div>
             <div class="mas-menos-container">
-              <span class="mas-menos" (mousedown)="mousedown('disminuir', 'edad')" (click)="click('disminuir', 'edad')" (mouseup)="mouseup()"><i class="fa-solid fa-minus"></i></span>
-              <span class="mas-menos" (mousedown)="mousedown('aumentar', 'edad')" (click)="click('aumentar', 'edad')" (mouseup)="mouseup()"><i class="fa-solid fa-plus"></i></span>
+              <span class="mas-menos" (mousedown)="onMousedown('disminuir', 'edad')" (click)="onClick('disminuir', 'edad')" (mouseup)="onMouseup()"><i class="fa-solid fa-minus"></i></span>
+              <span class="mas-menos" (mousedown)="onMousedown('aumentar', 'edad')" (click)="onClick('aumentar', 'edad')" (mouseup)="onMouseup()"><i class="fa-solid fa-plus"></i></span>
             </div>
           </div>
         </div>

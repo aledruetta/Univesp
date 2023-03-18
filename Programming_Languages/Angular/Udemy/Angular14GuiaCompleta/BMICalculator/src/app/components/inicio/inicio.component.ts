@@ -20,17 +20,17 @@ export class InicioComponent {
     peso: 0,
   }
 
-  click(operacion: string, campo: string) {
+  onClick(operacion: string, campo: string) {
     this.aumentarDisminuir(operacion, campo);
   }
 
-  mousedown(operacion: string, campo: string) {
+  onMousedown(operacion: string, campo: string) {
     this.timeoutHandler = setInterval(() => {
       this.aumentarDisminuir(operacion, campo);
     }, 100);
   }
 
-  mouseup() {
+  onMouseup() {
     if (this.timeoutHandler) {
       clearInterval(this.timeoutHandler);
       this.timeoutHandler = null;
