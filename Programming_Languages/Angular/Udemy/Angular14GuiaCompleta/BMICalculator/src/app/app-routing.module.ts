@@ -5,7 +5,7 @@ import { ResultadoComponent } from './components/resultado/resultado.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
-  { path: 'resultado', component: ResultadoComponent },
+  { path: 'resultado/:bmi', component: ResultadoComponent },
   { path: '**', redirectTo: '' }
 ];
 

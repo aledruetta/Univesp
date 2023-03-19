@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,19 +6,19 @@ import { Router } from '@angular/router';
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']
 })
-export class InicioComponent {
+export class InicioComponent implements OnInit {
 
   private timeoutHandler: ReturnType<typeof setInterval> | null = null;
 
   altura: Record<string, number> = {
-    valor: 0,
+    valor: 150,
     min: 0,
     max: 230,
   };
 
   campos: Record<string, number> = {
-    edad: 0,
-    peso: 0,
+    edad: 25,
+    peso: 55,
   }
 
   sexo: string = '';
@@ -26,8 +26,12 @@ export class InicioComponent {
   constructor(private router: Router) {
   }
 
+  ngOnInit(): void {
+  }
+
   calcularBMI() {
-    this.router.navigate(['/resultado']);
+    const bmi = this.campos['peso'] / Math.pow(this.altura['valor'] / 100, 2);
+    this.router.navigate(['/resultado', bmi]);
   }
 
   selectSexo(sexoSelected: string) {

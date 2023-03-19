@@ -5,6 +5,9 @@
   "projects": {
     "BMICalculator": {
       "projectType": "application",
+      "i18n": {
+        "sourceLocale": "es-AR"
+      },
       "schematics": {
         "@schematics/angular:class": {
           "skipTests": true

@@ -1,0 +1,22 @@
+.fondo-item {
+  height: 430px;
+}
+
+.resultado {
+  color: #12BD45;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.estilo-numero {
+  font-size: 80px;
+  font-weight: 700;
+  padding-top: 25px;
+  padding-bottom: 45px;
+}
+
+.interpretacion {
+  font-size: 18px;
+  margin: 10px;
+}
