@@ -1,0 +1,26 @@
+<div class="card mt-3">
+  <div class="card-body">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Legajo</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Sexo</th>
+          <th>Salario</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let empleado of listaEmpleados">
+          <td>{{ empleado.legajo }}</td>
+          <td>{{ empleado.nombre }}</td>
+          <td>{{ empleado.apellido }}</td>
+          <td>{{ empleado.sexo }}</td>
+          <td>{{ empleado.salario | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

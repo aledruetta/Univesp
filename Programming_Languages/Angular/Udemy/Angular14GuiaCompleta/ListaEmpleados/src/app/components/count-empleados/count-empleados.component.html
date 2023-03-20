@@ -1,0 +1,13 @@
+<h1 class="titulo mt-5 text-center">Lista Empleados</h1>
+
+<div class="card mt-3">
+  <div class="card-body d-flex justify-content-center">
+    <div class="form-check form-check-inline" *ngFor="let opcion of opcionesSexo">
+      <input class="form-check-input" type="radio" name="sexo"
+        [(ngModel)]="sexoSeleccionado" id="{{ opcion }}" [value]="opcion">
+      <label class="form-check-label" for="{{ opcion }}">{{ opcion }} ({{ getListaEmpleados(opcion).length }})</label>
+    </div>
+  </div>
+</div>
+
+<app-empleado-list [listaEmpleados]="getListaEmpleados(sexoSeleccionado)"></app-empleado-list>
