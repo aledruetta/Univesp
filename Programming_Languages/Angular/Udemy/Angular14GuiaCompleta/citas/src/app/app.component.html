@@ -1,0 +1,17 @@
+<div class="container">
+
+  <div class="row text-center mt-5">
+    <h1 class="col-lg-12 titulo">APLICACIÓN DE CITAS</h1>
+  </div>
+
+  <div class="row mt-3 justify-content-around">
+    <div class="col-lg-5">
+      <app-agregar-cita (agregarCitaEvent)="agregarCita($event)"></app-agregar-cita>
+    </div>
+
+    <div class="col-lg-5">
+      <app-listar-cita [listaCitas]="obtenerCitas()" (eliminarCitaEvent)="eliminarCita($event)"></app-listar-cita>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,27 @@
+<div class="card bg-light">
+  <div class="card-body">
+    <h5 class="card-title text-center">Agendar Cita</h5>
+
+    <div class="text-center" *ngIf="!nuevaCita.hasRequeridos()">
+      <h5 class="badge bg-danger">Todos los campos son obligatorios</h5>
+    </div>
+
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre:</label>
+      <input type="text" id="nombre" class="form-control" [(ngModel)]="nuevaCita.nombre" placeholder="Ingrese el nombre del paciente" required>
+    </div>
+    <div class="mb-3">
+      <label for="fecha" class="form-label">Fecha:</label>
+      <input type="date" id="fecha" class="form-control" [(ngModel)]="nuevaCita.fecha" required>
+    </div>
+    <div class="mb-3">
+      <label for="hora" class="form-label">Hora:</label>
+      <input type="time" id="hora" class="form-control" [(ngModel)]="nuevaCita.hora" placeholder="Hora" required>
+    </div>
+    <div class="mb-3">
+      <label for="sintomas" class="form-label">Síntomas:</label>
+      <textarea type="date" id="sintomas" style="height: 100px;" class="form-control" [(ngModel)]="nuevaCita.sintomas" placeholder="Ingrese los síntomas" required></textarea>
+    </div>
+    <button class="btn btn-primary btn-block" (click)="agregarCita()" style="width: 100%;" [disabled]="!nuevaCita.hasRequeridos()">Agregar Cita</button>
+  </div>
+</div>
