@@ -1,6 +1,6 @@
-<div class="card bg-light">
+<div *ngIf="listaCitas.length === 0" class="card bg-light">
   <div class="card-body">
-    <h5 *ngIf="listaCitas.length === 0" class="card-title text-center">No hay citas para mostrar</h5>
+    <h5 class="card-title text-center">No hay citas para mostrar</h5>
   </div>
 </div>
 
