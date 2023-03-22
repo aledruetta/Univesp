@@ -1,0 +1,15 @@
+<div class="row mt-5">
+  <div class="col-lg-6 offset-lg-3">
+
+    <h2 class="text-center title">Ingrese Presupuesto</h2>
+
+    <div class="card">
+      <div class="card-body text-center">
+        <span class="badge bg-danger mb-3" *ngIf="!presupuesto.totalMayorQueCero()">EL PRESUPUESTO DEBE SER MAYOR QUE CERO</span>
+        <input type="number" class="form-control form-control-lg" [(ngModel)]="presupuesto.total" placeholder="Ingrese su presupuesto">
+        <button class="btn btn-secondary btn-lg btn-block mt-3" (click)="agregarPresupuesto()" [disabled]="!presupuesto.totalMayorQueCero()">ACEPTAR</button>
+      </div>
+    </div>
+
+  </div>
+</div>
