@@ -13,13 +13,13 @@ export class GastosComponent implements OnInit {
   presupuesto: Presupuesto;
 
   constructor(private _presupuestoService: PresupuestoService, private _router: Router) {
-    this.presupuesto = new Presupuesto(0, 0);
+    this.presupuesto = new Presupuesto();
   }
 
   ngOnInit(): void {
     this.presupuesto = this._presupuestoService.getPresupuesto();
 
-    if (this.presupuesto.total === 0) {
+    if (isNaN(this.presupuesto.total)) {
       this._router.navigate(['/presupuesto']);
     }
   }

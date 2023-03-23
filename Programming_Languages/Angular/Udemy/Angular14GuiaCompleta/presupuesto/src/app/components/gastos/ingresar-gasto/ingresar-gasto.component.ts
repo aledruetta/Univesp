@@ -15,25 +15,32 @@ export class IngresarGastoComponent {
   error: string;
 
   constructor(private _presupuestoService: PresupuestoService, private _gastoService: GastoService) {
-    this.gasto = new Gasto('', 0);
+    this.gasto = new Gasto();
     this.error = '';
   }
 
-  agregarGasto() {
+  agregarGasto(): void {
+    if (this.validarGasto()) {
+      this.error = '';
+      this._gastoService.saveGasto(this.gasto);
+      this.gasto.reset();
+    }
+  }
+
+  validarGasto(): boolean {
     let restante = this._presupuestoService.getPresupuesto().restante;
 
-    if (this.gasto.cantidad === 0 || this.gasto.categoria.length === 0) {
+    if (!this.gasto.tieneRequeridos()) {
       this.error = 'Todos los campos son obligatorios';
-      return;
     }
     else if (this.gasto.cantidad > restante) {
       this.error = `El valor ($ ${ this.gasto.cantidad }) supera la cantidad disponible ($ ${ restante })`;
-      return;
+    }
+    else {
+      return true;
     }
 
-    this._gastoService.saveGasto(this.gasto);
-    this.gasto.reset();
-    this.error = '';
+    return false;
   }
 
   obtenerGastos() {

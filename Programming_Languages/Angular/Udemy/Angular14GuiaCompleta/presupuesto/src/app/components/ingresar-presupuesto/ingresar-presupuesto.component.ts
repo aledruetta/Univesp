@@ -13,11 +13,11 @@ export class IngresarPresupuestoComponent {
   presupuesto: Presupuesto;
 
   constructor(private _presupuestoService: PresupuestoService, private _router: Router) {
-    this.presupuesto = new Presupuesto(0, 0);
+    this.presupuesto = new Presupuesto();
   }
 
   agregarPresupuesto() {
-    if (this.presupuesto.totalMayorQueCero()) {
+    if (this.presupuesto.totalEsValido()) {
       this.presupuesto.restante = this.presupuesto.total;
       this._presupuestoService.savePresupuesto(this.presupuesto);
       this._router.navigate(['/gastos']);

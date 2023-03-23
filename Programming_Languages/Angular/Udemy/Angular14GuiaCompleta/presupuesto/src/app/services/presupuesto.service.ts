@@ -9,7 +9,7 @@ export class PresupuestoService {
   presupuesto: Presupuesto;
 
   constructor() {
-    this.presupuesto = new Presupuesto(0, 0);
+    this.presupuesto = new Presupuesto(NaN, NaN);
   }
 
   getPresupuesto() {
