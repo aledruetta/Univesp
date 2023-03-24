@@ -1,0 +1,11 @@
+input {
+  text-align: center;
+}
+
+.alert {
+  border-radius: 0;
+}
+
+.big {
+  font-size: 2em;
+}
