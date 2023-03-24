@@ -8,14 +8,14 @@ export class Presupuesto {
     this.restante = restante ?? NaN;
   }
 
-  updateRestante(gasto: number) {
+  updateRestante(gasto: number): void {
     let resto = this.restante - gasto;
     if (resto >= 0) {
       this.restante = resto;
     }
   }
 
-  totalEsValido() {
+  totalEsValido(): boolean {
     return this.total > 0;
   }
 

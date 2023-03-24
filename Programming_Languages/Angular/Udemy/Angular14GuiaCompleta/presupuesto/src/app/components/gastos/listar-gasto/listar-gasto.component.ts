@@ -11,25 +11,25 @@ import { PresupuestoService } from 'src/app/services/presupuesto.service';
 })
 export class ListarGastoComponent implements OnDestroy {
 
-  private _gastosSub: Subscription;
+  private _gastoSub: Subscription;
   presupuesto: Presupuesto;
   gastos: Gasto[];
 
   constructor(private _presupuestoService: PresupuestoService) {
-    this._gastosSub = new Subscription();
+    this._gastoSub = new Subscription();
     this.presupuesto = new Presupuesto();
     this.gastos = [];
   }
 
   ngOnInit(): void {
     this.presupuesto = this._presupuestoService.obtenerPresupuesto();
-    this._gastosSub = this._presupuestoService.obtenerGastos().subscribe(gasto => {
+    this._gastoSub = this._presupuestoService.obtenerGasto().subscribe(gasto => {
       this.gastos.push(gasto);
     });
   }
 
   ngOnDestroy(): void {
-    this._gastosSub.unsubscribe();
+    this._gastoSub.unsubscribe();
   }
 
   obtenerGastos(): Gasto[] {

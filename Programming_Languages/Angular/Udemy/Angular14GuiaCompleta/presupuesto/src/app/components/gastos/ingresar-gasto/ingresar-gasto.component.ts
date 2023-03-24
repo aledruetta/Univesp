@@ -19,8 +19,23 @@ export class IngresarGastoComponent {
   }
 
   agregarGasto(): void {
-    this._presupuestoService.agregarGasto(this.gasto);
-    this.gasto = new Gasto();
+    if (this.camposValidados()) {
+      this._presupuestoService.agregarGasto(this.gasto);
+      this.gasto = new Gasto();
+      this.error = '';
+    }
+  }
+
+  camposValidados(): boolean {
+    if (!this.gasto.tieneRequeridos()) {
+      this.error = 'Todos los campos son obligatorios';
+      return false;
+    }
+    else if (!this._presupuestoService.validarRestante(this.gasto)) {
+      this.error = 'El valor supera el restante'
+      return false;
+    }
+    return true;
   }
 
 }

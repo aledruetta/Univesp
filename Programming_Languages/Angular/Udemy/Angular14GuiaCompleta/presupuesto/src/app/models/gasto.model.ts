@@ -1,7 +1,7 @@
 export class Gasto {
 
-  categoria: string;
   cantidad: number;
+  categoria: string;
 
   constructor(categoria?: string, cantidad?: number) {
     this.categoria = categoria ?? '';
@@ -14,7 +14,7 @@ export class Gasto {
   }
 
   tieneRequeridos() {
-    return this.cantidad !== 0 || !isNaN(this.cantidad) || this.categoria !== '';
+    return this.cantidad > 0 && this.categoria !== '';
   }
 
 }

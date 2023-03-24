@@ -29,4 +29,8 @@ export class IngresarPresupuestoComponent {
       this.mostrarError = true;
     }
   }
+
+  corregirTotal(total: number) {
+    this.presupuesto.total = total < 0 ? Math.abs(total) : total;
+  }
 }

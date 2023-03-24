@@ -8,11 +8,11 @@ import { Presupuesto } from '../models/presupuesto.model';
 })
 export class PresupuestoService {
 
-  private _gastos$: Subject<Gasto>;
+  private _gasto$: Subject<Gasto>;
   presupuesto: Presupuesto;
 
   constructor() {
-    this._gastos$ = new Subject<Gasto>();
+    this._gasto$ = new Subject<Gasto>();
     this.presupuesto = new Presupuesto();
   }
 
@@ -24,19 +24,19 @@ export class PresupuestoService {
     this.presupuesto = presupuesto;
   }
 
-  obtenerGastos(): Observable<Gasto> {
-    return this._gastos$.asObservable();
+  obtenerGasto(): Observable<Gasto> {
+    return this._gasto$.asObservable();
   }
 
   agregarGasto(gasto: Gasto): void {
-    if (this.validarGasto(gasto)) {
-      this._gastos$.next(gasto);
+    if (this.validarRestante(gasto)) {
+      this._gasto$.next(gasto);
       this.presupuesto.restante -= gasto.cantidad;
     }
   }
 
-  validarGasto(gasto: Gasto): boolean {
-    return gasto.tieneRequeridos() && this.presupuesto.restante >= gasto.cantidad;
+  validarRestante(gasto: Gasto): boolean {
+    return this.presupuesto.restante >= gasto.cantidad;
   }
 
 }
