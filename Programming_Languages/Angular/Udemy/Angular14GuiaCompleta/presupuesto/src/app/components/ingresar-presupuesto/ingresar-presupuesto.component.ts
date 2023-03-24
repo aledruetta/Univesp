@@ -11,16 +11,22 @@ import { PresupuestoService } from 'src/app/services/presupuesto.service';
 export class IngresarPresupuestoComponent {
 
   presupuesto: Presupuesto;
+  mostrarError: boolean;
 
   constructor(private _presupuestoService: PresupuestoService, private _router: Router) {
     this.presupuesto = new Presupuesto();
+    this.mostrarError = false;
   }
 
   agregarPresupuesto() {
     if (this.presupuesto.totalEsValido()) {
       this.presupuesto.restante = this.presupuesto.total;
       this._presupuestoService.savePresupuesto(this.presupuesto);
+      this.mostrarError = false;
       this._router.navigate(['/gastos']);
+    }
+    else {
+      this.mostrarError = true;
     }
   }
 }

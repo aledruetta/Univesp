@@ -19,4 +19,8 @@ export class Presupuesto {
     return this.total > 0;
   }
 
+  obtenerPorcentaje(): number {
+    return 100 * (this.restante / this.total);
+  }
+
 }

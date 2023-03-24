@@ -1,1 +1,25 @@
-<p *ngFor="let gasto of obtenerGastos()">{{ gasto.categoria }}: {{ gasto.cantidad | currency }}</p>
+<h4 class="text-center">Listar Gastos</h4>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="alert alert-primary text-center">
+      Presupuesto: <strong>{{ presupuesto.total | currency }}</strong>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="alert text-center" [ngClass]="restanteColor()">
+      Restante: <strong>{{ presupuesto.restante | currency }}</strong>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item d-flex justify-content-between" *ngFor="let gasto of obtenerGastos()">
+        <strong>{{ gasto.categoria }}: </strong>
+        <span class="badge bg-secondary rounded-pill">{{ gasto.cantidad | currency }}</span>
+      </li>
+    </ul>
+  </div>
+</div>

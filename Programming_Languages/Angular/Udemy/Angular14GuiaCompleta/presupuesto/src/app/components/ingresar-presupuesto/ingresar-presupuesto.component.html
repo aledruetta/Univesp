@@ -5,9 +5,9 @@
 
     <div class="card">
       <div class="card-body text-center">
-        <span class="badge bg-danger mb-3" *ngIf="!presupuesto.totalEsValido()">EL PRESUPUESTO DEBE SER MAYOR QUE CERO</span>
+        <span class="badge bg-danger mb-3" *ngIf="mostrarError">EL VALOR DEBE SER MAYOR QUE CERO</span>
         <input type="number" class="form-control form-control-lg" [(ngModel)]="presupuesto.total" placeholder="Ingrese su presupuesto">
-        <button class="btn btn-secondary btn-lg btn-block mt-3" (click)="agregarPresupuesto()" [disabled]="!presupuesto.totalEsValido()">ACEPTAR</button>
+        <button class="btn btn-secondary btn-lg btn-block mt-3" (click)="agregarPresupuesto()">ACEPTAR</button>
       </div>
     </div>
 

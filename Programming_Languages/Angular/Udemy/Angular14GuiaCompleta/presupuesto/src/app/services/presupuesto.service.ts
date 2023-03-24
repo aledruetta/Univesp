@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { Gasto } from '../models/gasto.model';
 import { Presupuesto } from '../models/presupuesto.model';
 
 @Injectable({
@@ -6,18 +8,35 @@ import { Presupuesto } from '../models/presupuesto.model';
 })
 export class PresupuestoService {
 
+  private _gastos$: Subject<Gasto>;
   presupuesto: Presupuesto;
 
   constructor() {
-    this.presupuesto = new Presupuesto(NaN, NaN);
+    this._gastos$ = new Subject<Gasto>();
+    this.presupuesto = new Presupuesto();
   }
 
-  getPresupuesto() {
+  obtenerPresupuesto(): Presupuesto {
     return this.presupuesto;
   }
 
-  savePresupuesto(presupuesto: Presupuesto) {
+  savePresupuesto(presupuesto: Presupuesto): void {
     this.presupuesto = presupuesto;
+  }
+
+  obtenerGastos(): Observable<Gasto> {
+    return this._gastos$.asObservable();
+  }
+
+  agregarGasto(gasto: Gasto): void {
+    if (this.validarGasto(gasto)) {
+      this._gastos$.next(gasto);
+      this.presupuesto.restante -= gasto.cantidad;
+    }
+  }
+
+  validarGasto(gasto: Gasto): boolean {
+    return gasto.tieneRequeridos() && this.presupuesto.restante >= gasto.cantidad;
   }
 
 }
