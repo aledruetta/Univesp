@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperHero.API", "SuperHero.API\SuperHero.API.csproj", "{4113814E-6C01-4A6F-9462-0829A3CFD151}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "SuperHero.UI", "SuperHero.UI\SuperHero.UI.esproj", "{067FDB39-9C42-4541-9B27-54855229420D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4113814E-6C01-4A6F-9462-0829A3CFD151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4113814E-6C01-4A6F-9462-0829A3CFD151}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4113814E-6C01-4A6F-9462-0829A3CFD151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4113814E-6C01-4A6F-9462-0829A3CFD151}.Release|Any CPU.Build.0 = Release|Any CPU
+		{067FDB39-9C42-4541-9B27-54855229420D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{067FDB39-9C42-4541-9B27-54855229420D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{067FDB39-9C42-4541-9B27-54855229420D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{067FDB39-9C42-4541-9B27-54855229420D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{067FDB39-9C42-4541-9B27-54855229420D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{067FDB39-9C42-4541-9B27-54855229420D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D738C4BD-662C-4218-B766-483AB5A14915}
+	EndGlobalSection
+EndGlobal
