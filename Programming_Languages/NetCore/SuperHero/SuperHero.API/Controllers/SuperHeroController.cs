@@ -20,5 +20,12 @@ namespace SuperHero.API.Controllers
         {
             return Ok(await _context.SuperHeroes.ToListAsync());
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult<SuperHero>> GetSuperHero(int id)
+        {
+            return Ok(await _context.SuperHeroes.FirstOrDefaultAsync(x => x.Id == id));
+        }
     }
 }
