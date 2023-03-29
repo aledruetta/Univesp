@@ -15,10 +15,11 @@ export class AppComponent {
     this.noticias = [];
   }
 
-  obtenerNoticias(criteriosBusqueda: Record<string,string>): void {
-    this._noticiasService.obtenerNoticias(criteriosBusqueda)
+  getNews(criteriosBusqueda: Record<string,string>): void {
+    this._noticiasService.getNews(criteriosBusqueda)
       .subscribe((resultado) => {
         this.noticias = this._noticiasService.mapNewsFromArticles(resultado.articles);
+        console.log(this.noticias);
       }
     );
   }

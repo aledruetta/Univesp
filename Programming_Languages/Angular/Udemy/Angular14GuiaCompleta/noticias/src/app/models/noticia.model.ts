@@ -1,6 +1,5 @@
 export class Noticia {
 
-  source: string;
   author: string;
   title: string;
   description: string;
@@ -9,8 +8,7 @@ export class Noticia {
   publishedAt: string;
   content: string;
 
-  constructor(source: string, author: string, title: string, description: string, url: string, urlToImage: string, publishedAt: string, content: string) {
-    this.source = source;
+  constructor(author: string, title: string, description: string, url: string, urlToImage: string, publishedAt: string, content: string) {
     this.author = author;
     this.title = title;
     this.description = description;

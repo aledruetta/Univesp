@@ -32,7 +32,7 @@ export class FormularioComponent {
 
   constructor() {
     this.categoriaSeleccionada = 'general';
-    this.paisSeleccionado = 'ar';
+    this.paisSeleccionado = 'us';
   }
 
   submitFormAndEmit(): void {

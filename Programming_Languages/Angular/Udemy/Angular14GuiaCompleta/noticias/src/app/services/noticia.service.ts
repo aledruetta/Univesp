@@ -11,11 +11,12 @@ export class NoticiaService {
   constructor(private _http: HttpClient) {
   }
 
-  obtenerNoticias(criteriosBusqueda: Record<string, string>): Observable<any> {
+  getNews(criteriosBusqueda: Record<string, string>): Observable<any> {
     const PAIS = criteriosBusqueda['pais'];
     const CATEGORIA = criteriosBusqueda['categoria'];
     const APIKEY = '';
     const URL = `https://newsapi.org/v2/top-headlines?country=${PAIS}&category=${CATEGORIA}&apiKey=${APIKEY}`;
+    //const URL = `https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=${APIKEY}`;
 
     return this._http.get(URL);
   }
@@ -23,13 +24,12 @@ export class NoticiaService {
   mapNewsFromArticles(articulos: any): Noticia[] {
     return articulos.map((articulo: any) => {
       return {
-        source: articulo.source.name,
         author: articulo.author,
         title: articulo.title,
         description: articulo.description,
         url: articulo.url,
         urlToImage: articulo.urlToImage,
-        date: articulo.publishedAt,
+        publishedAt: articulo.publishedAt,
         content: articulo.content,
       };
     });
