@@ -19,7 +19,6 @@ export class AppComponent {
     this._noticiasService.getNews(criteriosBusqueda)
       .subscribe((resultado) => {
         this.noticias = this._noticiasService.mapNewsFromArticles(resultado.articles);
-        console.log(this.noticias);
       }
     );
   }
