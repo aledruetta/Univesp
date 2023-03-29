@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Noticia } from './models/noticia.model';
 import { NoticiaService } from './services/noticia.service';
 
 @Component({
@@ -8,15 +9,16 @@ import { NoticiaService } from './services/noticia.service';
 })
 export class AppComponent {
 
-  noticias: any;
+  noticias: Noticia[];
 
   constructor(private _noticiasService: NoticiaService) {
+    this.noticias = [];
   }
 
-  buscarNoticias(criteriosBusqueda: Record<string,string>): void {
+  obtenerNoticias(criteriosBusqueda: Record<string,string>): void {
     this._noticiasService.obtenerNoticias(criteriosBusqueda)
-      .subscribe((noticias) => {
-        this.noticias = noticias;
+      .subscribe((resultado) => {
+        this.noticias = this._noticiasService.mapNewsFromArticles(resultado.articles);
       }
     );
   }

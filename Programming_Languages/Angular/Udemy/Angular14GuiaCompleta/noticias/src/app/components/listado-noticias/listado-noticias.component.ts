@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Noticia } from 'src/app/models/noticia.model';
 
 @Component({
   selector: 'app-listado-noticias',
@@ -7,9 +8,10 @@ import { Component, Input } from '@angular/core';
 })
 export class ListadoNoticiasComponent {
 
-  @Input() noticias: any;
+  @Input() noticias: Noticia[];
 
   constructor() {
+    this.noticias = [];
   }
 
 }

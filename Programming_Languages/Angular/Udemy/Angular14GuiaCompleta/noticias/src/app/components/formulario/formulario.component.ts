@@ -14,7 +14,7 @@ export class FormularioComponent {
   categorias: Record<string, string>[] = [
     { value: 'general', name: 'General' },
     { value: 'business', name: 'Negocios' },
-    { value: 'entertaiment', name: 'Entretenimiento' },
+    { value: 'entertainment', name: 'Entretenimiento' },
     { value: 'health', name: 'Salud' },
     { value: 'science', name: 'Ciencia' },
     { value: 'sports', name: 'Deportes' },
@@ -35,7 +35,7 @@ export class FormularioComponent {
     this.paisSeleccionado = 'ar';
   }
 
-  buscarNoticias(): void {
+  submitFormAndEmit(): void {
     const CATEGORIA = this.categorias.find(categoria => categoria['value'] === this.categoriaSeleccionada);
     const PAIS = this.paises.find(pais => pais['value'] === this.paisSeleccionado);
 
@@ -44,8 +44,8 @@ export class FormularioComponent {
     }
 
     this.criteriosBusqueda.emit({
-      categoria: CATEGORIA['name'],
-      pais: PAIS['name']
+      categoria: CATEGORIA['value'],
+      pais: PAIS['value']
     });
   }
 

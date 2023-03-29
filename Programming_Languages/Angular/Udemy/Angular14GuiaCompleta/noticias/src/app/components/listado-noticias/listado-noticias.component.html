@@ -1,1 +1,3 @@
-<p>{{ noticias }}</p>
+<div *ngFor="let noticia of noticias">
+  <a href="{{ noticia.url }}" target="_blank">{{ noticia.title }}</a>
+</div>
