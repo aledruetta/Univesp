@@ -1,11 +1,11 @@
 <div class="row row-cols-1 row-cols-md-2 g-4">
   <div class="col" *ngFor="let noticia of noticias">
     <div class="card mb-3">
-      <img *ngIf="noticia.urlToImage" src="{{ noticia.urlToImage }}" class="card-img-top" alt="...">
+      <img *ngIf="noticia.urlToImage" [src]="noticia.urlToImage" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title"><a href="{{ noticia.url }}" target="_blank">{{ noticia.title }}</a></h5>
+        <h5 class="card-title"><a [href]="noticia.url" target="_blank">{{ noticia.title }}</a></h5>
+        <p class="card-text">{{ noticia.description }}</p>
         <p class="card-text">{{ noticia.publishedAt | date }}</p>
-        <p class="card-text">{{ noticia.content }}</p>
       </div>
     </div>
   </div>

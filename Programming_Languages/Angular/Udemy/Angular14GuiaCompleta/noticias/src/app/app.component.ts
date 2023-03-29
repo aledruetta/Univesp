@@ -10,16 +10,28 @@ import { NoticiaService } from './services/noticia.service';
 export class AppComponent {
 
   noticias: Noticia[];
+  spinner: boolean;
 
   constructor(private _noticiasService: NoticiaService) {
     this.noticias = [];
+    this.spinner = false;
   }
 
   getNews(criteriosBusqueda: Record<string,string>): void {
-    this._noticiasService.getNews(criteriosBusqueda)
-      .subscribe((resultado) => {
-        this.noticias = this._noticiasService.mapNewsFromArticles(resultado.articles);
-      }
-    );
+    this.spinner = true;
+    setTimeout(() => {
+      this._noticiasService.getNews(criteriosBusqueda)
+        .subscribe({
+          next: (resultado) => {
+            this.spinner = false;
+            this.noticias = [];
+            this.noticias = this._noticiasService.mapNewsFromArticles(resultado.articles);
+          },
+          error: (error) => {
+            this.spinner = false;
+            console.log(error);
+          }
+        });
+    }, 1000);
   }
 }
