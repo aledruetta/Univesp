@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ImagenService } from 'src/app/services/imagen.service';
 
 @Component({
@@ -6,7 +6,8 @@ import { ImagenService } from 'src/app/services/imagen.service';
   templateUrl: './buscar-imagen.component.html',
   styleUrls: ['./buscar-imagen.component.css']
 })
-export class BuscarImagenComponent implements OnInit {
+export class BuscarImagenComponent {
+
   nombreImagen: string;
 
   constructor(private _imagenService: ImagenService) {
@@ -17,7 +18,7 @@ export class BuscarImagenComponent implements OnInit {
   }
 
   buscarImagenes() {
-    
+
     if(this.nombreImagen === '') {
       this._imagenService.setError('Agrega un texto de busqueda');
       return;
@@ -25,4 +26,5 @@ export class BuscarImagenComponent implements OnInit {
 
     this._imagenService.enviarTerminoBusqueda(this.nombreImagen);
   }
+
 }

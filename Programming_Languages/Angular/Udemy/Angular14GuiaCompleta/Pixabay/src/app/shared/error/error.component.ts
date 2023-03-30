@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ImagenService } from 'src/app/services/imagen.service';
 
@@ -7,7 +7,8 @@ import { ImagenService } from 'src/app/services/imagen.service';
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.css']
 })
-export class ErrorComponent implements OnInit, OnDestroy {
+export class ErrorComponent {
+
   texto = '';
   mostrar = false;
   suscription: Subscription;
@@ -30,7 +31,6 @@ export class ErrorComponent implements OnInit, OnDestroy {
     this.mostrar = true;
     setTimeout(() => {
       this.mostrar = false;
-    }, 2000);  
+    }, 2000);
   }
-
 }

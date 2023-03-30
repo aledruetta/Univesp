@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ImagenService } from 'src/app/services/imagen.service';
 
@@ -7,7 +7,8 @@ import { ImagenService } from 'src/app/services/imagen.service';
   templateUrl: './listar-imagen.component.html',
   styleUrls: ['./listar-imagen.component.css']
 })
-export class ListarImagenComponent implements OnInit {
+export class ListarImagenComponent {
+
   termino = '';
   suscription: Subscription;
   listImagenes: any[] = [];
@@ -16,7 +17,7 @@ export class ListarImagenComponent implements OnInit {
   paginaActual = 1;
   calcularTotalPaginas = 0;
 
-  constructor(private _imagenService: ImagenService) { 
+  constructor(private _imagenService: ImagenService) {
     this.suscription = this._imagenService.getTerminoBusqueda().subscribe(data => {
       this.termino = data;
       this.paginaActual = 1;
@@ -31,7 +32,7 @@ export class ListarImagenComponent implements OnInit {
   obtenerImagenes() {
     this._imagenService.getImagenes(this.termino, this.imagensPorPagina, this.paginaActual).subscribe(data => {
       this.loading = false;
-      
+
       console.log(data);
       if(data.hits.length === 0){
         this._imagenService.setError('Opss.. no encontramos ningun resultado');
@@ -51,7 +52,7 @@ export class ListarImagenComponent implements OnInit {
     this.loading = true;
     this.listImagenes = [];
     this.obtenerImagenes();
-  } 
+  }
 
   paginaPosterior() {
     this.paginaActual++;
