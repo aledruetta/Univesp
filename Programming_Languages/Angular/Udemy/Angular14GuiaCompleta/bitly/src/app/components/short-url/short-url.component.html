@@ -1,0 +1,28 @@
+<div *ngIf="hasError()" class="alert alert-dismissible alert-danger text-center">
+  <strong>{{ errorMessage | uppercase }}</strong>
+</div>
+
+<div class="container">
+
+  <h1 class="display-6 text-center mt-5">INGRESE UNA URL VÁLIDA</h1>
+
+  <div class="row mt-5">
+    <div class="col-lg-8">
+      <input type="text" [(ngModel)]="longUrl" class="form-control form-control-lg" placeholder="Ingrese la url...">
+    </div>
+
+    <div class="col-lg-4">
+      <button (click)="processUrl()" class="btn btn-primary btn-lg">ACEPTAR</button>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-lg-8" *ngIf="!spinner && !hasError() && hasShortUrl()">
+      <input type="text" [value]="shortUrl" class="form-control form-control-lg" placeholder="Ingrese la url...">
+    </div>
+    <div *ngIf="spinner">
+      <app-spinner></app-spinner>
+    </div>
+  </div>
+
+</div>
