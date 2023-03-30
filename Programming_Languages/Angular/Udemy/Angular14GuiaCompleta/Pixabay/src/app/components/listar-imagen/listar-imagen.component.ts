@@ -30,21 +30,26 @@ export class ListarImagenComponent {
   }
 
   obtenerImagenes() {
-    this._imagenService.getImagenes(this.termino, this.imagensPorPagina, this.paginaActual).subscribe(data => {
-      this.loading = false;
+    this._imagenService
+      .getImagenes(this.termino, this.imagensPorPagina, this.paginaActual)
+      .subscribe({
+        next: data => {
+          this.loading = false;
 
-      console.log(data);
-      if(data.hits.length === 0){
-        this._imagenService.setError('Opss.. no encontramos ningun resultado');
-        return;
-      }
-      this.calcularTotalPaginas = Math.ceil(data.totalHits / this.imagensPorPagina);
+          console.log(data);
+          if(data.hits.length === 0){
+            this._imagenService.setError('Opss.. no encontramos ningun resultado');
+            return;
+          }
+          this.calcularTotalPaginas = Math.ceil(data.totalHits / this.imagensPorPagina);
 
-      this.listImagenes = data.hits;
-    }, error => {
-      this._imagenService.setError('Opss.. ocurrio un error');
-      this.loading = false;
-    })
+          this.listImagenes = data.hits;
+        },
+        error: error => {
+          this._imagenService.setError('Opss.. ocurrio un error');
+          this.loading = false;
+        }
+      })
   }
 
   paginaAnterior() {
@@ -62,7 +67,6 @@ export class ListarImagenComponent {
   }
 
   paginaAnteriorClass() {
-
     if(this.paginaActual === 1) {
       return false;
     } else {
@@ -71,7 +75,6 @@ export class ListarImagenComponent {
   }
 
   paginaPosteriorClass() {
-
     if(this.paginaActual === this.calcularTotalPaginas) {
       return false;
     } else {
