@@ -15,7 +15,7 @@ export class ListarImagenComponent {
   loading: boolean;
   imagensPorPagina: number;
   paginaActual: number;
-  calcularTotalPaginas: number;
+  calcularTotalPaginas = 0;
 
   constructor(private _imagenService: ImagenService) {
     this.termino = '';
@@ -28,12 +28,13 @@ export class ListarImagenComponent {
   }
 
   ngOnInit(): void {
-    this.suscription = this._imagenService.getTerminoBusqueda().subscribe(data => {
-      this.termino = data;
-      this.paginaActual = 1;
-      this.loading = true;
-      this.obtenerImagenes();
-    })
+    this.suscription = this._imagenService.getTerminoBusqueda()
+      .subscribe(data => {
+        this.termino = data;
+        this.paginaActual = 1;
+        this.loading = true;
+        this.obtenerImagenes();
+      })
   }
 
   ngOnDestroy(): void {
@@ -41,8 +42,7 @@ export class ListarImagenComponent {
   }
 
   obtenerImagenes() {
-    this._imagenService
-      .getImagenes(this.termino, this.imagensPorPagina, this.paginaActual)
+    this._imagenService.getImagenes(this.termino, this.imagensPorPagina, this.paginaActual)
       .subscribe({
         next: data => {
           this.loading = false;
@@ -78,19 +78,11 @@ export class ListarImagenComponent {
   }
 
   paginaAnteriorClass() {
-    if(this.paginaActual === 1) {
-      return false;
-    } else {
-      return true;
-    }
+    return this.paginaActual === 1 ? false : true;
   }
 
   paginaPosteriorClass() {
-    if(this.paginaActual === this.calcularTotalPaginas) {
-      return false;
-    } else {
-      return true;
-    }
+    return this.paginaActual === this.calcularTotalPaginas ? false : true;
   }
 
 }

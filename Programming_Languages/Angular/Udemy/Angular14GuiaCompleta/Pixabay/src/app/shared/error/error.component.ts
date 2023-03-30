@@ -20,10 +20,11 @@ export class ErrorComponent {
    }
 
   ngOnInit(): void {
-    this.suscription = this._imagenService.getError().subscribe(data =>{
-      this.mostrarMensaje();
-      this.texto = data;
-    })
+    this.suscription = this._imagenService.getError()
+      .subscribe(data => {
+        this.mostrarMensaje();
+        this.texto = data;
+      })
   }
 
   ngOnDestroy(): void {
