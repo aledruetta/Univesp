@@ -21,6 +21,7 @@ import { ShortInterceptor } from './services/short.interceptor';
     FormsModule,
     HttpClientModule
   ],
+  // Add the interceptor to the providers array
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

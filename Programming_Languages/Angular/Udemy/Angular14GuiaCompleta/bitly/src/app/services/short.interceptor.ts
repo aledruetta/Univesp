@@ -13,6 +13,7 @@ export class ShortInterceptor implements HttpInterceptor {
 
   constructor() {}
 
+  // Intercept the request, add the token to the headers and print the error if there is one
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const TOKEN = '';
     request = request.clone({ setHeaders: { Authorization: `Bearer ${TOKEN}` } });
