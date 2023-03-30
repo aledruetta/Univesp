@@ -9,15 +9,25 @@ import { ImagenService } from 'src/app/services/imagen.service';
 })
 export class ListarImagenComponent {
 
-  termino = '';
+  termino: string;
   suscription: Subscription;
-  listImagenes: any[] = [];
-  loading = false;
-  imagensPorPagina = 30;
-  paginaActual = 1;
-  calcularTotalPaginas = 0;
+  listImagenes: any[];
+  loading: boolean;
+  imagensPorPagina: number;
+  paginaActual: number;
+  calcularTotalPaginas: number;
 
   constructor(private _imagenService: ImagenService) {
+    this.termino = '';
+    this.suscription = new Subscription();
+    this.listImagenes = [];
+    this.loading = false;
+    this.imagensPorPagina = 30;
+    this.paginaActual = 1;
+    this.calcularTotalPaginas = 0;
+  }
+
+  ngOnInit(): void {
     this.suscription = this._imagenService.getTerminoBusqueda().subscribe(data => {
       this.termino = data;
       this.paginaActual = 1;
@@ -26,7 +36,8 @@ export class ListarImagenComponent {
     })
   }
 
-  ngOnInit(): void {
+  ngOnDestroy(): void {
+    this.suscription.unsubscribe();
   }
 
   obtenerImagenes() {

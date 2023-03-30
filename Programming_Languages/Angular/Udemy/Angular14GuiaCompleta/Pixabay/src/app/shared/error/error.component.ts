@@ -9,18 +9,21 @@ import { ImagenService } from 'src/app/services/imagen.service';
 })
 export class ErrorComponent {
 
-  texto = '';
-  mostrar = false;
+  texto: string;
+  mostrar: boolean;
   suscription: Subscription;
 
   constructor(private _imagenService: ImagenService) {
+    this.texto = '';
+    this.mostrar = false;
+    this.suscription = new Subscription();
+   }
+
+  ngOnInit(): void {
     this.suscription = this._imagenService.getError().subscribe(data =>{
       this.mostrarMensaje();
       this.texto = data;
     })
-   }
-
-  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {

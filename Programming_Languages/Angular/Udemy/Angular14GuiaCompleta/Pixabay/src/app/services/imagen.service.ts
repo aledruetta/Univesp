@@ -7,10 +7,13 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ImagenService {
 
-  private error$ = new Subject<string>();
-  private terminoBusqueda$ = new Subject<string>();
+  private error$: Subject<string>;
+  private terminoBusqueda$: Subject<string>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.error$ = new Subject<string>();
+    this.terminoBusqueda$ = new Subject<string>();
+  }
 
   // Emite un mensaje de error
   setError(mensaje: string) {
