@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using WebAPI.Data.Context;
 
 namespace WebAPI.Data
@@ -17,13 +18,17 @@ namespace WebAPI.Data
 
     public class Enrollment : IEnrollment
     {
+        [Key]
         public int EnrollmentID { get; set; }
         public Grade? Grade { get; set; }
+        [Required]
         public DateTime EnrollmentDate { get; set; }
         public int CourseID { get; set; }
         public int StudentID { get; set; }
 
+        [ForeignKey("CourseID")]
         public Course Course { get; set; } = null!;
+        [ForeignKey("StudentID")]
         public Student Student { get; set; } = null!;
     }
 

@@ -12,8 +12,8 @@ using WebAPI.Data.Context;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20230401211808_FixStudents_01")]
-    partial class FixStudents_01
+    [Migration("20230402224059_FixCoursesCreatedDate")]
+    partial class FixCoursesCreatedDate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,14 +27,21 @@ namespace WebAPI.Migrations
             modelBuilder.Entity("WebAPI.Data.Course", b =>
                 {
                     b.Property<int>("CourseID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseID"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Credits")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("CourseID");
 
@@ -67,26 +74,28 @@ namespace WebAPI.Migrations
 
                     b.HasIndex("StudentID");
 
-                    b.ToTable("Grades");
+                    b.ToTable("Enrollments");
                 });
 
             modelBuilder.Entity("WebAPI.Data.Student", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("StudentID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentID"), 1L, 1);
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("ID");
+                    b.HasKey("StudentID");
 
                     b.ToTable("Students");
                 });

@@ -45,6 +45,7 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> PostCourse([FromBody] CourseDto courseDto)
         {
             var course = courseDto.Map();
+            course.CreatedDate = DateTime.Now;
             _context.Courses.Add(course);
             await _context.SaveChangesAsync();
 

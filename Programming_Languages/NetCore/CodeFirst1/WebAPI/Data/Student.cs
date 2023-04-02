@@ -1,4 +1,7 @@
-﻿namespace WebAPI.Data
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
+namespace WebAPI.Data
 {
     public interface IStudent
     {
@@ -9,8 +12,13 @@
 
     public class Student : IStudent
     {
+        [Key]
         public int StudentID { get; set; }
+        [Required]
+        [MaxLength(100), MinLength(2)]
         public string FirstName { get; set; } = null!;
+        [Required]
+        [MaxLength(100), MinLength(2)]
         public string LastName { get; set; } = null!;
 
         public ICollection<Enrollment> Enrollments { get; set; } = null!;
