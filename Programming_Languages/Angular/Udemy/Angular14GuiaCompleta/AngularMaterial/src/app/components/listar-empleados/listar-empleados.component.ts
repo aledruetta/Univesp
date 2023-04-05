@@ -11,7 +11,6 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
   styleUrls: ['./listar-empleados.component.css']
 })
 export class ListarEmpleadosComponent implements OnInit, AfterViewInit {
-  listaEmpleados: Empleado[];
   displayedColumns: string[];
   dataSource: MatTableDataSource<Empleado>;
 
@@ -19,16 +18,14 @@ export class ListarEmpleadosComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _servicioEmpleados: EmpleadoService) {
-    this.listaEmpleados = [];
     this.displayedColumns = ['id', 'nombreCompleto', 'telefono', 'correo', 'fechaIngreso', 'sexo', 'estadoCivil', 'acciones'];
-    this.dataSource = {} as MatTableDataSource<Empleado>;
+    this.dataSource = new MatTableDataSource();
     this.paginator = {} as MatPaginator;
     this.sort = {} as MatSort;
   }
 
   ngOnInit(): void {
-    this.getEmpleados();
-    this.dataSource = new MatTableDataSource(this.listaEmpleados);
+    this.obtenerEmpleados();
   }
 
   ngAfterViewInit() {
@@ -36,8 +33,13 @@ export class ListarEmpleadosComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  getEmpleados() {
-    this.listaEmpleados = this._servicioEmpleados.getEmpleados();
+  obtenerEmpleados() {
+    this._servicioEmpleados.getEmpleados()
+    .subscribe({
+      next: (empleados: Empleado[]) => {
+        this.dataSource.data = empleados;
+      }
+    });
   }
 
   editarEmpleado(id: number) {
@@ -45,8 +47,11 @@ export class ListarEmpleadosComponent implements OnInit, AfterViewInit {
   }
 
   eliminarEmpleado(id: number) {
-    this._servicioEmpleados.eliminarEmpleado(id);
-    this.dataSource.data = this._servicioEmpleados.getEmpleados();
+    this._servicioEmpleados.eliminarEmpleado(id).subscribe({
+      next: (empleados: Empleado[]) => {
+        this.dataSource.data = empleados;
+      }
+    });
   }
 
   applyFilter(event: Event) {
