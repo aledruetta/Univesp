@@ -11,23 +11,24 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
   styleUrls: ['./listar-empleados.component.css']
 })
 export class ListarEmpleadosComponent implements OnInit, AfterViewInit {
+  listaEmpleados: Empleado[];
   displayedColumns: string[];
   dataSource: MatTableDataSource<Empleado>;
-  listaEmpleados: Empleado[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _servicioEmpleados: EmpleadoService) {
-    this.displayedColumns = ['nombreCompleto', 'telefono', 'correo', 'fechaIngreso', 'sexo', 'estadoCivil', 'acciones'];
-    this.dataSource = {} as MatTableDataSource<Empleado>;
     this.listaEmpleados = [];
+    this.displayedColumns = ['id', 'nombreCompleto', 'telefono', 'correo', 'fechaIngreso', 'sexo', 'estadoCivil', 'acciones'];
+    this.dataSource = {} as MatTableDataSource<Empleado>;
     this.paginator = {} as MatPaginator;
     this.sort = {} as MatSort;
   }
 
   ngOnInit(): void {
     this.getEmpleados();
+    this.dataSource = new MatTableDataSource(this.listaEmpleados);
   }
 
   ngAfterViewInit() {
@@ -37,14 +38,14 @@ export class ListarEmpleadosComponent implements OnInit, AfterViewInit {
 
   getEmpleados() {
     this.listaEmpleados = this._servicioEmpleados.getEmpleados();
-    this.dataSource = new MatTableDataSource(this.listaEmpleados);
   }
 
-  editarEmpleado(nombre: string) {
+  editarEmpleado(id: number) {
+    // algo
   }
 
-  eliminarEmpleado(nombre: string) {
-    this._servicioEmpleados.eliminarEmpleado(nombre);
+  eliminarEmpleado(id: number) {
+    this._servicioEmpleados.eliminarEmpleado(id);
     this.dataSource.data = this._servicioEmpleados.getEmpleados();
   }
 

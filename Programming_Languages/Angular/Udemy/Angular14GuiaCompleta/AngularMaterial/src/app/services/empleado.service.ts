@@ -3,16 +3,16 @@ import { Empleado } from '../models/empleado.model';
 import { Observable, Subject } from 'rxjs';
 
 const EMPLEADOS: Empleado[] = [
-  { nombreCompleto: 'Juan Perez', telefono: 1234567890, correo: 'jp@gmail.com', fechaIngreso: new Date('2022-01-01'), sexo: 'Masculino', estadoCivil: 'Soltero/a' },
-  { nombreCompleto: 'María Gonzalez', telefono: 1234567890, correo: 'mg@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Femenino', estadoCivil: 'Soltero/a' },
-  { nombreCompleto: 'Juan Perez', telefono: 1234567890, correo: 'jp@gmail.com', fechaIngreso: new Date('2022-01-01'), sexo: 'Masculino', estadoCivil: 'Soltero/a' },
-  { nombreCompleto: 'María Gonzalez', telefono: 1234567890, correo: 'mg@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Femenino', estadoCivil: 'Soltero/a' },
-  { nombreCompleto: 'Juan Perez', telefono: 1234567890, correo: 'jp@gmail.com', fechaIngreso: new Date('2022-01-01'), sexo: 'Masculino', estadoCivil: 'Soltero/a' },
-  { nombreCompleto: 'María Gonzalez', telefono: 1234567890, correo: 'mg@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Femenino', estadoCivil: 'Soltero/a' },
-  { nombreCompleto: 'Juan Perez', telefono: 1234567890, correo: 'jp@gmail.com', fechaIngreso: new Date('2022-01-01'), sexo: 'Masculino', estadoCivil: 'Soltero/a' },
-  { nombreCompleto: 'María Gonzalez', telefono: 1234567890, correo: 'mg@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Femenino', estadoCivil: 'Soltero/a' },
-  { nombreCompleto: 'Juan Perez', telefono: 1234567890, correo: 'jp@gmail.com', fechaIngreso: new Date('2022-01-01'), sexo: 'Masculino', estadoCivil: 'Soltero/a' },
-  { nombreCompleto: 'María Gonzalez', telefono: 1234567890, correo: 'mg@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Femenino', estadoCivil: 'Soltero/a' },
+  { id: 1, nombreCompleto: 'Juan Perez', telefono: 1234567890, correo: 'jp@gmail.com', fechaIngreso: new Date('2022-01-01'), sexo: 'Masculino', estadoCivil: 'Soltero/a' },
+  { id: 2, nombreCompleto: 'María Gonzalez', telefono: 1234567890, correo: 'mg@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Femenino', estadoCivil: 'Soltero/a' },
+  { id: 3, nombreCompleto: 'Juan Perez', telefono: 1234567890, correo: 'jp@gmail.com', fechaIngreso: new Date('2022-01-01'), sexo: 'Masculino', estadoCivil: 'Soltero/a' },
+  { id: 4, nombreCompleto: 'María Gonzalez', telefono: 1234567890, correo: 'mg@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Femenino', estadoCivil: 'Soltero/a' },
+  { id: 5, nombreCompleto: 'Juan Perez', telefono: 1234567890, correo: 'jp@gmail.com', fechaIngreso: new Date('2022-01-01'), sexo: 'Masculino', estadoCivil: 'Soltero/a' },
+  { id: 6, nombreCompleto: 'María Gonzalez', telefono: 1234567890, correo: 'mg@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Femenino', estadoCivil: 'Soltero/a' },
+  { id: 7, nombreCompleto: 'Juan Perez', telefono: 1234567890, correo: 'jp@gmail.com', fechaIngreso: new Date('2022-01-01'), sexo: 'Masculino', estadoCivil: 'Soltero/a' },
+  { id: 8, nombreCompleto: 'María Gonzalez', telefono: 1234567890, correo: 'mg@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Femenino', estadoCivil: 'Soltero/a' },
+  { id: 9, nombreCompleto: 'Juan Perez', telefono: 1234567890, correo: 'jp@gmail.com', fechaIngreso: new Date('2022-01-01'), sexo: 'Masculino', estadoCivil: 'Soltero/a' },
+  { id: 10, nombreCompleto: 'María Gonzalez', telefono: 1234567890, correo: 'mg@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Femenino', estadoCivil: 'Soltero/a' },
 ];
 
 @Injectable({
@@ -30,9 +30,8 @@ export class EmpleadoService {
     return this._listaEmpleados;
   }
 
-  eliminarEmpleado(nombre: string) {
-    const index = this._listaEmpleados.findIndex(e => e.nombreCompleto === nombre);
+  eliminarEmpleado(id: number) {
+    const index = this._listaEmpleados.findIndex(e => e.id === id);
     this._listaEmpleados.splice(index, 1);
-    console.log(this._listaEmpleados);
   }
 }
