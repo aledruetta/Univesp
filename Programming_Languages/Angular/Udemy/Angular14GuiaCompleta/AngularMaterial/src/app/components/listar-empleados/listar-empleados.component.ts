@@ -42,12 +42,18 @@ export class ListarEmpleadosComponent implements OnInit, AfterViewInit {
     });
   }
 
-  editarEmpleado(id: number) {
-    // algo
+  editarEmpleado(empleado: Empleado) {
+    this._servicioEmpleados.editarEmpleado(empleado)
+    .subscribe({
+      next: (empleados: Empleado[]) => {
+        this.dataSource.data = empleados;
+      }
+    });
   }
 
   eliminarEmpleado(id: number) {
-    this._servicioEmpleados.eliminarEmpleado(id).subscribe({
+    this._servicioEmpleados.eliminarEmpleado(id)
+    .subscribe({
       next: (empleados: Empleado[]) => {
         this.dataSource.data = empleados;
       }
