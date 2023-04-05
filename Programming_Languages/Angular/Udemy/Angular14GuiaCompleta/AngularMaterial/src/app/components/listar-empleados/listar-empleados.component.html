@@ -1,0 +1,68 @@
+<div>
+  <mat-form-field>
+    <mat-label>Filtro</mat-label>
+    <input matInput (keyup)="applyFilter($event)" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Nombre Column -->
+    <ng-container matColumnDef="nombreCompleto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por nombre"> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombreCompleto}} </td>
+    </ng-container>
+
+    <!-- Telefono Column -->
+    <ng-container matColumnDef="telefono">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por teléfono"> Teléfono </th>
+      <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+    </ng-container>
+
+    <!-- Correo Column -->
+    <ng-container matColumnDef="correo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por correo"> Correo </th>
+      <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+    </ng-container>
+
+    <!-- FechaIngreso Column -->
+    <ng-container matColumnDef="fechaIngreso">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por fecha"> Fecha Ingreso </th>
+      <td mat-cell *matCellDef="let element"> {{element.fechaIngreso | date:'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <!-- EstadoCivil Column -->
+    <ng-container matColumnDef="estadoCivil">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por estado civil"> Estado Civil </th>
+      <td mat-cell *matCellDef="let element"> {{element.estadoCivil}} </td>
+    </ng-container>
+
+    <!-- Sexo Column -->
+    <ng-container matColumnDef="sexo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por sexo"> Sexo </th>
+      <td mat-cell *matCellDef="let element"> {{element.sexo}} </td>
+    </ng-container>
+
+    <!-- Acciones Column -->
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let element">
+        <a class="pointer pointer-edit" (click)="editarEmpleado(element.nombreCompleto)">
+          <mat-icon fontIcon="edit"></mat-icon>
+        </a>
+        <a class="pointer pointer-delete" (click)="eliminarEmpleado(element.nombreCompleto)">
+          <mat-icon fontIcon="delete"></mat-icon>
+        </a>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                  showFirstLastButtons>
+  </mat-paginator>
+</div>

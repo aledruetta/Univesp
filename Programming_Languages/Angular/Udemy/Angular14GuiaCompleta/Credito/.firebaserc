@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "tarjetacredito2-5f310": {
+      "hosting": {
+        "TarjetaCredito": [
+          "tarjetacredito2-5f310"
+        ]
+      }
+    }
+  }
+}

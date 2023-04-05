@@ -1,0 +1,53 @@
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.demo-toggles {
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-toggles * {
+  margin-bottom: 16px;
+}
+
+.demo-options {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+
+.demo-data * {
+  margin: 16px 0;
+}
+
+.demo-paginator {
+  width: 600px;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+/* Custom CSS */
+
+mat-paginator {
+  margin: 16px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.pointer-edit {
+  color: #5792cd;
+}
+
+.pointer-delete {
+  color: #d04242;
+}
