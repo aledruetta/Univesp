@@ -9,17 +9,19 @@ export class EmpleadoService {
 
   private _listaEmpleados: Empleado[];
   private _empleados$: Subject<Empleado[]>;
+  private _maxId: number;
 
   constructor() {
     this._listaEmpleados = [
-      { id: 1, nombreCompleto: 'Charly García', telefono: 1234567890, correo: 'cg@gmail.com', fechaIngreso: new Date('2022-01-01'), sexo: 'Masculino', estadoCivil: 'Soltero/a' },
-      { id: 2, nombreCompleto: 'Alberto Spinetta', telefono: 1234567890, correo: 'as@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Masculino', estadoCivil: 'Casado/a' },
-      { id: 3, nombreCompleto: 'Silvina Garré', telefono: 1234567890, correo: 'sg@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Femenino', estadoCivil: 'Soltero/a' },
-      { id: 4, nombreCompleto: 'Gustavo Ceratti', telefono: 1234567890, correo: 'gc@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Masculino', estadoCivil: 'Divorciado/a' },
-      { id: 5, nombreCompleto: 'León Gieco', telefono: 1234567890, correo: 'lg@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Masculino', estadoCivil: 'Viudo/a' },
-      { id: 6, nombreCompleto: 'Adriana Varela', telefono: 1234567890, correo: 'av@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Femenino', estadoCivil: 'Casado/a' },
+      { id: 1, nombreCompleto: 'Charly García', telefono: 1234567890, correo: 'cg@gmail.com', fechaIngreso: new Date('2022-01-01'), sexo: 'Masculino', estadoCivil: 'Soltero' },
+      { id: 2, nombreCompleto: 'Alberto Spinetta', telefono: 1234567890, correo: 'as@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Masculino', estadoCivil: 'Casado' },
+      { id: 3, nombreCompleto: 'Silvina Garré', telefono: 1234567890, correo: 'sg@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Femenino', estadoCivil: 'Separado' },
+      { id: 4, nombreCompleto: 'Gustavo Ceratti', telefono: 1234567890, correo: 'gc@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Masculino', estadoCivil: 'Divorciado' },
+      { id: 5, nombreCompleto: 'León Gieco', telefono: 1234567890, correo: 'lg@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Masculino', estadoCivil: 'Viudo' },
+      { id: 6, nombreCompleto: 'Adriana Varela', telefono: 1234567890, correo: 'av@gmail.com', fechaIngreso: new Date('2020-01-01'), sexo: 'Femenino', estadoCivil: 'Casado' },
     ];
     this._empleados$ = new Subject<Empleado[]>();
+    this._maxId = Math.max(...this._listaEmpleados.map(e => e.id));
   }
 
   getEmpleados(): Observable<Empleado[]> {
@@ -39,9 +41,11 @@ export class EmpleadoService {
 
   agregarEmpleado(empleado: Empleado): Observable<Empleado> {
     return new Observable<Empleado>(observer => {
+      empleado.id = this.getUserId();
       this._listaEmpleados.push(empleado);
       observer.next(empleado);
       this._empleados$.next(this._listaEmpleados);
+      console.log(this._listaEmpleados);
     });
   }
 
@@ -52,6 +56,11 @@ export class EmpleadoService {
       observer.next(empleado);
       this._empleados$.next(this._listaEmpleados);
     });
+  }
+
+  getUserId(): number {
+    this._maxId++;
+    return this._maxId;
   }
 
 }
