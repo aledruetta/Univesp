@@ -1,0 +1,11 @@
+h1, p {
+  text-align: center;
+}
+
+.mat-mdc-dialog-actions {
+  justify-content: center;
+}
+
+.mensaje-confirmar {
+  padding: 1em;
+}

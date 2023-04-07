@@ -40,14 +40,14 @@ mat-paginator {
   margin: 16px;
 }
 
-.pointer {
-  cursor: pointer;
-}
-
-.pointer-edit {
+.btn-edit {
   color: #5792cd;
 }
 
-.pointer-delete {
+.btn-delete {
   color: #d04242;
+}
+
+.col-lg-6.right-align {
+  text-align: right;
 }

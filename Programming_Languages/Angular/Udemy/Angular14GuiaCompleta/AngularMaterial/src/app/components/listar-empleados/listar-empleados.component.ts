@@ -1,9 +1,12 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Empleado } from 'src/app/models/empleado.model';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+import { MensajeConfirmarComponent } from '../shared/mensaje-confirmar/mensaje-confirmar.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-listar-empleados',
@@ -17,11 +20,19 @@ export class ListarEmpleadosComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _servicioEmpleados: EmpleadoService) {
+  pageSizeOptions: number[];
+  pageSize: number;
+
+  constructor(private _servicioEmpleados: EmpleadoService,
+              public dialog: MatDialog,
+              public snackBar: MatSnackBar
+  ) {
     this.displayedColumns = ['id', 'nombreCompleto', 'telefono', 'correo', 'fechaIngreso', 'sexo', 'estadoCivil', 'acciones'];
     this.dataSource = new MatTableDataSource();
     this.paginator = {} as MatPaginator;
     this.sort = {} as MatSort;
+    this.pageSizeOptions = [5, 10, 25];
+    this.pageSize = 10;
   }
 
   ngOnInit(): void {
@@ -33,11 +44,11 @@ export class ListarEmpleadosComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  obtenerEmpleados() {
+  obtenerEmpleados(): void {
     this._servicioEmpleados.getEmpleados()
     .subscribe({
-      next: (empleados: Empleado[]) => {
-        this.dataSource.data = empleados;
+      next: (res: Empleado[]) => {
+        this.dataSource.data = res;
       }
     });
   }
@@ -45,17 +56,32 @@ export class ListarEmpleadosComponent implements OnInit, AfterViewInit {
   editarEmpleado(empleado: Empleado) {
     this._servicioEmpleados.editarEmpleado(empleado)
     .subscribe({
-      next: (empleados: Empleado[]) => {
-        this.dataSource.data = empleados;
+      next: (res: Empleado) => {
+        this.obtenerEmpleados();
+        console.log('Empleado editado: id ', res.id);
       }
     });
   }
 
   eliminarEmpleado(id: number) {
-    this._servicioEmpleados.eliminarEmpleado(id)
-    .subscribe({
-      next: (empleados: Empleado[]) => {
-        this.dataSource.data = empleados;
+    const empleado: string | undefined = this.dataSource.data.find(e => e.id === id)?.nombreCompleto;
+    const dialogRef = this.dialog.open(MensajeConfirmarComponent, {
+      //width: '250px',
+      data: { titulo: 'Cuidado!', mensaje: `Está seguro que quiere eliminar el empleado/a: ${empleado}?`},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'aceptar') {
+        this._servicioEmpleados.eliminarEmpleado(id)
+        .subscribe({
+          next: (res: Empleado) => {
+            console.log('Empleado eliminado: id ', res.id);
+            this.snackBar.open('Empleado eliminado', 'Cerrar', {
+              duration: 5000,
+            });
+            this.obtenerEmpleados();
+          }
+        });
       }
     });
   }
