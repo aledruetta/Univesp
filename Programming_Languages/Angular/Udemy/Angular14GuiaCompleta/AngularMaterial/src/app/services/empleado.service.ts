@@ -45,7 +45,6 @@ export class EmpleadoService {
       this._listaEmpleados.push(empleado);
       observer.next(empleado);
       this._empleados$.next(this._listaEmpleados);
-      console.log(this._listaEmpleados);
     });
   }
 
