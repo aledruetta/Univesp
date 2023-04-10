@@ -7,6 +7,7 @@ import { Empleado } from 'src/app/models/empleado.model';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { MensajeConfirmarComponent } from '../shared/mensaje-confirmar/mensaje-confirmar.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-empleados',
@@ -24,6 +25,7 @@ export class ListarEmpleadosComponent implements OnInit, AfterViewInit {
   pageSize: number;
 
   constructor(private _servicioEmpleados: EmpleadoService,
+              private _router: Router,
               public dialog: MatDialog,
               public snackBar: MatSnackBar
   ) {
@@ -37,6 +39,11 @@ export class ListarEmpleadosComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.obtenerEmpleados();
+    if (this._router.url.endsWith('created')) {
+      this.snackBar.open('Empleado creado con éxito', 'Cerrar', {
+        duration: 5000,
+      });
+    }
   }
 
   ngAfterViewInit() {

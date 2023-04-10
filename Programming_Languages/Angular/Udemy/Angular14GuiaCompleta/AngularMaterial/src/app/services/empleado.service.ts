@@ -57,6 +57,12 @@ export class EmpleadoService {
     });
   }
 
+  empleadoCreado(empleado: Empleado): Observable<Empleado> {
+    return new Observable<Empleado>(observer => {
+      observer.next(empleado);
+    });
+  }
+
   getUserId(): number {
     this._maxId++;
     return this._maxId;

@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MensajeConfirmarComponent } from '../shared/mensaje-confirmar/mensaje-confirmar.component';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-agregar-editar-empleado',
@@ -54,9 +55,7 @@ export class AgregarEditarEmpleadoComponent {
     const newEmpleado = Empleado.mapFromObject(this.userForm.value);
     this._empleadoService.agregarEmpleado(newEmpleado)
     .subscribe({
-      next: empleado => {
-        this._router.navigate(['/']);
-      }
+      next: empleado => this._router.navigate(['/created'])
     });
   }
 
