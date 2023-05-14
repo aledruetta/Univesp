@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center mt-3">
+      <button mat-raised-button color="warn">Add TODO</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+        <mat-grid-list cols="6">
+          <mat-grid-tile *ngFor="let todo of todos"
+                          [colspan]="2"
+                          [rowspan]="1">
+
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{ todo.title }}</mat-card-title>
+                <!-- <mat-card-subtitle>{{ todo.description }}</mat-card-subtitle> -->
+              </mat-card-header>
+              <mat-card-content>
+                <p>
+                  {{ todo.description }}
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button color="warn">Delete</button>
+                <button mat-raised-button color="primary">Edit</button>
+              </mat-card-actions>
+            </mat-card>
+
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
+  </div>

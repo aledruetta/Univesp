@@ -1,0 +1,28 @@
+<div class="row text-center">
+  <div class="col-lg-6 offset-lg-3">
+    <h2>Sign In</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+    <form [formGroup]="signInForm" (submit)="onSubmit()">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="name@example.com" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required>
+        </mat-form-field>
+      </div>
+      <div class="d-flex justify-content-center mt-2">
+        <button mat-raised-button color="warn" class="flex-fill me-1" (click)="onCancel()">Cancel</button>
+        <button mat-raised-button color="primary" class="flex-fill ms-1" type="submit">Accept</button>
+      </div>
+    </form>
+  </div>
+</div>

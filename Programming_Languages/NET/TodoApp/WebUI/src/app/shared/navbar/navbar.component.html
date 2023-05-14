@@ -1,0 +1,16 @@
+<p>
+  <mat-toolbar color="primary">
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+      <span routerLink="/">ToDo App</span>
+    <span class="toolbar-spacer"></span>
+    <div *ngIf="!isUserAuthenticated(); else isNotAuthenticated">
+      <button mat-button routerLink="/auth/signin">Sign In</button>
+      <button mat-button routerLink="/auth/signup">Sign Up</button>
+    </div>
+    <ng-template #isNotAuthenticated>
+      <button mat-button (click)="signOut()">Sign Out</button>
+    </ng-template>
+  </mat-toolbar>
+</p>

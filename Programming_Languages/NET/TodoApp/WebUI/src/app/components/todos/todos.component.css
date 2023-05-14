@@ -1,0 +1,18 @@
+.mat-mdc-card {
+  background-color: #f5f5f5;
+  flex-grow: 1;
+  margin: 0.25rem;
+  padding: 0.5rem;
+}
+
+.mat-mdc-card-header {
+  justify-content: center;
+}
+
+.mat-mdc-card-actions {
+  justify-content: center;
+}
+
+.mdc-button {
+  margin: 0.25rem;
+}
