@@ -1,0 +1,19 @@
+﻿<Window x:Class="RelativeSourceBinding.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RelativeSourceBinding"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+
+        <!-- RelativeSource permite referenciar el source al propio elemento o a otro 
+             relativo al mismo en el árbol de elementos -->
+        <Rectangle Fill="Red" 
+                   Width="200" 
+                   Height="{Binding RelativeSource={RelativeSource Self}, 
+                                    Path=Width}"></Rectangle>
+        
+    </Grid>
+</Window>

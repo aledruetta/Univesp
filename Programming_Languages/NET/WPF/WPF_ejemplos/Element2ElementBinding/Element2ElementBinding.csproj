@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3E805598-FDC4-43D3-ABB1-15F5697AE806}</ProjectGuid>
+    <ProjectGuid>{B70B6A5C-8BC8-4A71-A9A3-2DECB545F548}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>BindToAnotherUIElement</RootNamespace>
-    <AssemblyName>BindToAnotherUIElement</AssemblyName>
+    <RootNamespace>Element2ElementBinding</RootNamespace>
+    <AssemblyName>Element2ElementBinding</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
