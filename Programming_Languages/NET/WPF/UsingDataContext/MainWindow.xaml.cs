@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace BindToAnotherUIElement
+namespace BindUsingRelativeSource
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -10,11 +10,6 @@ namespace BindToAnotherUIElement
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

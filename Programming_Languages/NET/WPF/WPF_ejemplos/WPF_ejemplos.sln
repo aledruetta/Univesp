@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindToAnotherUIElement", "BindToAnotherUIElement.csproj", "{3E805598-FDC4-43D3-ABB1-15F5697AE806}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindUsingRelativeSource", "..\UsingDataContext\BindUsingRelativeSource.csproj", "{AD957ED2-D66B-431F-968C-47BF3A80541D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3E805598-FDC4-43D3-ABB1-15F5697AE806}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E805598-FDC4-43D3-ABB1-15F5697AE806}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E805598-FDC4-43D3-ABB1-15F5697AE806}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD957ED2-D66B-431F-968C-47BF3A80541D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD957ED2-D66B-431F-968C-47BF3A80541D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD957ED2-D66B-431F-968C-47BF3A80541D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD957ED2-D66B-431F-968C-47BF3A80541D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

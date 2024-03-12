@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BindToAnotherUIElement.Properties {
+namespace BindUsingRelativeSource.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
