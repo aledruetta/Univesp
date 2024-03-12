@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindToAnotherUIElement", "BindToAnotherUIElement.csproj", "{3E805598-FDC4-43D3-ABB1-15F5697AE806}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E805598-FDC4-43D3-ABB1-15F5697AE806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E805598-FDC4-43D3-ABB1-15F5697AE806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E805598-FDC4-43D3-ABB1-15F5697AE806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E805598-FDC4-43D3-ABB1-15F5697AE806}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {79A12196-1A0A-47DD-872F-9F3172101EE5}
+	EndGlobalSection
+EndGlobal

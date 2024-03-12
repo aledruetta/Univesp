@@ -1,0 +1,40 @@
+﻿<Window x:Class="WPF_ejemplos.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_ejemplos"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="10">
+            <Label>Selected Item:</Label>
+            
+            <!-- Target -->
+            <!-- Declara el binding entre el atributo Text del elemento TextBox y la propiedad Content 
+                 del objeto SelectedItem del elemento ListView.
+                 Por defecto, el binding es en modo OneWay, es decir, el target reflejando los cambios en el source.
+                 Por defecto, el evento se dispara cuando el elemento pierde foco. En el ejemplo, el evento se dispara
+                 ante cualquier cambio en la propiedad (el contenido del item seleccionado).
+                 -->
+            <TextBox Text="{Binding ElementName=listView, 
+                                    Path=SelectedItem.Content, 
+                                    Mode=TwoWay, 
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <!-- Source -->
+        <ListView x:Name="listView" Grid.Row="1" Margin="10">
+            <ListViewItem>One</ListViewItem>
+            <ListViewItem>Two</ListViewItem>
+            <ListViewItem>Three</ListViewItem>
+        </ListView>
+
+    </Grid>
+</Window>
