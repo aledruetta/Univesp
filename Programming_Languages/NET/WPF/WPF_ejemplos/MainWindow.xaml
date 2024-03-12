@@ -21,8 +21,8 @@
                  del objeto SelectedItem del elemento ListView.
                  Por defecto, el binding es en modo OneWay, es decir, el target reflejando los cambios en el source.
                  Por defecto, el evento se dispara cuando el elemento pierde foco. En el ejemplo, el evento se dispara
-                 ante cualquier cambio en la propiedad (el contenido del item seleccionado).
-                 -->
+                 ante cualquier cambio en el source (el contenido del item seleccionado).
+            -->
             <TextBox Text="{Binding ElementName=listView, 
                                     Path=SelectedItem.Content, 
                                     Mode=TwoWay, 
@@ -30,6 +30,7 @@
         </StackPanel>
 
         <!-- Source -->
+        <!-- x:Name se usa para poder referenciar el source desde el target -->
         <ListView x:Name="listView" Grid.Row="1" Margin="10">
             <ListViewItem>One</ListViewItem>
             <ListViewItem>Two</ListViewItem>
