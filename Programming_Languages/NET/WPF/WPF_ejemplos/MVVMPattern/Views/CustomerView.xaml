@@ -6,12 +6,11 @@
         xmlns:local="clr-namespace:MVVMPattern.Views"
         mc:Ignorable="d">
     <Grid>
+        <!-- En este caso, el binding no se hace entre elementos de UI, sino entre la View y el ViewModel -->
         <StackPanel>
-            <TextBlock Text="{Binding ElementName=customersListView,
-                                      Path=SelectedItem.LastName}"/>
+            <TextBlock Text="{Binding SelectedCustomer.LastName}"/>
 
-            <ListView x:Name="customersListView"
-                      ItemsSource="{Binding Customers}"
+            <ListView ItemsSource="{Binding Customers}"
                       SelectedItem="{Binding SelectedCustomer}"
                       DisplayMemberPath="FirstName"/>
         </StackPanel>
