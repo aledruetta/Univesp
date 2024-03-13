@@ -8,11 +8,15 @@
     <Grid>
         <!-- En este caso, el binding no se hace entre elementos de UI, sino entre la View y el ViewModel -->
         <StackPanel>
-            <TextBlock Text="{Binding SelectedCustomer.LastName}"/>
+            <TextBlock Text="{Binding SelectedCustomer.LastName}"
+                       Margin="10"/>
+            <CheckBox IsChecked="{Binding SelectedCustomer.IsDeveloper}"
+                      Margin="10"/>
 
             <ListView ItemsSource="{Binding Customers}"
                       SelectedItem="{Binding SelectedCustomer}"
-                      DisplayMemberPath="FirstName"/>
+                      DisplayMemberPath="FirstName"
+                      Margin="10"/>
         </StackPanel>
     </Grid>
 </UserControl>
