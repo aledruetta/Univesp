@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelativeSourceBinding", "Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataContextBinding", "DataContextBinding\DataContextBinding.csproj", "{40C6E473-D148-4371-BCFB-8D73298BEB4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMPattern", "MVVMPattern\MVVMPattern.csproj", "{C0EBDB36-D059-4072-8011-F203F44E9CCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{40C6E473-D148-4371-BCFB-8D73298BEB4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40C6E473-D148-4371-BCFB-8D73298BEB4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40C6E473-D148-4371-BCFB-8D73298BEB4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0EBDB36-D059-4072-8011-F203F44E9CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0EBDB36-D059-4072-8011-F203F44E9CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0EBDB36-D059-4072-8011-F203F44E9CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0EBDB36-D059-4072-8011-F203F44E9CCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

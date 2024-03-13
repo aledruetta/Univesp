@@ -5,31 +5,31 @@ using WiredBrainCoffee.CustomersApp.ViewModel;
 
 namespace WiredBrainCoffee.CustomersApp.View
 {
-  public partial class CustomersView : UserControl
-  {
-    private CustomersViewModel _viewModel;
-
-    public CustomersView()
+    public partial class CustomersView : UserControl
     {
-      InitializeComponent();
-      _viewModel = new CustomersViewModel(new CustomerDataProvider());
-      DataContext = _viewModel;
-      Loaded += CustomersView_Loaded;
-    }
+        private readonly CustomersViewModel _viewModel;
 
-    private async void CustomersView_Loaded(object sender, RoutedEventArgs e)
-    {
-      await _viewModel.LoadAsync();
-    }
+        public CustomersView()
+        {
+            InitializeComponent();
+            _viewModel = new CustomersViewModel(new CustomerDataProvider());
+            DataContext = _viewModel;
+            Loaded += CustomersView_Loaded;
+        }
 
-    private void ButtonMoveNavigation_Click(object sender, RoutedEventArgs e)
-    {
-      _viewModel.MoveNavigation();
-    }
+        private async void CustomersView_Loaded(object sender, RoutedEventArgs e)
+        {
+            await _viewModel.LoadAsync();
+        }
 
-    private void ButtonAdd_Click(object sender, RoutedEventArgs e)
-    {
-      _viewModel.Add();
+        private void ButtonMoveNavigation_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.MoveNavigation();
+        }
+
+        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.Add();
+        }
     }
-  }
 }
