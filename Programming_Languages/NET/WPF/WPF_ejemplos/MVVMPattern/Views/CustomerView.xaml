@@ -6,9 +6,14 @@
         xmlns:local="clr-namespace:MVVMPattern.Views"
         mc:Ignorable="d">
     <Grid>
-        <ListView x:Name="customersListView"
-                  ItemsSource="{Binding Customers}"
-                  SelectedItem="{Binding SelectedCustomer}"
-                  DisplayMemberPath="FirstName"/>
+        <StackPanel>
+            <TextBlock Text="{Binding ElementName=customersListView,
+                                      Path=SelectedItem.LastName}"/>
+
+            <ListView x:Name="customersListView"
+                      ItemsSource="{Binding Customers}"
+                      SelectedItem="{Binding SelectedCustomer}"
+                      DisplayMemberPath="FirstName"/>
+        </StackPanel>
     </Grid>
 </UserControl>
