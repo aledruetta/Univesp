@@ -10,13 +10,21 @@
         <StackPanel>
             <TextBlock Text="{Binding SelectedCustomer.LastName}"
                        Margin="10"/>
-            <CheckBox IsChecked="{Binding SelectedCustomer.IsDeveloper}"
-                      Margin="10"/>
+
+            <StackPanel Orientation="Horizontal">
+                <Label VerticalContentAlignment="Center" Margin="5 0 0 0">Is Developer:</Label>
+                <CheckBox IsChecked="{Binding SelectedCustomer.IsDeveloper}" VerticalContentAlignment="Center"/>
+            </StackPanel>
 
             <ListView ItemsSource="{Binding Customers}"
                       SelectedItem="{Binding SelectedCustomer}"
                       DisplayMemberPath="FirstName"
                       Margin="10"/>
+
+            <!-- En lugar de usar el evento Click de la clase Button, se usa un comando.
+                 De esta forma el handler del evento no queda en el View, sino en el ViewModel -->
+            <Button Command="{Binding ClearCommand}"
+                    Margin="10">Clear</Button>
         </StackPanel>
     </Grid>
 </UserControl>

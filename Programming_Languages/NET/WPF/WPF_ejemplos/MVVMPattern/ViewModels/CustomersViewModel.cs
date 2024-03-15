@@ -1,4 +1,5 @@
-﻿using MVVMPattern.Data;
+﻿using MVVMPattern.Commands;
+using MVVMPattern.Data;
 using MVVMPattern.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,11 +11,14 @@ namespace MVVMPattern.ViewModels
     public class CustomersViewModel : INotifyPropertyChanged
     {
         private readonly ICustomerDataProvider _customerDataProvider;
+
         private Customer _selectedCustomer;
 
         public CustomersViewModel(ICustomerDataProvider customerDataProvider)
         {
             _customerDataProvider = customerDataProvider;
+
+            ClearCommand = new DelegateCommand(Clear);
         }
 
         // ObservableCollections lanza un evento CollectionChanged cada vez que se agrega o remueve un item.
@@ -47,6 +51,13 @@ namespace MVVMPattern.ViewModels
             {
                 Customers.Add(customer);
             }
+        }
+
+        public DelegateCommand ClearCommand { get; }
+
+        private void Clear(object parameter)
+        {
+            Customers.Clear();
         }
     }
 }
