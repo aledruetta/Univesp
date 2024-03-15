@@ -24,7 +24,9 @@
             <!-- En lugar de usar el evento Click de la clase Button, se usa un comando.
                  De esta forma el handler del evento no queda en el View, sino en el ViewModel -->
             <Button Command="{Binding ClearCommand}"
-                    Margin="10">Clear</Button>
+                    Margin="10">
+                Clear
+            </Button>
         </StackPanel>
     </Grid>
 </UserControl>

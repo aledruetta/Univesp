@@ -18,7 +18,7 @@ namespace MVVMPattern.ViewModels
         {
             _customerDataProvider = customerDataProvider;
 
-            ClearCommand = new DelegateCommand(Clear);
+            ClearCommand = new DelegateCommand(Clear, CanClear);
         }
 
         // ObservableCollections lanza un evento CollectionChanged cada vez que se agrega o remueve un item.
@@ -35,8 +35,10 @@ namespace MVVMPattern.ViewModels
             {
                 _selectedCustomer = value;
 
-                // Lanza el evento de notificación.
+                // Lanza los eventos para notificar a la View del cambio en el item seleccionado
+                // y al evento CanExecute del comando Clear para habilitar el botón.
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedCustomer)));
+                ClearCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -59,5 +61,7 @@ namespace MVVMPattern.ViewModels
         {
             Customers.Clear();
         }
+
+        private bool CanClear(object parameter) => SelectedCustomer?.IsDeveloper == false;
     }
 }
