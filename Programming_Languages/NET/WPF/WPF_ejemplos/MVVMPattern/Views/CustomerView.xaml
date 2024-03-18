@@ -5,6 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MVVMPattern.Views"
         mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate x:Key="CustomerDataTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding FirstName}"/>
+                <TextBlock Text="{Binding LastName}" 
+                           FontWeight="Bold"
+                           Margin="5 0 0 0"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+
     <Grid>
         <!-- En este caso, el binding no se hace entre elementos de UI, sino entre la View y el ViewModel -->
         <StackPanel>
@@ -16,15 +27,25 @@
                 <CheckBox IsChecked="{Binding SelectedCustomer.IsDeveloper}" VerticalContentAlignment="Center"/>
             </StackPanel>
 
+            <!-- Ejemplo con DisplayMemberPath -->
             <ListView ItemsSource="{Binding Customers}"
                       SelectedItem="{Binding SelectedCustomer}"
                       DisplayMemberPath="FirstName"
                       Margin="10"/>
 
+
+            <!-- Ejemplo con ItemTemplate -->
+            <ListView ItemsSource="{Binding Customers}"
+                      SelectedItem="{Binding SelectedCustomer}"
+                      ItemTemplate="{StaticResource CustomerDataTemplate}"
+                      Margin="10"/>
+
             <!-- En lugar de usar el evento Click de la clase Button, se usa un comando.
                  De esta forma el handler del evento no queda en el View, sino en el ViewModel -->
+            <!-- El recurso estático está definido en un archivo de resources y declarado en el XAML de la aplicación -->
             <Button Command="{Binding ClearCommand}"
-                    Margin="10">
+                    Margin="10"
+                    Background="{StaticResource ButtonBackground}">
                 Clear
             </Button>
         </StackPanel>
